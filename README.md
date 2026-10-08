@@ -10,4 +10,4 @@ Página de vendas do Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol.
 
 Para hospedar como site estático, publique `index.html` e a pasta `assets` no mesmo diretório. Não é necessário instalar dependências nem executar um build.
 
-O checkout e a integração Pix ainda não estão conectados. O botão de compra mostra uma mensagem de demonstração. Nenhuma chave de API foi incluída.
+O botão de compra abre `checkout.html` com a cor selecionada. O checkout é uma demonstração de layout: não cria pedidos, não transmite os dados preenchidos e não gera cobranças. A integração Pix será adicionada depois. Nenhuma chave de API foi incluída.

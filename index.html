@@ -936,9 +936,8 @@ footer { background: var(--navy-deep); color: rgba(255,255,255,.58); padding: 72
   window.addEventListener('resize',()=>homeSlider.scrollTo({left:currentHome*homeSlider.clientWidth,behavior:'instant'}));
 
   function handleBuy(btn) {
-    const notice=document.getElementById('purchaseNotice');
-    notice.textContent='Kit Praia '+document.getElementById('variantLabel').textContent+' — R$ 119,90. O novo checkout será conectado na próxima etapa.';
-    notice.scrollIntoView({behavior:'smooth',block:'center'});
+    const color=document.getElementById('variantLabel').textContent;
+    window.location.href='checkout.html?cor='+encodeURIComponent(color);
   }
 
   document.querySelectorAll('.color-swatch').forEach(button=>{
