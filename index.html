@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol — Maré Azul</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  --font-logo: 'Plus Jakarta Sans', sans-serif;
+  --navy:        #123b74;
+  --navy-deep:   #082b58;
+  --navy-mid:    #20569a;
+  --sand:        #f9bd27;
+  --sand-light:  #edf5ff;
+  --cream:       #f5f8fc;
+  --cream-dark:  #e6eef9;
+  --white:       #ffffff;
+  --text:        #18212e;
+  --muted:       #6b7a8d;
+  --border:      #dce6f2;
+  --cta:         #1461ce;
+  --cta-hover:   #0d4dac;
+  --cta-glow:    rgba(20,97,206,.32);
+  --cta-light:   #eaf3ff;
+  --green-text:  #124e9b;
+  --pix:         #32bcad;
+  --star:        #f5a623;
+}
+
+html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
+body { font-family: var(--font-main); color: var(--text); background: var(--cream); line-height: 1.6; max-width: 100%; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+.announce-bar {
+  background: #082b58;
+  color: #ffffff;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+  text-align: center; padding: 0 16px; overflow: hidden;
+  text-transform: uppercase;
+  height: 36px; display: flex; align-items: center;
+}
+.announce-track { display: flex; animation: annSlide 15s infinite ease-in-out; width: 100%; }
+.announce-item  { min-width: 100%; display: flex; align-items: center; justify-content: center; white-space: normal; line-height: 1.2; }
+@keyframes annSlide {
+  0%,28%  { transform: translateX(0%); }
+  33%,61% { transform: translateX(-100%); }
+  66%,94% { transform: translateX(-200%); }
+  99%,100%{ transform: translateX(0%); }
+}
+
+header {
+  background: rgba(255,255,255,.94);
+  padding: 22px 48px 18px;
+  display: flex; justify-content: center;
+  align-items: center; flex-direction: column; gap: 14px;
+  border-bottom: 1px solid rgba(234,219,216,.9);
+  box-shadow: 0 8px 34px rgba(18,59,116,.08);
+}
+.logo-wrap { text-align: center; }
+.logo { 
+  font-family: var(--font-logo); 
+  font-size: 36px; 
+  font-weight: 700; 
+  color: var(--navy); 
+  letter-spacing: 2.5px; 
+  line-height: 1.1; 
+  text-transform: uppercase;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+.logo-sub { 
+  font-size: 11px; 
+  letter-spacing: 5px; 
+  text-transform: uppercase; 
+  margin-top: 6px; 
+  font-weight: 700;
+  color: var(--sand);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  filter: none;
+  display: block;
+}
+.header-nav {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  width: 100%;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .2px; text-transform: none;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(234,219,216,.75);
+  padding: 10px 0 0;
+}
+.header-nav a { position: relative; padding-bottom: 2px; color: var(--muted); }
+.header-nav a:last-child { color: var(--navy-mid); font-weight: 700; }
+.header-nav .nav-home { color: var(--muted); }
+.header-nav .nav-sep { color: #d5c3c0; font-size: 10px; font-weight: 600; letter-spacing: 0; line-height: 1; }
+.header-nav a::after {
+  content: ''; position: absolute; left: 50%; bottom: 0; width: 0; height: 2px;
+  background: var(--sand); transition: all .2s; transform: translateX(-50%);
+}
+.header-nav a:hover::after { width: 100%; }
+
+.breadcrumb { background: #edf5ff; border-bottom: 1px solid var(--border); padding: 10px 48px; font-size: 11.5px; color: var(--muted); }
+.breadcrumb a { color: var(--muted); transition: color .2s; }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb span { color: var(--text); font-weight: 500; }
+
+.product-wrap {
+  max-width: 1200px; margin: 0 auto; padding: 48px 48px 88px;
+  display: grid; grid-template-columns: 54% 1fr; gap: 68px; align-items: start;
+}
+
+.gallery { position: sticky; top: 20px; min-width: 0; }
+.main-img-wrap {
+  width: 100%; aspect-ratio: 1/1; border-radius: 14px; overflow: hidden;
+  background: var(--white); border: 1px solid var(--border);
+  margin-bottom: 12px; position: relative;
+  box-shadow: 0 14px 54px rgba(18,59,116,.12);
+}
+
+/* Carousel Styles */
+.carousel-container { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.carousel-track { display: flex; transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); height: 100%; }
+.carousel-slide { min-width: 100%; height: 100%; }
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+.carousel-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 15px; pointer-events: none; z-index: 10; }
+.nav-arrow { 
+  width: 28px; height: 28px; background: rgba(255,255,255,0.7); border-radius: 50%; 
+  display: flex; align-items: center; justify-content: center; cursor: pointer; 
+  pointer-events: auto; border: 1px solid rgba(0,0,0,0.05); 
+  transition: all 0.2s;
+}
+.nav-arrow:hover { background: rgba(255,255,255,1); transform: scale(1.05); }
+.nav-arrow svg { width: 14px; height: 14px; fill: var(--navy); opacity: 0.8; }
+
+.badge-over {
+  position: absolute; top: 14px; right: 14px;
+  background: var(--cta); color: #fff;
+  font-size: 10px; font-weight: 800;
+  letter-spacing: 0.3px; text-transform: uppercase;
+  padding: 5px 11px; border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(20,97,206,.22);
+  z-index: 5;
+}
+.thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.thumbs::-webkit-scrollbar { height: 4px; }
+.thumbs::-webkit-scrollbar-track { background: transparent; }
+.thumbs::-webkit-scrollbar-thumb { background: #dcc9c7; border-radius: 999px; }
+.thumb { flex: 0 0 calc((100% - 32px) / 5); aspect-ratio: 1; scroll-snap-align: start; border-radius: 8px; overflow: hidden; border: 2px solid transparent; cursor: pointer; background: var(--white); transition: border-color .2s, transform .2s; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.thumb:hover { border-color: var(--sand); transform: translateY(-2px); }
+.thumb.active { border-color: var(--navy); }
+
+.product-info { padding-top: 2px; min-width: 0; }
+.sold-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--sand-light); border: 1px solid #c6dafa;
+  border-radius: 6px; padding: 5px 13px;
+  font-size: 11.5px; font-weight: 700; color: #174b8c;
+  margin-bottom: 16px; letter-spacing: .3px;
+}
+.badge-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.badge-row .sold-badge { margin-bottom: 0; }
+.deal-badge {
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  background: #f9bd27; color: #fff; border-radius: 5px;
+  padding: 6px 9px; font-size: 11px; font-weight: 900;
+  letter-spacing: .25px; text-transform: uppercase;
+  box-shadow: 0 6px 16px rgba(255,79,122,.16);
+}
+.deal-badge::before {
+  content: '%'; width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 900; line-height: 1;
+}
+h1 { font-size: 28px; font-weight: 800; line-height: 1.2; color: var(--navy); margin-bottom: 8px; letter-spacing: -0.8px; }
+.vendor { font-size: 13px; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; font-weight: 500; }
+.vendor::before { content: ''; display: inline-block; width: 18px; height: 2px; background: var(--sand); border-radius: 2px; }
+.stars { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+.star-icons { color: var(--star); font-size: 14px; letter-spacing: 1.5px; }
+.star-count { font-size: 13px; color: var(--muted); font-weight: 500; }
+.divider { height: 1px; background: var(--border); margin: 18px 0; }
+
+.price-original { font-size: 13px; color: var(--muted); text-decoration: line-through; margin-bottom: 4px; }
+.price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+.price-main { font-size: 34px; font-weight: 800; color: var(--navy); line-height: 1; letter-spacing: -1px; }
+.discount-pill { background: var(--cta-light); border: 1.5px solid #9bddba; color: var(--green-text); font-size: 12px; font-weight: 700; padding: 4px 11px; border-radius: 50px; letter-spacing: .5px; }
+.installments { font-size: 13px; color: var(--muted); margin: 4px 0 2px; }
+.installments strong { color: var(--text); font-weight: 600; }
+.savings-text { font-size: 13px; color: var(--cta); font-weight: 600; }
+
+.pix-box {
+  background: #f5fbf7;
+  border: 1px solid #b8d9c4; border-radius: 10px;
+  padding: 12px 16px; display: flex; align-items: center; gap: 12px; margin: 12px 0 20px;
+}
+.pix-icon { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.pix-icon img { width: 100%; height: 100%; object-fit: contain; }
+.pix-price { font-size: 19px; font-weight: 700; color: #0f7a6b; letter-spacing: -0.3px; }
+.pix-label { font-size: 11px; color: #1a9a88; font-weight: 500; }
+
+.variants-section { margin-bottom: 22px; }
+.variants-label { font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 12px; }
+.variants-label strong { color: var(--navy); font-weight: 700; font-size: 14px; }
+.variants-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.variant-btn { border: 2px solid #9ca3af; background: var(--white); border-radius: 12px; padding: 16px 20px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-family: var(--font-main); text-align: center; flex: 1; min-width: 130px; position: relative; }
+.variant-btn .vb-name { font-size: 14px; font-weight: 700; color: #111827; display: block; }
+.variant-btn .vb-price { font-size: 13px; color: #374151; display: block; margin-top: 4px; font-weight: 600; }
+.variant-btn:hover { border-color: #9ca3af; transform: translateY(-2px); }
+.variant-btn.active { border-color: var(--cta); background: #f0fdf4; border-width: 3px; transform: scale(1.05); box-shadow: 0 10px 25px rgba(20,97,206,0.15); z-index: 10; }
+.variant-btn.active::after { content: '✓'; position: absolute; top: -10px; right: -10px; background: var(--cta); color: white; width: 24px; height: 24px; border-radius: 50%; font-size: 14px; display: flex; align-items: center; justify-content: center; font-weight: 800; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.variant-btn.active .vb-name { color: var(--green-text); font-size: 16px; font-weight: 800; }
+.variant-btn.active .vb-price { color: var(--green-text); opacity: 1; font-weight: 700; font-size: 14px; }
+.color-pickers { margin-bottom: 22px; }
+.color-summary { display: none; }
+.color-summary { font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 12px; }
+.color-summary strong { color: var(--navy); font-weight: 700; font-size: 14px; }
+.color-picker { margin-bottom: 16px; }
+.color-picker:last-child { margin-bottom: 0; }
+.color-picker-title {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 14px;
+  letter-spacing: -0.3px; text-transform: none;
+}
+.color-picker-title .step {
+  width: 42px; height: 42px; border-radius: 11px; background: #edf5ff; color: #d85064;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 900; flex-shrink: 0;
+}
+.color-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: start; }
+.color-option {
+  border: 0; padding: 0; background: transparent; cursor: pointer; position: relative;
+  display: flex; flex-direction: column; align-items: center;
+  transition: transform .2s;
+}
+.color-option img {
+  width: 100%; aspect-ratio: 1; object-fit: cover; object-position: center top; display: block;
+  border-radius: 50%; border: 1.5px solid #eadfdd; background: var(--white);
+  box-shadow: 0 4px 16px rgba(24,22,44,.06);
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.color-option:hover { transform: translateY(-1px); }
+.color-option:hover img { border-color: var(--sand); }
+.color-option.active img { border-color: var(--cta); border-width: 3px; box-shadow: 0 10px 24px rgba(20,97,206,.15); }
+.color-option.active::after {
+  content: '✓'; position: absolute; top: -2px; right: 7px; background: var(--cta); color: white;
+  width: 25px; height: 25px; border-radius: 50%; font-size: 15px; display: flex;
+  align-items: center; justify-content: center; font-weight: 800; border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+.color-name {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 30px;
+  margin-top: -12px; padding: 7px 13px 8px; border: 1px solid #eadfdd; border-radius: 999px;
+  background: var(--white); color: var(--navy); box-shadow: 0 5px 14px rgba(24,22,44,.05);
+  font-size: 12.5px; font-weight: 700; line-height: 1.05; text-align: center; position: relative; z-index: 1;
+  white-space: nowrap;
+}
+.color-option.active .color-name { border-color: var(--cta); color: #0b6838; }
+.size-section { margin: -6px 0 22px; }
+.size-label { font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 12px; }
+.size-label strong { color: var(--navy); font-weight: 700; font-size: 14px; }
+.size-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.size-btn {
+  border: 1.5px solid #d8d1d0; background: var(--white); border-radius: 10px; padding: 12px 10px;
+  cursor: pointer; transition: border-color .2s, background .2s, box-shadow .2s, transform .2s;
+  font-family: var(--font-main); font-size: 13px; font-weight: 800; color: var(--navy);
+  position: relative;
+}
+.size-btn span { display: block; margin-top: 2px; font-size: 11px; font-weight: 600; color: var(--muted); }
+.size-btn:hover { border-color: var(--sand); transform: translateY(-1px); }
+.size-btn.active { border-color: var(--cta); border-width: 3px; background: #f0fdf4; box-shadow: 0 8px 18px rgba(20,97,206,.12); color: var(--green-text); }
+.size-btn.active::after {
+  content: '✓'; position: absolute; top: -10px; right: -10px; background: var(--cta); color: white;
+  width: 22px; height: 22px; border-radius: 50%; font-size: 13px; display: flex;
+  align-items: center; justify-content: center; font-weight: 800; border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.size-btn.active span { color: var(--green-text); }
+
+.cta-btn {
+  width: 100%; background: var(--cta); color: #fff;
+  border: none; border-radius: 12px; padding: 20px 24px;
+  font-size: 17px; font-weight: 700; letter-spacing: -0.2px;
+  cursor: pointer; transition: background .2s, transform .15s, box-shadow .2s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  box-shadow: 0 6px 28px var(--cta-glow); margin-bottom: 12px;
+  position: relative; overflow: hidden;
+}
+.cta-btn::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg,rgba(255,255,255,.08) 0%,transparent 60%); pointer-events: none; }
+.cta-btn:hover { background: var(--cta-hover); transform: translateY(-2px); box-shadow: 0 10px 36px var(--cta-glow); }
+.cta-btn:active { transform: translateY(0); }
+
+.cta-sub { text-align: center; font-size: 11.5px; color: var(--muted); margin-bottom: 22px; letter-spacing: .2px; }
+.cta-sub span { color: var(--cta); font-weight: 600; }
+
+.trust-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 22px; }
+.trust-item { background: var(--white); padding: 14px 10px; text-align: center; }
+.trust-item .ti { font-size: 20px; margin-bottom: 5px; display: block; }
+.trust-item strong { display: block; font-size: 10.5px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px; }
+.trust-item span { font-size: 11px; color: var(--muted); line-height: 1.4; display: block; }
+
+.payment-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.payment-icons { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.pay-chip { background: var(--white); border: 1px solid #e5e7eb; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; justify-content: center; height: 38px; min-width: 64px; }
+.pay-chip img { height: 22px; width: auto; object-fit: contain; }
+.pay-chip.elo-chip img { height: 16px; }
+.pay-chip.pix-chip img { height: 24px; }
+
+.desc-section { background: var(--white); padding: 80px 48px; border-top: 1px solid var(--border); }
+.section-heading { text-align: center; margin-bottom: 52px; }
+.section-heading h2 { font-size: 34px; font-weight: 800; color: var(--navy); letter-spacing: -1px; margin-bottom: 12px; }
+.section-heading p { font-size: 16px; color: var(--muted); max-width: 520px; margin: 0 auto; line-height: 1.6; }
+.heading-line { width: 44px; height: 3px; background: var(--sand); border-radius: 2px; margin: 14px auto 0; }
+.desc-images { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; box-shadow: 0 16px 64px rgba(27,42,59,.13); }
+.desc-images img { width: 100%; }
+
+.benefits-section { background: var(--white); padding: 58px 48px; border-top: 1px solid var(--border); }
+.benefits-section .section-heading h2 { color: var(--navy); }
+.benefits-section .section-heading p { color: var(--muted); }
+.benefits-section .section-heading { margin-bottom: 28px; }
+.benefits-section .section-heading h2 { font-size: 26px; letter-spacing: -.4px; margin-bottom: 6px; }
+.benefits-section .section-heading p { font-size: 14px; max-width: 460px; }
+.benefits-section .heading-line { width: 34px; height: 2px; margin-top: 12px; }
+.benefits-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; max-width: 980px; margin: 0 auto; }
+.benefit-card { background: #edf5ff; border: 1px solid #f0dedc; border-radius: 12px; padding: 18px 16px; text-align: left; transition: border-color .25s, box-shadow .25s, transform .25s; }
+.benefit-card:hover { border-color: #e9bbc5; box-shadow: 0 12px 30px rgba(18,59,116,.07); transform: translateY(-2px); }
+.benefit-icon { width: 34px; height: 34px; background: var(--white); border: 1px solid #ead6d8; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 15px; margin: 0 0 10px; }
+.benefit-card h3 { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 5px; }
+.benefit-card p { font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+.testimonials { background: var(--white); padding: 80px 48px; border-top: 1px solid var(--border); overflow-anchor: none; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; overflow-anchor: none; }
+.testi-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s; }
+.testi-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+.testi-card.no-photo { min-height: 280px; border-top: 3px solid #e9bbc5; }
+.testi-card.no-photo .testi-content { min-height: 100%; }
+.testi-img { width: 100%; aspect-ratio: 1/1; overflow: hidden; }
+.testi-img img { width: 100%; height: 100%; object-fit: cover; }
+.testi-img img.focus-waist { object-position: center 28%; }
+.testi-content { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+.testi-stars { color: var(--star); font-size: 14px; margin-bottom: 12px; }
+.testi-text { font-size: 14px; color: var(--text); line-height: 1.6; margin-bottom: 16px; font-weight: 400; flex-grow: 1; }
+.testi-footer { display: flex; align-items: center; gap: 12px; border-top: 1px solid #f0f0f0; padding-top: 16px; }
+.testi-author { font-size: 14px; font-weight: 700; color: var(--navy); }
+.testi-author span { color: var(--muted); font-weight: 400; display: block; font-size: 12px; margin-top: 2px; }
+.verified-badge { font-size: 10px; font-weight: 700; color: #174b8c; background: #edf5ff; padding: 2px 8px; border-radius: 50px; text-transform: uppercase; margin-left: auto; }
+.review-pages { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 30px; }
+.review-page {
+  width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 999px;
+  background: var(--white); color: var(--muted); font: 700 13px/1 var(--font-main);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: border-color .2s, color .2s, background .2s, transform .2s;
+}
+.review-page:hover { border-color: var(--sand); color: var(--navy); transform: translateY(-1px); }
+.review-page.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.review-page.more { border: 0; background: transparent; cursor: default; width: auto; color: #c0a7aa; }
+
+@media (max-width: 960px) {
+  .testi-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+
+.mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; padding: 12px 16px; background: var(--white); border-top: 1px solid var(--border); z-index: 300; box-shadow: 0 -4px 20px rgba(0,0,0,.1); }
+.mobile-cta button { width: 100%; background: var(--cta); color: #fff; border: none; border-radius: 12px; padding: 18px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 20px var(--cta-glow); }
+
+footer { background: var(--navy-deep); color: rgba(255,255,255,.58); padding: 72px 48px 36px; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 52px; max-width: 1100px; margin: 0 auto 52px; }
+.footer-logo { font-size: 24px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; margin-bottom: 16px; }
+.footer-logo em { font-style: normal; color: var(--sand); }
+.footer-about { font-size: 14px; line-height: 1.8; max-width: 280px; }
+.footer-col h4 { font-size: 11px; font-weight: 700; color: var(--sand); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,.5); transition: color .2s; }
+.footer-col ul li a:hover { color: var(--sand); }
+.footer-col p { font-size: 13px; line-height: 2; }
+.footer-col strong { color: rgba(255,255,255,.8); font-weight: 500; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,.25); max-width: 1100px; margin: 0 auto; flex-wrap: wrap; gap: 10px; }
+
+@media (max-width: 960px) {
+  .product-wrap { grid-template-columns: 1fr; gap: 28px; padding: 24px 20px 60px; }
+  .gallery { position: static; }
+  h1 { font-size: 22px; } .price-main { font-size: 36px; }
+  .benefits-grid { grid-template-columns: 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .testi-grid { grid-template-columns: 1fr; }
+  header { padding: 18px 20px 16px; }
+  .breadcrumb { padding: 10px 20px; display: none; }
+  .desc-section, .benefits-section, .testimonials, footer { padding-left: 20px; padding-right: 20px; }
+  .mobile-cta { display: block; }
+}
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+  .announce-bar { height: 35px; font-size: 10px; padding: 0 10px; }
+  header { width: 100%; padding: 18px 12px 14px; gap: 11px; }
+  .logo-wrap { width: 100%; }
+  .logo { font-size: 38px; letter-spacing: 2px; }
+  .logo-sub { font-size: 10px; letter-spacing: 3.8px; margin-top: 5px; }
+  .product-wrap { padding: 16px 12px 52px; gap: 20px; }
+  .main-img-wrap { border-radius: 12px; margin-bottom: 10px; }
+  .badge-over { top: 10px; right: 10px; font-size: 11px; padding: 6px 12px; }
+  .thumbs { gap: 7px; padding-bottom: 4px; scrollbar-width: none; }
+  .thumbs::-webkit-scrollbar { display: none; }
+  .thumb { flex-basis: calc((100% - 28px) / 5); }
+  .sold-badge { font-size: 11.5px; padding: 5px 12px; margin-bottom: 14px; }
+  .badge-row { gap: 7px; margin-bottom: 14px; }
+  .badge-row .sold-badge { margin-bottom: 0; }
+  .deal-badge { font-size: 10.5px; padding: 5px 8px; gap: 4px; }
+  .deal-badge::before { width: 13px; height: 13px; font-size: 8px; }
+  h1 { font-size: 24px; letter-spacing: -0.35px; margin-bottom: 7px; }
+  .vendor { font-size: 12.5px; margin-bottom: 12px; }
+  .stars { margin-bottom: 14px; }
+  .star-icons { font-size: 13.5px; }
+  .star-count { font-size: 12.5px; }
+  .divider { margin: 14px 0; }
+  .price-original { font-size: 12.5px; }
+  .price-main { font-size: 32px; }
+  .discount-pill { font-size: 11.5px; padding: 4px 10px; }
+  .installments, .savings-text { font-size: 12.5px; }
+  .pix-box { padding: 12px 14px; margin: 12px 0 18px; }
+  .pix-icon { width: 30px; height: 30px; }
+  .pix-price { font-size: 19px; }
+  .pix-label { font-size: 11.5px; }
+  .variants-row { gap: 8px; }
+  .variants-label, .size-label { font-size: 13px; margin-bottom: 10px; }
+  .variants-label strong, .size-label strong { font-size: 13.5px; }
+  .color-pickers { margin-bottom: 20px; }
+  .color-summary { font-size: 13px; margin-bottom: 12px; }
+  .color-summary strong { font-size: 13.5px; }
+  .color-picker { margin-bottom: 14px; }
+  .color-picker-title { gap: 9px; font-size: 16px; margin-bottom: 10px; letter-spacing: -0.2px; }
+  .color-picker-title .step { width: 32px; height: 32px; border-radius: 9px; font-size: 16px; }
+  .color-options { gap: 9px; }
+  .color-option.active::after { top: -3px; right: 1px; width: 22px; height: 22px; font-size: 13px; border-width: 2px; }
+  .color-name { min-height: 27px; margin-top: -10px; font-size: 10.5px; font-weight: 700; padding: 6px 8px 7px; max-width: 100%; white-space: normal; }
+  .variant-btn { min-width: 0; flex: 1 1 calc(50% - 4px); padding: 14px 14px; border-radius: 10px; }
+  .variant-btn:first-child { flex-basis: 100%; }
+  .variant-btn .vb-name { font-size: 15.5px; }
+  .variant-btn .vb-price { font-size: 13.2px; }
+  .variant-btn.active .vb-name { font-size: 15.8px; }
+  .variant-btn.active .vb-price { font-size: 13.2px; }
+  .variant-btn.active { transform: none; }
+  .size-row { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .size-btn { padding: 13px 9px; font-size: 14px; }
+  .size-btn span { font-size: 11.5px; }
+  .cta-sub { font-size: 11.5px; margin-bottom: 18px; }
+  .trust-item { padding: 13px 10px; }
+  .trust-item .ti { font-size: 20px; }
+  .trust-item strong { font-size: 11px; }
+  .trust-item span { font-size: 11.5px; }
+  .payment-label { font-size: 10.5px; margin-bottom: 10px; }
+  .payment-icons { gap: 8px; }
+  .pay-chip { min-width: 52px; height: 34px; padding: 5px 9px; }
+  .desc-section, .benefits-section, .testimonials, footer { padding-top: 50px; padding-bottom: 50px; }
+  .section-heading { margin-bottom: 28px; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .benefit-card { padding: 17px 15px; }
+  .benefits-section .benefit-card { text-align: center; }
+  .benefit-icon { width: 34px; height: 34px; font-size: 15px; margin: 0 auto 10px; }
+  .benefit-card h3 { font-size: 14.5px; margin-bottom: 6px; }
+  .benefit-card p { font-size: 13px; line-height: 1.5; }
+  .footer-top { grid-template-columns: 1fr; }
+  .header-nav {
+    width: 100%; justify-content: center; gap: 6px; font-size: 11.5px;
+    padding-top: 10px; max-width: 100%; flex-wrap: wrap; line-height: 1.35;
+  }
+  .trust-grid { grid-template-columns: 1fr; }
+  .section-heading h2 { font-size: 26px; letter-spacing: -0.4px; }
+  .section-heading p { font-size: 13.5px; }
+  .desc-images { border-radius: 12px; }
+  .testi-content { padding: 17px; }
+  .testi-text { font-size: 13.5px; line-height: 1.55; }
+  .testi-author { font-size: 13.5px; }
+  .testi-author span { font-size: 11.5px; }
+  .verified-badge { font-size: 9.5px; padding: 2px 8px; }
+  .review-pages { gap: 6px; margin-top: 24px; }
+  .review-page { width: 31px; height: 31px; font-size: 12px; }
+  .mobile-cta { padding: 10px 12px; }
+  .mobile-cta button { padding: 17px; font-size: 16px; }
+  .footer-about, .footer-col p, .footer-col ul li a { font-size: 13px; }
+  .footer-bottom { display: block; line-height: 1.7; }
+}
+
+.deal-badge{color:#082b58}.logo-sub{color:#20569a}.pix-box{background:#eef6ff;border-color:#c6dafa}.pix-price{color:#1459b4}.carousel-slide img{object-fit:contain}.logo{font-size:30px;letter-spacing:1px}.header-nav a:last-child{color:#20569a}
+
+:root{--cta:#1a8f4e;--cta-hover:#157a40;--cta-glow:rgba(26,143,78,.32);--cta-light:#e6f5ec;--green-text:#1a6e3d}
+.pix-box{background:#f4fbf7;border-color:#9ed9bc}.pix-price{color:#07877e}.pix-label{color:#039d94}.savings-text{color:#099b71}.variant-btn.active{box-shadow:0 10px 25px rgba(26,143,78,.15)}
+
+.pay-chip.pix-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;width:auto;font-size:12px}
+
+/* Seletor do produto: identidade azul da primeira versão. */
+.variant-btn.active{border-color:#1461ce;background:#edf5ff;box-shadow:0 10px 25px rgba(20,97,206,.15)}
+.variant-btn.active::after{background:#1461ce}
+.variant-btn.active .vb-name,.variant-btn.active .vb-price{color:#124e9b}
+
+.exclusive-price{background:#f5fbf7;border:1px solid #afe9ca;border-radius:15px;padding:18px;margin:0 0 24px}
+.exclusive-price-title{background:#def5e8;border-radius:12px;padding:10px 13px;font-size:16px;font-weight:800;color:#008c59;line-height:1.3;margin-bottom:17px}
+.exclusive-price-top{display:flex;align-items:center;gap:13px;margin-bottom:3px;flex-wrap:wrap}
+.exclusive-price-old{font-size:20px;color:#87919f;text-decoration:line-through;font-weight:600}
+.exclusive-price-discount{background:#dcf6e7;border:1px solid #c3efd7;border-radius:25px;color:#008e56;font-size:17px;font-weight:800;padding:3px 13px}
+.exclusive-price-value{font-size:clamp(38px,5vw,56px);font-weight:800;color:#080d22;line-height:1.2;letter-spacing:-1.7px;white-space:nowrap}
+.exclusive-price-caption{font-size:17px;color:#87919f;margin-top:11px;line-height:1.4}
+@media(max-width:480px){.exclusive-price{padding:16px}.exclusive-price-title{font-size:15px}.exclusive-price-value{font-size:46px}.exclusive-price-caption{font-size:16px}}
+
+/* Oferta compacta, proporcional à área de compra. */
+.exclusive-price{padding:13px 15px;margin-bottom:20px;border-radius:10px}
+.exclusive-price-title{font-size:11px;letter-spacing:.3px;padding:7px 10px;border-radius:6px;margin-bottom:10px}
+.exclusive-price-top{gap:9px;margin-bottom:5px}
+.exclusive-price-old{font-size:13px;font-weight:500}
+.exclusive-price-discount{font-size:11px;padding:2px 9px;font-weight:700}
+.exclusive-price-value{font-size:34px;letter-spacing:-.8px;line-height:1.15;color:var(--navy)}
+.exclusive-price-caption{font-size:12px;margin-top:5px;line-height:1.4}
+@media(max-width:480px){.exclusive-price{padding:12px 14px}.exclusive-price-title{font-size:11px}.exclusive-price-value{font-size:32px}.exclusive-price-caption{font-size:12px}}
+
+.exclusive-price{margin-bottom:10px}
+.economy-badge{display:inline-flex;align-items:center;gap:5px;background:#e6f5ec;border:1px solid #c4e7d2;color:#1a6e3d;border-radius:7px;padding:7px 11px;font-size:12px;margin-bottom:22px;line-height:1.4}
+.economy-badge strong{font-weight:700}
+
+/* Pix title and integrated savings footer. */
+.exclusive-price{overflow:hidden;padding:14px 15px 0;margin-bottom:22px}
+.exclusive-price-title{display:flex;align-items:center;gap:9px;background:#e2f5ef;color:#169d90;padding:9px 10px;font-size:11px;letter-spacing:.2px;border-radius:7px;margin-bottom:12px}
+.offer-pix-logo{width:22px;height:22px;flex-shrink:0;color:#32bcad}
+.exclusive-price-caption{margin-bottom:13px}
+.offer-economy{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 -15px;padding:10px 15px;background:#e4f5e9;border-top:1px solid #c8e7d2;color:#287647;font-size:12px}
+.offer-economy strong{display:inline-flex;align-items:center;background:#1a8f4e;color:white;border-radius:6px;padding:5px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+@media(max-width:480px){.exclusive-price{padding:13px 14px 0}.offer-economy{margin:0 -14px;padding:10px 14px}.exclusive-price-title{font-size:11px}}
+
+/* Compact, consistent typography and one-piece savings line. */
+.exclusive-price{padding:11px 13px 0;border-radius:10px;margin-bottom:19px}
+.exclusive-price-title{background:none;padding:0;margin-bottom:10px;gap:7px;font-family:var(--font-main);font-size:11px;font-weight:600;letter-spacing:.15px;color:#178b7e;border-radius:0;line-height:1.4}
+.offer-pix-logo{width:17px;height:17px;flex-shrink:0;color:#22a995}
+.exclusive-price-top{margin-bottom:4px;gap:8px}
+.exclusive-price-old{font-size:12px}
+.exclusive-price-discount{font-size:10px;padding:2px 7px;font-weight:600}
+.exclusive-price-value{font-size:30px;font-weight:700;letter-spacing:-.7px;line-height:1.2}
+.exclusive-price-caption{font-size:11px;margin-top:4px;margin-bottom:10px}
+.offer-economy{display:block;margin:0 -13px;padding:7px 13px;line-height:1.4;background:#e8f5ed;border-top:1px solid #d3e9db;color:#227046;font-size:11px;font-weight:600;letter-spacing:0}
+@media(max-width:480px){.exclusive-price{padding:11px 13px 0}.exclusive-price-title{font-size:11px}.exclusive-price-value{font-size:30px}.exclusive-price-caption{font-size:11px}.offer-economy{margin:0 -13px;padding:7px 13px}}
+
+.modern-offer{margin-bottom:16px;border-radius:13px;background:#fff;box-shadow:0 4px 15px rgba(18,59,116,.09);font-family:var(--font-main)}
+.modern-offer-header{display:flex;align-items:center;gap:9px;padding:14px 12px 25px;border-radius:13px 13px 0 0;background:linear-gradient(115deg,#00542f,#009152);color:#fff}
+.offer-seal{width:30px;height:30px;flex-shrink:0}
+.modern-offer-heading{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.modern-offer-heading strong{font-size:11px;font-weight:800;line-height:1.3;letter-spacing:0}
+.modern-offer-heading span{font-size:9px;line-height:1.3;font-weight:400}
+.modern-offer-discount{border:1px solid #94ddaf;border-radius:24px;padding:5px 10px;font-size:10px;line-height:1.2;font-weight:700;white-space:nowrap}
+.modern-offer-body{position:relative;margin-top:-13px;background:#fff;border-radius:14px;padding:12px}
+.modern-offer-old{color:#7e889b;font-size:11px;text-decoration:line-through;line-height:1.2;margin:0 5px 2px}
+.modern-offer-price{color:#13213c;font-size:32px;font-weight:800;letter-spacing:-1px;line-height:1.15;margin:0 5px 7px}
+.modern-offer-saving{display:flex;align-items:center;gap:7px;background:#e9f8f0;color:#087a42;padding:7px 9px;border-radius:7px;font-size:11px;line-height:1.3}
+.modern-offer-saving svg{height:15px;width:15px;flex-shrink:0}
+.modern-offer-saving strong{font-size:12px;font-weight:800}
+.modern-offer-color{font-size:11px;line-height:1.4;color:#77849a;margin:12px 0 5px}
+.modern-offer-color strong{color:#1451b5}
+.modern-offer-variant{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;padding:8px 12px;background:#f0f6ff;border:2px solid #2876ff;border-radius:6px;color:#124dcc;font-family:inherit}
+.modern-offer-variant strong{font-size:12px;line-height:1.4;font-weight:700}
+.modern-offer-variant>span:not(.modern-offer-check){font-size:10px;line-height:1.4}
+.modern-offer-check{position:absolute;right:-5px;top:-8px;width:18px;height:18px;display:grid;place-items:center;border:2px solid white;border-radius:50%;background:#0875ff;color:white;font-size:11px;line-height:1}
+.modern-offer-buy{margin-top:9px;min-height:40px;padding:9px 12px;width:100%;border:0;border-radius:8px;background:linear-gradient(110deg,#168f51,#108446);color:white;font:800 14px var(--font-main);line-height:1.4;cursor:pointer}
+.modern-offer-buy:hover{background:#08733c}
+@media(max-width:480px){.modern-offer-heading strong{font-size:10px}.modern-offer-price{font-size:30px}.modern-offer-header{gap:7px}.modern-offer-discount{padding:5px 8px;font-size:9px}}
+
+/* Tipografia proporcional ao restante da página. */
+.modern-offer-header{gap:11px;padding:17px 16px 28px}
+.offer-seal{width:34px;height:34px}
+.modern-offer-heading{gap:4px}
+.modern-offer-heading strong{font-size:13px;line-height:1.35}
+.modern-offer-heading span{font-size:11px;line-height:1.4}
+.modern-offer-discount{font-size:12px;padding:6px 10px}
+.modern-offer-body{padding:16px}
+.modern-offer-old{font-size:13px;margin-bottom:4px}
+.modern-offer-price{font-size:38px;margin-bottom:11px;line-height:1.15}
+.modern-offer-saving{font-size:13px;padding:10px 11px;gap:8px}
+.modern-offer-saving svg{width:17px;height:17px}
+.modern-offer-saving strong{font-size:14px}
+.modern-offer-color{font-size:13px;margin:15px 0 8px}
+.modern-offer-variant{padding:11px 12px;gap:4px;border-radius:8px}
+.modern-offer-variant strong{font-size:15px}
+.modern-offer-variant>span:not(.modern-offer-check){font-size:12px}
+.modern-offer-check{width:22px;height:22px;font-size:13px}
+.modern-offer-buy{font-size:17px;min-height:50px;padding:12px;margin-top:12px;border-radius:9px}
+@media(max-width:480px){.modern-offer-header{padding:15px 12px 27px;gap:9px}.offer-seal{width:30px;height:30px}.modern-offer-heading strong{font-size:12px}.modern-offer-heading span{font-size:11px}.modern-offer-discount{font-size:11px;padding:6px 8px}.modern-offer-body{padding:14px}.modern-offer-price{font-size:36px}.modern-offer-buy{font-size:16px}}
+@media(max-width:350px){.modern-offer-header{gap:6px}.modern-offer-heading strong{font-size:11px}.modern-offer-discount{font-size:10px;padding:5px 6px}.offer-seal{width:26px;height:26px}}
+
+/* Equilíbrio entre título, oferta e os demais elementos da loja. */
+.product-info h1{font-size:23px;font-weight:700;line-height:1.35;letter-spacing:-.4px;margin-bottom:9px;text-wrap:balance}
+.product-info .badge-row{margin-bottom:13px}
+.product-info .vendor{font-size:12px;margin-bottom:12px}
+.product-info .divider{margin:14px 0}
+.modern-offer{box-shadow:0 3px 12px rgba(18,59,116,.06);border-radius:12px}
+.modern-offer-header{padding:14px 14px 25px;gap:9px}
+.offer-seal{width:29px;height:29px}
+.modern-offer-heading strong{font-size:12px;font-weight:700;line-height:1.4}
+.modern-offer-heading span{font-size:11px;line-height:1.4}
+.modern-offer-discount{font-size:11px;font-weight:600;padding:5px 9px}
+.modern-offer-body{padding:14px;border-radius:12px}
+.modern-offer-old{font-size:12px;margin-left:0}
+.modern-offer-price{font-size:34px;font-weight:800;letter-spacing:-.8px;margin-left:0;margin-bottom:10px}
+.modern-offer-saving{font-size:12px;padding:8px 10px}
+.modern-offer-saving strong{font-size:12px;font-weight:700}
+.modern-offer-color{font-size:13px;margin:13px 0 7px}
+.modern-offer-variant{padding:11px 12px;gap:3px}
+.modern-offer-variant strong{font-size:14px}
+.modern-offer-variant>span:not(.modern-offer-check){font-size:12px}
+.modern-offer-buy{font-size:16px;min-height:49px;font-weight:700;margin-top:11px}
+@media(max-width:480px){.product-info h1{font-size:21px;line-height:1.35;letter-spacing:-.3px}.modern-offer-header{padding:13px 12px 24px;gap:8px}.modern-offer-heading strong{font-size:11px}.modern-offer-heading span{font-size:10px}.modern-offer-discount{font-size:10px;padding:5px 8px}.offer-seal{width:27px;height:27px}.modern-offer-body{padding:13px}.modern-offer-price{font-size:32px}.modern-offer-buy{font-size:16px}}
+
+.color-swatches{display:flex;align-items:center;width:100%;border:1px solid #e1e8f1;border-radius:9px;background:#fafcff;height:43px}
+.color-swatches-track{display:flex;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;scroll-behavior:smooth;padding:2px;gap:2px}
+.color-swatches-track::-webkit-scrollbar{display:none}
+.color-swatch{position:relative;display:grid;place-items:center;flex:1 0 44px;height:36px;border:1px solid transparent;border-radius:7px;background:transparent;cursor:pointer;padding:4px 10px}
+.color-swatch:not(:last-child)::after{content:'';position:absolute;right:-2px;top:7px;bottom:7px;width:1px;background:#edf0f5}
+.color-swatch.selected{border-color:#277eff;background:#edf6ff;box-shadow:0 0 0 1px #277eff12}
+.swatch-dot{width:25px;height:25px;border-radius:50%;background:radial-gradient(circle at 32% 24%,#ffffff30,transparent 62%),var(--swatch);box-shadow:inset 0 1px 2px #ffffff45,inset 0 -2px 3px #0000000d;display:block}
+.swatch-check{display:none;position:absolute;right:-2px;top:-3px;border:1px solid white;border-radius:50%;width:13px;height:13px;background:#1678ff;color:white;font-size:9px;line-height:11px;text-align:center}
+.color-swatch.selected .swatch-check{display:block}
+.color-swatch:focus-visible,.swatches-next:focus-visible{outline:2px solid #1461ce;outline-offset:2px}
+.swatches-next{align-self:stretch;flex:0 0 33px;border:0;border-left:1px solid #edf0f5;background:transparent;color:#7a8aa3;font-size:23px;cursor:pointer;border-radius:0 9px 9px 0}
+.swatch-kit-caption{font-size:11px;color:#75839a;line-height:1.4;margin-top:5px}
+.modern-offer-color{margin-bottom:5px}
+
+.modern-offer-header{background:linear-gradient(115deg,#123b74,#20569a)}
+.modern-offer-discount{border-color:#a9c9f1;background:rgba(255,255,255,.08);color:#fff}
+
+/* Mais legibilidade na faixa de oferta. */
+.modern-offer-heading strong{font-size:15px;line-height:1.35}
+.modern-offer-heading span{font-size:13px;line-height:1.4}
+.modern-offer-discount{font-size:13px;padding:6px 10px}
+.modern-offer-header{padding-top:16px;padding-bottom:27px}
+@media(max-width:480px){.modern-offer-heading strong{font-size:14px}.modern-offer-heading span{font-size:12px}.modern-offer-discount{font-size:12px;padding:6px 8px}}
+@media(max-width:350px){.modern-offer-heading strong{font-size:13px}.modern-offer-heading span{font-size:12px}.modern-offer-discount{font-size:11px;padding:6px}.modern-offer-header{gap:7px}}
+
+.modern-offer-heading strong{font-size:12.75px}
+.modern-offer-heading span{font-size:11.05px}
+.modern-offer-discount{font-size:11.05px}
+@media(max-width:480px){.modern-offer-heading strong{font-size:11.9px}.modern-offer-heading span{font-size:10.2px}.modern-offer-discount{font-size:10.2px}}
+@media(max-width:350px){.modern-offer-heading strong{font-size:11.05px}.modern-offer-heading span{font-size:10.2px}.modern-offer-discount{font-size:9.35px}}
+
+.product-info>.modern-offer{margin-bottom:14px}
+.product-info>.modern-offer-buy{display:block;margin:0 0 14px;width:100%;min-height:54px;font-size:17px;border-radius:10px;box-shadow:0 5px 14px rgba(26,143,78,.2)}
+
+/* Profundidade do cartão e do botão principal. */
+.modern-offer{box-shadow:0 3px 6px rgba(18,59,116,.05),0 12px 26px rgba(18,59,116,.14);border:1px solid rgba(18,59,116,.08)}
+.modern-offer-header{box-shadow:inset 0 1px 0 rgba(255,255,255,.19)}
+.modern-offer-body{box-shadow:inset 0 1px 0 #fff}
+.product-info>.modern-offer-buy{background:linear-gradient(180deg,#1a9957,#108447);border:1px solid #0e7d42;box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 4px 0 #096a35,0 10px 20px rgba(16,132,71,.24);transition:transform .18s,box-shadow .18s;margin-bottom:19px}
+.product-info>.modern-offer-buy:hover{background:linear-gradient(180deg,#1ca45e,#108447);transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 5px 0 #096a35,0 13px 23px rgba(16,132,71,.27)}
+.product-info>.modern-offer-buy:active{transform:translateY(3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 0 #096a35,0 4px 9px rgba(16,132,71,.2)}
+.product-info>.modern-offer-buy:focus-visible{outline:3px solid #1461ce;outline-offset:5px}
+@media(prefers-reduced-motion:reduce){.product-info>.modern-offer-buy{transition:none}}
+
+/* Sombra média e suave, conforme a referência. */
+.product-info>.modern-offer-buy{background:linear-gradient(180deg,#14924e,#0e8645);border:0;box-shadow:0 7px 12px rgba(15,78,47,.26);margin-bottom:19px}
+.product-info>.modern-offer-buy:hover{background:linear-gradient(180deg,#169c54,#0e8645);transform:translateY(-1px);box-shadow:0 8px 14px rgba(15,78,47,.28)}
+.product-info>.modern-offer-buy:active{transform:translateY(1px);box-shadow:0 4px 8px rgba(15,78,47,.22)}
+
+.shipping-badge{display:inline-flex;align-items:center;gap:7px;background:#1461ce;border:1px solid #1461ce;color:#fff;padding:5px 11px;border-radius:6px;font-size:11.5px;font-weight:700;letter-spacing:.3px;line-height:1.5}
+.shipping-badge svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+.shipping-badge{background:#123b74;border-color:#123b74;color:#fff}
+
+.shipping-badge{background:linear-gradient(135deg,#194780,#123b74);border-color:#123b74;box-shadow:inset 0 1px 0 rgba(255,255,255,.13)}
+.product-info .deal-badge{background:linear-gradient(135deg,#ffce47,#f9bd27);color:#082b58;box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+
+.shipping-badge{background:linear-gradient(115deg,#2a62a5 0%,#194780 48%,#0b2b57 100%);border-color:#123b74}
+.product-info .deal-badge{background:linear-gradient(115deg,#ffe17b 0%,#ffcb37 48%,#eda600 100%);color:#082b58}
+
+.product-description-image{max-width:858px;margin:28px auto 45px;padding:0 16px}
+.product-description-image img{display:block;width:100%;height:auto;border-radius:12px}
+@media(max-width:600px){.product-description-image{margin:20px auto 32px;padding:0 11px}.product-description-image img{border-radius:8px}}
+
+/* Descrição em largura de landing page, sem margens no celular. */
+.product-description-image{width:100%;max-width:1200px;margin:28px auto 45px;padding:0}
+.product-description-image img{width:100%;height:auto;border-radius:0}
+@media(max-width:600px){.product-description-image{width:100%;max-width:none;margin:20px 0 32px;padding:0}.product-description-image img{border-radius:0}}
+
+/* Transição da compra para a descrição e separação entre imagens. */
+.product-wrap{padding-bottom:18px}
+.product-description-image{margin-top:0;margin-bottom:30px}
+.product-description-image img{display:block}
+.product-description-image img:first-child{mask-image:linear-gradient(to bottom,transparent 0,#000 24px);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 24px)}
+.product-description-image img+img{margin-top:22px;mask-image:linear-gradient(to bottom,transparent 0,#000 14px);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14px)}
+@media(max-width:600px){.product-wrap{padding-bottom:8px}.product-description-image{margin-top:0;margin-bottom:26px}.product-description-image img+img{margin-top:18px}.product-description-image img:first-child{mask-image:linear-gradient(to bottom,transparent 0,#000 18px);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18px)}}
+
+.product-description-image img.promo-image{width:80%;max-width:620px;height:auto;margin-left:auto;margin-right:auto}
+
+/* Fade nas duas bordas para separar suavemente os painéis. */
+.product-description-image img{mask-image:linear-gradient(to bottom,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%)}
+.product-description-image img:first-child,.product-description-image img+img{mask-image:linear-gradient(to bottom,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%)}
+.product-description-image img+img{margin-top:16px}
+@media(max-width:600px){.product-description-image img,.product-description-image img:first-child,.product-description-image img+img{mask-image:linear-gradient(to bottom,transparent 0,#000 10px,#000 calc(100% - 10px),transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 10px,#000 calc(100% - 10px),transparent 100%)}.product-description-image img+img{margin-top:12px}}
+
+.product-description-image img+img{margin-top:28px}
+@media(max-width:600px){.product-description-image img+img{margin-top:24px}}
+
+/* Cada imagem em um cartão separado. */
+.product-description-image{display:flex;flex-direction:column;gap:22px;padding:0 18px;max-width:1200px;margin:0 auto 30px}
+.description-panel{margin:0;width:100%;overflow:hidden;background:#fff;border:1px solid #d6e2ef;border-radius:13px;box-shadow:0 3px 10px rgba(18,59,116,.04)}
+.product-description-image .description-panel img{display:block;width:100%;height:auto;margin:0;border-radius:0;mask-image:none;-webkit-mask-image:none}
+.description-panel-promo{width:80%;max-width:620px;align-self:center}
+@media(max-width:600px){.product-description-image{padding:0 11px;gap:18px;margin:0 auto 26px}.description-panel{border-radius:10px}.product-description-image .description-panel img{margin:0;mask-image:none;-webkit-mask-image:none}}
+
+.description-panel{border:0;box-shadow:0 5px 16px rgba(18,59,116,.14),0 1px 3px rgba(18,59,116,.06)}
+.product-description-image{gap:25px}
+@media(max-width:600px){.product-description-image{gap:21px}.description-panel{border:0;box-shadow:0 4px 13px rgba(18,59,116,.14),0 1px 3px rgba(18,59,116,.05)}}
+
+.description-panel{box-shadow:0 10px 25px rgba(18,59,116,.20),0 3px 7px rgba(18,59,116,.10)}
+.product-description-image{gap:38px}
+@media(max-width:600px){.product-description-image{gap:32px}.description-panel{box-shadow:0 8px 20px rgba(18,59,116,.20),0 3px 6px rgba(18,59,116,.10)}}
+
+.home-slider{display:flex;width:100%;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;cursor:grab;overscroll-behavior-x:contain}
+.home-slider::-webkit-scrollbar{display:none}.home-slider.dragging{scroll-snap-type:none;cursor:grabbing;user-select:none}
+.home-slide{flex:0 0 100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always}
+.home-slide img{width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none}
+.home-thumbs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px}
+.home-thumb{flex:0 0 calc((100% - 32px)/5);aspect-ratio:1;padding:0;overflow:hidden;border:2px solid transparent;border-radius:8px;background:white;cursor:pointer}
+.home-thumb.active{border-color:#123b74}.home-thumb img{width:100%;height:100%;object-fit:cover}
+.home-arrow{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;background:#ffffffe8;border:1px solid #dce6f2;border-radius:50%;color:#123b74;font-size:25px;line-height:1;cursor:pointer;box-shadow:0 2px 7px #123b7420}
+.home-prev{left:10px}.home-next{right:10px}.home-counter{position:absolute;bottom:11px;right:12px;background:#ffffffed;color:#123b74;border-radius:15px;padding:3px 9px;font-size:11px;font-weight:600;pointer-events:none}
+.home-slider:focus-visible,.home-thumb:focus-visible,.home-arrow:focus-visible{outline:2px solid #1461ce;outline-offset:-3px}
+
+.store-header-logo{display:block;width:270px;max-width:80vw;height:auto;margin:0 auto;mix-blend-mode:multiply}
+@media(max-width:480px){.store-header-logo{width:235px}}
+
+.mare-reviews{background:#f5f8fc;padding:48px 24px 40px;border-top:1px solid #dce6f2}
+.mare-reviews .section-heading{margin-bottom:15px}.mare-reviews .section-heading h2{font-size:26px;letter-spacing:-.4px;color:#123b74}.mare-reviews .section-heading p{font-size:14px;color:#6b7a8d}
+.mare-reviews-demo{text-align:center;font-size:11px;color:#6b7a8d;margin:0 auto 24px;letter-spacing:.2px}
+.mare-reviews-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.mare-review-card{background:white;border:1px solid #e1e9f3;border-radius:14px;padding:22px;box-shadow:0 5px 16px rgba(18,59,116,.06);display:flex;flex-direction:column}
+.mare-review-stars{color:#e9ae14;letter-spacing:3px;font-size:18px;margin-bottom:12px}
+.mare-review-card h3{font-size:15px;line-height:1.5;color:#123b74;margin-bottom:9px}
+.mare-review-card>p{font-size:13px;line-height:1.8;color:#65758a;margin:0 0 20px;flex:1}
+.mare-review-author{display:flex;gap:10px;align-items:center;border-top:1px solid #eef2f7;padding-top:16px}
+.mare-review-avatar{display:grid;place-items:center;background:#eaf2ff;color:#174b8c;width:37px;height:37px;border-radius:50%;font-size:14px;font-weight:700}
+.mare-review-author strong{display:block;font-size:12px;color:#123b74}.mare-review-author small{display:block;font-size:10px;color:#7f8da0;margin-top:2px}
+.mare-reviews-footnote{text-align:center;color:#8290a2;font-size:11px;margin:22px 0 0}
+@media(max-width:700px){.mare-reviews{padding:35px 16px}.mare-reviews-grid{grid-template-columns:1fr;gap:15px}.mare-review-card{padding:20px}.mare-reviews .section-heading h2{font-size:23px}.mare-reviews .section-heading p{font-size:13px}}
+
+.review-pagination{display:flex;justify-content:center;gap:8px;margin:27px 0 10px}.review-pagination button{width:38px;height:38px;border:1px solid #d6e2ef;background:white;border-radius:8px;color:#123b74;font:600 13px var(--font-main);cursor:pointer}.review-pagination button.active{background:#123b74;border-color:#123b74;color:white}.review-pagination button:disabled{opacity:.35;cursor:default}.review-pagination button:focus-visible{outline:2px solid #1461ce;outline-offset:3px}.review-page-info{text-align:center;font-size:11px;color:#7f8da0}.mare-reviews{padding-top:50px;padding-bottom:45px}.mare-reviews-grid{gap:20px}.mare-review-card{min-height:220px}#reviews-heading{scroll-margin-top:20px}
+@media(max-width:700px){.mare-reviews{padding:35px 16px}.mare-review-card{min-height:0}.mare-reviews-grid{gap:15px}}
+
+.mare-reviews-grid{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:700px){.mare-reviews-grid{grid-template-columns:1fr}}
+
+.review-customer-photo{display:block;width:100%;height:auto;max-height:340px;object-fit:contain;background:#f5f8fc;border-radius:10px;margin:0 0 17px}
+
+/* Fotos maiores, sem redução para caber em uma altura fixa. */
+.mare-review-card{padding:0;overflow:hidden}
+.mare-review-card>.mare-review-stars{margin:20px 22px 10px}
+.mare-review-card>p{margin:0 22px 18px}
+.mare-review-card>.review-customer-photo{width:100%;height:auto;max-height:none;object-fit:contain;border-radius:0;margin:0 0 18px;background:#edf4fc}
+.mare-review-card>.mare-review-author{margin:0 22px 20px}
+@media(max-width:700px){.mare-review-card{padding:0}.mare-review-card>.mare-review-stars{margin:18px 18px 10px}.mare-review-card>p{margin:0 18px 17px}.mare-review-card>.mare-review-author{margin:0 18px 18px}}
+
+/* Avaliações com leitura mais clara. */
+.mare-review-card>p{color:#27364a;font-size:15px;font-weight:500;line-height:1.75}
+.mare-review-author strong{font-size:14px;font-weight:700;color:#123b74}
+.mare-review-stars{font-size:21px;color:#d89a00}
+.mare-reviews .section-heading p{color:#46566d;font-size:14px}
+.review-page-info{color:#46566d;font-size:12px}
+@media(max-width:700px){.mare-review-card>p{font-size:15px;line-height:1.7}}
+
+.mare-review-card>p{font-weight:400}
+.mare-review-author strong{font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="announce-bar">
+  <div class="announce-track">
+    <div class="announce-item">☀️ PRAIA, CAMPING E LAZER — APROVEITE AO AR LIVRE</div>
+    <div class="announce-item">💸 PAGUE COM PIX COM SEGURANÇA</div>
+    <div class="announce-item">🚚 FRETE GRÁTIS PARA TODO BRASIL ACIMA DE R$49,90</div>
+  </div>
+</div>
+
+<header>
+  <div class="logo-wrap">
+    <img class="store-header-logo" src="assets/icone-mareazul.png" alt="Maré Azul — Praia & Camping" width="440" height="122">
+  </div>
+  <nav class="header-nav" aria-label="Categorias">
+    <a class="nav-home" href="#">Início</a>
+    <span class="nav-sep">&gt;</span>
+    <a href="#">Praia</a>
+    <span class="nav-sep">&gt;</span>
+    <a href="#">Camping</a>
+    <span class="nav-sep">&gt;</span>
+    <a href="#">Promoções</a>
+  </nav>
+</header>
+
+<div class="breadcrumb">
+  <a href="#">Início</a> &rsaquo; <a href="#">Praia & Camping</a> &rsaquo;
+  <span>Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol</span>
+</div>
+
+<div class="product-wrap">
+  <div class="gallery"><div class="main-img-wrap"><div class="home-slider" id="homeSlider" tabindex="0" role="region" aria-label="Fotos do produto: arraste para navegar"><div class="home-slide"><img src="assets/home-1.webp" alt="Kit Dobrável Duo 3 em 1 — foto 1" draggable="false" fetchpriority="high"></div><div class="home-slide"><img src="assets/home-4.webp" alt="Kit Dobrável Duo 3 em 1 — foto 2" draggable="false" loading="lazy"></div><div class="home-slide"><img src="assets/home-2.webp" alt="Kit Dobrável Duo 3 em 1 — foto 3" draggable="false" loading="lazy"></div><div class="home-slide"><img src="assets/home-3.webp" alt="Kit Dobrável Duo 3 em 1 — foto 4" draggable="false" loading="lazy"></div><div class="home-slide"><img src="assets/home-5.webp" alt="Kit Dobrável Duo 3 em 1 — foto 5" draggable="false" loading="lazy"></div></div><button class="home-arrow home-prev" type="button" aria-label="Foto anterior">‹</button><button class="home-arrow home-next" type="button" aria-label="Próxima foto">›</button><span class="home-counter" id="homeCounter">1 / 5</span></div><div class="home-thumbs"><button class="home-thumb active" type="button" data-slide="0" aria-label="Ver foto 1" aria-pressed="true"><img src="assets/home-1-thumb.webp" alt="" loading="lazy" draggable="false"></button><button class="home-thumb" type="button" data-slide="1" aria-label="Ver foto 2" aria-pressed="false"><img src="assets/home-4-thumb.webp" alt="" loading="lazy" draggable="false"></button><button class="home-thumb" type="button" data-slide="2" aria-label="Ver foto 3" aria-pressed="false"><img src="assets/home-2-thumb.webp" alt="" loading="lazy" draggable="false"></button><button class="home-thumb" type="button" data-slide="3" aria-label="Ver foto 4" aria-pressed="false"><img src="assets/home-3-thumb.webp" alt="" loading="lazy" draggable="false"></button><button class="home-thumb" type="button" data-slide="4" aria-label="Ver foto 5" aria-pressed="false"><img src="assets/home-5-thumb.webp" alt="" loading="lazy" draggable="false"></button></div></div>
+  <div class="product-info">
+    <div class="badge-row">
+      <div class="sold-badge shipping-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h11v12H3zM14 9h4l3 4v4h-7M4 17h2m4 0h6m4 0h1"/><circle cx="8" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>FRETE GRÁTIS</span></div>
+      <div class="deal-badge">KIT COMPLETO</div>
+    </div>
+    <h1>Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol</h1>
+    <p class="vendor">Vendido e garantido pela Maré Azul</p>
+    
+    <div class="divider"></div>
+    <section class="modern-offer" aria-label="Oferta exclusiva via Pix">
+      <div class="modern-offer-header">
+        <svg class="offer-seal" viewBox="0 0 32 32" aria-hidden="true"><path fill="#f9bd27" d="m16 1 4 3 5-1 2 5 4 3-1 5 1 5-4 3-2 5-5-1-4 3-4-3-5 1-2-5-4-3 1-5-1-5 4-3 2-5 5 1z"/><path d="m12 21 8-10" fill="none" stroke="#123b74" stroke-width="2.5" stroke-linecap="round"/><circle cx="11.5" cy="11.5" r="2" fill="#123b74"/><circle cx="20.5" cy="20.5" r="2" fill="#123b74"/></svg>
+        <div class="modern-offer-heading"><strong>OFERTA EXCLUSIVA VIA PIX</strong><span>Pagamento à vista via Pix</span></div>
+        <span class="modern-offer-discount">56% OFF</span>
+      </div>
+      <div class="modern-offer-body">
+        <div class="modern-offer-old">R$ 269,90</div>
+        <div class="modern-offer-price" id="priceMain">R$ 119,90</div>
+        <div class="modern-offer-saving"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 5h13v3H5a2 2 0 0 0 0 4h15v8H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h11v2H5zm0 5h17v4h-6v-2H5z"/></svg><span>Você economiza <strong>R$ 150,00</strong></span></div>
+        <div class="modern-offer-color">Cor: <strong id="variantLabel">Azul</strong></div>
+        <div class="color-swatches" aria-label="Escolha a cor do kit">
+          <div class="color-swatches-track" id="colorSwatchTrack">
+            <button class="color-swatch selected" type="button" data-color="Azul" aria-label="Azul" aria-pressed="true"><span class="swatch-dot" style="--swatch:#2563c1"></span><span class="swatch-check" aria-hidden="true">✓</span></button>
+            <button class="color-swatch" type="button" data-color="Preto" aria-label="Preto" aria-pressed="false"><span class="swatch-dot" style="--swatch:#242424"></span><span class="swatch-check" aria-hidden="true">✓</span></button>
+            <button class="color-swatch" type="button" data-color="Verde" aria-label="Verde" aria-pressed="false"><span class="swatch-dot" style="--swatch:#238851"></span><span class="swatch-check" aria-hidden="true">✓</span></button>
+            <button class="color-swatch" type="button" data-color="Vermelho" aria-label="Vermelho" aria-pressed="false"><span class="swatch-dot" style="--swatch:#d63c43"></span><span class="swatch-check" aria-hidden="true">✓</span></button>
+          </div>
+          <button class="swatches-next" type="button" aria-label="Ver próximas cores">›</button>
+        </div>
+        <div class="swatch-kit-caption">2 cadeiras + 1 guarda-sol - Kit Completo</div>
+      </div>
+    </section>
+    <button class="modern-offer-buy" onclick="handleBuy(this)" type="button">COMPRAR AGORA</button>
+    <p id="purchaseNotice" role="status" style="color:var(--navy);font-size:13px;margin-top:12px"></p>
+    <p class="cta-sub">🔒 Pagamento 100% seguro &nbsp;·&nbsp; <span>Entregas em todo o Brasil</span></p>
+    <div class="trust-grid">
+      <div class="trust-item"><span class="ti">🛡️</span><strong>Compra Garantida</strong><span>Satisfação ou dinheiro de volta</span></div>
+      <div class="trust-item"><span class="ti">🔄</span><strong>Troca Grátis</strong><span>7 dias para trocas e devoluções</span></div>
+      <div class="trust-item"><span class="ti">⭐</span><strong>RA 1000</strong><span>Bem avaliada no Reclame Aqui</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="product-description-image" id="detalhes" aria-label="Descrição do Kit Dobrável Duo 3 em 1"><div class="description-panel"><img src="assets/detalhes-atualizados-1.webp" alt="Apresentação do Kit Dobrável Duo 3 em 1." width="638" height="461" loading="lazy"></div><div class="description-panel"><img src="assets/detalhes-atualizados-2.webp" alt="Duas cadeiras integradas e opções de uso." width="1254" height="1254" loading="lazy"></div><div class="description-panel"><img src="assets/detalhes-atualizados-3.webp" alt="Detalhes do cooler térmico central." width="1254" height="1254" loading="lazy"></div><div class="description-panel"><img src="assets/detalhes-atualizados-4.webp" alt="Detalhes do guarda-sol reforçado." width="1254" height="1254" loading="lazy"></div><div class="description-panel"><img src="assets/detalhes-atualizados-5.webp" alt="Estrutura resistente e detalhes de construção." width="1254" height="1254" loading="lazy"></div><div class="description-panel"><img src="assets/detalhes-atualizados-6.webp" alt="O que acompanha o kit e uso ao ar livre." width="455" height="476" loading="lazy"></div><div class="description-panel description-panel-promo"><img class="promo-image" src="assets/promo2.webp" alt="Informações de frete, envio, trocas e segurança da compra." width="720" height="939" loading="lazy"></div></section>
+
+<section class="mare-reviews" id="avaliacoes" aria-labelledby="reviews-heading"><div class="section-heading"><h2 id="reviews-heading">Avaliações do produto</h2><p>Mais de 571 avaliações · Confira alguns comentários de quem já comprou.</p><div class="heading-line"></div></div><div class="mare-reviews-grid" id="reviewCards" aria-live="polite"><article class="mare-review-card"><div class="mare-review-stars" aria-label="5 de 5 estrelas">★★★★★</div><p>chegou bem embalado e rapidinho. veio tudo protegido, sem nenhum amassado nem nada. já montei e tá perfeito, cadeiras firmes e o guarda sol grande. pelo preço tá ótimo</p><img class="review-customer-photo" src="assets/review-photo-1.webp" alt="Foto anexada à avaliação de Amanda C." loading="lazy"><div class="mare-review-author"><span class="mare-review-avatar" aria-hidden="true">A</span><div><strong>Amanda C.</strong></div></div></article><article class="mare-review-card"><div class="mare-review-stars" aria-label="5 de 5 estrelas">★★★★★</div><p>melhor compra do verão kkkkk usei o fds inteiro na praia, cadeiras confortaveis pra caralho, o guarda sol é gigante e o cooler no meio é pratico. estrutura firme mesmo n balança. recomendo dms</p><img class="review-customer-photo" src="assets/review-photo-2.webp" alt="Foto anexada à avaliação de Camila R." loading="lazy"><div class="mare-review-author"><span class="mare-review-avatar" aria-hidden="true">C</span><div><strong>Camila R.</strong></div></div></article><article class="mare-review-card"><div class="mare-review-stars" aria-label="4 de 5 estrelas">★★★★☆</div><p>Bom produto. Monta facil, cadeiras reforçadas e o guarda sol faz uma sombra boa. A bolsa achei fraquinha mas n atrapalha tanto</p><img class="review-customer-photo" src="assets/review-photo-3.webp" alt="Foto anexada à avaliação de Rafael M." loading="lazy"><div class="mare-review-author"><span class="mare-review-avatar" aria-hidden="true">R</span><div><strong>Rafael M.</strong></div></div></article><article class="mare-review-card"><div class="mare-review-stars" aria-label="5 de 5 estrelas">★★★★★</div><p>genteeee amei demais!! usei na praia com a família e todo mundo gostou kkkk cadeiras altas, confortaveis, o cooler ajuda mas n substitui um cooler daqueles grandes, e o guarda sol lindo. nota 10</p><img class="review-customer-photo" src="assets/review-photo-4.webp" alt="Foto anexada à avaliação de Juliana S." loading="lazy"><div class="mare-review-author"><span class="mare-review-avatar" aria-hidden="true">J</span><div><strong>Juliana S.</strong></div></div></article></div><nav class="review-pagination" aria-label="Páginas de avaliações"><button type="button" id="reviewPrev" aria-label="Página anterior">‹</button><button type="button" class="review-page-btn active" data-page="1" aria-current="page">1</button><button type="button" class="review-page-btn" data-page="2">2</button><button type="button" class="review-page-btn" data-page="3">3</button><button type="button" id="reviewNext" aria-label="Próxima página">›</button></nav><div class="review-page-info" id="reviewPageInfo">Página 1 de 3 · Avaliações 1–4 de 571</div></section>
+<div class="benefits-section">
+  <div class="section-heading">
+    <h2>Por que escolher a Maré Azul?</h2>
+    <p>Compra simples, segura e pensada para aproveitar seus momentos ao ar livre.</p>
+    <div class="heading-line"></div>
+  </div>
+  <div class="benefits-grid">
+    <div class="benefit-card"><div class="benefit-icon">🚚</div><h3>Frete Grátis</h3><p>Envio com rastreio para acompanhar cada etapa.</p></div>
+    <div class="benefit-card"><div class="benefit-icon">★</div><h3>RA1000</h3><p>Nota 1000 no Reclame Aqui para comprar com mais confiança.</p></div>
+    <div class="benefit-card"><div class="benefit-icon">🎧</div><h3>Suporte Diário</h3><p>Atendimento para dúvidas de pedido e entrega.</p></div>
+    <div class="benefit-card"><div class="benefit-icon">🔒</div><h3>Compra Segura</h3><p>Pagamento protegido via PIX ou cartão.</p></div>
+  </div>
+</div>
+
+<div class="mobile-cta">
+  <button id="mobileCtaBtn" onclick="handleBuy(this)">COMPRAR AGORA</button>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="logo-wrap" style="text-align: left;">
+        <div class="logo" style="font-size: 20px;">Maré Azul</div>
+        <div class="logo-sub" style="font-size: 8px; text-align: left;">Praia & Camping</div>
+      </div>
+      <p class="footer-about" style="margin-top: 16px;">Artigos para praia, camping e lazer. Mais praticidade para aproveitar os dias ao ar livre.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Institucional</h4>
+      <ul><li><a href="#">Sobre Nós</a></li><li><a href="#detalhes">Detalhes do produto</a></li><li><a href="#">Dúvidas Frequentes</a></li><li><a href="#">Praia e Ofertas</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Atendimento</h4>
+      <ul><li><a href="#">Política de Envio</a></li><li><a href="#">Trocas e Devoluções</a></li><li><a href="#">Privacidade</a></li><li><a href="#">Termos de Uso</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <p><strong>Seg-Dom, 8h-18h</strong><br>suporte@mareazul.com<br><br>Av. Brigadeiro Faria Lima, 2371 — Jardim Paulistano<br>São Paulo, SP<br>CNPJ: 42.009.818/0001-15</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Maré Azul. Todos os direitos reservados.</span>
+    <span>Oferta exclusiva neste site oficial. Evite golpes comprando apenas aqui.</span>
+  </div>
+</footer>
+
+<script>
+  const homeSlider=document.getElementById('homeSlider');
+  const homeSlides=Array.from(homeSlider.children);
+  const homeThumbs=Array.from(document.querySelectorAll('.home-thumb'));
+  let currentHome=0;
+  const motion=()=>matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+  function goHome(index){
+    index=Math.max(0,Math.min(homeSlides.length-1,index));
+    homeSlider.scrollTo({left:index*homeSlider.clientWidth,behavior:motion()});
+  }
+  homeThumbs.forEach((btn,i)=>btn.addEventListener('click',()=>goHome(i)));
+  document.querySelector('.home-prev').addEventListener('click',()=>goHome(currentHome-1));
+  document.querySelector('.home-next').addEventListener('click',()=>goHome(currentHome+1));
+  homeSlider.addEventListener('scroll',()=>{
+    currentHome=Math.max(0,Math.min(homeSlides.length-1,Math.round(homeSlider.scrollLeft/homeSlider.clientWidth)));
+    homeThumbs.forEach((btn,i)=>{btn.classList.toggle('active',i===currentHome);btn.setAttribute('aria-pressed',String(i===currentHome))});
+    document.getElementById('homeCounter').textContent=(currentHome+1)+' / '+homeSlides.length;
+  },{passive:true});
+  homeSlider.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();goHome(currentHome+(e.key==='ArrowRight'?1:-1))}});
+  let drag=null;
+  homeSlider.addEventListener('pointerdown',e=>{
+    if(e.pointerType!=='mouse'||e.button!==0)return;
+    drag={x:e.clientX,left:homeSlider.scrollLeft,index:currentHome};
+    homeSlider.setPointerCapture(e.pointerId);homeSlider.classList.add('dragging');
+  });
+  homeSlider.addEventListener('pointermove',e=>{if(drag)homeSlider.scrollLeft=drag.left+drag.x-e.clientX});
+  function endDrag(e){
+    if(!drag)return;
+    const delta=drag.x-e.clientX,initial=drag.index;drag=null;homeSlider.classList.remove('dragging');
+    goHome(initial+(Math.abs(delta)>Math.min(70,homeSlider.clientWidth*.15)?(delta>0?1:-1):0));
+  }
+  homeSlider.addEventListener('pointerup',endDrag);
+  homeSlider.addEventListener('pointercancel',()=>{drag=null;homeSlider.classList.remove('dragging');goHome(currentHome)});
+  window.addEventListener('resize',()=>homeSlider.scrollTo({left:currentHome*homeSlider.clientWidth,behavior:'instant'}));
+
+  function handleBuy(btn) {
+    const notice=document.getElementById('purchaseNotice');
+    notice.textContent='Kit Praia '+document.getElementById('variantLabel').textContent+' — R$ 119,90. O novo checkout será conectado na próxima etapa.';
+    notice.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  document.querySelectorAll('.color-swatch').forEach(button=>{
+    button.addEventListener('click',()=>{
+      document.querySelectorAll('.color-swatch').forEach(item=>{item.classList.remove('selected');item.setAttribute('aria-pressed','false')});
+      button.classList.add('selected');button.setAttribute('aria-pressed','true');
+      document.getElementById('variantLabel').textContent=button.dataset.color;
+      document.getElementById('purchaseNotice').textContent='';
+    });
+  });
+  document.querySelector('.swatches-next').addEventListener('click',()=>{
+    const choices=Array.from(document.querySelectorAll('.color-swatch'));
+    const next=choices[(choices.findIndex(item=>item.classList.contains('selected'))+1)%choices.length];
+    next.click();next.scrollIntoView({behavior:'smooth',block:'nearest',inline:'nearest'});
+  });
+
+const customerReviews=[["Amanda C.", 5, "chegou bem embalado e rapidinho. veio tudo protegido, sem nenhum amassado nem nada. já montei e tá perfeito, cadeiras firmes e o guarda sol grande. pelo preço tá ótimo", "assets/review-photo-1.webp"], ["Camila R.", 5, "melhor compra do verão kkkkk usei o fds inteiro na praia, cadeiras confortaveis pra caralho, o guarda sol é gigante e o cooler no meio é pratico. estrutura firme mesmo n balança. recomendo dms", "assets/review-photo-2.webp"], ["Rafael M.", 4, "Bom produto. Monta facil, cadeiras reforçadas e o guarda sol faz uma sombra boa. A bolsa achei fraquinha mas n atrapalha tanto", "assets/review-photo-3.webp"], ["Juliana S.", 5, "genteeee amei demais!! usei na praia com a família e todo mundo gostou kkkk cadeiras altas, confortaveis, o cooler ajuda mas n substitui um cooler daqueles grandes, e o guarda sol lindo. nota 10", "assets/review-photo-4.webp"], ["Pedro H.", 4, "custo beneficio ok. estrutura aguenta 100kg sem problema. o cooler é pequenininho e n é igual um cooler separado, mas resolve. guarda sol bom"], ["Fernanda L.", 5, "Comprei dps de ler um monte de avaliação e n me decepcionei. as cadeiras n afundam na areia, o conjunto fica bonito e o guarda sol segura bem o vento. super recomendo"], ["Lucas T.", 4, "produto bom. montagem simples, material de qualidade. o cooler no meio é pratico, mas n substitui um cooler de verdade. daria 5 se a bolsa viesse melhor"], ["Beatriz A.", 5, "usei com minhas amigas e foi perfeito. cadeiras confortaveis o dia todo, guarda sol cobre direito e o cooler mantém as bebidas geladas por um tempo. ja indiquei pra umas 3 pessoas"], ["Marcos V.", 3, "bonito e funcional, mas o guarda sol balança bastante quando venta forte. as cadeiras são boas. gostei mais ou menos"], ["Thiago B.", 4, "Gostei. Estrutura reforçada como fala no anuncio e o guarda sol faz uma sombra boa. a bolsa de transporte é meio apertada pra guardar tudo"], ["Larissa M.", 5, "amei kkk as cadeiras são altas, n precisa ficar se abaixando, o guarda sol é enorme e o cooler no meio ajuda bastante, mas n substitui um cooler daqueles comprados. vale cada centavo"], ["Eduardo P.", 4, "estrutura reforçada de verdade e o guarda sol é top. o cooler n tem isolamento tão forte e n substitui um cooler separado, mas ainda funciona. no geral boa compra"]];
+let reviewPage=1;
+function renderReviews(page){
+ reviewPage=Math.max(1,Math.min(3,page));
+ const grid=document.getElementById('reviewCards');
+ grid.replaceChildren(...customerReviews.slice((reviewPage-1)*4,reviewPage*4).map(([name,rating,body,photo])=>{
+  const article=document.createElement('article');article.className='mare-review-card';
+  const stars=document.createElement('div');stars.className='mare-review-stars';stars.textContent='★'.repeat(rating)+'☆'.repeat(5-rating);stars.setAttribute('aria-label',rating+' de 5 estrelas');
+  
+  const text=document.createElement('p');text.textContent=body;
+  const author=document.createElement('div');author.className='mare-review-author';
+  const avatar=document.createElement('span');avatar.className='mare-review-avatar';avatar.textContent=name[0];avatar.setAttribute('aria-hidden','true');
+  const info=document.createElement('div');const label=document.createElement('strong');label.textContent=name;info.append(label);author.append(avatar,info);article.append(stars,text);if(photo){const image=document.createElement('img');image.src=photo;image.alt='Foto anexada à avaliação de '+name;image.className='review-customer-photo';image.loading='lazy';article.append(image)}article.append(author);return article;
+ }));
+ document.querySelectorAll('.review-page-btn').forEach(b=>{const active=Number(b.dataset.page)===reviewPage;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+ document.getElementById('reviewPrev').disabled=reviewPage===1;document.getElementById('reviewNext').disabled=reviewPage===3;
+ document.getElementById('reviewPageInfo').textContent='Página '+reviewPage+' de 3 · Avaliações '+((reviewPage-1)*4+1)+'–'+(reviewPage*4)+' de 571';
+}
+function changeReviewPage(page){if(page<1||page>3||page===reviewPage)return;renderReviews(page);document.getElementById('reviews-heading').scrollIntoView({behavior:motion(),block:'start'})}
+document.querySelectorAll('.review-page-btn').forEach(b=>b.addEventListener('click',()=>changeReviewPage(Number(b.dataset.page))));
+document.getElementById('reviewPrev').addEventListener('click',()=>changeReviewPage(reviewPage-1));document.getElementById('reviewNext').addEventListener('click',()=>changeReviewPage(reviewPage+1));
+renderReviews(1);
+</script>
+</body>
+</html>
+
