@@ -18,4 +18,4 @@ function renderTimer(){const remaining=remainingSeconds(expiresAt,Date.now());do
 let timer=setInterval(renderTimer,1000);renderTimer();document.addEventListener('visibilitychange',renderTimer);
 copyButton.addEventListener('click',async()=>{if(!remainingSeconds(expiresAt,Date.now())){renderTimer();return}const input=document.getElementById('pixCode'),feedback=document.getElementById('copyFeedback');let copied=false;try{await navigator.clipboard.writeText(input.value);copied=true}catch{input.focus();input.select();input.setSelectionRange(0,input.value.length);try{copied=document.execCommand('copy')}catch{}}
 feedback.textContent=copied?'Código de demonstração copiado. Não use para pagamento.':'Selecione o código acima e escolha Copiar.';document.getElementById('copyLabel').textContent=copied?'Código copiado!':'Copiar código Pix';setTimeout(()=>document.getElementById('copyLabel').textContent='Copiar código Pix',2500)});
-</script><script src="../assets/pix-live.js"></script></body></html>
+</script><script src="../assets/pix-live.js?v=fba465b"></script></body></html>
