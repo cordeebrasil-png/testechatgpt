@@ -1,4 +1,5 @@
 (() => {
+  window.__mareAzulIronpayLoaded = true;
   const originalButton = document.getElementById('finish');
   if (!originalButton) return;
   // The original checkout has a legacy demo click listener. Replace the
