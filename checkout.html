@@ -81,7 +81,7 @@ async function lookupCep(cep){
  }
 }
 cepInput.addEventListener('input',e=>{
- const cep=digits(e.target.value).slice(0,8);e.target.value=cep.replace(/^(\d{5})(\d)/,'$1-$2');
+ const cep=digits(e.target.value).slice(0,8);applyMask(e.target,v=>digits(v).slice(0,8).replace(/^(\d{5})(\d)/,'$1-$2'));
  if(cep===lastCep)return;
  cepController?.abort();cepSequence++;cepInput.removeAttribute('aria-busy');retryCep.hidden=true;
  clearPreviousAddress();lastCep='';setCepStatus('');
@@ -89,8 +89,32 @@ cepInput.addEventListener('input',e=>{
 });
 retryCep.addEventListener('click',()=>lookupCep(digits(cepInput.value)));
 document.getElementById('cpf').inputMode='numeric';document.getElementById('cep').inputMode='numeric';
-document.getElementById('cpf').addEventListener('input',e=>e.target.value=digits(e.target.value).slice(0,11).replace(/^(\d{3})(\d)/,'$1.$2').replace(/^(\d{3})\.(\d{3})(\d)/,'$1.$2.$3').replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3-$4'));
-document.getElementById('phone').addEventListener('input',e=>{const v=digits(e.target.value).slice(0,11);e.target.value=v.length>10?v.replace(/^(\d{2})(\d{5})(\d*)$/,'($1) $2-$3'):v.replace(/^(\d{2})(\d{4})(\d*)$/,'($1) $2-$3')});
+function formatCpf(value){const v=digits(value).slice(0,11);return v.replace(/^(\d{3})(\d)/,'$1.$2').replace(/^(\d{3})\.(\d{3})(\d)/,'$1.$2.$3').replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3-$4')}
+function formatPhone(value){const v=digits(value).slice(0,11);if(v.length<=2)return v;if(v.length<=6)return '('+v.slice(0,2)+') '+v.slice(2);const cut=v.length===11?7:6;return '('+v.slice(0,2)+') '+v.slice(2,cut)+'-'+v.slice(cut)}
+function applyMask(input,formatter){
+ const cursor=input.selectionStart??input.value.length;
+ const count=digits(input.value.slice(0,cursor)).length;
+ const atEnd=cursor===input.value.length;
+ input.value=formatter(input.value);
+ let position=0,seen=0;
+ while(position<input.value.length&&seen<count){if(/\d/.test(input.value[position]))seen++;position++}
+ input.setSelectionRange(atEnd?input.value.length:position,atEnd?input.value.length:position);
+}
+for(const [id,formatter] of [['cpf',formatCpf],['phone',formatPhone],['cep',v=>digits(v).slice(0,8).replace(/^(\d{5})(\d)/,'$1-$2')]]){
+ const input=document.getElementById(id);
+ input.addEventListener('beforeinput',event=>{
+  const start=input.selectionStart,end=input.selectionEnd;
+  if(start!==end||start===null)return;
+  if(event.inputType==='deleteContentBackward'&&start>0&&/\D/.test(input.value[start-1])){
+   let from=start-1;while(from>0&&/\D/.test(input.value[from]))from--;
+   event.preventDefault();input.setRangeText('',from,start,'start');input.dispatchEvent(new Event('input',{bubbles:true}));
+  }else if(event.inputType==='deleteContentForward'&&start<input.value.length&&/\D/.test(input.value[start])){
+   let to=start;while(to<input.value.length&&/\D/.test(input.value[to]))to++;
+   event.preventDefault();input.setRangeText('',start,Math.min(to+1,input.value.length),'start');input.dispatchEvent(new Event('input',{bubbles:true}));
+  }
+ });
+ if(id!=='cep')input.addEventListener('input',()=>applyMask(input,formatter));
+}
 const color=new URLSearchParams(location.search).get('cor');document.getElementById('selectedColor').textContent=['Azul','Preto','Verde','Vermelho'].includes(color)?color:'Azul';const modal=document.getElementById('pixModal');const finish=document.getElementById('finish');const close=document.getElementById('closeModal');function hideModal(){modal.hidden=true;document.body.style.overflow='';finish.focus()}finish.addEventListener('click',()=>{if(!validateCheckout())return;modal.hidden=false;document.body.style.overflow='hidden';close.focus()});close.addEventListener('click',hideModal);modal.addEventListener('click',e=>{if(e.target===modal)hideModal()});document.addEventListener('keydown',e=>{if(modal.hidden)return;if(e.key==='Escape')hideModal();if(e.key==='Tab'){e.preventDefault();close.focus()}});document.getElementById('checkoutForm').addEventListener('submit',e=>{e.preventDefault();finish.click()});
 
 const checkoutForm=document.getElementById('checkoutForm');
