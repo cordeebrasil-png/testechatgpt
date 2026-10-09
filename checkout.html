@@ -17,6 +17,8 @@
 /* Economia com leitura mais clara em todos os tamanhos. */
 .saving{font-size:14px;padding:12px 14px;gap:10px}.saving strong{font-size:21px}.saving svg{width:22px;height:22px;flex-shrink:0}
 @media(max-width:600px){.product-bottom{align-items:flex-start;gap:12px}.saving{font-size:12px;padding:10px 12px;gap:9px;white-space:normal}.saving strong{font-size:18px;white-space:nowrap}.saving svg{width:20px;height:20px}}
+
+.field{--field-green:#17844b}.field.is-complete::after{content:'✓';position:absolute;right:16px;top:17px;color:var(--field-green);font-size:16px;font-weight:700;pointer-events:none}.field.is-complete input,.field.is-complete select{padding-right:44px}.field.is-complete select{background-position:right 34px center}.field input:focus,.field select:focus{border-color:#0877ff;box-shadow:0 0 0 3px #0877ff18}.field.is-invalid input,.field.is-invalid select{border-color:#c54c40}.field-error{font-size:12px;line-height:1.5;color:#ae382e;margin:6px 3px 0}.field-error:empty{display:none}#checkoutForm>.card{transition:border-color .2s,box-shadow .2s;scroll-margin-top:20px}#checkoutForm>.card.next-section{border-color:#b6d7ff;box-shadow:0 8px 29px #13264010,0 0 0 2px #0877ff08}.finish{box-shadow:0 9px 22px #08723e35;border:1px solid #087f42}.finish:active{transform:translateY(1px)}@media(prefers-reduced-motion:reduce){#checkoutForm>.card{transition:none}}
 </style></head><body><div class="waves"></div><main class="wrap"><header><a href="./" aria-label="Voltar à loja"><img class="logo" src="assets/icone-mareazul.png" alt="Maré Azul" width="440" height="122"></a><div class="secure"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="12" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4m-4 4v3"/></svg><div><strong>COMPRA SEGURA</strong><span>Seus dados protegidos</span></div></div></header>
 <section class="card product"><img src="assets/home-1.webp" alt="Kit Dobrável Duo 3 em 1"><div class="product-info"><h1>Kit Dobrável Duo 3 em 1</h1><div class="product-bottom"><div><div class="old">R$ 269,90</div><div class="price">R$ 119,90</div></div><div class="saving"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h14v4H4a2 2 0 0 1 0-4zm0 4h17v12H4a2 2 0 0 1-2-2V7"/><path d="M16 13h5v4h-5z"/></svg><div>Você economiza<strong>R$ 150,00</strong></div></div></div></div></section>
 <form id="checkoutForm"><section class="card"><div class="title"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg><div><h2>Informações Pessoais</h2><p>Para quem devemos entregar o pedido?</p></div></div><div class="fields"><div class="field"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg><input id="email" name="email" type="email" placeholder="E-mail*" aria-label="E-mail*" autocomplete="email" required></div><div class="field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg><input id="name" name="name" type="text" placeholder="Nome completo*" aria-label="Nome completo*" autocomplete="name" required></div><div class="field"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l2 5-3 2a14 14 0 0 0 6 6l2-3 5 2v4c0 2-2 3-4 2C9 19 5 15 3 7c-1-2 0-4 2-4z"/></svg><input id="phone" name="phone" type="tel" placeholder="Celular*" aria-label="Celular*" autocomplete="tel" maxlength="15" required></div></div></section>
@@ -34,7 +36,7 @@ const retryCep=document.getElementById('retryCep');
 let cepController=null,cepSequence=0,lastCep='',filledAddress={};
 function clearPreviousAddress(){
  for(const [id,value] of Object.entries(filledAddress)){
-  const field=document.getElementById(id);if(field.value===value)field.value='';
+  const field=document.getElementById(id);if(field.value===value){field.value='';paintField(field,false)}
  }
  filledAddress={};
 }
@@ -68,7 +70,7 @@ async function lookupCep(cep){
   if(!data.localidade||!states.includes(data.uf))throw new Error('invalid-response');
   const values={street:data.logradouro||'',district:data.bairro||'',city:data.localidade,state:data.uf};
   for(const [id,value] of Object.entries(values))document.getElementById(id).value=value;
-  filledAddress=values;
+  filledAddress=values;refreshFields();
   setCepStatus(values.street&&values.district?'Endereço encontrado. Confira os dados e informe o número.':'CEP encontrado. Complete a rua, o bairro e o número.');
  }catch(error){
   if(sequence!==cepSequence||digits(cepInput.value)!==cep)return;
@@ -89,5 +91,62 @@ retryCep.addEventListener('click',()=>lookupCep(digits(cepInput.value)));
 document.getElementById('cpf').inputMode='numeric';document.getElementById('cep').inputMode='numeric';
 document.getElementById('cpf').addEventListener('input',e=>e.target.value=digits(e.target.value).slice(0,11).replace(/^(\d{3})(\d)/,'$1.$2').replace(/^(\d{3})\.(\d{3})(\d)/,'$1.$2.$3').replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3-$4'));
 document.getElementById('phone').addEventListener('input',e=>{const v=digits(e.target.value).slice(0,11);e.target.value=v.length>10?v.replace(/^(\d{2})(\d{5})(\d*)$/,'($1) $2-$3'):v.replace(/^(\d{2})(\d{4})(\d*)$/,'($1) $2-$3')});
-const color=new URLSearchParams(location.search).get('cor');document.getElementById('selectedColor').textContent=['Azul','Preto','Verde','Vermelho'].includes(color)?color:'Azul';const modal=document.getElementById('pixModal');const finish=document.getElementById('finish');const close=document.getElementById('closeModal');function hideModal(){modal.hidden=true;document.body.style.overflow='';finish.focus()}finish.addEventListener('click',()=>{modal.hidden=false;document.body.style.overflow='hidden';close.focus()});close.addEventListener('click',hideModal);modal.addEventListener('click',e=>{if(e.target===modal)hideModal()});document.addEventListener('keydown',e=>{if(modal.hidden)return;if(e.key==='Escape')hideModal();if(e.key==='Tab'){e.preventDefault();close.focus()}});document.getElementById('checkoutForm').addEventListener('submit',e=>e.preventDefault());
+const color=new URLSearchParams(location.search).get('cor');document.getElementById('selectedColor').textContent=['Azul','Preto','Verde','Vermelho'].includes(color)?color:'Azul';const modal=document.getElementById('pixModal');const finish=document.getElementById('finish');const close=document.getElementById('closeModal');function hideModal(){modal.hidden=true;document.body.style.overflow='';finish.focus()}finish.addEventListener('click',()=>{if(!validateCheckout())return;modal.hidden=false;document.body.style.overflow='hidden';close.focus()});close.addEventListener('click',hideModal);modal.addEventListener('click',e=>{if(e.target===modal)hideModal()});document.addEventListener('keydown',e=>{if(modal.hidden)return;if(e.key==='Escape')hideModal();if(e.key==='Tab'){e.preventDefault();close.focus()}});document.getElementById('checkoutForm').addEventListener('submit',e=>{e.preventDefault();finish.click()});
+
+const checkoutForm=document.getElementById('checkoutForm');
+const controls=[...checkoutForm.querySelectorAll('input,select')];
+const sections=[...checkoutForm.querySelectorAll('section.card')];
+function validCpf(value){
+ const cpf=digits(value);if(cpf.length!==11||/^(\d)\1{10}$/.test(cpf))return false;
+ for(let size=9;size<=10;size++){let sum=0;for(let i=0;i<size;i++)sum+=Number(cpf[i])*(size+1-i);let check=(sum*10)%11;if(check===10)check=0;if(check!==Number(cpf[size]))return false}return true;
+}
+function fieldIssue(control){
+ const value=control.value.trim();
+ if(!value)return control.required?({email:'Informe seu e-mail.',name:'Informe seu nome completo.',phone:'Informe seu celular com DDD.',cep:'Informe seu CEP.',street:'Informe a rua ou avenida.',district:'Informe o bairro.',number:'Informe o número ou S/N.',city:'Informe a cidade.',state:'Selecione o estado.',cpf:'Informe seu CPF.'}[control.id]||'Preencha este campo.') : '';
+ if(control.id==='email'&&control.validity.typeMismatch)return 'Informe um e-mail válido, como nome@exemplo.com.';
+ if(control.id==='name'&&value.split(/\s+/).length<2)return 'Informe seu nome e sobrenome.';
+ if(control.id==='phone'&&!/^[1-9]\d9\d{8}$/.test(digits(value)))return 'Informe um celular válido com DDD e 11 dígitos.';
+ if(control.id==='cep'&&digits(value).length!==8)return 'O CEP deve ter 8 dígitos.';
+ if(control.id==='cpf'&&!validCpf(value))return 'Confira o CPF: os dígitos informados não são válidos.';
+ return '';
+}
+function paintField(control,showError=false){
+ const issue=fieldIssue(control),field=control.closest('.field');
+ field.classList.toggle('is-complete',Boolean(control.value.trim())&&!issue);
+ field.classList.toggle('is-invalid',showError&&Boolean(issue));
+ control.setAttribute('aria-invalid',String(showError&&Boolean(issue)));
+ document.getElementById(control.id+'Error').textContent=showError?issue:'';
+ return !issue;
+}
+function refreshSections(){
+ let found=false;
+ for(const section of sections){
+  const incomplete=[...section.querySelectorAll('input[required],select[required]')].some(c=>Boolean(fieldIssue(c)));
+  section.classList.toggle('next-section',!found&&incomplete);if(incomplete)found=true;
+ }
+}
+function refreshFields(){for(const control of controls)paintField(control,control.getAttribute('aria-invalid')==='true');refreshSections()}
+for(const control of controls){
+ const error=document.createElement('p');error.id=control.id+'Error';error.className='field-error';error.setAttribute('aria-live','polite');control.closest('.field').append(error);
+ const described=control.getAttribute('aria-describedby');control.setAttribute('aria-describedby',[described,error.id].filter(Boolean).join(' '));
+ control.addEventListener('blur',()=>{paintField(control,true);refreshSections()});
+ control.addEventListener('input',()=>{paintField(control,false);refreshSections()});
+ control.addEventListener('change',()=>{paintField(control,true);refreshSections()});
+}
+checkoutForm.noValidate=true;
+function validateCheckout(){
+ let firstInvalid=null;
+ for(const control of controls){if(!paintField(control,true)&&!firstInvalid)firstInvalid=control}
+ refreshSections();
+ if(firstInvalid){
+  if(firstInvalid.closest('#addressFields'))showAddress();
+  firstInvalid.focus({preventScroll:true});
+  const rect=firstInvalid.getBoundingClientRect();
+  if(rect.top<0||rect.bottom>innerHeight)firstInvalid.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+  return false;
+ }
+ return true;
+}
+refreshFields();
+window.addEventListener('pageshow',refreshFields);
 </script></body></html>
