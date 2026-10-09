@@ -1,13 +1,22 @@
 # Maré Azul
 
-Página de vendas do Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol.
+Página de vendas e checkout demonstrativo.
 
-## Baixar e abrir no computador
+## Rotas
 
-1. No GitHub, clique em **Code → Download ZIP**.
-2. Extraia o ZIP no Windows.
-3. Abra `index.html` no Chrome ou Edge. Mantenha a pasta `assets` junto do HTML.
+- `/`: loja.
+- `/checkout/`: checkout; recebe `?cor=Azul`, Preto, Verde ou Vermelho.
+- `/obrigado/`: demonstração da página de obrigado.
+- `/api/cep/88220000`: consulta de CEP pelas Pages Functions, com BrasilAPI e ViaCEP como fontes.
 
-Para hospedar como site estático, publique `index.html` e a pasta `assets` no mesmo diretório. Não é necessário instalar dependências nem executar um build.
+## Publicação no Cloudflare Pages
 
-O botão de compra abre `checkout.html` com a cor selecionada. O checkout é uma demonstração de layout: não cria pedidos, não transmite os dados preenchidos e não gera cobranças. A integração Pix será adicionada depois. Nenhuma chave de API foi incluída.
+Conecte este repositório, selecione a branch `main`, framework `None`, deixe o comando de build vazio e use `.` como diretório de saída, na raiz do repositório. A pasta `functions` precisa ser implantada pelo Cloudflare Pages. GitHub Pages sozinho não executa essas funções.
+
+Depois do deploy, abra `/api/cep/88220000`: uma consulta bem-sucedida deve retornar JSON com localidade e UF. Teste também o CEP no checkout. Um push ao GitHub só publica o site se houver integração configurada no Cloudflare.
+
+## Limitações
+
+O checkout não cria pedidos, não envia os dados pessoais e não gera Pix. O botão final abre uma demonstração. A página de obrigado não confirma pagamento. Nenhuma chave de API está incluída.
+
+A consulta de CEP depende de disponibilidade das APIs externas. Em caso de falha, o endereço continua editável e uma nova tentativa pode ser solicitada.

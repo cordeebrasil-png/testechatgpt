@@ -837,7 +837,7 @@ footer { background: var(--navy-deep); color: rgba(255,255,255,.58); padding: 72
           </div>
           <button class="swatches-next" type="button" aria-label="Ver próximas cores">›</button>
         </div>
-        <div class="swatch-kit-caption">2 cadeiras + 1 guarda-sol - Kit Completo</div>
+        
       </div>
     </section>
     <button class="modern-offer-buy" onclick="handleBuy(this)" type="button">COMPRAR AGORA</button>
@@ -937,7 +937,7 @@ footer { background: var(--navy-deep); color: rgba(255,255,255,.58); padding: 72
 
   function handleBuy(btn) {
     const color=document.getElementById('variantLabel').textContent;
-    window.location.href='checkout.html?cor='+encodeURIComponent(color);
+    window.location.href='checkout/?cor='+encodeURIComponent(color);
   }
 
   document.querySelectorAll('.color-swatch').forEach(button=>{
