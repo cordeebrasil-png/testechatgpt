@@ -1,0 +1,9 @@
+CHECKOUT DEMONSTRATIVO
+
+Envie o conteúdo desta pasta para a hospedagem. O index.html deve ficar na raiz.
+
+1. Abra o checkout e toque em Preencher dados de exemplo.
+2. Clique em Comprar agora via Pix.
+3. Abaixo de Copiar código Pix, clique em Simular Pix pago e ver próxima etapa.
+
+Não gera cobranças, não envia dados para gateway e não confirma pagamentos reais. Dados de exemplo são fictícios. O botão de simulação pertence apenas a este pacote.
