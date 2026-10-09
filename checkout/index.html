@@ -55,6 +55,63 @@ body{font-size:var(--type-body);line-height:1.55;font-weight:400}
 .secure{white-space:normal}.freight-benefits>div{padding:0 7px;gap:6px}.freight-benefits svg{width:21px;height:21px}.payment .pix-price-note{padding:12px 10px;gap:9px}.payment .pix-price-note>span,.payment .pix-price-note svg{width:24px;height:24px}
 @media(min-width:601px){:root{--type-title:21px;--type-body:14px;--type-label:15px;--type-price:34px;--type-fine:12px}.secure{white-space:nowrap}.payment .pix-price-note{padding:14px;gap:12px}.freight-benefits>div{padding:0 10px;gap:9px}}
 @media(max-width:380px){:root{--type-body:12px;--type-label:13px;--type-title:17px;--type-price:28px}.payment .pix-price-note{padding:12px 8px;gap:7px}}
+/* Restore the original header and product summary. */
+header{display:flex;align-items:center;justify-content:space-between;padding:0 35px 17px;gap:25px}
+.logo{display:block;width:330px;max-width:100%;height:auto}
+.secure{display:flex;gap:13px;align-items:center;font-size:16px;white-space:nowrap}
+.secure svg{width:28px;height:31px}
+.secure strong{display:block;font-weight:800}
+.secure span{display:block;font-size:14px;color:var(--muted);margin-top:3px}
+.product{display:flex;gap:25px;align-items:center;padding:16px 22px}
+.product>img{width:205px;height:205px;object-fit:cover;border-radius:15px;flex-shrink:0}
+.product-info{flex:1;min-width:0}
+.product h1{font-size:27px;font-weight:800;line-height:1.3;letter-spacing:-.9px;margin:0 0 5px}
+.product p{font-size:18px;color:var(--muted);margin:0}
+.product-bottom{display:flex;gap:20px;align-items:end;justify-content:space-between;margin-top:29px}
+.old{font-size:21px;color:#8993a5;text-decoration:line-through;white-space:nowrap}
+.price{font-size:39px;letter-spacing:-1.4px;font-weight:800;white-space:nowrap;margin-top:5px;line-height:1.2}
+.saving{display:flex;gap:13px;align-items:center;background:#eefaF2;padding:15px 18px;border-radius:14px;color:#078337;white-space:nowrap;font-size:16px}
+.saving svg{height:23px;width:23px}
+.saving strong{display:block;font-size:21px;margin-top:1px}
+@media(max-width:600px){header{padding:0 8px 17px;gap:15px}
+.logo{width:200px}
+.secure{font-size:10px;gap:7px}
+.secure svg{width:18px;height:23px}
+.secure span{font-size:9px}
+.product{gap:12px;padding:13px}
+.product>img{width:105px;height:139px;border-radius:11px}
+.product h1{font-size:17px;letter-spacing:-.5px}
+.product p{font-size:12px}
+.product-bottom{gap:9px;margin-top:15px;flex-wrap:wrap}
+.old{font-size:13px}
+.price{font-size:27px;letter-spacing:-.8px}
+.saving{font-size:10px;padding:7px 9px;gap:7px;border-radius:8px}
+.saving strong{font-size:13px}
+.saving svg{width:16px;height:16px}}
+@media(max-width:360px){.logo{width:170px}
+.secure{font-size:9px}
+.product>img{width:91px}
+.product h1{font-size:16px}}
+.product h1{font-size:23px;letter-spacing:-.6px}
+.product p{font-size:16px}
+.price{font-size:34px}
+.old{font-size:18px}
+.saving{font-size:14px}
+.saving strong{font-size:18px}
+@media(max-width:600px){.product h1{font-size:16px}
+.product p{font-size:11px}
+.price{font-size:25px}
+.old{font-size:12px}
+.saving{font-size:10px}
+.saving strong{font-size:12px}}
+.saving{font-size:14px;padding:12px 14px;gap:10px}
+.saving strong{font-size:21px}
+.saving svg{width:22px;height:22px;flex-shrink:0}
+@media(max-width:600px){.product-bottom{align-items:flex-start;gap:12px}
+.saving{font-size:12px;padding:10px 12px;gap:9px;white-space:normal}
+.saving strong{font-size:18px;white-space:nowrap}
+.saving svg{width:20px;height:20px}}
+.secure{line-height:1.4;font-weight:400;white-space:nowrap}.secure span{line-height:1.4}.product h1{font-weight:800;line-height:1.3}.saving{font-weight:400;line-height:1.4}.saving strong{line-height:1.4}.old{font-weight:400;line-height:1.4}
 </style></head><body><main class="wrap"><header><a href="../" aria-label="Voltar à loja"><img class="logo" src="../assets/icone-mareazul.png" alt="Maré Azul" width="440" height="122"></a><div class="secure"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="12" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4m-4 4v3"/></svg><div><strong>COMPRA SEGURA</strong><span>Seus dados protegidos</span></div></div></header>
 <section class="card product"><img src="../assets/home-1.webp" alt="Kit Dobrável Duo 3 em 1"><div class="product-info"><h1>Kit Dobrável Duo 3 em 1</h1><div class="product-bottom"><div><div class="old">R$ 269,90</div><div class="price">R$ 119,90</div></div><div class="saving"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h14v4H4a2 2 0 0 1 0-4zm0 4h17v12H4a2 2 0 0 1-2-2V7"/><path d="M16 13h5v4h-5z"/></svg><div>Você economiza<strong>R$ 150,00</strong></div></div></div></div></section>
 <form id="checkoutForm"><section class="card"><div class="title"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg><div><h2>Informações Pessoais</h2><p>Para quem devemos entregar o pedido?</p></div></div><div class="fields"><div class="field"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg><input id="email" name="email" type="email" placeholder="E-mail*" aria-label="E-mail*" autocomplete="email" required></div><div class="field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg><input id="name" name="name" type="text" placeholder="Nome completo*" aria-label="Nome completo*" autocomplete="name" required></div><div class="field"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l2 5-3 2a14 14 0 0 0 6 6l2-3 5 2v4c0 2-2 3-4 2C9 19 5 15 3 7c-1-2 0-4 2-4z"/></svg><input id="phone" name="phone" type="tel" placeholder="Celular*" aria-label="Celular*" autocomplete="tel" maxlength="15" required></div></div></section>
