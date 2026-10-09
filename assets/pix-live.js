@@ -2179,6 +2179,10 @@
   if (session?.id && session?.accessToken) {
     poll();
     setInterval(poll, 15e3);
+  } else {
+    setTimeout(() => {
+      location.replace("../checkout/");
+    }, 1200);
   }
   var copy = $("copyPix");
   copy?.addEventListener("click", async (event) => {

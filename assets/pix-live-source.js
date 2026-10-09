@@ -38,7 +38,12 @@ async function poll() {
   try { const response = await fetch(`../api/orders/${encodeURIComponent(session.id)}`, { headers: auth, cache: 'no-store' }); if (!response.ok) return; render(await response.json()); } catch {}
 }
 
-if (session?.id && session?.accessToken) { poll(); setInterval(poll, 15000); }
+if (session?.id && session?.accessToken) {
+  poll();
+  setInterval(poll, 15000);
+} else {
+  setTimeout(() => { location.replace('../checkout/'); }, 1200);
+}
 const copy = $('copyPix');
 copy?.addEventListener('click', async event => {
   if (!$('pixCode').dataset.live) return;
