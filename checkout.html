@@ -235,7 +235,12 @@ for(const [id,formatter] of [['cpf',formatCpf],['phone',formatPhone],['cep',v=>d
  if(id!=='cep')input.addEventListener('input',()=>applyMask(input,formatter));
 }
 const finish=document.getElementById('finish');
-finish.addEventListener('click',()=>{if(!validateCheckout())return;try{sessionStorage.removeItem('mareazul.demoPixExpiresAt')}catch{}location.href='pagamento/'});
+finish.addEventListener('click',()=>{if(!validateCheckout())return;try{
+ const field=id=>document.getElementById(id).value.trim();
+ const selectedColor=new URLSearchParams(location.search).get('cor');
+ sessionStorage.setItem('mareazul.orderPreview',JSON.stringify({name:field('name'),email:field('email'),street:field('street'),number:field('number'),extra:field('extra'),district:field('district'),city:field('city'),state:field('state'),cep:field('cep'),color:['Azul','Preto','Verde','Vermelho'].includes(selectedColor)?selectedColor:'Azul',savedAt:Date.now()}));
+ sessionStorage.removeItem('mareazul.demoPixExpiresAt');
+}catch{}location.href='pagamento/'});
 document.getElementById('checkoutForm').addEventListener('submit',e=>{e.preventDefault();finish.click()});
 const checkoutForm=document.getElementById('checkoutForm');
 const controls=[...checkoutForm.querySelectorAll('input,select')];
