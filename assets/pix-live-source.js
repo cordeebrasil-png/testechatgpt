@@ -35,7 +35,16 @@ function render(data) {
 
 async function poll() {
   if (!session?.id || !session?.accessToken) return;
-  try { const response = await fetch(`../api/orders/${encodeURIComponent(session.id)}`, { headers: auth, cache: 'no-store' }); if (!response.ok) return; render(await response.json()); } catch {}
+  try {
+    const response = await fetch(`../api/orders/${encodeURIComponent(session.id)}`, { headers: auth, cache: 'no-store' });
+    if (response.status === 404) {
+      sessionStorage.removeItem('mareazul.ironpayOrder');
+      location.replace('../checkout/');
+      return;
+    }
+    if (!response.ok) return;
+    render(await response.json());
+  } catch {}
 }
 
 if (session?.id && session?.accessToken) {
