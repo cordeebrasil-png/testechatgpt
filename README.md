@@ -15,19 +15,21 @@ Conecte este repositório, selecione a branch `checkout-preview`, framework `Non
 
 Depois do deploy, abra `/api/cep/88220000`: uma consulta bem-sucedida deve retornar JSON com localidade e UF. Teste também o CEP no checkout. Um push ao GitHub só publica o site se houver integração configurada no Cloudflare.
 
-## Limitações
+## Integração Pix via IronPay
 
-O checkout não cria pedidos, não envia os dados pessoais e não gera Pix. O botão final abre `/pagamento/`, ainda demonstrativa. A página de obrigado não confirma pagamento. Nenhuma chave de API está incluída.
+O checkout cria uma cobrança Pix pelo endpoint `/api/orders` e a tela `/pagamento/` consulta o status no servidor, exibe o código copia e cola e gera o QR Code. O navegador recebe apenas um identificador de pedido e um token temporário; o token da IronPay fica somente no ambiente do Cloudflare.
+
+No Cloudflare Pages, em **Settings → Variables and secrets**, configure:
+
+- `IRONPAY_API_TOKEN` como Secret.
+- `IRONPAY_OFFER_HASH` com o hash da oferta.
+- `IRONPAY_PRODUCT_HASH` com o hash do produto.
+
+Em **Settings → Bindings**, adicione um banco D1 e use o nome `ORDERS_DB`. Execute o conteúdo de `migrations/0001_orders.sql` no console SQL do banco antes de testar o checkout. O webhook público usado pela integração é `/api/ironpay-webhook`; ele consulta a transação na IronPay e não confia no status recebido no corpo da notificação.
+
+O valor é fixado no servidor em 11990 centavos (R$ 119,90), e o Pix segue o prazo informado pela IronPay (24 horas por padrão). O contador visual acompanha a data de expiração retornada pela API.
 
 A consulta de CEP depende de disponibilidade das APIs externas. Em caso de falha, o endereço continua editável e uma nova tentativa pode ser solicitada.
 
 
-## Integração IronPay em preparação
-
-`functions/_lib/ironpay.js` monta o payload da cobrança Pix no servidor, com validação dos dados e valor fixo de 11990 centavos. Não realiza chamadas nem cria cobranças por enquanto.
-
-Configure os identificadores reais `IRONPAY_OFFER_HASH` e `IRONPAY_PRODUCT_HASH` no Cloudflare. O token deverá ser guardado como secret `IRONPAY_API_TOKEN`, nunca no HTML ou em arquivos versionados. O webhook depende da documentação de autenticação e confirmação; não configure uma URL não implementada.
-
-Pendente: exemplo de resposta da criação Pix, consulta da transação, autenticação do webhook e confirmação do prazo de expiração. O campo documentado `expire_in_days` não permite inferir expiração de 30 minutos. A tela e o contador atuais continuam demonstrativos.
-
-A documentação recebida confirma `installments: 1` obrigatório para Pix e autenticação via query parameter `api_token`. O Pix expira em 24h por padrão. Não usar o contador demonstrativo de 30 minutos como prazo real sem suporte confirmado pela API.
+Nenhuma chave de API está incluída no repositório. A documentação confirma `installments: 1` para Pix e autenticação da API via query parameter `api_token`.
