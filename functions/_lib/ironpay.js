@@ -42,6 +42,7 @@ export function buildPixRequest(input, env) {
     amount: ORDER_AMOUNT,
     offer_hash: env.IRONPAY_OFFER_HASH,
     payment_method: 'pix',
+    installments: 1,
     customer,
     cart: [{
       product_hash: env.IRONPAY_PRODUCT_HASH,

@@ -29,3 +29,5 @@ A consulta de CEP depende de disponibilidade das APIs externas. Em caso de falha
 Configure os identificadores reais `IRONPAY_OFFER_HASH` e `IRONPAY_PRODUCT_HASH` no Cloudflare. O token deverá ser guardado como secret `IRONPAY_API_TOKEN`, nunca no HTML ou em arquivos versionados. O webhook depende da documentação de autenticação e confirmação; não configure uma URL não implementada.
 
 Pendente: exemplo de resposta da criação Pix, consulta da transação, autenticação do webhook e confirmação do prazo de expiração. O campo documentado `expire_in_days` não permite inferir expiração de 30 minutos. A tela e o contador atuais continuam demonstrativos.
+
+A documentação recebida confirma `installments: 1` obrigatório para Pix e autenticação via query parameter `api_token`. O Pix expira em 24h por padrão. Não usar o contador demonstrativo de 30 minutos como prazo real sem suporte confirmado pela API.
