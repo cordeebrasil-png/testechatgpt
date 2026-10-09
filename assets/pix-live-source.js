@@ -26,7 +26,7 @@ function render(data) {
   }
   const providerDeadline = Number(data.expiresAt) || displayDeadline;
   const deadline = Math.min(displayDeadline, providerDeadline);
-  const tick = () => { const left = seconds(deadline); $('countdown').textContent = clock(left); $('timerProgress').style.width = `${Math.min(100, left / (24 * 60 * 60) * 100)}%`; if (!left) $('paymentCard').classList.add('expired'); };
+  const tick = () => { const left = seconds(deadline); $('countdown').textContent = clock(left); $('timerProgress').style.width = `${Math.min(100, left / (DISPLAY_WINDOW / 1000) * 100)}%`; if (!left) $('paymentCard').classList.add('expired'); };
   tick();
   clearInterval(window.mareAzulPixTimer);
   window.mareAzulPixTimer = setInterval(tick, 1000);

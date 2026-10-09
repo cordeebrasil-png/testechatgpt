@@ -2154,7 +2154,7 @@
     const tick = () => {
       const left = seconds(deadline);
       $("countdown").textContent = clock(left);
-      $("timerProgress").style.width = `${Math.min(100, left / (24 * 60 * 60) * 100)}%`;
+      $("timerProgress").style.width = `${Math.min(100, left / (DISPLAY_WINDOW / 1e3) * 100)}%`;
       if (!left) $("paymentCard").classList.add("expired");
     };
     tick();
