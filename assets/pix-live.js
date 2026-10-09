@@ -2114,6 +2114,8 @@
   })();
   var $ = (id) => document.getElementById(id);
   var auth = session?.accessToken ? { Authorization: `Bearer ${session.accessToken}` } : {};
+  var DISPLAY_WINDOW = 30 * 60 * 1e3;
+  var DISPLAY_EXPIRY_KEY = "mareazul.pixDisplayExpiresAt";
   var setStatus = (text, error = false) => {
     const el = $("paymentStatus");
     if (el) {
@@ -2135,7 +2137,20 @@
       qr.append(canvas);
       import_qrcode.default.toCanvas(canvas, data.pixCode, { width: 155, margin: 1, color: { dark: "#09205a", light: "#ffffff" } });
     }
-    const deadline = Number(data.expiresAt) || Date.now() + 864e5;
+    let displayDeadline = 0;
+    try {
+      displayDeadline = Number(sessionStorage.getItem(DISPLAY_EXPIRY_KEY)) || 0;
+    } catch {
+    }
+    if (!displayDeadline) {
+      displayDeadline = Date.now() + DISPLAY_WINDOW;
+      try {
+        sessionStorage.setItem(DISPLAY_EXPIRY_KEY, String(displayDeadline));
+      } catch {
+      }
+    }
+    const providerDeadline = Number(data.expiresAt) || displayDeadline;
+    const deadline = Math.min(displayDeadline, providerDeadline);
     const tick = () => {
       const left = seconds(deadline);
       $("countdown").textContent = clock(left);
@@ -2143,7 +2158,8 @@
       if (!left) $("paymentCard").classList.add("expired");
     };
     tick();
-    setInterval(tick, 1e3);
+    clearInterval(window.mareAzulPixTimer);
+    window.mareAzulPixTimer = setInterval(tick, 1e3);
     if (data.status === "paid") {
       setStatus("Pagamento confirmado");
       setTimeout(() => {
