@@ -1,6 +1,10 @@
 (() => {
-  const button = document.getElementById('finish');
-  if (!button) return;
+  const originalButton = document.getElementById('finish');
+  if (!originalButton) return;
+  // The original checkout has a legacy demo click listener. Replace the
+  // node so that only the live IronPay handler can run.
+  const button = originalButton.cloneNode(true);
+  originalButton.replaceWith(button);
   const value = id => document.getElementById(id)?.value?.trim() || '';
   const makeToken = () => {
     const bytes = new Uint8Array(32);
