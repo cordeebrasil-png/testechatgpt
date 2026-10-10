@@ -4,6 +4,20 @@ export const DAY = 86400000;
 export const UUID = /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
 export const ACCESS = /^[a-f0-9]{64}$/;
 export const json = (body, status = 200) => Response.json(body, { status, headers: { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' } });
+const FAILURE_CODES = new Set(['PROVIDER_UNAVAILABLE','PROVIDER_ERROR','PROVIDER_RESPONSE_INVALID','PROVIDER_ID_MISMATCH','PROVIDER_AMOUNT_MISMATCH','PROVIDER_STATUS_INVALID']);
+// Diagnostics are deliberately limited to fixed codes and numeric HTTP status. Never log an
+// upstream body, URL, exception stack/message, database query, token or customer details.
+export function reportFailure(error, operation) {
+ const message=typeof error?.message==='string'?error.message:'';
+ let code=FAILURE_CODES.has(message)?message:'PAYMENT_INTERNAL_ERROR';
+ if(/no such table:\s*orders\b/i.test(message))code='DATABASE_SCHEMA_MISSING';
+ else if(/D1_ERROR|SQLITE_ERROR|database (?:is locked|unavailable)/i.test(message))code='DATABASE_UNAVAILABLE';
+ const providerStatus=Number.isInteger(error?.providerStatus)&&error.providerStatus>=400&&error.providerStatus<=599?error.providerStatus:undefined;
+ if(providerStatus===401||providerStatus===403)code='PROVIDER_AUTH_FAILED';
+ const result={code,...(providerStatus?{providerStatus}:{})};
+ console.error(JSON.stringify({event:'payment_failure',operation:['create','lookup','refresh','webhook'].includes(operation)?operation:'unknown',...result}));
+ return result;
+}
 export function configured(env) { return Boolean(env.ORDERS_DB && env.IRONPAY_API_TOKEN && env.IRONPAY_OFFER_HASH && env.IRONPAY_PRODUCT_HASH); }
 export async function sha(value) { return [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value)))].map(n => n.toString(16).padStart(2, '0')).join(''); }
 export async function signature(value, secret) {
@@ -16,7 +30,7 @@ export async function provider(env, path, payload) {
  let response;
  try { response = await fetch(url, {method:payload?'POST':'GET',headers:{Accept:'application/json',...(payload?{'Content-Type':'application/json'}:{})},body:payload?JSON.stringify(payload):undefined,signal:AbortSignal.timeout(18000),redirect:'error'}); }
  catch { throw new Error('PROVIDER_UNAVAILABLE'); }
- if (!response.ok) { const error=new Error('PROVIDER_ERROR');error.definitive=[400,401,403,422].includes(response.status);throw error; }
+ if (!response.ok) { const error=new Error('PROVIDER_ERROR');error.providerStatus=response.status;error.definitive=[400,401,403,422].includes(response.status);throw error; }
  let raw;try { raw=await response.json(); } catch { throw new Error('PROVIDER_RESPONSE_INVALID'); }
  if(raw?.success===false)throw new Error('PROVIDER_RESPONSE_INVALID');
  return raw?.data && typeof raw.data==='object' && !Array.isArray(raw.data) ? raw.data : raw;
@@ -39,7 +53,9 @@ export function receipt(input, payload) {
  return {name:c.name,email:c.email,street:c.street_name,number:c.number,extra:c.complement,district:c.neighborhood,city:c.city,state:c.state,cep:c.zip_code,color:['Azul','Preto','Verde','Vermelho'].includes(input.color)?input.color:'Azul'};
 }
 export function publicOrder(row) {
- return {id:row.id,status:row.state,amount:ORDER_AMOUNT,pixCode:['pending','paid'].includes(row.state)?row.pix_code:null,expiresAt:row.expires_at,createdAt:row.created_at,receipt:row.state==='paid'?JSON.parse(row.receipt_json):undefined};
+ const pixCode=['pending','paid'].includes(row.state)?row.pix_code:null;
+ const code=row.state==='uncertain'?'PAYMENT_CREATION_UNCERTAIN':row.state==='creating'?'PAYMENT_CREATION_PENDING':row.state==='pending'&&!pixCode?'PIX_CODE_PENDING':undefined;
+ return {id:row.id,status:row.state,amount:ORDER_AMOUNT,pixCode,paymentReady:row.state==='paid'||(row.state==='pending'&&Boolean(pixCode)),expiresAt:row.expires_at,createdAt:row.created_at,...(code?{code,retrySafe:false}:{}),receipt:row.state==='paid'?JSON.parse(row.receipt_json):undefined};
 }
 export async function findOrder(env,id) { return env.ORDERS_DB.prepare('SELECT * FROM orders WHERE id = ?').bind(id).first(); }
 export async function authorize(request,env,id) {
@@ -61,12 +77,12 @@ export async function refreshOrder(env,row,force=false) {
  return await findOrder(env,row.id);
 }
 export async function createOrder(request,env) {
- if(!configured(env))return json({error:'O pagamento ainda está sendo configurado. Tente novamente mais tarde.'},503);
+ if(!configured(env))return json({error:'O pagamento ainda está sendo configurado. Tente novamente mais tarde.',code:'PAYMENT_CONFIGURATION_MISSING',retrySafe:false},503);
  const origin=request.headers.get('Origin');if(origin!==new URL(request.url).origin)return json({error:'Solicitação inválida.'},403);
  if(!request.headers.get('Content-Type')?.startsWith('application/json'))return json({error:'Formato inválido.'},415);
  let input;try {const raw=await request.text();if(raw.length>16000)return json({error:'Solicitação muito grande.'},413);input=JSON.parse(raw);}catch{return json({error:'Dados inválidos.'},400);}
  if(!UUID.test(input?.id||'')||!ACCESS.test(input?.accessToken||''))return json({error:'Sessão inválida.'},400);
- let payload;try{payload=buildPixRequest(input,env);}catch(error){return json({error:error.fields?'Confira os dados do formulário.':'O pagamento ainda está sendo configurado.',fields:error.fields},error.fields?422:503);}
+ let payload;try{payload=buildPixRequest(input,env);}catch(error){return json({error:error.fields?'Confira os dados do formulário.':'O pagamento ainda está sendo configurado.',code:error.fields?'INVALID_CUSTOMER':'PAYMENT_CONFIGURATION_INVALID',fields:error.fields,retrySafe:Boolean(error.fields)},error.fields?422:503);}
  const fingerprint=await signature(JSON.stringify(payload),env.IRONPAY_API_TOKEN),accessHash=await sha(input.accessToken);
  const now=Date.now();
  const insert=await env.ORDERS_DB.prepare('INSERT OR IGNORE INTO orders (id,access_hash,request_hash,state,created_at,expires_at,receipt_json) VALUES (?,?,?,?,?,?,?)').bind(input.id,accessHash,fingerprint,'creating',now,now+DAY,JSON.stringify(receipt(input,payload))).run();
@@ -74,7 +90,7 @@ export async function createOrder(request,env) {
   const existing=await findOrder(env,input.id);
   if(!existing || existing.access_hash!==accessHash)return json({error:'Sessão inválida.'},403);
   if(existing.request_hash!==fingerprint)return json({error:'Já existe uma tentativa de pagamento nesta sessão. Consulte o pagamento anterior antes de alterar o pedido.',code:'ORDER_EXISTS',id:existing.id},409);
-  if(existing.state==='rejected')return json({error:'A cobrança anterior foi recusada. Confira seus dados e tente novamente.',retrySafe:true},422);
+  if(existing.state==='rejected')return json({error:'A cobrança anterior foi recusada. Confira seus dados e tente novamente.',code:'PAYMENT_REJECTED',retrySafe:true},422);
   return json(publicOrder(existing),existing.state==='creating'?202:200);
  }
  const callback=new URL('/api/ironpay-webhook',request.url);
@@ -87,8 +103,9 @@ export async function createOrder(request,env) {
   await env.ORDERS_DB.prepare('UPDATE orders SET provider_hash = ?, state = ?, pix_code = ?, expires_at = ?, last_checked = ? WHERE id = ?').bind(result.hash,result.state,result.code,result.expiresAt??now+DAY,now,input.id).run();
   return json(publicOrder(await findOrder(env,input.id)),201);
  }catch(error){
+  const failure=reportFailure(error,'create');
   const state=error.definitive?'rejected':'uncertain';
   await env.ORDERS_DB.prepare('UPDATE orders SET state = ? WHERE id = ?').bind(state,input.id).run();
-  return error.definitive?json({error:'A IronPay não autorizou a criação do Pix. Confira seus dados ou fale com o suporte.',retrySafe:true},422):json(publicOrder(await findOrder(env,input.id)),202);
+  return error.definitive?json({error:'A IronPay não autorizou a criação do Pix. Confira seus dados ou fale com o suporte.',...failure,retrySafe:true},422):json({...publicOrder(await findOrder(env,input.id)),...failure,retrySafe:false},202);
  }
 }

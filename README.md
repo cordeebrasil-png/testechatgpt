@@ -1,12 +1,13 @@
 # Maré Azul
 
-Página de vendas e checkout demonstrativo.
+Página de vendas e checkout Pix com integração IronPay via Cloudflare Pages Functions.
 
 ## Rotas
 
 - `/`: loja.
 - `/checkout/`: checkout; recebe `?cor=Azul`, Preto, Verde ou Vermelho.
-- `/obrigado/`: demonstração da página de obrigado.
+- `/pagamento/`: consulta o pedido autenticado, exibe apenas o código recebido da API e gera o QR Code.
+- `/obrigado/`: mostra a confirmação e os dados do pedido após verificar o status pago no servidor.
 - `/api/cep/88220000`: consulta de CEP pelas Pages Functions, com BrasilAPI e ViaCEP como fontes.
 
 ## Publicação no Cloudflare Pages
@@ -27,7 +28,21 @@ No Cloudflare Pages, em **Settings → Variables and secrets**, configure:
 
 Em **Settings → Bindings**, adicione um banco D1 e use o nome `ORDERS_DB`. Execute o conteúdo de `migrations/0001_orders.sql` no console SQL do banco antes de testar o checkout. O webhook público usado pela integração é `/api/ironpay-webhook`; ele consulta a transação na IronPay e não confia no status recebido no corpo da notificação.
 
-O valor é fixado no servidor em 11990 centavos (R$ 119,90), e o Pix segue o prazo informado pela IronPay (24 horas por padrão). O contador visual acompanha a data de expiração retornada pela API.
+O valor é fixado no servidor em 11990 centavos (R$ 119,90), e o Pix segue o prazo informado pela IronPay (24 horas por padrão). O contador visual sugere pagamento em 30 minutos, vinculado ao pedido e persistente ao recarregar. O fim desse contador não declara que uma cobrança ainda válida no provedor expirou.
+
+## Desenvolvimento e verificação
+
+Use Node.js 22 ou mais recente. Execute `npm ci` e `npm run build` após editar `assets/*-source.js`. O build gera os blocos inline identificados por comentários nas páginas; não os edite manualmente. Os HTMLs gerados são versionados, portanto o Pages pode continuar com comando de build vazio.
+
+`npm test` executa testes de backend com SQLite em memória. `npm run test:browser` testa o fluxo em Chromium com todas as chamadas interceptadas: não cria cobranças reais. O teste usa `/usr/bin/chromium` quando disponível; em outro ambiente instale-o com `npx playwright install chromium`.
+
+## Diagnóstico de pagamento
+
+A tela inicia sem código e sem botão de cópia ativo. Respostas sem Pix, inválidas ou indisponíveis exibem uma mensagem com referência, nunca um código de demonstração. A sessão é salva antes da criação, e novas tentativas após falha de conexão reutilizam o mesmo ID para evitar duplicidade. Um pedido incerto sem identificador da IronPay exige conciliação no provedor antes de gerar outra cobrança.
+
+No console do navegador, `window.__mareAzulPixDiagnostics` contém somente versão, status e códigos seguros para suporte (não inclui token, Pix ou dados pessoais). Em Functions logs, eventos `payment_failure` registram apenas a operação, código fixo e status HTTP do provedor. Exemplos: `PAYMENT_CONFIGURATION_MISSING`, `DATABASE_SCHEMA_MISSING`, `PROVIDER_AUTH_FAILED`, `PROVIDER_RESPONSE_INVALID`.
+
+Os testes locais não substituem a validação com o D1 e as credenciais da produção. Não envie tokens nem dados pessoais em capturas do painel.
 
 A consulta de CEP depende de disponibilidade das APIs externas. Em caso de falha, o endereço continua editável e uma nova tentativa pode ser solicitada.
 

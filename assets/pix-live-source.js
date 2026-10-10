@@ -1,62 +1,159 @@
 import QRCode from 'qrcode';
+import { SESSION_KEY, INTENT_KEY, readSession, readJson, validOrder, diagnostic } from './order-session.js';
 
-const session = (() => {
-  try { return JSON.parse(sessionStorage.getItem('mareazul.ironpayOrder') || 'null'); } catch { return null; }
-})();
+const session = readSession();
 const $ = id => document.getElementById(id);
-const auth = session?.accessToken ? { Authorization: `Bearer ${session.accessToken}` } : {};
 const DISPLAY_WINDOW = 30 * 60 * 1000;
-const DISPLAY_EXPIRY_KEY = 'mareazul.pixDisplayExpiresAt';
-const setStatus = (text, error = false) => { const el = $('paymentStatus'); if (el) { el.innerHTML = text; el.classList.toggle('error', error); } };
-const seconds = deadline => Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
-const clock = value => `${String(Math.floor(value / 60)).padStart(2, '0')}:${String(value % 60).padStart(2, '0')}`;
-
-function render(data) {
-  if (!data?.pixCode) return;
-  $('pixCode').value = data.pixCode;
-  $('pixCode').dataset.live = 'true';
-  $('expiredMessage').hidden = data.status === 'paid';
-  const qr = document.querySelector('.qr-demo');
-  if (qr) { qr.replaceChildren(); const canvas = document.createElement('canvas'); qr.append(canvas); QRCode.toCanvas(canvas, data.pixCode, { width: 155, margin: 1, color: { dark: '#09205a', light: '#ffffff' } }); }
-  let displayDeadline = 0;
-  try { displayDeadline = Number(sessionStorage.getItem(DISPLAY_EXPIRY_KEY)) || 0; } catch {}
-  if (!displayDeadline) {
-    displayDeadline = Date.now() + DISPLAY_WINDOW;
-    try { sessionStorage.setItem(DISPLAY_EXPIRY_KEY, String(displayDeadline)); } catch {}
-  }
-  const providerDeadline = Number(data.expiresAt) || displayDeadline;
-  const deadline = Math.min(displayDeadline, providerDeadline);
-  const tick = () => { const left = seconds(deadline); $('countdown').textContent = clock(left); $('timerProgress').style.width = `${Math.min(100, left / (DISPLAY_WINDOW / 1000) * 100)}%`; if (!left) $('paymentCard').classList.add('expired'); };
-  tick();
-  clearInterval(window.mareAzulPixTimer);
-  window.mareAzulPixTimer = setInterval(tick, 1000);
-  if (data.status === 'paid') { setStatus('Pagamento confirmado'); setTimeout(() => { location.href = `../obrigado/?pedido=${encodeURIComponent(data.id)}`; }, 800); }
+let busy = false, ended = false, nextPoll, clockTimer, renderedCode = '', latest = null;
+window.__mareAzulPixLoaded = true;
+const message = (title, detail) => {
+  $('paymentStatus').textContent = title;
+  $('paymentMessage').textContent = detail;
+};
+function reference(code) {
+  $('paymentReference').hidden = !code;
+  $('paymentReference').textContent = code ? 'Referência para o suporte: ' + code : '';
 }
-
-async function poll() {
-  if (!session?.id || !session?.accessToken) return;
-  try {
-    const response = await fetch(`../api/orders/${encodeURIComponent(session.id)}`, { headers: auth, cache: 'no-store' });
-    if (response.status === 404) {
-      sessionStorage.removeItem('mareazul.ironpayOrder');
-      location.replace('../checkout/');
+function clearPayment() {
+  clearInterval(clockTimer);
+  $('pixCode').value = ''; $('copyPix').disabled = true;
+  delete $('pixCode').dataset.live;
+  $('copyFeedback').textContent = '';
+  document.querySelector('.deadline').hidden = true;
+  document.querySelector('.code-trust').hidden = true;
+  document.querySelector('.qr-section').hidden = true;
+  document.querySelector('.qr-code').replaceChildren(); renderedCode = '';
+  $('countdown').textContent = '--:--';
+  $('expiredMessage').hidden = true;
+}
+function issue(title, detail, code, retry = true) {
+  clearPayment(); message(title, detail); reference(code);
+  $('retryPayment').hidden = !retry;
+}
+function displayDeadline(data) {
+  // Anchor to this order; reloads/polls and another order cannot reset/share the clock.
+  if (Number.isFinite(data.createdAt) && data.createdAt > 0) return data.createdAt + DISPLAY_WINDOW;
+  const key = 'mareazul.pixDisplayExpiresAt:' + session.id;
+  let deadline = 0;
+  try { deadline = Number(sessionStorage.getItem(key)); } catch {}
+  if (!deadline) {
+    deadline = Date.now() + DISPLAY_WINDOW;
+    try { sessionStorage.setItem(key, String(deadline)); } catch {}
+  }
+  return deadline;
+}
+function startClock(data) {
+  clearInterval(clockTimer);
+  const deadline = displayDeadline(data);
+  const providerDeadline = Number(data.expiresAt) || Infinity;
+  const tick = () => {
+    if (Date.now() >= providerDeadline) {
+      issue('Prazo do Pix encerrado', 'O prazo informado para este código terminou. Se você já pagou, aguarde a confirmação.', 'PIX_EXPIRED');
       return;
     }
-    if (!response.ok) return;
-    render(await response.json());
-  } catch {}
+    const remaining = Math.max(0, Math.min(1800, Math.ceil((Math.min(deadline, providerDeadline) - Date.now()) / 1000)));
+    $('countdown').textContent = `${String(Math.floor(remaining / 60)).padStart(2, '0')}:${String(remaining % 60).padStart(2, '0')}`;
+    $('timerProgress').style.width = `${remaining / 1800 * 100}%`;
+    $('expiredMessage').hidden = remaining > 0;
+    $('expiredMessage').textContent = 'O tempo sugerido terminou. O Pix pode continuar válido no banco; a confirmação do pedido continua sendo consultada.';
+  };
+  clockTimer = setInterval(tick, 1000); tick();
 }
-
-if (session?.id && session?.accessToken) {
-  poll();
-  setInterval(poll, 15000);
-} else {
-  setTimeout(() => { location.replace('../checkout/'); }, 1200);
+async function render(data) {
+  if (data.status === 'uncertain' && session.creationCode && data.code === 'PAYMENT_CREATION_UNCERTAIN') {
+    data = { ...data, code: session.creationCode };
+  }
+  latest = data;
+  diagnostic({ code: data.code, httpStatus: 200, orderStatus: data.status, hasPix: Boolean(data.pixCode) });
+  if (data.status === 'paid') {
+    clearPayment(); ended = true; clearTimeout(nextPoll);
+    message('Pagamento confirmado', 'Seu pagamento foi confirmado. Abrindo as informações do pedido…');
+    reference(null); $('retryPayment').hidden = true;
+    try { if (readSession(INTENT_KEY)?.id === session.id) sessionStorage.removeItem(INTENT_KEY); } catch {}
+    location.replace('../obrigado/?pedido=' + encodeURIComponent(data.id));
+    return;
+  }
+  if (['rejected', 'canceled', 'refunded'].includes(data.status)) {
+    ended = true;
+    const labels = { rejected: 'Pix não gerado', canceled: 'Pagamento cancelado', refunded: 'Pagamento reembolsado' };
+    issue(labels[data.status], 'Esta cobrança não está disponível para pagamento. Entre em contato com o suporte se precisar de ajuda.', data.code || data.status.toUpperCase(), false);
+    try { if (readSession(INTENT_KEY)?.id === session.id) sessionStorage.removeItem(INTENT_KEY); } catch {}
+    return;
+  }
+  const hasCode = typeof data.pixCode === 'string' && data.pixCode.trim().length > 0 && !data.pixCode.includes('DEMONSTRACAO');
+  if (data.status !== 'pending' || !hasCode) {
+    issue(data.status === 'uncertain' ? 'Geração do Pix não confirmada' : 'Preparando seu Pix',
+      data.status === 'uncertain'
+        ? 'Ainda não recebemos o código de pagamento. Consulte novamente ou fale com o suporte antes de iniciar outro pedido.'
+        : 'O código ainda não foi disponibilizado. Estamos consultando o pagamento.', data.code || 'PIX_CODE_PENDING');
+    return;
+  }
+  if (Number(data.expiresAt) > 0 && Date.now() >= Number(data.expiresAt)) {
+    issue('Prazo do Pix encerrado', 'Se você já pagou, aguarde enquanto consultamos a confirmação.', 'PIX_EXPIRED'); return;
+  }
+  message('Aguardando pagamento', 'Pague via Pix para concluir seu pedido.');
+  reference(data.verificationDelayed ? data.code || 'VERIFICATION_DELAYED' : null);
+  $('retryPayment').hidden = !data.verificationDelayed;
+  $('pixCode').value = data.pixCode; $('pixCode').dataset.live = 'true'; $('copyPix').disabled = false;
+  document.querySelector('.code-trust').hidden = false;
+  document.querySelector('.deadline').hidden = false;
+  if (renderedCode !== data.pixCode) {
+    const qr = document.querySelector('.qr-code');
+    const canvas = document.createElement('canvas');
+    try {
+      await QRCode.toCanvas(canvas, data.pixCode, { width: 200, margin: 2, color: { dark: '#09205a', light: '#ffffff' } });
+      qr.replaceChildren(canvas); renderedCode = data.pixCode;
+      document.querySelector('.qr-section').hidden = false;
+    } catch { document.querySelector('.qr-section').hidden = true; }
+  }
+  startClock(data);
 }
-const copy = $('copyPix');
-copy?.addEventListener('click', async event => {
-  if (!$('pixCode').dataset.live) return;
-  event.preventDefault(); event.stopImmediatePropagation();
-  try { await navigator.clipboard.writeText($('pixCode').value); $('copyLabel').textContent = 'Código copiado!'; $('copyFeedback').textContent = 'Código Pix copiado com segurança.'; }
-  catch { $('pixCode').focus(); $('pixCode').select(); $('copyFeedback').textContent = 'Selecione o código e copie manualmente.'; }
-}, true);
+async function poll() {
+  if (!session || busy || ended) return;
+  clearTimeout(nextPoll); busy = true; $('retryPayment').disabled = true;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 20000);
+  let httpStatus = null;
+  try {
+    const response = await fetch('/api/orders/' + encodeURIComponent(session.id), {
+      headers: { Authorization: 'Bearer ' + session.accessToken }, cache: 'no-store', signal: controller.signal
+    });
+    httpStatus = response.status;
+    const data = await readJson(response);
+    if (!response.ok) {
+      const code = data.code || 'PAYMENT_LOOKUP_FAILED';
+      issue(response.status === 404 ? 'Pedido não encontrado' : 'Não foi possível consultar o Pix',
+        response.status === 404 ? 'Não encontramos o pedido desta sessão. Volte ao checkout para conferir sua compra.'
+          : 'Tente consultar novamente. Se o problema continuar, informe a referência abaixo ao suporte.', code);
+      diagnostic({ code, httpStatus });
+      if (response.status === 404) ended = true;
+      return;
+    }
+    if (!validOrder(data, session.id)) throw new Error('API_RESPONSE_INVALID');
+    await render(data);
+  } catch (error) {
+    const code = error.message === 'API_RESPONSE_INVALID' ? error.message : 'PAYMENT_CONNECTION_FAILED';
+    issue('Não foi possível consultar o Pix', 'Verifique sua conexão e tente consultar novamente.', code);
+    diagnostic({ code, httpStatus });
+  } finally {
+    clearTimeout(timeout); busy = false; $('retryPayment').disabled = false;
+    if (!ended) nextPoll = setTimeout(poll, 15000);
+  }
+}
+$('retryPayment').addEventListener('click', () => { ended = false; poll(); });
+$('copyPix').addEventListener('click', async () => {
+  if ($('copyPix').disabled || !$('pixCode').dataset.live || latest?.status !== 'pending') return;
+  try {
+    await navigator.clipboard.writeText($('pixCode').value);
+    $('copyLabel').textContent = 'Código copiado!'; $('copyFeedback').textContent = 'Abra o aplicativo do seu banco e escolha Pix copia e cola.';
+  } catch {
+    $('pixCode').focus(); $('pixCode').select(); $('copyFeedback').textContent = 'Selecione o código e copie manualmente.';
+  }
+});
+document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
+clearPayment();
+if (session) poll();
+else {
+  issue('Nenhum pedido nesta sessão', 'Volte ao checkout para iniciar seu pagamento.', 'SESSION_MISSING', false);
+  diagnostic({ code: 'SESSION_MISSING' });
+}
