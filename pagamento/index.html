@@ -18,6 +18,52 @@ body{font-family:'Inter',Arial,sans-serif;background:radial-gradient(ellipse at 
 [hidden]{display:none!important}.qr-code{display:grid;place-items:center;margin:8px auto 12px}.qr-code canvas{max-width:100%;height:auto!important}.payment-reference{font-size:11px;color:#61748c;overflow-wrap:anywhere;text-align:center;margin-top:16px}#retryPayment{margin:12px auto;background:#f0f7ff;border:1px solid #d6e8ff;border-radius:10px;padding:10px 16px;font:inherit}#paymentStatus{overflow-wrap:anywhere}
 .copy-icon{position:absolute;right:0;top:50%;transform:translateY(-50%);width:44px;height:44px;padding:10px;border:0;border-radius:8px;background:transparent;color:#0877ff;display:grid;place-items:center}.copy-icon svg{width:23px;height:23px}.copy-icon:focus-visible{outline:2px solid #0877ff;outline-offset:-3px}.copy-icon:disabled{cursor:default;opacity:.5}
 </style>
+<style>
+/* Spacing and proportions of the supplied payment reference. */
+.payment-content{background:transparent}
+.payment-shell{max-width:480px;padding:18px 24px 24px;background:transparent}
+.payment-status-card{min-height:0;padding:12px 16px 12px 24px;gap:14px;border-radius:18px}
+.payment-status-card::before{left:12px;top:16px;bottom:16px;width:2px;background:#f3c000}
+.hero-clock{width:72px;height:72px;border-width:8px}
+.hero-clock svg{width:44px;height:44px}
+.payment-hero h1{font-size:clamp(18px,4.8vw,24px);line-height:1.18;letter-spacing:-.65px;margin:0 0 6px}
+.payment-status-copy p{font-size:14px;line-height:1.4}
+.deadline{padding:12px 24px 10px;margin:10px 0;border-radius:18px}
+.deadline span{font-size:14px;color:#4b65a1}
+.deadline strong{font-size:43px;line-height:1.2;margin:4px 0 6px}
+.progress{height:6px;opacity:1;background:#b9e9df;margin:0;border-radius:8px}
+.progress span{height:100%;background:#45c996;border-radius:8px}
+.payment-content>section[aria-label="Pix copia e cola"]{padding:16px 15px 15px;margin-bottom:10px;border-radius:18px}
+.copy-heading{gap:18px;margin:0 4px 14px}
+.copy-heading>svg{width:42px;height:42px}
+.copy-heading h2{font-size:18px;line-height:1.3;letter-spacing:-.5px}
+.copy-heading p{font-size:13px;line-height:1.45;margin-top:4px}
+textarea{height:96px;padding:12px 50px 12px 14px;font-size:12px;line-height:1.5;border-radius:13px;color:#405d9b}
+.copy-icon{right:5px}
+.copy-button{min-height:49px;margin-top:10px;border-radius:13px;gap:16px;font-size:19px}
+.copy-feedback:empty{display:none}
+.code-trust{margin:22px 4px 2px;gap:12px;font-size:12px;line-height:1.5}
+.code-trust svg{width:30px;height:30px;padding:5px;background:#e9faf3;border-radius:50%;box-sizing:border-box}
+.qr-section{margin-bottom:10px;border-radius:18px}
+.qr-section summary{padding:13px 16px;gap:15px}
+.qr-summary>svg:first-child{width:29px;height:29px;padding:10px}
+.qr-summary h2{font-size:18px;line-height:1.3}
+.qr-summary p{font-size:13px;margin-top:4px;line-height:1.45}
+.tutorial{padding:12px 17px 15px;border-radius:18px}
+.tutorial-title{gap:19px;margin:0 0 9px}
+.tutorial-title>svg{width:27px;height:27px;padding:8px}
+.tutorial-title h2{font-size:18px}
+.steps{gap:9px}
+.steps li{gap:16px}
+.steps strong{width:32px;height:32px;font-size:18px}
+.steps:before{left:15px;border-left:1px solid #b3e1ff}
+.step-icon{width:33px;height:33px}
+.steps p{font-size:13px;line-height:1.5;color:#405d9b}
+.confirmation{margin-top:10px;padding:11px 18px;gap:16px;border-radius:18px}
+.confirmation svg{width:28px;height:28px}
+.confirmation p{font-size:11px;line-height:1.5}
+@media(max-width:400px){.payment-shell{padding:16px 14px 22px}.payment-status-card{padding-left:22px;gap:10px}.hero-clock{width:60px;height:60px;border-width:7px}.hero-clock svg{width:36px;height:36px}.payment-status-copy p{font-size:12px}.copy-heading{gap:13px}.copy-heading h2{font-size:16px}.copy-heading p{font-size:12px}.qr-summary h2,.tutorial-title h2{font-size:17px}}
+</style>
 </head>
 <body>
 <main class="payment-shell" id="paymentCard">
@@ -30,7 +76,7 @@ body{font-family:'Inter',Arial,sans-serif;background:radial-gradient(ellipse at 
 </svg>
 </div>
 <div class="payment-status-copy">
-<h1 id="paymentStatus">Aguardando<br>pagamento</h1>
+<h1 id="paymentStatus">Aguardando pagamento</h1>
 <p id="paymentMessage" role="status" aria-live="polite">Pague via Pix para concluir seu pedido.</p>
 </div>
 </div>

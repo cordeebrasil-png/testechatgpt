@@ -172,6 +172,28 @@ test('paid response redirects to thank-you even when provider code is absent', a
   assert.deepEqual(h.state.pageErrors, []);
 });
 
+test('reference spacing remains separated without copy instruction or horizontal overflow', async t => {
+  const h = await harness(t);
+  await openPayment(h);
+  for (const width of [320, 390, 480]) {
+    await h.page.setViewportSize({ width, height: 1000 });
+    const layout = await h.page.evaluate(() => {
+      const box = selector => document.querySelector(selector).getBoundingClientRect();
+      return {
+        trustGap: box('.code-trust').top - box('#copyPix').bottom,
+        cardGap: box('.qr-section').top - box('section[aria-label="Pix copia e cola"]').bottom,
+        overflow: document.documentElement.scrollWidth > innerWidth,
+        text: document.body.innerText
+      };
+    });
+    assert.ok(layout.trustGap >= 20);
+    assert.ok(layout.cardGap >= 10);
+    assert.equal(layout.overflow, false);
+    assert.doesNotMatch(layout.text, /Abra o aplicativo do seu banco e escolha Pix copia e cola/);
+  }
+  if (process.env.PIX_LAYOUT_SCREENSHOT) await h.page.screenshot({ path: '/tmp/pix-reference-layout.png', fullPage: true });
+});
+
 for (const status of ['canceled', 'refunded']) {
   test(`${status} clears a code and disables payment`, async t => {
     const h = await harness(t, { getOrder: route => json(route, { ...pending(), status }) });
