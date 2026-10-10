@@ -160,6 +160,9 @@ test('pending order displays only API-provided Pix, draws QR and copies exact co
   await h.page.focus('#copyPixIcon');
   await h.page.keyboard.press('Enter');
   assert.deepEqual(await h.page.evaluate(() => window.__copied), [PIX, PIX, PIX]);
+  await h.page.click('#pixCode');
+  assert.deepEqual(await h.page.evaluate(() => window.__copied), [PIX, PIX, PIX, PIX]);
+  assert.equal(await h.page.locator('#copyLabel').textContent(), 'Código copiado!');
   assert.equal(await h.page.locator('#copyFeedback').textContent(), '');
   assert.deepEqual(h.state.pageErrors, []);
 });

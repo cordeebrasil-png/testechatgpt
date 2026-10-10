@@ -158,6 +158,7 @@ async function copyPix() {
 }
 $('copyPix').addEventListener('click', copyPix);
 $('copyPixIcon').addEventListener('click', copyPix);
+$('pixCode').addEventListener('click', copyPix);
 window.addEventListener('resize', fitPixCode);
 document.fonts?.ready.then(fitPixCode);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
