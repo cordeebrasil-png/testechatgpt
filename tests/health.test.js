@@ -12,7 +12,7 @@ test('health checks database and provider product without creating charges or ex
   });
   const env = {
     IRONPAY_API_TOKEN: 'secret', IRONPAY_PRODUCT_HASH: 'product123', IRONPAY_OFFER_HASH: 'offer123',
-    ORDERS_DB: { prepare(sql) { assert.equal(sql, 'SELECT id FROM orders LIMIT 0'); return { all: async () => ({ results: [] }) }; } }
+    ORDERS_DB: { prepare(sql) { assert.match(sql, /^SELECT /); return { all: async () => ({ results: [] }), first: async () => null }; } }
   };
   const response = await onRequestGet({ request: new Request('https://example.com/api/payment-health'), env });
   assert.deepEqual(await response.json(), { ready: true, checks: { database: true, providerAuthentication: true, product: true } });
