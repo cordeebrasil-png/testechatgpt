@@ -162,7 +162,9 @@ test('pending order displays only API-provided Pix, draws QR and copies exact co
   assert.deepEqual(await h.page.evaluate(() => window.__copied), [PIX, PIX, PIX]);
   await h.page.click('#pixCode');
   assert.deepEqual(await h.page.evaluate(() => window.__copied), [PIX, PIX, PIX, PIX]);
-  assert.equal(await h.page.locator('#copyLabel').textContent(), 'Código copiado!');
+  assert.equal(await h.page.locator('#copyLabel').textContent(), 'Copiar código Pix');
+  assert.equal(await h.page.locator('#copyToast').textContent(), 'Código copiado');
+  assert.equal(await h.page.locator('#copyToast').isVisible(), true);
   assert.equal(await h.page.locator('#copyFeedback').textContent(), '');
   assert.deepEqual(h.state.pageErrors, []);
 });
@@ -173,6 +175,20 @@ test('paid response redirects to thank-you even when provider code is absent', a
   await h.page.waitForURL('**/obrigado/**');
   assert.equal(new URL(h.page.url()).searchParams.get('pedido'), SESSION.id);
   assert.deepEqual(h.state.pageErrors, []);
+});
+
+test('copy toast disappears automatically and repeated copies restart its duration', async t => {
+  const h = await harness(t, { clock: true });
+  await openPayment(h);
+  await h.page.click('#copyPix');
+  assert.equal(await h.page.locator('#copyToast').isVisible(), true);
+  await h.page.clock.fastForward(1500);
+  await h.page.click('#pixCode');
+  await h.page.clock.fastForward(1500);
+  assert.equal(await h.page.locator('#copyToast').isVisible(), true);
+  await h.page.clock.fastForward(800);
+  assert.equal(await h.page.locator('#copyToast').isVisible(), false);
+  assert.equal(await h.page.locator('#copyLabel').textContent(), 'Copiar código Pix');
 });
 
 test('reference spacing remains separated without copy instruction or horizontal overflow', async t => {

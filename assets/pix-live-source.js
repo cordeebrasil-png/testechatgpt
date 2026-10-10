@@ -5,6 +5,7 @@ const session = readSession();
 const $ = id => document.getElementById(id);
 const DISPLAY_WINDOW = 30 * 60 * 1000;
 let busy = false, ended = false, nextPoll, clockTimer, renderedCode = '', latest = null;
+let copyToastTimer;
 window.__mareAzulPixLoaded = true;
 const message = (title, detail) => {
   $('paymentStatus').textContent = title;
@@ -19,6 +20,9 @@ function fitPixCode() {
   field.style.height = Math.max(96, Math.ceil(field.scrollHeight + borders)) + 'px';
 }
 function clearPayment() {
+  clearTimeout(copyToastTimer);
+  $('copyToast').hidden = true;
+  $('copyToast').textContent = '';
   clearInterval(clockTimer);
   $('pixCode').value = ''; $('copyPix').disabled = true;
   $('pixCode').style.height = '';
@@ -151,7 +155,14 @@ async function copyPix() {
   if ($('copyPix').disabled || !$('pixCode').dataset.live || latest?.status !== 'pending') return;
   try {
     await navigator.clipboard.writeText($('pixCode').value);
-    $('copyLabel').textContent = 'Código copiado!'; $('copyFeedback').textContent = '';
+    $('copyFeedback').textContent = '';
+    clearTimeout(copyToastTimer);
+    $('copyToast').hidden = false;
+    $('copyToast').textContent = 'Código copiado';
+    copyToastTimer = setTimeout(() => {
+      $('copyToast').hidden = true;
+      $('copyToast').textContent = '';
+    }, 2200);
   } catch {
     $('pixCode').focus(); $('pixCode').select(); $('copyFeedback').textContent = 'Selecione o código e copie manualmente.';
   }
