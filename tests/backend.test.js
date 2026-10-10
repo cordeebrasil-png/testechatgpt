@@ -195,6 +195,37 @@ test('refresh failure reports verificationDelayed with a safe cause', async t =>
   assert.equal(body.retrySafe, false);
 });
 
+test('live IronPay waiting_payment status creates a payable pending Pix', async t => {
+  const env = environment(t);
+  t.mock.method(globalThis, 'fetch', async () => Response.json({ ...transaction, payment_status: 'waiting_payment' }));
+  const response = await onRequestPost({ request: request(), env });
+  assert.equal(response.status, 201);
+  const body = await response.json();
+  assert.equal(body.status, 'pending');
+  assert.equal(body.paymentReady, true);
+  assert.equal(body.pixCode, transaction.pix.pix_qr_code);
+});
+
+test('existing uncertain order recovers the same waiting_payment charge without another provider POST', async t => {
+  const env = environment(t);
+  const upstream = t.mock.method(globalThis, 'fetch', async () => Response.json(transaction));
+  await onRequestPost({ request: request(), env });
+  await env.ORDERS_DB.prepare("UPDATE orders SET state = 'uncertain', pix_code = NULL, last_checked = 0 WHERE id = ?").bind(id).run();
+  upstream.mock.mockImplementation(async (url, options) => {
+    assert.equal(options.method, 'GET');
+    assert.equal(new URL(url).pathname, '/api/public/v1/transactions/' + transaction.hash);
+    return Response.json({ success: true, data: { ...transaction, payment_status: 'waiting_payment' } });
+  });
+  const retry = await onRequestPost({ request: request(), env });
+  assert.equal((await retry.json()).status, 'uncertain');
+  const body = await (await lookup(env)).json();
+  assert.equal(body.status, 'pending');
+  assert.equal(body.pixCode, transaction.pix.pix_qr_code);
+  assert.equal(body.paymentReady, true);
+  assert.equal(upstream.mock.callCount(), 2);
+  assert.equal((await findOrder(env, id)).provider_hash, transaction.hash);
+});
+
 test('missing schema is distinguishable without leaking raw database errors', async t => {
   const env = environment(t);
   const logs = silenceLogs(t);

@@ -29,7 +29,7 @@ export async function onRequestGet({ request, env, waitUntil }) {
           numericAmountMatches: Number(data.amount) === ORDER_AMOUNT,
           totalPresent: data.amount_total != null,
           totalMatches: data.amount_total == null || data.amount_total === ORDER_AMOUNT,
-          knownStatus: ['pending','paid','canceled','refunded'].includes(state),
+          knownStatus: ['waiting_payment','pending','paid','canceled','refunded'].includes(state),
           statusValue: typeof state === 'string' && /^[a-zA-Z_ -]{1,40}$/.test(state) ? state : typeof state,
           pixObject: typeof data.pix === 'object' && data.pix !== null,
           nestedCode: typeof data.pix?.pix_qr_code === 'string',

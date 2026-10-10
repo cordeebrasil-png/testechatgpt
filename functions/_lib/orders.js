@@ -39,7 +39,9 @@ export async function provider(env, path, payload) {
 export function normalize(data, expectedHash) {
  if(!data || typeof data.hash!=='string' || !/^[a-zA-Z0-9_-]{1,128}$/.test(data.hash) || (expectedHash && data.hash!==expectedHash))throw new Error('PROVIDER_ID_MISMATCH');
  if(data.payment_method!=='pix' || data.amount!==ORDER_AMOUNT || (data.amount_total!=null && data.amount_total!==ORDER_AMOUNT))throw new Error('PROVIDER_AMOUNT_MISMATCH');
- const state=data.payment_status ?? data.status;
+ const providerState=data.payment_status ?? data.status;
+ // Observed on the live IronPay API: unpaid Pix uses waiting_payment, not pending.
+ const state=providerState==='waiting_payment'?'pending':providerState;
  if(!['pending','paid','canceled','refunded'].includes(state))throw new Error('PROVIDER_STATUS_INVALID');
  const code=data.pix?.pix_qr_code;
  let expiresAt=null;
