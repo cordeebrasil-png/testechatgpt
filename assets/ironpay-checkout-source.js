@@ -2,21 +2,46 @@ import { SESSION_KEY, INTENT_KEY, readSession, readJson, validOrder, diagnostic 
 
 const button = document.getElementById('finish');
 const form = document.getElementById('checkoutForm');
-const errorBox = document.getElementById('paymentError');
 const value = id => document.getElementById(id)?.value?.trim() || '';
 const originalContent = button.innerHTML;
 let submitting = false;
+let needsRetry = false;
 window.__mareAzulIronpayLoaded = true;
 button.disabled = false;
 diagnostic({ code: 'READY' });
+
+function ready(data) {
+  return data.status === 'paid' || (data.status === 'pending' && typeof data.pixCode === 'string' && data.pixCode.trim() && !data.pixCode.includes('DEMONSTRACAO'));
+}
+async function openPaymentWhenReady(data, intent) {
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify({ id: intent.id, accessToken: intent.accessToken,
+    creationCode: typeof data.code === 'string' && /^[A-Z_]+$/.test(data.code) ? data.code : null }));
+  diagnostic({ code: data.code, httpStatus: 200, orderStatus: data.status, hasPix: Boolean(data.pixCode) });
+  if (!ready(data)) {
+    // Reconcile this same order, never create another charge to replace an uncertain one.
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    try {
+      const response = await fetch('/api/orders/' + encodeURIComponent(intent.id), {
+        headers: { Authorization: 'Bearer ' + intent.accessToken }, cache: 'no-store', signal: controller.signal
+      });
+      const result = await readJson(response);
+      diagnostic({ code: result.code || data.code, httpStatus: response.status, orderStatus: result.status, hasPix: Boolean(result.pixCode) });
+      if (!response.ok || !validOrder(result, intent.id)) { needsRetry = true; return; }
+      data = result;
+    } finally { clearTimeout(timeout); }
+  }
+  if (ready(data)) location.assign('../pagamento/');
+  else needsRetry = true;
+}
 
 async function start(event) {
   event.preventDefault();
   if (submitting || !validateCheckout()) return;
   submitting = true;
+  needsRetry = false;
   button.disabled = true;
   button.textContent = 'Preparando Pix…';
-  errorBox.textContent = '';
   let httpStatus = null;
   try {
     const customer = {
@@ -29,11 +54,7 @@ async function start(event) {
       .map(byte => byte.toString(16).padStart(2, '0')).join('');
     let intent = readSession(INTENT_KEY);
     if (intent && intent.fingerprint !== fingerprint) {
-      errorBox.textContent = 'Existe uma tentativa de pagamento em andamento. Consulte o pedido anterior antes de alterar os dados.';
-      const link = document.createElement('a');
-      link.href = '../pagamento/'; link.textContent = ' Consultar pagamento';
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify({ id: intent.id, accessToken: intent.accessToken }));
-      errorBox.append(link);
+      await openPaymentWhenReady({ status: 'uncertain' }, intent);
       return;
     }
     if (!intent) {
@@ -54,25 +75,19 @@ async function start(event) {
     if (!response.ok) {
       if (data.retrySafe || (response.status === 422 && data.fields)) sessionStorage.removeItem(INTENT_KEY);
       diagnostic({ code: data.code || 'CREATE_FAILED', httpStatus });
-      const detail = data.fields ? Object.values(data.fields).join(' ') : data.error;
-      errorBox.textContent = detail || 'Não foi possível gerar o Pix. Tente consultar novamente.';
-      if (data.code) errorBox.append(document.createTextNode(' Referência: ' + data.code));
+      needsRetry = true;
       return;
     }
     if (!validOrder(data, intent.id)) throw new Error('API_RESPONSE_INVALID');
-    sessionStorage.setItem(SESSION_KEY, JSON.stringify({ id: intent.id, accessToken: intent.accessToken,
-      creationCode: typeof data.code === 'string' && /^[A-Z_]+$/.test(data.code) ? data.code : null,
-      providerStatus: Number.isInteger(data.providerStatus) ? data.providerStatus : null }));
-    diagnostic({ code: data.code, httpStatus, orderStatus: data.status, hasPix: Boolean(data.pixCode) });
-    location.assign('../pagamento/');
+    await openPaymentWhenReady(data, intent);
   } catch (error) {
     const code = error.message === 'API_RESPONSE_INVALID' ? error.message : 'CREATE_CONNECTION_FAILED';
     diagnostic({ code, httpStatus });
-    errorBox.textContent = code === 'API_RESPONSE_INVALID'
-      ? 'O servidor não retornou uma resposta válida para o pagamento. Referência: API_RESPONSE_INVALID.'
-      : 'Não foi possível confirmar a geração do Pix. Clique novamente para consultar a mesma tentativa.';
+    needsRetry = true;
   } finally {
-    submitting = false; button.disabled = false; button.innerHTML = originalContent;
+    submitting = false; button.disabled = false;
+    if (needsRetry) button.textContent = 'TENTAR NOVAMENTE';
+    else button.innerHTML = originalContent;
   }
 }
 button.addEventListener('click', start);

@@ -312,17 +312,34 @@ test('countdown uses order creation time, and only the provider expiry disables 
   assert.match((await paymentState(h.page)).status, /Prazo do Pix encerrado/);
 });
 
-test('uncertain create cause survives navigation for support without exposing the token', async t => {
+test('uncertain create cause stays in console diagnostics and is never displayed to customers', async t => {
   const h = await harness(t, {
     session: { ...SESSION, creationCode: 'PROVIDER_UNAVAILABLE' },
     getOrder: route => json(route, { id: SESSION.id, status: 'uncertain', pixCode: null, code: 'PAYMENT_CREATION_UNCERTAIN' })
   });
   await openPayment(h);
   await expectUnavailable(h);
-  assert.match(await h.page.locator('#paymentReference').innerText(), /PROVIDER_UNAVAILABLE/);
+  assert.doesNotMatch(await h.page.locator('body').innerText(), /PROVIDER_UNAVAILABLE|Referência|erro|suporte/i);
+  assert.equal(await h.page.locator('#paymentReference').count(), 0);
   const diagnostic = await h.page.evaluate(() => JSON.stringify(window.__mareAzulPixDiagnostics));
+  assert.match(diagnostic, /PROVIDER_UNAVAILABLE/);
   assert.doesNotMatch(diagnostic, /accessToken/);
   assert.ok(!diagnostic.includes(SESSION.accessToken));
+});
+
+test('checkout never opens payment without a provider Pix code', async t => {
+  const h = await harness(t, {
+    session: false,
+    postOrder: (route, body) => json(route, { id: body.id, status: 'uncertain', pixCode: null }, 202),
+    getOrder: route => json(route, { id: new URL(route.request().url()).pathname.split('/').pop(), status: 'uncertain', pixCode: null })
+  });
+  await fillCheckout(h.page);
+  await h.page.click('#finish');
+  await h.page.waitForFunction(() => !document.getElementById('finish')?.disabled);
+  assert.equal(new URL(h.page.url()).pathname, '/checkout/');
+  assert.equal(h.state.posts.length, 1);
+  assert.equal(h.state.gets, 1);
+  assert.doesNotMatch(await h.page.locator('body').innerText(), /Referência|API_RESPONSE|PROVIDER_|PIX_CODE_PENDING/);
 });
 
 test('thank-you verifies paid receipt from API instead of trusting preview data', async t => {

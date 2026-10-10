@@ -10,10 +10,6 @@ const message = (title, detail) => {
   $('paymentStatus').textContent = title;
   $('paymentMessage').textContent = detail;
 };
-function reference(code) {
-  $('paymentReference').hidden = !code;
-  $('paymentReference').textContent = code ? 'Referência para o suporte: ' + code : '';
-}
 function clearPayment() {
   clearInterval(clockTimer);
   $('pixCode').value = ''; $('copyPix').disabled = true;
@@ -27,8 +23,10 @@ function clearPayment() {
   $('expiredMessage').hidden = true;
 }
 function issue(title, detail, code, retry = true) {
-  clearPayment(); message(title, detail); reference(code);
-  $('retryPayment').hidden = !retry;
+  clearPayment();
+  const terminal = ['PIX_EXPIRED', 'REJECTED', 'CANCELED', 'REFUNDED'].includes(code);
+  message(terminal ? title : 'Aguardando pagamento', terminal ? 'Consulte as informações do seu pedido.' : 'Pague via Pix para concluir seu pedido.');
+  $('pixCode').placeholder = terminal ? 'Este código não está disponível para pagamento.' : 'Preparando seu código Pix…';
 }
 function displayDeadline(data) {
   // Anchor to this order; reloads/polls and another order cannot reset/share the clock.
@@ -68,7 +66,6 @@ async function render(data) {
   if (data.status === 'paid') {
     clearPayment(); ended = true; clearTimeout(nextPoll);
     message('Pagamento confirmado', 'Seu pagamento foi confirmado. Abrindo as informações do pedido…');
-    reference(null); $('retryPayment').hidden = true;
     try { if (readSession(INTENT_KEY)?.id === session.id) sessionStorage.removeItem(INTENT_KEY); } catch {}
     location.replace('../obrigado/?pedido=' + encodeURIComponent(data.id));
     return;
@@ -92,8 +89,6 @@ async function render(data) {
     issue('Prazo do Pix encerrado', 'Se você já pagou, aguarde enquanto consultamos a confirmação.', 'PIX_EXPIRED'); return;
   }
   message('Aguardando pagamento', 'Pague via Pix para concluir seu pedido.');
-  reference(data.verificationDelayed ? data.code || 'VERIFICATION_DELAYED' : null);
-  $('retryPayment').hidden = !data.verificationDelayed;
   $('pixCode').value = data.pixCode; $('pixCode').dataset.live = 'true'; $('copyPix').disabled = false;
   document.querySelector('.code-trust').hidden = false;
   document.querySelector('.deadline').hidden = false;
@@ -101,7 +96,7 @@ async function render(data) {
     const qr = document.querySelector('.qr-code');
     const canvas = document.createElement('canvas');
     try {
-      await QRCode.toCanvas(canvas, data.pixCode, { width: 200, margin: 2, color: { dark: '#09205a', light: '#ffffff' } });
+      await QRCode.toCanvas(canvas, data.pixCode, { width: 155, margin: 1, color: { dark: '#09205a', light: '#ffffff' } });
       qr.replaceChildren(canvas); renderedCode = data.pixCode;
       document.querySelector('.qr-section').hidden = false;
     } catch { document.querySelector('.qr-section').hidden = true; }
@@ -110,7 +105,7 @@ async function render(data) {
 }
 async function poll() {
   if (!session || busy || ended) return;
-  clearTimeout(nextPoll); busy = true; $('retryPayment').disabled = true;
+  clearTimeout(nextPoll); busy = true;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 20000);
   let httpStatus = null;
@@ -136,11 +131,10 @@ async function poll() {
     issue('Não foi possível consultar o Pix', 'Verifique sua conexão e tente consultar novamente.', code);
     diagnostic({ code, httpStatus });
   } finally {
-    clearTimeout(timeout); busy = false; $('retryPayment').disabled = false;
+    clearTimeout(timeout); busy = false;
     if (!ended) nextPoll = setTimeout(poll, 15000);
   }
 }
-$('retryPayment').addEventListener('click', () => { ended = false; poll(); });
 $('copyPix').addEventListener('click', async () => {
   if ($('copyPix').disabled || !$('pixCode').dataset.live || latest?.status !== 'pending') return;
   try {

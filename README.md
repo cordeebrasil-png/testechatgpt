@@ -38,7 +38,9 @@ Use Node.js 22 ou mais recente. Execute `npm ci` e `npm run build` após editar 
 
 ## Diagnóstico de pagamento
 
-A tela inicia sem código e sem botão de cópia ativo. Respostas sem Pix, inválidas ou indisponíveis exibem uma mensagem com referência, nunca um código de demonstração. A sessão é salva antes da criação, e novas tentativas após falha de conexão reutilizam o mesmo ID para evitar duplicidade. Um pedido incerto sem identificador da IronPay exige conciliação no provedor antes de gerar outra cobrança.
+A tela mantém o visual do pagamento e só exibe o código recebido da IronPay. O checkout consulta a tentativa em andamento e só navega para o pagamento quando há um Pix disponível (ou pagamento confirmado). Diagnósticos técnicos não são exibidos ao cliente. A sessão é salva antes da criação, e novas tentativas após falha de conexão reutilizam o mesmo ID para evitar duplicidade. Um pedido incerto sem identificador da IronPay exige conciliação no provedor antes de gerar outra cobrança.
+
+`GET /api/payment-health` verifica apenas a existência da tabela e a consulta autenticada do produto na IronPay, sem criar transações, expor credenciais ou retornar dados da conta. A resposta fica em cache por 60 segundos. Um resultado positivo não comprova criação/liquidação de Pix.
 
 No console do navegador, `window.__mareAzulPixDiagnostics` contém somente versão, status e códigos seguros para suporte (não inclui token, Pix ou dados pessoais). Em Functions logs, eventos `payment_failure` registram apenas a operação, código fixo e status HTTP do provedor. Exemplos: `PAYMENT_CONFIGURATION_MISSING`, `DATABASE_SCHEMA_MISSING`, `PROVIDER_AUTH_FAILED`, `PROVIDER_RESPONSE_INVALID`.
 
