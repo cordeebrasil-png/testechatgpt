@@ -165,6 +165,7 @@ test('pending order displays only API-provided Pix, draws QR and copies exact co
   assert.equal(await h.page.locator('#copyLabel').textContent(), 'Copiar código Pix');
   assert.equal(await h.page.locator('#copyToast').textContent(), 'Código copiado');
   assert.equal(await h.page.locator('#copyToast').isVisible(), true);
+  assert.equal(await h.page.locator('#copyBackdrop').isVisible(), true);
   assert.equal(await h.page.locator('#copyFeedback').textContent(), '');
   assert.deepEqual(h.state.pageErrors, []);
 });
@@ -182,12 +183,16 @@ test('copy toast disappears automatically and repeated copies restart its durati
   await openPayment(h);
   await h.page.click('#copyPix');
   assert.equal(await h.page.locator('#copyToast').isVisible(), true);
-  await h.page.clock.fastForward(1500);
+  await h.page.clock.fastForward(1000);
   await h.page.click('#pixCode');
-  await h.page.clock.fastForward(1500);
+  await h.page.clock.fastForward(1000);
   assert.equal(await h.page.locator('#copyToast').isVisible(), true);
   await h.page.clock.fastForward(800);
   assert.equal(await h.page.locator('#copyToast').isVisible(), false);
+  assert.equal(await h.page.locator('#copyBackdrop').isVisible(), false);
+  await h.page.click('#copyPixIcon');
+  assert.equal(await h.page.locator('#copyBackdrop').isVisible(), true);
+  assert.equal(h.state.posts.length, 0);
   assert.equal(await h.page.locator('#copyLabel').textContent(), 'Copiar código Pix');
 });
 

@@ -22,6 +22,7 @@ function fitPixCode() {
 function clearPayment() {
   clearTimeout(copyToastTimer);
   $('copyToast').hidden = true;
+  $('copyBackdrop').hidden = true;
   $('copyToast').textContent = '';
   clearInterval(clockTimer);
   $('pixCode').value = ''; $('copyPix').disabled = true;
@@ -158,11 +159,13 @@ async function copyPix() {
     $('copyFeedback').textContent = '';
     clearTimeout(copyToastTimer);
     $('copyToast').hidden = false;
+    $('copyBackdrop').hidden = false;
     $('copyToast').textContent = 'Código copiado';
     copyToastTimer = setTimeout(() => {
       $('copyToast').hidden = true;
+      $('copyBackdrop').hidden = true;
       $('copyToast').textContent = '';
-    }, 2200);
+    }, 1600);
   } catch {
     $('pixCode').focus(); $('pixCode').select(); $('copyFeedback').textContent = 'Selecione o código e copie manualmente.';
   }
