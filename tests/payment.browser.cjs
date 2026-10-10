@@ -164,6 +164,14 @@ test('pending order displays only API-provided Pix, draws QR and copies exact co
   assert.deepEqual(await h.page.evaluate(() => window.__copied), [PIX, PIX, PIX, PIX]);
   assert.equal(await h.page.locator('#copyLabel').textContent(), 'Copiar código Pix');
   assert.equal(await h.page.locator('#copyToast').textContent(), 'Código PIX copiado');
+  const checkStyle = await h.page.locator('#copyToast').evaluate(el => ({
+    position: getComputedStyle(el, '::before').backgroundPosition,
+    image: getComputedStyle(el, '::before').backgroundImage,
+    detachedCheck: getComputedStyle(el, '::after').content
+  }));
+  assert.ok(checkStyle.position.startsWith('50% 50%'));
+  assert.match(checkStyle.image, /data:image\/svg\+xml/);
+  assert.equal(checkStyle.detachedCheck, 'none');
   assert.equal(await h.page.locator('#copyToast').isVisible(), true);
   assert.equal(await h.page.locator('#copyBackdrop').isVisible(), true);
   assert.equal(await h.page.locator('#copyFeedback').textContent(), '');

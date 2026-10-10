@@ -22,8 +22,7 @@ body{font-family:'Inter',Arial,sans-serif;background:radial-gradient(ellipse at 
 /* Spacing and proportions of the supplied payment reference. */
 .copy-backdrop{position:fixed;inset:0;z-index:999;background:radial-gradient(ellipse at center,#09101475 0%,#09101485 65%,#091014a0 100%);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);pointer-events:none;animation:copy-appear .14s ease-out}
 .copy-toast{position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:24px;width:250px;max-width:calc(100vw - 40px);padding:34px 20px 26px;border:1px solid #fff;border-radius:24px;background:#fff;color:#293344;font-size:19px;font-weight:700;line-height:1.35;text-align:center;box-shadow:0 24px 70px #0006,0 8px 24px #0003;pointer-events:none;animation:copy-appear .14s ease-out}
-.copy-toast::before{content:'';width:62px;height:62px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#0ba464,#00894e);box-shadow:0 0 0 14px #e8f8f1}
-.copy-toast::after{content:'';position:absolute;left:calc(50% - 8px);top:52px;width:13px;height:23px;border:solid white;border-width:0 5px 5px 0;border-radius:2px;transform:rotate(45deg)}
+.copy-toast::before{content:'';width:62px;height:62px;border-radius:50%;flex-shrink:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12l5 5L19 7' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/34px 34px no-repeat,linear-gradient(135deg,#0ba464,#00894e);box-shadow:0 0 0 14px #e8f8f1}
 @keyframes copy-appear{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.copy-backdrop,.copy-toast{animation:none}}
 #pixCode[data-live="true"]{cursor:pointer}
