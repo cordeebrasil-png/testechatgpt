@@ -4,7 +4,7 @@ export const DAY = 86400000;
 export const UUID = /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
 export const ACCESS = /^[a-f0-9]{64}$/;
 export const json = (body, status = 200) => Response.json(body, { status, headers: { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' } });
-const FAILURE_CODES = new Set(['PROVIDER_UNAVAILABLE','PROVIDER_ERROR','PROVIDER_RESPONSE_INVALID','PROVIDER_ID_MISMATCH','PROVIDER_AMOUNT_MISMATCH','PROVIDER_STATUS_INVALID']);
+const FAILURE_CODES = new Set(['PROVIDER_UNAVAILABLE','PROVIDER_TIMEOUT','PROVIDER_REDIRECT','PROVIDER_FETCH_TYPE_ERROR','PROVIDER_ERROR','PROVIDER_RESPONSE_INVALID','PROVIDER_ID_MISMATCH','PROVIDER_AMOUNT_MISMATCH','PROVIDER_STATUS_INVALID']);
 // Diagnostics are deliberately limited to fixed codes and numeric HTTP status. Never log an
 // upstream body, URL, exception stack/message, database query, token or customer details.
 export function reportFailure(error, operation) {
@@ -28,8 +28,9 @@ export async function provider(env, path, payload) {
  const url = new URL(API + path); url.searchParams.set('api_token', env.IRONPAY_API_TOKEN);
  // Do not log this URL, request bodies or upstream errors: they can contain secrets/PII.
  let response;
- try { response = await fetch(url, {method:payload?'POST':'GET',headers:{Accept:'application/json',...(payload?{'Content-Type':'application/json'}:{})},body:payload?JSON.stringify(payload):undefined,signal:AbortSignal.timeout(18000),redirect:'error'}); }
- catch { throw new Error('PROVIDER_UNAVAILABLE'); }
+ try { response = await fetch(url, {method:payload?'POST':'GET',headers:{Accept:'application/json',...(payload?{'Content-Type':'application/json'}:{})},body:payload?JSON.stringify(payload):undefined,signal:AbortSignal.timeout(18000),redirect:'manual'}); }
+ catch (error) { throw new Error(['TimeoutError','AbortError'].includes(error?.name)?'PROVIDER_TIMEOUT':error?.name==='TypeError'?'PROVIDER_FETCH_TYPE_ERROR':'PROVIDER_UNAVAILABLE'); }
+ if(response.status>=300&&response.status<400)throw new Error('PROVIDER_REDIRECT');
  if (!response.ok) { const error=new Error('PROVIDER_ERROR');error.providerStatus=response.status;error.definitive=[400,401,403,422].includes(response.status);throw error; }
  let raw;try { raw=await response.json(); } catch { throw new Error('PROVIDER_RESPONSE_INVALID'); }
  if(raw?.success===false)throw new Error('PROVIDER_RESPONSE_INVALID');
