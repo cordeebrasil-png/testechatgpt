@@ -194,6 +194,22 @@ test('reference spacing remains separated without copy instruction or horizontal
   if (process.env.PIX_LAYOUT_SCREENSHOT) await h.page.screenshot({ path: '/tmp/pix-reference-layout.png', fullPage: true });
 });
 
+test('long Pix code is fully visible at mobile widths and after resizing', async t => {
+  const longCode = PIX.repeat(3);
+  const h = await harness(t, { getOrder: route => json(route, { ...pending(), pixCode: longCode }) });
+  await openPayment(h);
+  for (const width of [390, 320, 480]) {
+    await h.page.setViewportSize({ width, height: 1000 });
+    await h.page.waitForFunction(() => {
+      const field = document.getElementById('pixCode');
+      return field.scrollHeight <= field.clientHeight;
+    });
+    const field = await h.page.locator('#pixCode').evaluate(el => ({ value: el.value, height: el.clientHeight }));
+    assert.equal(field.value, longCode);
+    assert.ok(field.height > 96);
+  }
+});
+
 for (const status of ['canceled', 'refunded']) {
   test(`${status} clears a code and disables payment`, async t => {
     const h = await harness(t, { getOrder: route => json(route, { ...pending(), status }) });

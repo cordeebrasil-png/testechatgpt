@@ -10,9 +10,18 @@ const message = (title, detail) => {
   $('paymentStatus').textContent = title;
   $('paymentMessage').textContent = detail;
 };
+function fitPixCode() {
+  const field = $('pixCode');
+  if (!field.value) return;
+  field.style.height = 'auto';
+  const style = getComputedStyle(field);
+  const borders = parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
+  field.style.height = Math.max(96, Math.ceil(field.scrollHeight + borders)) + 'px';
+}
 function clearPayment() {
   clearInterval(clockTimer);
   $('pixCode').value = ''; $('copyPix').disabled = true;
+  $('pixCode').style.height = '';
   $('copyPixIcon').disabled = true;
   delete $('pixCode').dataset.live;
   $('copyFeedback').textContent = '';
@@ -92,6 +101,7 @@ async function render(data) {
   message('Aguardando pagamento', 'Pague via Pix para concluir seu pedido.');
   $('pixCode').value = data.pixCode; $('pixCode').dataset.live = 'true'; $('copyPix').disabled = false;
   $('copyPixIcon').disabled = false;
+  fitPixCode();
   document.querySelector('.code-trust').hidden = false;
   document.querySelector('.deadline').hidden = false;
   if (renderedCode !== data.pixCode) {
@@ -148,6 +158,8 @@ async function copyPix() {
 }
 $('copyPix').addEventListener('click', copyPix);
 $('copyPixIcon').addEventListener('click', copyPix);
+window.addEventListener('resize', fitPixCode);
+document.fonts?.ready.then(fitPixCode);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
 clearPayment();
 if (session) poll();
