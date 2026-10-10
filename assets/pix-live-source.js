@@ -160,7 +160,7 @@ async function copyPix() {
     clearTimeout(copyToastTimer);
     $('copyToast').hidden = false;
     $('copyBackdrop').hidden = false;
-    $('copyToast').textContent = 'Código copiado';
+    $('copyToast').textContent = 'Código PIX copiado';
     copyToastTimer = setTimeout(() => {
       $('copyToast').hidden = true;
       $('copyBackdrop').hidden = true;
