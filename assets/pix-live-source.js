@@ -13,6 +13,7 @@ const message = (title, detail) => {
 function clearPayment() {
   clearInterval(clockTimer);
   $('pixCode').value = ''; $('copyPix').disabled = true;
+  $('copyPixIcon').disabled = true;
   delete $('pixCode').dataset.live;
   $('copyFeedback').textContent = '';
   document.querySelector('.deadline').hidden = true;
@@ -90,6 +91,7 @@ async function render(data) {
   }
   message('Aguardando pagamento', 'Pague via Pix para concluir seu pedido.');
   $('pixCode').value = data.pixCode; $('pixCode').dataset.live = 'true'; $('copyPix').disabled = false;
+  $('copyPixIcon').disabled = false;
   document.querySelector('.code-trust').hidden = false;
   document.querySelector('.deadline').hidden = false;
   if (renderedCode !== data.pixCode) {
@@ -135,15 +137,17 @@ async function poll() {
     if (!ended) nextPoll = setTimeout(poll, 15000);
   }
 }
-$('copyPix').addEventListener('click', async () => {
+async function copyPix() {
   if ($('copyPix').disabled || !$('pixCode').dataset.live || latest?.status !== 'pending') return;
   try {
     await navigator.clipboard.writeText($('pixCode').value);
-    $('copyLabel').textContent = 'Código copiado!'; $('copyFeedback').textContent = 'Abra o aplicativo do seu banco e escolha Pix copia e cola.';
+    $('copyLabel').textContent = 'Código copiado!'; $('copyFeedback').textContent = '';
   } catch {
     $('pixCode').focus(); $('pixCode').select(); $('copyFeedback').textContent = 'Selecione o código e copie manualmente.';
   }
-});
+}
+$('copyPix').addEventListener('click', copyPix);
+$('copyPixIcon').addEventListener('click', copyPix);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
 clearPayment();
 if (session) poll();
