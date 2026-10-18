@@ -1,5 +1,5 @@
 import QRCode from 'qrcode';
-import { initTikTok } from './tiktok-source.js';
+import { initTikTok, trackGeneratedPix } from './tiktok-source.js';
 initTikTok();
 import { SESSION_KEY, INTENT_KEY, readSession, readJson, validOrder, diagnostic } from './order-session.js';
 
@@ -107,6 +107,7 @@ async function render(data) {
   }
   message('Aguardando pagamento', 'Pague via Pix para concluir seu pedido.');
   $('pixCode').value = data.pixCode; $('pixCode').dataset.live = 'true'; $('copyPix').disabled = false;
+  trackGeneratedPix(data);
   $('copyPixIcon').disabled = false;
   fitPixCode();
   document.querySelector('.code-trust').hidden = false;

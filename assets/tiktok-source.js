@@ -5,10 +5,10 @@ let active = false, loaded = false;
 let paymentInfoSent = false;
 const pendingPurchases = new Map();
 const sent = new Set();
-const keyFor = id => `mareazul.tiktok.${PIXEL_ID}.purchase.${id}`;
-function alreadySent(id) {
-  if (sent.has(id)) return true;
-  try { return localStorage.getItem(keyFor(id)) === 'sent'; } catch { return false; }
+const keyFor = (id, event) => `mareazul.tiktok.${PIXEL_ID}.${event === 'Purchase' ? 'purchase' : 'paid'}.${id}`;
+function alreadySent(id, event) {
+  if (sent.has(keyFor(id, event))) return true;
+  try { return localStorage.getItem(keyFor(id, event)) === 'sent'; } catch { return false; }
 }
 function product(value = 119.90) {
   return { currency: 'BRL', value, content_type: 'product',
@@ -16,13 +16,13 @@ function product(value = 119.90) {
 }
 function flushPurchases() {
   if (!loaded) return;
-  for (const [id, amount] of pendingPurchases) {
-    if (!alreadySent(id)) {
-      window.ttq.track('Purchase', product(amount / 100), { event_id: `mareazul_purchase_${id}` });
-      sent.add(id);
-      try { localStorage.setItem(keyFor(id), 'sent'); } catch { /* Browser storage can be unavailable. */ }
+  for (const [key, { id, amount, event }] of pendingPurchases) {
+    if (!alreadySent(id, event)) {
+      window.ttq.track(event, product(amount / 100), { event_id: `mareazul_${event === 'Purchase' ? 'purchase' : 'paid'}_${id}` });
+      sent.add(key);
+      try { localStorage.setItem(key, 'sent'); } catch { /* Browser storage can be unavailable. */ }
     }
-    pendingPurchases.delete(id);
+    pendingPurchases.delete(key);
   }
 }
 export function initTikTok() {
@@ -58,9 +58,20 @@ export function initTikTok() {
 }
 export function trackPaidPurchase(order) {
   // Call only after the authenticated order API confirms payment, never from URL parameters.
-  if (!active || order?.status !== 'paid' || !/^[a-f0-9-]{36}$/i.test(order.id || '') ||
-      !Number.isSafeInteger(order.amount) || order.amount <= 0 || alreadySent(order.id)) return;
-  pendingPurchases.set(order.id, order.amount);
+  if (order?.status !== 'paid') return;
+  trackOrderEvent(order, 'PedidoPago');
+}
+export function trackGeneratedPix(order) {
+  // Merchant-defined Purchase conversion: a provider-issued Pix, not settled revenue.
+  if (order?.status !== 'pending' || typeof order.pixCode !== 'string' ||
+      !order.pixCode.trim() || order.pixCode.includes('DEMONSTRACAO') ||
+      (Number(order.expiresAt) > 0 && Date.now() >= Number(order.expiresAt))) return;
+  trackOrderEvent(order, 'Purchase');
+}
+function trackOrderEvent(order, event) {
+  if (!active || !/^[a-f0-9-]{36}$/i.test(order.id || '') ||
+      !Number.isSafeInteger(order.amount) || order.amount <= 0 || alreadySent(order.id, event)) return;
+  pendingPurchases.set(keyFor(order.id, event), { id: order.id, amount: order.amount, event });
   try { flushPurchases(); } catch { /* Payment confirmation remains independent of analytics. */ }
 }
 export function trackAddressStarted() {
