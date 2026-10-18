@@ -1,4 +1,6 @@
 import { INTENT_KEY, readSession, readJson, validOrder, diagnostic } from './order-session.js';
+import { initTikTok, trackPaidPurchase } from './tiktok-source.js';
+initTikTok();
 const session = readSession();
 const title = document.getElementById('customerGreeting');
 const message = document.getElementById('customerMessage');
@@ -22,6 +24,7 @@ async function verify() {
     diagnostic({ code: data.code, httpStatus: response.status, orderStatus: data.status });
     if (!response.ok || !validOrder(data, session.id)) throw new Error('RECEIPT_UNAVAILABLE');
     if (data.status !== 'paid') { location.replace('../pagamento/'); return; }
+    trackPaidPurchase(data);
     document.body.dataset.paymentState = 'paid';
     title.textContent = 'Obrigado pela sua compra!';
     message.textContent = 'Seu pagamento foi confirmado.';

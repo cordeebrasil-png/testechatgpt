@@ -1,4 +1,6 @@
 import QRCode from 'qrcode';
+import { initTikTok } from './tiktok-source.js';
+initTikTok();
 import { SESSION_KEY, INTENT_KEY, readSession, readJson, validOrder, diagnostic } from './order-session.js';
 
 const session = readSession();

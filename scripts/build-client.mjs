@@ -3,6 +3,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 // Keep one source per flow; inline bundles are generated, never patched by hand.
 for (const [name, htmlFile, source, bundle] of [
+  ['tiktok', 'index.html', 'assets/tiktok-landing-source.js', null],
   ['checkout', 'checkout/index.html', 'assets/ironpay-checkout-source.js', null],
   ['payment', 'pagamento/index.html', 'assets/pix-live-source.js', 'assets/pix-live.js'],
   ['thankyou', 'obrigado/index.html', 'assets/thankyou-source.js', null]

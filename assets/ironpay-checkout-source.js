@@ -1,4 +1,6 @@
 import { SESSION_KEY, INTENT_KEY, readSession, readJson, validOrder, diagnostic } from './order-session.js';
+import { initTikTok } from './tiktok-source.js';
+initTikTok();
 
 const button = document.getElementById('finish');
 const form = document.getElementById('checkoutForm');

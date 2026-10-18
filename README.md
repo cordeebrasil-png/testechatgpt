@@ -50,3 +50,16 @@ A consulta de CEP depende de disponibilidade das APIs externas. Em caso de falha
 
 
 Nenhuma chave de API está incluída no repositório. A documentação confirma `installments: 1` para Pix e autenticação da API via query parameter `api_token`.
+
+## Pixel TikTok
+
+Pixel público: `DA5U5MRC77U8NT7JF3A0`. Fonte: `assets/tiktok-source.js`, incluída nos bundles gerados por `npm run build`.
+
+- Somente o hostname de produção `mare-azul.pages.dev` carrega o pixel. Prévia, localhost e rotas de testes não carregam. Ao adotar um domínio próprio, atualizar a lista de hosts e validar novamente.
+- `PageView` via `ttq.page()` nas páginas do funil; `ViewContent` na página de vendas; `InitiateCheckout` na entrada do checkout.
+- `Purchase` somente em `/obrigado/`, depois da consulta autenticada confirmar `paid`. Valor vem de `amount` do servidor, convertido de centavos para BRL. Gerar/copiar Pix e parâmetros da URL não confirmam compra.
+- Identificação de evento estável por pedido; proteção contra repetição no mesmo navegador com `localStorage`. Não promete deduplicação entre dispositivos. Nenhum dado de formulário, CPF, token ou recibo é incluído nas propriedades que o código envia ao pixel.
+- Falha/bloqueio do SDK não interfere no checkout e não marca a compra como enviada. O marcador local indica chamada ao SDK, não confirmação de recebimento pelo TikTok.
+- Implementação por navegador, sem Events API: fechar a página antes da confirmação ou bloquear o pixel pode impedir o evento de compra. Não configurar conversões de compra pelo clique no botão Pix no Event Builder.
+
+Validar no TikTok Events Manager em Testar eventos e no Pixel Helper, usando o domínio de produção. Os testes automatizados interceptam o SDK e as respostas de pagamento; não enviam conversões reais ao TikTok. A entrega ao painel deve ser confirmada separadamente. A oferta isolada de R$ 1 ainda depende da criação e do hash da oferta de teste na IronPay; o preço de produção permanece R$ 119,90.
