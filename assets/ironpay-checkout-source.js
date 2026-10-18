@@ -1,6 +1,9 @@
 import { SESSION_KEY, INTENT_KEY, readSession, readJson, validOrder, diagnostic } from './order-session.js';
-import { initTikTok } from './tiktok-source.js';
+import { initTikTok, trackAddressStarted } from './tiktok-source.js';
 initTikTok();
+document.getElementById('street').addEventListener('input', event => {
+  if (event.isTrusted && event.target.value.trim()) trackAddressStarted();
+});
 
 const button = document.getElementById('finish');
 const form = document.getElementById('checkoutForm');

@@ -2,6 +2,7 @@ export const PIXEL_ID = 'DA5U5MRC77U8NT7JF3A0';
 const PRODUCT_ID = 'jbkikbdjti';
 const PRODUCT_NAME = 'Kit Dobrável Duo 3 em 1';
 let active = false, loaded = false;
+let paymentInfoSent = false;
 const pendingPurchases = new Map();
 const sent = new Set();
 const keyFor = id => `mareazul.tiktok.${PIXEL_ID}.purchase.${id}`;
@@ -61,4 +62,11 @@ export function trackPaidPurchase(order) {
       !Number.isSafeInteger(order.amount) || order.amount <= 0 || alreadySent(order.id)) return;
   pendingPurchases.set(order.id, order.amount);
   try { flushPurchases(); } catch { /* Payment confirmation remains independent of analytics. */ }
+}
+export function trackAddressStarted() {
+  if (!active || location.pathname !== '/checkout/' || paymentInfoSent) return;
+  try {
+    window.ttq.track('AddPaymentInfo', product());
+    paymentInfoSent = true;
+  } catch { /* Analytics must never interfere with address entry. */ }
 }

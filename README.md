@@ -57,6 +57,7 @@ Pixel público: `DA5U5MRC77U8NT7JF3A0`. Fonte: `assets/tiktok-source.js`, inclu�
 
 - Somente o hostname de produção `mare-azul.pages.dev` carrega o pixel. Prévia, localhost e rotas de testes não carregam. Ao adotar um domínio próprio, atualizar a lista de hosts e validar novamente.
 - `PageView` via `ttq.page()` nas páginas do funil; `ViewContent` na página de vendas; `InitiateCheckout` na entrada do checkout.
+- `AddPaymentInfo` ao primeiro input não vazio do usuário no campo Endereço (`street`), uma vez por carregamento do checkout. Não dispara só por foco nem pelo preenchimento programático do CEP. É um marco de preenchimento do endereço solicitado para este funil, não confirmação de pagamento; nenhum texto digitado é enviado nas propriedades do evento.
 - `Purchase` somente em `/obrigado/`, depois da consulta autenticada confirmar `paid`. Valor vem de `amount` do servidor, convertido de centavos para BRL. Gerar/copiar Pix e parâmetros da URL não confirmam compra.
 - Identificação de evento estável por pedido; proteção contra repetição no mesmo navegador com `localStorage`. Não promete deduplicação entre dispositivos. Nenhum dado de formulário, CPF, token ou recibo é incluído nas propriedades que o código envia ao pixel.
 - Falha/bloqueio do SDK não interfere no checkout e não marca a compra como enviada. O marcador local indica chamada ao SDK, não confirmação de recebimento pelo TikTok.

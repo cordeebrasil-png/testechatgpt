@@ -79,3 +79,24 @@ test('preview deployments never load production pixel', async t => {
   await h.page.waitForFunction(() => document.body.dataset.paymentState === 'paid');
   assert.equal(h.sdkRequests.length, 0);
 });
+test('address typing sends AddPaymentInfo once without address data; focus and blank input do not', async t => {
+  const h = await setup(t);
+  await h.page.goto(h.origin + '/checkout/');
+  await h.page.waitForFunction(() => window.pixelEvents);
+  await h.page.evaluate(() => { document.getElementById('addressFields').hidden = false; });
+  const events = () => h.page.evaluate(() => window.pixelEvents.filter(e => e[1] === 'AddPaymentInfo'));
+  await h.page.locator('#street').focus();
+  assert.equal((await events()).length, 0);
+  await h.page.locator('#street').fill('   ');
+  assert.equal((await events()).length, 0);
+  await h.page.locator('#street').fill('Rua Particular de Teste');
+  await h.page.locator('#street').fill('Outra Rua Particular');
+  await h.page.locator('#street').fill('');
+  await h.page.locator('#street').fill('Rua Final');
+  const tracked = await events();
+  assert.equal(tracked.length, 1);
+  assert.equal(tracked[0][2].value, 119.9);
+  assert.equal(tracked[0][2].currency, 'BRL');
+  assert.doesNotMatch(JSON.stringify(tracked), /Rua|street|address|email|phone/);
+  assert.equal(await h.page.evaluate(() => window.pixelEvents.some(e => e[1] === 'Purchase')), false);
+});
