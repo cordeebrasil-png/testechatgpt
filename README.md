@@ -99,6 +99,6 @@ Os testes usam respostas interceptadas; não pagam nem criam transações reais.
 
 ## Presell
 
-A entrada opcional do funil é `/acesso/`. A página prepara os recursos visuais e revela o botão **PROSSEGUIR**, que leva à página de vendas em `/`. Não há redirecionamento automático. Query string e fragmento são preservados no clique; parâmetros não podem alterar o destino para outro domínio. A interface não simula consulta de estoque. Sem JavaScript, o botão continua acessível. Fontes, logo, CSS e JavaScript são locais.
+A entrada opcional do funil é `/acesso/`. A página prepara os recursos visuais e revela o botão **PROSSEGUIR**, que leva à página de vendas em `/`. Não há redirecionamento automático. Query string e fragmento são preservados no clique; parâmetros não podem alterar o destino para outro domínio. Os textos de disponibilidade reproduzem a referência solicitada. A transição é visual e ainda não consulta estoque real na API. Sem JavaScript, o botão continua acessível. Fontes, logo, CSS e JavaScript são locais.
 
 Use `/acesso/` nos links de entrada dos anúncios. A página de vendas continua acessível diretamente em `/`. O pixel permanece pausado durante o teste conforme a configuração atual do funil.
