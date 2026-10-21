@@ -105,7 +105,7 @@
 .upgrade-price-free{color:#64748b!important;font-size:13px!important;font-weight:700!important}
 #finish{display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:900;letter-spacing:.3px;background:linear-gradient(180deg,#ff6b00,#e85d00);box-shadow:0 6px 20px rgba(255,107,0,.35)}
 </style>
-<meta name="referrer" content="no-referrer"><style>.sf-hidden{display:none!important}</style><link rel="stylesheet" href="/assets/boxes-interactions.css"><meta name="checkout-test-mode" content="boxes-live"></head>
+<meta name="referrer" content="no-referrer"><style>.sf-hidden{display:none!important}</style><link rel="stylesheet" href="/assets/boxes-interactions.css"><meta name="checkout-test-mode" content="boxes-live"><script type="module" src="/assets/boxes-tiktok.js?v=1"></script></head>
 <body>
 <div id="loading-overlay" class="sf-hidden">
 
@@ -351,6 +351,7 @@ let pixCountdownTimer=null;
 let pixPollingTimer=null;
 
 function renderInlinePix(orderData,creds){
+  window.dispatchEvent(new CustomEvent("boxes:pix-ready", {detail:orderData}));
   const overlay=document.getElementById("rl-overlay");
   if(overlay)overlay.classList.remove("show");
 
