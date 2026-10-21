@@ -1,22 +1,46 @@
 (() => {
- const proceed=document.getElementById('proceed');
- // Destination is always the local sales page; attribution cannot override it.
- proceed.href='/'+location.search+location.hash;
- const loading=document.querySelector('.presell-loading');
- const ready=document.querySelector('.presell-ready');
- const progress=document.querySelector('.progress');
- const fill=document.querySelector('.progress-fill');
- let finished=false, value=0;
- function showReady(){
-  if(finished)return;finished=true;clearInterval(tick);clearTimeout(fallback);
-  loading.hidden=true;ready.hidden=false;
- }
- const tick=setInterval(()=>{value=Math.min(90,value+15);fill.style.width=value+'%';progress.setAttribute('aria-valuenow',String(value));},200);
- const fallback=setTimeout(showReady,3500);
- // Only prepare local presentation assets. This is not an inventory check.
- Promise.allSettled([
-  document.fonts?.ready,
-  document.querySelector('.logo').decode(),
-  new Promise(resolve=>setTimeout(resolve,matchMedia('(prefers-reduced-motion: reduce)').matches?0:1500)),
- ]).then(showReady);
+  const proceed = document.getElementById('proceed');
+  const loading = document.querySelector('.presell-loading');
+  const ready = document.querySelector('.presell-ready');
+  const progress = document.querySelector('.progress');
+  const fill = document.querySelector('.progress-fill');
+
+  // Garante que o botao comece desativado e sem link
+  proceed.removeAttribute('href');
+  proceed.classList.add('disabled');
+  proceed.setAttribute('aria-disabled', 'true');
+
+  let finished = false;
+  let value = 0;
+  const totalDuration = 4500; // 4.5 segundos de verificacao
+  const intervalTime = 50;
+  const step = 100 / (totalDuration / intervalTime);
+
+  const tick = setInterval(() => {
+    value = Math.min(100, value + step);
+    fill.style.width = Math.round(value) + '%';
+    progress.setAttribute('aria-valuenow', String(Math.round(value)));
+
+    if (value >= 100) {
+      clearInterval(tick);
+      showReady();
+    }
+  }, intervalTime);
+
+  function showReady() {
+    if (finished) return;
+    finished = true;
+    clearInterval(tick);
+
+    // Exibe a tela de confirmacao de estoque
+    loading.hidden = true;
+    ready.hidden = false;
+
+    // Libera o botao e injeta o link somente apos o carregamento
+    setTimeout(() => {
+      proceed.href = '/' + location.search + location.hash;
+      proceed.classList.remove('disabled');
+      proceed.removeAttribute('aria-disabled');
+    }, 600);
+  }
 })();
