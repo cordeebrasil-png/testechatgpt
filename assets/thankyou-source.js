@@ -29,6 +29,14 @@ async function verify() {
     title.textContent = 'Obrigado pela sua compra!';
     message.textContent = 'Seu pagamento foi confirmado.';
     if (data.receipt) personalizeOrder(data.receipt);
+    const money=value=>(value/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+    if(Number.isSafeInteger(data.amount)&&data.amount>0)document.getElementById('receiptTotal').textContent=money(data.amount);
+    const shipping=data.pricing?.shipping;
+    if(shipping) {
+      const field=document.getElementById('receiptShipping');
+      field.textContent=shipping.name+' — '+(shipping.amount?money(shipping.amount):'Grátis');
+      field.classList.toggle('free',shipping.amount===0);
+    }
     if (readSession(INTENT_KEY)?.id === session.id) sessionStorage.removeItem(INTENT_KEY);
   } catch {
     title.textContent = 'Não foi possível consultar o pedido';

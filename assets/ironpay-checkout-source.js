@@ -8,8 +8,9 @@ document.getElementById('street').addEventListener('input', event => {
 
 const button = document.getElementById('finish');
 const form = document.getElementById('checkoutForm');
+const shippingGroup = document.querySelector('.shipping-options');
 const value = id => document.getElementById(id)?.value?.trim() || '';
-const originalContent = button.innerHTML;
+let originalContent = button.innerHTML;
 let submitting = false;
 let needsRetry = false;
 window.__mareAzulIronpayLoaded = true;
@@ -44,9 +45,11 @@ async function openPaymentWhenReady(data, intent) {
 async function start(event) {
   event.preventDefault();
   if (submitting || !validateCheckout()) return;
+  originalContent = button.innerHTML;
   submitting = true;
   needsRetry = false;
   button.disabled = true;
+  if(shippingGroup)shippingGroup.disabled=true;
   button.textContent = 'Preparando Pix…';
   let httpStatus = null;
   try {
@@ -55,8 +58,9 @@ async function start(event) {
       street_name: value('street'), number: value('number'), complement: value('extra'),
       neighborhood: value('district'), city: value('city'), state: value('state'), zip_code: value('cep')
     };
+    const shipping = document.querySelector('input[name="shipping"]:checked')?.value || 'free';
     const color = new URLSearchParams(location.search).get('cor') || 'Azul';
-    const fingerprint = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify({customer, color}))))]
+    const fingerprint = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify({customer, color, shipping}))))]
       .map(byte => byte.toString(16).padStart(2, '0')).join('');
     let intent = readSession(INTENT_KEY);
     if (intent && intent.fingerprint !== fingerprint) {
@@ -74,7 +78,7 @@ async function start(event) {
     let response;
     try { response = await fetch('/api/orders', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: controller.signal,
-      body: JSON.stringify({ id: intent.id, accessToken: intent.accessToken, customer, color })
+      body: JSON.stringify({ id: intent.id, accessToken: intent.accessToken, customer, color, shipping })
     }); } finally { clearTimeout(timeout); }
     httpStatus = response.status;
     const data = await readJson(response);
@@ -92,6 +96,7 @@ async function start(event) {
     needsRetry = true;
   } finally {
     submitting = false; button.disabled = false;
+    if(shippingGroup)shippingGroup.disabled=false;
     if (needsRetry) button.textContent = 'TENTAR NOVAMENTE';
     else button.innerHTML = originalContent;
   }

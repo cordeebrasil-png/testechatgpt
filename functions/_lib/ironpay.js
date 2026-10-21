@@ -1,5 +1,6 @@
 // Server-only request builder. Never accept prices or product hashes from the browser.
-export const ORDER_AMOUNT = 11990;
+import { BASE_AMOUNT, quoteShipping } from '../../shared/shipping.js';
+export const ORDER_AMOUNT = BASE_AMOUNT;
 const digits = value => String(value ?? '').replace(/\D/g, '');
 const text = (value, max = 160) => String(value ?? '').trim().slice(0, max);
 export function validCpf(value) {
@@ -17,6 +18,7 @@ export function buildPixRequest(input, env) {
   if (!env.IRONPAY_OFFER_HASH || !env.IRONPAY_PRODUCT_HASH) {
     throw new Error('IRONPAY_PRODUCT_CONFIGURATION_MISSING');
   }
+  const pricing = quoteShipping(input?.shipping);
   const c = input?.customer ?? {};
   const customer = {
     name: text(c.name), email: text(c.email, 254), phone_number: digits(c.phone_number),
@@ -39,15 +41,15 @@ export function buildPixRequest(input, env) {
   }
   const color = ['Azul', 'Preto', 'Verde', 'Vermelho'].includes(input.color) ? input.color : 'Azul';
   const payload = {
-    amount: ORDER_AMOUNT,
+    amount: pricing.total,
     offer_hash: env.IRONPAY_OFFER_HASH,
     payment_method: 'pix',
     installments: 1,
     customer,
     cart: [{
       product_hash: env.IRONPAY_PRODUCT_HASH,
-      title: `Kit Dobrável Duo 3 em 1 — ${color}`,
-      cover: null, price: ORDER_AMOUNT, quantity: 1, operation_type: 1, tangible: true
+      title: `Kit Dobrável Duo 3 em 1 — ${color}${pricing.shipping.id === 'free' ? '' : ' + ' + pricing.shipping.name}`,
+      cover: null, price: pricing.total, quantity: 1, operation_type: 1, tangible: true
     }],
     transaction_origin: 'api'
   };

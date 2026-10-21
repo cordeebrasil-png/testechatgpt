@@ -105,7 +105,7 @@ async function render(data) {
   if (Number(data.expiresAt) > 0 && Date.now() >= Number(data.expiresAt)) {
     issue('Prazo do Pix encerrado', 'Se você já pagou, aguarde enquanto consultamos a confirmação.', 'PIX_EXPIRED'); return;
   }
-  message('Aguardando pagamento', 'Pague via Pix para concluir seu pedido.');
+  message('Aguardando pagamento', Number.isSafeInteger(data.amount)&&data.amount>0 ? 'Total: '+(data.amount/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})+(data.pricing?.shipping?' · '+data.pricing.shipping.name:'') : 'Pague via Pix para concluir seu pedido.');
   $('pixCode').value = data.pixCode; $('pixCode').dataset.live = 'true'; $('copyPix').disabled = false;
   trackGeneratedPix(data);
   $('copyPixIcon').disabled = false;

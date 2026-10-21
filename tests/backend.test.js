@@ -239,3 +239,82 @@ test('missing schema is distinguishable without leaking raw database errors', as
   }
   assert.equal(JSON.stringify(logs.mock.calls).includes(secret), false);
 });
+
+for(const [shipping,fee,total] of [['free',0,11990],['pickup',0,11990],['jadlog',990,12980],['express',1990,13980]]) {
+ test(`shipping ${shipping}: server total survives create, retry and paid reconciliation`, async t=>{
+  const env=environment(t);
+  const payloadInput={...input,shipping,amount:1,shipping_amount:1,price:1};
+  const upstream=t.mock.method(globalThis,'fetch',async(url,options)=>{
+   const sent=JSON.parse(options.body);
+   assert.equal(sent.amount,total);assert.equal(sent.cart[0].price,total);
+   assert.equal(sent.cart.length,1);assert.equal(sent.cart[0].product_hash,'product123');
+   assert.equal('shipping_amount' in sent,false);assert.equal('upsell' in sent,false);
+   return Response.json({...transaction,amount:total,amount_total:total});
+  });
+  const created=await onRequestPost({request:request(payloadInput),env});assert.equal(created.status,201);
+  const body=await created.json();assert.equal(body.amount,total);assert.equal(body.pricing.shipping.amount,fee);
+  const row=await findOrder(env,id);assert.equal(JSON.parse(row.receipt_json).pricing.total,total);
+  const retry=await onRequestPost({request:request(payloadInput),env});assert.equal(retry.status,200);assert.equal(upstream.mock.callCount(),1);
+  const changed=await onRequestPost({request:request({...payloadInput,shipping:shipping==='free'?'express':'free'}),env});
+  assert.equal(changed.status,409);assert.equal(upstream.mock.callCount(),1);
+  await env.ORDERS_DB.prepare('UPDATE orders SET last_checked = 0 WHERE id = ?').bind(id).run();
+  upstream.mock.mockImplementation(async()=>Response.json({...transaction,status:'paid',payment_status:'paid',amount:total,amount_total:total}));
+  const paid=await (await lookup(env)).json();assert.equal(paid.status,'paid');assert.equal(paid.amount,total);assert.equal(paid.receipt.pricing.shipping.id,shipping);
+ });
+}
+
+test('invalid shipping cannot fall back to free or call the provider',async t=>{
+ const env=environment(t),upstream=t.mock.method(globalThis,'fetch',()=>{throw new Error('Unexpected provider call');});
+ for(const shipping of ['other','__proto__','',null,{},-1]) {
+  const response=await onRequestPost({request:request({...input,shipping}),env});
+  assert.equal(response.status,422);assert.ok((await response.json()).fields.shipping);
+ }
+ assert.equal(upstream.mock.callCount(),0);
+});
+
+test('provider returning the base amount for paid shipping never releases a Pix',async t=>{
+ const env=environment(t);silenceLogs(t);
+ t.mock.method(globalThis,'fetch',async()=>Response.json(transaction));
+ const response=await onRequestPost({request:request({...input,shipping:'express'}),env});
+ const body=await response.json();assert.equal(response.status,202);assert.equal(body.status,'uncertain');
+ assert.equal(body.code,'PROVIDER_AMOUNT_MISMATCH');assert.equal(body.amount,13980);assert.equal(body.pixCode,null);
+});
+
+test('legacy stored receipt without pricing retains the old amount',async t=>{
+ const env=environment(t);
+ const upstream=t.mock.method(globalThis,'fetch',async()=>Response.json(transaction));
+ await onRequestPost({request:request(),env});
+ const row=await findOrder(env,id),receipt=JSON.parse(row.receipt_json);delete receipt.pricing;
+ await env.ORDERS_DB.prepare('UPDATE orders SET receipt_json = ?, last_checked = 0 WHERE id = ?').bind(JSON.stringify(receipt),id).run();
+ upstream.mock.mockImplementation(async()=>Response.json({...transaction,payment_status:'paid'}));
+ const paid=await (await lookup(env)).json();assert.equal(paid.status,'paid');assert.equal(paid.amount,11990);
+});
+
+test('wrong paid amount cannot confirm a shipping order; the same order can recover',async t=>{
+ const env=environment(t);silenceLogs(t);
+ const upstream=t.mock.method(globalThis,'fetch',async()=>Response.json({...transaction,amount:12980,amount_total:12980}));
+ await onRequestPost({request:request({...input,shipping:'jadlog'}),env});
+ await env.ORDERS_DB.prepare('UPDATE orders SET last_checked = 0 WHERE id = ?').bind(id).run();
+ upstream.mock.mockImplementation(async()=>Response.json({...transaction,payment_status:'paid'}));
+ const bad=await (await lookup(env)).json();assert.equal(bad.status,'pending');assert.equal(bad.code,'PROVIDER_AMOUNT_MISMATCH');assert.equal(bad.amount,12980);
+ await env.ORDERS_DB.prepare('UPDATE orders SET last_checked = 0 WHERE id = ?').bind(id).run();
+ upstream.mock.mockImplementation(async()=>Response.json({...transaction,payment_status:'paid',amount:12980,amount_total:12980}));
+ const good=await (await lookup(env)).json();assert.equal(good.status,'paid');assert.equal(good.amount,12980);
+});
+
+test('signed webhook confirms shipping total from IronPay, not notification fields',async t=>{
+ const {onRequestPost:webhook}=await import('../functions/api/ironpay-webhook.js');
+ const {signature}=await import('../functions/_lib/orders.js');
+ const env=environment(t),total=13980;
+ const upstream=t.mock.method(globalThis,'fetch',async()=>Response.json({...transaction,amount:total,amount_total:total}));
+ await onRequestPost({request:request({...input,shipping:'express'}),env});
+ await env.ORDERS_DB.prepare('UPDATE orders SET last_checked = 0 WHERE id = ?').bind(id).run();
+ const key=await signature('webhook:'+id,secret);
+ const notify=()=>new Request(`${origin}/api/ironpay-webhook?id=${id}&key=${key}`,{method:'POST',body:JSON.stringify({status:'paid',amount:1})});
+ upstream.mock.mockImplementation(async()=>Response.json({...transaction,amount:total,amount_total:total}));
+ assert.equal((await webhook({request:notify(),env})).status,200);assert.equal((await findOrder(env,id)).state,'pending');
+ await env.ORDERS_DB.prepare('UPDATE orders SET last_checked = 0 WHERE id = ?').bind(id).run();
+ upstream.mock.mockImplementation(async()=>Response.json({...transaction,amount:total,amount_total:total,payment_status:'paid'}));
+ assert.equal((await webhook({request:notify(),env})).status,200);
+ const order=publicOrder(await findOrder(env,id));assert.equal(order.status,'paid');assert.equal(order.amount,total);assert.equal(order.pricing.shipping.id,'express');
+});

@@ -456,3 +456,28 @@ test('each box displays the real test total and has no paid upgrade', async t =>
  assert.equal(h.state.posts.length,0);
  assert.deepEqual(h.state.pageErrors,[]);
 });
+
+for(const [shipping,fee,total,label] of [['free',0,11990,'119,90'],['pickup',0,11990,'119,90'],['jadlog',990,12980,'129,80'],['express',1990,13980,'139,80']]) {
+ test(`selected ${shipping} reaches the API, displays ${label} and copies only provider Pix`,async t=>{
+  const h=await harness(t,{session:false,postOrder:async(route,body)=>{
+   assert.equal(body.shipping,shipping);assert.equal('amount' in body,false);assert.equal('shipping_amount' in body,false);
+   return json(route,{...pending(body.id),amount:total},201);
+  },getOrder:(route)=>json(route,{...pending(),id:route.request().url().split('/').pop(),amount:total,pricing:{shipping:{id:shipping,name:shipping,amount:fee}}})});
+  await fillCheckout(h.page);
+  await h.page.locator('#sec-entrega .section-header').click();
+  await h.page.locator(`.shipping-choice:has(input[value="${shipping}"])`).click();
+  assert.match(await h.page.locator('#sum-total').innerText(),new RegExp(label));
+  await h.page.locator('#continuar-entrega').click();
+  assert.match(await h.page.locator('#finish').innerText(),new RegExp(label));
+  await h.page.locator('#finish').click();await h.page.waitForURL('**/pagamento/');
+  await h.page.waitForFunction(()=>document.getElementById('pixCode').dataset.live);
+  assert.match(await h.page.locator('#paymentMessage').innerText(),new RegExp(label));
+  await h.page.locator('#copyPix').click();assert.deepEqual(await h.page.evaluate(()=>window.__copied),[PIX]);
+  assert.equal(h.state.posts.length,1);assert.deepEqual(h.state.pageErrors,[]);
+ });
+}
+test('paid receipt displays the server-confirmed shipping amount and total',async t=>{
+ const h=await harness(t,{realThankyou:true,getOrder:route=>json(route,{id:SESSION.id,status:'paid',amount:13980,pricing:{shipping:{id:'express',name:'Full 24hrs',amount:1990}},receipt:{name:'Pessoa Teste'}})});
+ await h.page.goto(`${ORIGIN}/obrigado/`);await h.page.waitForFunction(()=>document.body.dataset.paymentState==='paid');
+ assert.match(await h.page.locator('#receiptTotal').innerText(),/139,80/);assert.match(await h.page.locator('#receiptShipping').innerText(),/19,90/);
+});

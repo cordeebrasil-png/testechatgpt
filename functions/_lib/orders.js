@@ -1,4 +1,5 @@
 import { buildPixRequest, ORDER_AMOUNT } from './ironpay.js';
+import { quoteShipping } from '../../shared/shipping.js';
 const API = 'https://api.ironpayapp.com.br/api/public/v1';
 export const DAY = 86400000;
 export const UUID = /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
@@ -36,9 +37,9 @@ export async function provider(env, path, payload) {
  if(raw?.success===false)throw new Error('PROVIDER_RESPONSE_INVALID');
  return raw?.data && typeof raw.data==='object' && !Array.isArray(raw.data) ? raw.data : raw;
 }
-export function normalize(data, expectedHash) {
+export function normalize(data, expectedHash, expectedAmount = ORDER_AMOUNT) {
  if(!data || typeof data.hash!=='string' || !/^[a-zA-Z0-9_-]{1,128}$/.test(data.hash) || (expectedHash && data.hash!==expectedHash))throw new Error('PROVIDER_ID_MISMATCH');
- if(data.payment_method!=='pix' || data.amount!==ORDER_AMOUNT || (data.amount_total!=null && data.amount_total!==ORDER_AMOUNT))throw new Error('PROVIDER_AMOUNT_MISMATCH');
+ if(data.payment_method!=='pix' || data.amount!==expectedAmount || (data.amount_total!=null && data.amount_total!==expectedAmount))throw new Error('PROVIDER_AMOUNT_MISMATCH');
  const providerState=data.payment_status ?? data.status;
  // Observed on the live IronPay API: unpaid Pix uses waiting_payment, not pending.
  const state=providerState==='waiting_payment'?'pending':providerState;
@@ -53,12 +54,24 @@ export function normalize(data, expectedHash) {
 }
 export function receipt(input, payload) {
  const c=payload.customer;
- return {name:c.name,email:c.email,street:c.street_name,number:c.number,extra:c.complement,district:c.neighborhood,city:c.city,state:c.state,cep:c.zip_code,color:['Azul','Preto','Verde','Vermelho'].includes(input.color)?input.color:'Azul'};
+ return {pricing:quoteShipping(input.shipping),name:c.name,email:c.email,street:c.street_name,number:c.number,extra:c.complement,district:c.neighborhood,city:c.city,state:c.state,cep:c.zip_code,color:['Azul','Preto','Verde','Vermelho'].includes(input.color)?input.color:'Azul'};
+}
+export function storedPricing(row) {
+ const receipt=row.receipt_json?JSON.parse(row.receipt_json):{};
+ // All orders before shipping support charged the legacy fixed amount.
+ if(!Object.hasOwn(receipt,'pricing'))return {version:1,subtotal:11990,shipping:{id:'free',name:'Frete Grátis',amount:0},total:11990};
+ const p=receipt.pricing;
+ if(p?.version!==1||!Number.isSafeInteger(p.subtotal)||p.subtotal<=0||
+    !Number.isSafeInteger(p.shipping?.amount)||p.shipping.amount<0||
+    typeof p.shipping.id!=='string'||typeof p.shipping.name!=='string'||
+    !Number.isSafeInteger(p.total)||p.total!==p.subtotal+p.shipping.amount)throw new Error('ORDER_PRICING_INVALID');
+ return p;
 }
 export function publicOrder(row) {
+ const pricing=storedPricing(row);
  const pixCode=['pending','paid'].includes(row.state)?row.pix_code:null;
  const code=row.state==='uncertain'?'PAYMENT_CREATION_UNCERTAIN':row.state==='creating'?'PAYMENT_CREATION_PENDING':row.state==='pending'&&!pixCode?'PIX_CODE_PENDING':undefined;
- return {id:row.id,status:row.state,amount:ORDER_AMOUNT,pixCode,paymentReady:row.state==='paid'||(row.state==='pending'&&Boolean(pixCode)),expiresAt:row.expires_at,createdAt:row.created_at,...(code?{code,retrySafe:false}:{}),receipt:row.state==='paid'?JSON.parse(row.receipt_json):undefined};
+ return {id:row.id,status:row.state,amount:pricing.total,pricing,pixCode,paymentReady:row.state==='paid'||(row.state==='pending'&&Boolean(pixCode)),expiresAt:row.expires_at,createdAt:row.created_at,...(code?{code,retrySafe:false}:{}),receipt:row.state==='paid'?JSON.parse(row.receipt_json):undefined};
 }
 export async function findOrder(env,id) { return env.ORDERS_DB.prepare('SELECT * FROM orders WHERE id = ?').bind(id).first(); }
 export async function authorize(request,env,id) {
@@ -73,7 +86,7 @@ export async function refreshOrder(env,row,force=false) {
  if(!force && now-row.last_checked<10000)return row;
  const claim=await env.ORDERS_DB.prepare('UPDATE orders SET last_checked = ? WHERE id = ? AND last_checked = ?').bind(now,row.id,row.last_checked).run();
  if(!claim.meta.changes)return await findOrder(env,row.id);
- const result=normalize(await provider(env,'/transactions/'+encodeURIComponent(row.provider_hash)),row.provider_hash);
+ const result=normalize(await provider(env,'/transactions/'+encodeURIComponent(row.provider_hash)),row.provider_hash,storedPricing(row).total);
  // Ignore a stale pending notification after an authoritative payment confirmation.
  const state=row.state==='paid' && ['pending','canceled'].includes(result.state)?'paid':result.state;
  await env.ORDERS_DB.prepare('UPDATE orders SET state = ?, pix_code = COALESCE(?,pix_code), expires_at = COALESCE(?,expires_at) WHERE id = ?').bind(state,result.code,result.expiresAt,row.id).run();
@@ -102,7 +115,7 @@ export async function createOrder(request,env) {
   const raw=await provider(env,'/transactions',payload);
   // Save the hash before mapping remaining fields so unexpected formats can be reconciled safely.
   if(typeof raw?.hash==='string'&&/^[a-zA-Z0-9_-]{1,128}$/.test(raw.hash))await env.ORDERS_DB.prepare('UPDATE orders SET provider_hash = ? WHERE id = ?').bind(raw.hash,input.id).run();
-  const result=normalize(raw);
+  const result=normalize(raw,undefined,payload.amount);
   await env.ORDERS_DB.prepare('UPDATE orders SET provider_hash = ?, state = ?, pix_code = ?, expires_at = ?, last_checked = ? WHERE id = ?').bind(result.hash,result.state,result.code,result.expiresAt??now+DAY,now,input.id).run();
   return json(publicOrder(await findOrder(env,input.id)),201);
  }catch(error){

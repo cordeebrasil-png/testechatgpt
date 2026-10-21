@@ -1,6 +1,7 @@
+import { SHIPPING as shippingOptions, quoteShipping } from '../shared/shipping.js';
 import { initIronPayCheckout } from './ironpay-checkout-source.js';
 // Address/payment contents were absent from SingleFile: reconstructed with original design tokens.
-// Test layout uses the existing IronPay product and its server-fixed R$119.90 price.
+// Existing IronPay product: server-owned base price plus selected shipping.
 const plans = {
   bronze: {name:'Bronze', amount:11990, image:'f27b4f275c81d505.png'},
   prata: {name:'Prata', amount:11990, image:'4533661a7b85490c.png'},
@@ -18,12 +19,6 @@ $('sum-total').textContent = money(plan.amount);
 function field(id, label, placeholder, autocomplete, max = '') {
   return `<div class="form-group" id="fg-${id}"><label for="${id}">${label}</label><input id="${id}" type="text" placeholder="${placeholder}" autocomplete="${autocomplete}" ${max ? `maxlength="${max}"` : ''}><div class="field-error sf-hidden">Preencha ${label.toLowerCase()} corretamente.</div></div>`;
 }
-const shippingOptions = [
- {id:'free',name:'Frete Grátis',description:'4 a 7 dias úteis',price:0,icon:'gift'},
- {id:'jadlog',name:'JadLog',description:'3 a 5 dias úteis',price:990,icon:'truck'},
- {id:'pickup',name:'Retirada no Shopping Iguatemi',description:'Ribeirão Preto · retire no mesmo dia',price:0,icon:'pin'},
- {id:'express',name:'Full 24hrs',description:'Entrega em 24 horas ⚡',price:1990,icon:'bolt'},
-];
 const shippingIcons = {
  gift:'<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8H8a3 3 0 1 1 3-3l1 3Zm0 0h4a3 3 0 1 0-3-3l-1 3Z"/>',
  truck:'<path d="M1 4h13v13H1zM14 9h5l4 5v3h-9M18 9v5h5"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/>',
@@ -37,13 +32,17 @@ $('body-entrega').innerHTML = field('cep','CEP','00000-000','postal-code',9)
  + `<div class="form-group"><label for="state">Estado</label><select id="state" autocomplete="address-level1"><option value="">Selecione...</option>${'AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(' ').map(uf=>`<option value="${uf}">${uf}</option>`).join('')}</select><div class="field-error sf-hidden">Selecione um estado.</div></div>`
  + `<fieldset class="shipping-options"><legend>Escolha o frete:</legend>${shippingOptions.map((option,index)=>`<label class="shipping-choice"><input type="radio" name="shipping" value="${option.id}" ${index===0?'checked':''}><span class="shipping-icon ${option.icon}" aria-hidden="true"><svg viewBox="0 0 24 24">${shippingIcons[option.icon]}</svg></span><span class="shipping-copy"><strong>${option.name}</strong><small class="${option.id==='express'?'express-copy':''}">${option.description}</small></span><span class="shipping-price ${option.price===0?'free-price':''}">${option.price===0?'Grátis':money(option.price)}</span><span class="shipping-radio" aria-hidden="true"></span></label>`).join('')}</fieldset>`
  + '<button type="button" class="btn-continuar" id="continuar-entrega">Continuar para Pagamento <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg></button>';
-// Shipping selection is visual in this fixed-price test; never change the API amount.
-for(const input of document.querySelectorAll('input[name="shipping"]')) input.addEventListener('change',()=>{
- const option=shippingOptions.find(item=>item.id===input.value);
- $('sum-frete-label').textContent=option.name;
- $('sum-frete').textContent=option.price?'Incluído no teste':'Grátis';
-});
-$('body-pagamento').innerHTML = '<div class="payment-option"><strong>Pix</strong><span>Pagamento à vista</span></div><p class="preview-note">Total deste teste: <strong>R$ 119,90</strong>.</p><button type="submit" class="btn-continuar" id="finish" disabled>GERAR PIX DE R$ 119,90</button>';
+$('body-pagamento').innerHTML = '<div class="payment-option"><strong>Pix</strong><span>Pagamento à vista</span></div><p class="preview-note">Total com frete: <strong id="payment-total">R$ 119,90</strong>.</p><button type="submit" class="btn-continuar" id="finish" disabled>GERAR PIX DE R$ 119,90</button>';
+function updateShipping() {
+ const pricing=quoteShipping(document.querySelector('input[name="shipping"]:checked').value);
+ $('sum-frete-label').textContent=pricing.shipping.name;
+ $('sum-frete').textContent=pricing.shipping.amount?money(pricing.shipping.amount):'Grátis';
+ $('sum-frete').style.color=pricing.shipping.amount?'var(--text)':'#22c55e';
+ $('sum-total').textContent=$('payment-total').textContent=money(pricing.total);
+ $('finish').textContent='GERAR PIX DE '+money(pricing.total);
+}
+for(const input of document.querySelectorAll('input[name="shipping"]'))input.addEventListener('change',updateShipping);
+updateShipping();
 for (const input of document.querySelectorAll('.form-group input, .form-group select')) {
   input.previousElementSibling?.setAttribute('for', input.id);
   input.addEventListener('input', () => {

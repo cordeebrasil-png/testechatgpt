@@ -1,6 +1,6 @@
 # Teste visual das caixas — integração Maré Azul preservada
 
-A página de vendas e o checkout usam o layout Deveu Perdeu. Os três planos são variantes visuais de teste: o checkout informa R$ 119,90 antes do pagamento, sem o upgrade adicional. O servidor continua usando o produto, oferta e preço anteriores da IronPay. No painel do provedor, a cobrança continua associada ao Kit Dobrável; esta troca não cadastra novos produtos.
+A página de vendas e o checkout usam o layout Deveu Perdeu. Os três planos são variantes visuais de teste: produto base R$ 119,90, mais o frete escolhido. Frete grátis/retirada: R$ 119,90; JadLog: R$ 129,80; Full 24hrs: R$ 139,80. Não há upgrade adicional. O servidor continua usando o produto e a oferta anteriores da IronPay, com o total calculado para cada pedido. No painel do provedor, a cobrança continua associada ao Kit Dobrável; esta troca não cadastra novos produtos.
 
 As rotinas de criação, sessão, conciliação, webhook e confirmação do Pix permanecem as mesmas. A página de pagamento conserva o contador sugerido de 30 minutos e a cópia do Pix. Pedidos anteriores continuam consultáveis.
 
@@ -46,7 +46,7 @@ No Cloudflare Pages, em **Settings → Variables and secrets**, configure:
 
 Em **Settings → Bindings**, adicione um banco D1 e use o nome `ORDERS_DB`. Execute o conteúdo de `migrations/0001_orders.sql` no console SQL do banco antes de testar o checkout. O webhook público usado pela integração é `/api/ironpay-webhook`; ele consulta a transação na IronPay e não confia no status recebido no corpo da notificação.
 
-O valor é fixado no servidor em 11990 centavos (R$ 119,90), e o Pix segue o prazo informado pela IronPay (24 horas por padrão). O contador visual sugere pagamento em 30 minutos, vinculado ao pedido e persistente ao recarregar. O fim desse contador não declara que uma cobrança ainda válida no provedor expirou.
+O valor base é fixado no servidor em 11990 centavos (R$ 119,90), acrescido do frete escolhido (0, 990 ou 1990 centavos), e o Pix segue o prazo informado pela IronPay (24 horas por padrão). O contador visual sugere pagamento em 30 minutos, vinculado ao pedido e persistente ao recarregar. O fim desse contador não declara que uma cobrança ainda válida no provedor expirou.
 
 ## Desenvolvimento e verificação
 
@@ -83,3 +83,16 @@ Pixel público: `DA5U5MRC77U8NT7JF3A0`. Fonte: `assets/tiktok-source.js`, inclu�
 - Implementação por navegador, sem Events API: fechar a página antes da confirmação ou bloquear o pixel pode impedir o evento de compra. Não configurar conversões de compra pelo clique no botão Pix no Event Builder.
 
 Validar no TikTok Events Manager em Testar eventos e no Pixel Helper, usando o domínio de produção. Os testes automatizados interceptam o SDK e as respostas de pagamento; não enviam conversões reais ao TikTok. A entrega ao painel deve ser confirmada separadamente. A oferta isolada de R$ 1 ainda depende da criação e do hash da oferta de teste na IronPay; o preço de produção permanece R$ 119,90.
+
+
+## Frete na cobrança Pix
+
+Referência: [documentação oficial da IronPay](https://docs.ironpayapp.com.br/), consultada em 21/10/2026. A criação de transação documenta `amount` e `cart[].price`, mas não campos `shipping` ou `upsell`. Nossa API recebe apenas o identificador local de frete; esse identificador não é repassado como campo inventado à IronPay.
+
+A cobrança contém um item com valor produto + frete e título que identifica JadLog, retirada ou Full 24hrs. `amount` e `cart[0].price` têm o mesmo total, quantidade 1, `operation_type: 1`. Portanto é um adicional na mesma venda, não uma operação separada/classificada como upsell no provedor.
+
+O catálogo fica em `shared/shipping.js`. O servidor ignora valores enviados pelo navegador e rejeita identificadores desconhecidos. O resumo, botão de geração, tela Pix e recibo pago usam o total correspondente. Durante a criação, a seleção de frete fica bloqueada.
+
+A fotografia de preços de cada pedido é persistida em `orders.receipt_json.pricing` antes de consultar a IronPay. Não é necessária migração D1. Consulta e webhook validam o valor retornado contra esse total salvo, nunca contra o catálogo atual ou dados enviados no webhook. Registros antigos sem preços salvos continuam associados a R$ 119,90. Alterar o frete depois de já emitir um Pix não substitui automaticamente a cobrança existente: a tentativa é conciliada para evitar duplicação.
+
+Os testes usam respostas interceptadas; não pagam nem criam transações reais. A aceitação do valor acrescido pela oferta específica de produção deve ser confirmada com uma emissão real pelo checkout. Se o provedor devolver outro valor, o código Pix não é liberado para aquele pedido.
