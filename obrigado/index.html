@@ -2,181 +2,832 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<style>html{touch-action:pan-x pan-y}</style>
-<title>Obrigado pela compra — Maré Azul</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>*{box-sizing:border-box}body{margin:0;color:#102955;background:radial-gradient(ellipse at top,#eaf8f2,transparent 42%),#f6f9fc;font:14px 'Inter',Arial,sans-serif;line-height:1.5}svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.wrap{max-width:480px;margin:auto;padding:22px 16px 28px}header{text-align:center;margin-bottom:24px}.logo{width:173px;height:auto}.success{text-align:center;padding:4px 8px 24px}.success-icon{width:76px;height:76px;border:9px solid #e0f6e9;border-radius:50%;background:#078850;box-shadow:0 0 0 1px #d4f0e1;margin:0 auto 16px;display:grid;place-items:center;color:white}.success-icon svg{width:34px;height:34px;stroke-width:2.6}.eyebrow{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#098252;margin:0 0 9px}h1{font-size:27px;line-height:1.18;letter-spacing:-.7px;margin:0 0 12px;font-weight:800}.lead{font-size:14px;color:#637590;max-width:335px;margin:auto;line-height:1.6}.card{background:white;border:1px solid #e2eaf2;border-radius:18px;padding:19px;margin-bottom:15px;box-shadow:0 5px 18px #163c6505}h2{font-size:16px;font-weight:700;letter-spacing:-.2px;line-height:1.35;margin:0 0 16px}.product{display:flex;gap:13px;align-items:center}.product img{width:76px;height:83px;object-fit:cover;border-radius:11px}.product h3{font-size:14px;line-height:1.4;margin:0 0 5px;font-weight:700}.product p{font-size:12px;color:#6d7d93;margin:0}.totals{border-top:1px solid #edf1f5;margin-top:17px;padding-top:13px;display:grid;gap:9px}.row{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:#60718c}.row strong{font-weight:600;color:#13355e}.row .free{color:#078950}.row.total{margin-top:2px;padding-top:10px;border-top:1px solid #edf1f5;font-size:15px;color:#102955}.row.total strong{font-size:20px;color:#087b49}.timeline{list-style:none;padding:0;margin:0;display:grid;gap:22px;position:relative}.timeline:before{content:'';position:absolute;left:17px;top:22px;bottom:22px;width:1px;background:#dfe8f2}.timeline li{position:relative;display:flex;gap:13px}.step-icon{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#f0f5fb;color:#6482a7;flex-shrink:0;border:4px solid white;box-sizing:content-box;margin-left:-4px}.step-icon svg{width:19px;height:19px}.timeline .done .step-icon{background:#e6f7ee;color:#078c50}.timeline h3{font-size:13px;font-weight:600;margin:2px 0 4px}.timeline p{font-size:12px;color:#6b7e99;margin:0;line-height:1.6}.email-note{display:flex;align-items:flex-start;gap:11px;background:#edf7ff;border-radius:12px;padding:13px;margin-top:20px}.email-note svg{width:21px;height:21px;color:#1d77ca;flex-shrink:0;margin-top:2px}.email-note p{font-size:12px;color:#506f94;margin:0;line-height:1.6}.help{text-align:center;padding:7px 12px 0}.help h2{margin-bottom:6px;font-size:15px}.help p{font-size:12px;color:#6d7e96;margin:0 0 10px}.help a{font-size:13px;color:#1766aa;font-weight:500;text-decoration:none}.back{display:block;width:100%;text-align:center;text-decoration:none;background:#fff;border:1px solid #dce6f0;border-radius:12px;color:#244972;padding:13px;margin-top:23px;font-size:13px;font-weight:600}footer{text-align:center;font-size:11px;color:#8391a5;margin-top:22px}.demo{font-size:10px;color:#738198;border:1px dashed #cedae8;border-radius:8px;padding:8px;text-align:center;margin-top:17px}a:focus-visible{outline:2px solid #0877ff;outline-offset:4px}@media(max-width:350px){.wrap{padding:19px 12px 24px}.card{padding:16px}h1{font-size:25px}}
-.order-details[hidden]{display:none}.order-details dl{margin:0;display:grid;gap:15px}.order-details dt{font-size:11px;color:#75859b;margin-bottom:4px}.order-details dd{margin:0;font-size:13px;line-height:1.6;color:#264368;overflow-wrap:anywhere;white-space:pre-line}.lead strong{color:#235b85;font-weight:600;overflow-wrap:anywhere}#customerGreeting{overflow-wrap:anywhere}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Pedido Confirmado — Deveu Perdeu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #121316;
+    --ink-2: #1c1e23;
+    --ink-3: #2a2d34;
+    --primary: #ff6b00;
+    --primary-dark: #e65c00;
+    --primary-soft: #fff3e8;
+    --green: #16a34a;
+    --green-soft: #dcfce7;
+    --bg: #f6f5f2;
+    --card: #ffffff;
+    --line: #e8e6e1;
+    --text: #16181d;
+    --muted: #6b6f78;
+    --r: 18px;
+    --shadow: 0 2px 4px rgba(16,18,22,.04), 0 10px 28px rgba(16,18,22,.07);
+  }
+  html { touch-action: pan-x pan-y; scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 40px;
+  }
+  img { max-width: 100%; display: block; }
+  svg { display: inline-block; vertical-align: middle; }
 
-body{background:#f7fbff}.wrap{position:relative;isolation:isolate;max-width:540px;padding-top:19px}.wrap:before{content:'';position:absolute;z-index:-1;left:0;right:0;top:48px;height:88px;background:linear-gradient(135deg,#e7f5ff90,#f6fcff,#dff2ff80);clip-path:polygon(0 15%,10% 8%,22% 22%,40% 51%,56% 45%,73% 60%,86% 34%,100% 6%,100% 54%,87% 75%,72% 92%,54% 73%,37% 78%,19% 61%,0 94%)}header{margin-bottom:23px}.logo{width:190px}.success{padding:0 7px 22px}.success-icon{position:relative;width:77px;height:77px;border:10px solid #dcfae8;background:linear-gradient(125deg,#12bb77,#008d4e);box-shadow:0 0 25px #51d78b20;margin-bottom:17px}.success-icon:before,.success-icon:after{content:'';position:absolute;top:19px;width:9px;height:2px;background:#45d989}.success-icon:before{left:-24px;transform:rotate(35deg)}.success-icon:after{right:-24px;transform:rotate(-35deg)}.eyebrow{color:#009b4d;font-size:11px;letter-spacing:1.3px;font-weight:700}h1{font-size:32px;font-weight:800;letter-spacing:-1px;margin-bottom:8px}.lead{font-size:13px;max-width:420px;line-height:1.6}.lead strong{color:#28466d;font-weight:700}.card{padding:19px 19px 17px;border-color:#e5eff8;border-radius:19px;box-shadow:0 5px 15px #246b9910;margin-bottom:12px}h2{font-size:19px;font-weight:800;letter-spacing:-.6px;margin-bottom:13px}.product{gap:15px}.product img{width:92px;height:85px;border-radius:12px}.product h3{font-size:15px;font-weight:700;margin-bottom:5px}.product p{font-size:12px;line-height:1.5}.totals{gap:10px;margin-top:14px}.summary-label{display:flex;align-items:center;gap:10px}.summary-label svg{width:20px;height:20px;flex-shrink:0;color:#3673b4}.row{align-items:center;font-size:12px}.row.total{font-size:13px}.row.total strong{font-size:23px;letter-spacing:-.5px}.order-progress{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}.order-progress li{position:relative;text-align:center;color:#7488a3;font-size:11px;line-height:1.5;display:flex;align-items:center;flex-direction:column;gap:8px}.order-progress li:not(:last-child):after{content:'';position:absolute;top:22px;left:calc(50% + 25px);width:calc(100% - 50px);border-top:1px dashed #c6dff6}.order-progress li.complete:after{border-top:2px solid #15b66d}.progress-icon{position:relative;z-index:1;width:44px;height:44px;border-radius:50%;background:#edf6ff;color:#397cc2;display:grid;place-items:center}.progress-icon svg{width:24px;height:24px}.complete .progress-icon{background:#e3f9eb;color:#09884a}.current .progress-icon{background:#d7f7e4;color:#07964c;box-shadow:0 0 0 4px #effbf4}.order-progress .complete,.order-progress .current{color:#068a48;font-weight:600}.preparing-note{margin:14px 0 0;padding-top:10px;border-top:1px solid #edf4f8;color:#248055;font-size:12px;text-align:center}.order-details dl{gap:0}.order-details dl>div{position:relative;padding:9px 0 9px 47px;border-bottom:1px solid #edf2f7;min-height:51px}.order-details dl>div:last-child{border-bottom:0;padding-bottom:0}.detail-icon{position:absolute;left:0;top:10px;display:grid;place-items:center;width:33px;height:33px;border-radius:50%;background:#eaf6ff;color:#2585d5}.detail-icon svg{width:19px;height:19px}.order-details dt{font-size:11px;margin-bottom:1px}.order-details dd{font-size:12px;line-height:1.5}.order-details h2{margin-bottom:3px}@media(max-width:350px){h1{font-size:29px}.card{padding:16px 14px}h2{font-size:18px}.product img{width:78px;height:81px}.order-progress li{font-size:10px}.progress-icon{width:39px;height:39px}.order-progress li:not(:last-child):after{top:19px;left:calc(50% + 22px);width:calc(100% - 44px)}}
-body:not([data-payment-state="paid"]) .success-icon,body:not([data-payment-state="paid"]) .eyebrow,body:not([data-payment-state="paid"]) .card{display:none}#receiptRetry{display:block;margin:12px auto;padding:10px;border:1px solid #dce6f0;background:white;border-radius:10px;color:#244972}[hidden]{display:none!important}
+  /* HEADER */
+  header.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(18, 19, 22, 0.96);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px 18px;
+  }
+  .header-inner {
+    max-width: 560px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-logo img {
+    height: 32px;
+    width: auto;
+  }
+  .header-secure {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #4ade80;
+  }
+  .header-secure svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* HERO BANNER */
+  .hero {
+    background: radial-gradient(120% 90% at 50% 0%, var(--ink-3) 0%, var(--ink) 70%);
+    color: #fff;
+    text-align: center;
+    padding: 28px 16px 42px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: var(--primary);
+    top: -90px;
+    left: -70px;
+    opacity: 0.18;
+    filter: blur(40px);
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #22c55e;
+    bottom: -60px;
+    right: -60px;
+    opacity: 0.15;
+    filter: blur(40px);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .check-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #22c55e, #15803d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    color: #fff;
+    box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.2), 0 12px 28px rgba(0, 0, 0, 0.35);
+    animation: popCheck 0.6s cubic-bezier(0.18, 1.3, 0.3, 1) both;
+  }
+  .check-circle svg {
+    width: 34px;
+    height: 34px;
+    stroke: #fff;
+    stroke-width: 3.2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: drawCheck 0.5s 0.4s ease forwards;
+  }
+  @keyframes popCheck {
+    from { transform: scale(0.4); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  @keyframes drawCheck {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .badge-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #4ade80;
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+    border-radius: 999px;
+    padding: 5px 14px;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-size: clamp(25px, 6.5vw, 34px);
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .hero h1 span.name-highlight {
+    color: #ff9d42;
+    text-shadow: 0 2px 10px rgba(255, 107, 0, 0.35);
+  }
+  .hero p.lead {
+    font-size: 14.5px;
+    color: #cbd0d8;
+    line-height: 1.5;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .order-ref-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #fff;
+    font-family: monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* MAIN WRAPPER */
+  .main {
+    max-width: 540px;
+    margin: -20px auto 0;
+    padding: 0 16px;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 20px 18px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .card-icon.orange {
+    background: var(--primary-soft);
+    color: var(--primary);
+  }
+  .card-icon.blue {
+    background: #e0f2fe;
+    color: #0284c7;
+  }
+  .card-icon.green {
+    background: var(--green-soft);
+    color: var(--green);
+  }
+  .card-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+  .card-header-text h2 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .card-header-text span {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  /* EMAIL BOX */
+  .email-box {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 10px 0 12px;
+  }
+  .email-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #e0f2fe;
+    color: #0284c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .email-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  .email-data {
+    overflow: hidden;
+  }
+  .email-data small {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #64748b;
+    letter-spacing: 0.05em;
+  }
+  .email-data strong {
+    font-size: 14px;
+    color: #0f172a;
+    font-weight: 800;
+    word-break: break-all;
+  }
+  .info-note {
+    font-size: 12.5px;
+    color: #475569;
+    line-height: 1.5;
+    background: #f1f5f9;
+    padding: 10px 12px;
+    border-radius: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .info-note svg {
+    width: 16px;
+    height: 16px;
+    color: #0284c7;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ADDRESS BOX */
+  .address-box {
+    background: #fdfaf6;
+    border: 1.5px solid #fed7aa;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 10px 0 12px;
+  }
+  .address-title {
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .address-text {
+    font-size: 14px;
+    color: #1f2937;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .address-sub {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .shipping-badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #fed7aa;
+    font-size: 12px;
+    font-weight: 700;
+    color: #9a3412;
+  }
+  .shipping-badge-row span.badge-free {
+    color: #15803d;
+    background: #dcfce7;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  /* ORDER SUMMARY */
+  .product-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #fbfbfc;
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 12px;
+    margin-top: 8px;
+  }
+  .product-summary-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid var(--line);
+    object-fit: contain;
+    padding: 4px;
+    flex-shrink: 0;
+  }
+  .product-summary-info h3 {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .product-tag-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .prod-tag {
+    font-size: 11px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .prod-tag.bonus {
+    background: #fff3e8;
+    color: var(--primary);
+    border: 1px solid #ffd8b2;
+  }
+  .prod-tag.upgrade {
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    list-style: none;
+    display: grid;
+    gap: 14px;
+    margin-top: 8px;
+    position: relative;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: #e2e8f0;
+  }
+  .timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+  }
+  .timeline-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 900;
+    flex-shrink: 0;
+    background: #fff;
+    border: 2px solid #cbd5e1;
+    color: #64748b;
+  }
+  .timeline-item.done .timeline-dot {
+    background: #16a34a;
+    border-color: #16a34a;
+    color: #fff;
+  }
+  .timeline-item.active .timeline-dot {
+    background: #ff6b00;
+    border-color: #ff6b00;
+    color: #fff;
+    box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.2);
+  }
+  .timeline-text strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .timeline-text span {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* BUTTONS & FOOTER */
+  .btn-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 800;
+    font-size: 15px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255, 107, 0, 0.3);
+    transition: background 0.15s, transform 0.1s;
+    margin-top: 6px;
+  }
+  .btn-action:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+  }
+  .btn-action:active {
+    transform: scale(0.98);
+  }
+  .btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: #fff;
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 13px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    margin-top: 10px;
+    transition: background 0.15s;
+  }
+  .btn-secondary:hover {
+    background: #f9fafb;
+  }
+
+  footer.footer {
+    text-align: center;
+    color: #8d929a;
+    font-size: 12px;
+    padding: 24px 16px 0;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  footer.footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+  }
 </style>
-<meta name="checkout-test-mode" content="boxes-11990"></head>
-<body data-payment-state="verifying">
-<main class="wrap">
-<header>
-<img class="logo" src="../assets/icone-mareazul.png" alt="Maré Azul">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <a href="/"><img src="/assets/f4e97641be0a8ceb.png" alt="Deveu Perdeu"></a>
+    </div>
+    <div class="header-secure">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      <span>Compra 100% Protegida</span>
+    </div>
+  </div>
 </header>
 
-<section class="success">
-<div class="success-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="m5 12 4 4L19 6"/>
-</svg>
+<div class="hero">
+  <div class="hero-content">
+    <div class="check-circle">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <div class="badge-status">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      Pedido Confirmado
+    </div>
+    <h1 id="title-greeting">Obrigado<span id="name-container">, <span class="name-highlight" id="client-name">Cliente</span></span>!</h1>
+    <p class="lead">Seu pagamento foi aprovado e a sua caixa surpresa já está sendo preparada com todo cuidado.</p>
+    <div>
+      <span class="order-ref-pill">NÚMERO DO PEDIDO: <strong id="order-ref">#DP-84291</strong></span>
+    </div>
+  </div>
 </div>
-<p class="eyebrow">Pagamento confirmado</p>
-<h1 id="customerGreeting">Consultando seu pedido</h1>
-<p class="lead" id="customerMessage" role="status">Aguarde a confirmação do pagamento.</p>
-<button id="receiptRetry" type="button" hidden>Consultar novamente</button>
-</section>
-<section class="card" aria-label="Resumo do pedido">
-<h2>Sua compra</h2>
-<div class="product">
-<img src="../assets/home-1.webp" alt="Kit Dobrável Duo 3 em 1 azul">
-<div>
-<h3>Kit Dobrável Duo 3 em 1</h3>
-<p>Quantidade: 1<span id="orderColor">
-</span>
-</p>
-<p>Cadeiras, cooler e guarda-sol</p>
-</div>
-</div>
-<div class="totals">
-<div class="row">
-<span class="summary-label">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="2" y="4" width="20" height="16" rx="2"/>
-<path d="M2 10h20m-15 5h5"/>
-</svg>Forma de pagamento</span>
-<strong>Pix</strong>
-</div>
-<div class="row">
-<span class="summary-label">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M2 4h13v14H2zM15 9h4l4 5v4h-8"/>
-<circle cx="6" cy="19" r="2"/>
-<circle cx="19" cy="19" r="2"/>
-</svg>Frete</span>
-<strong class="free" id="receiptShipping">Grátis</strong>
-</div>
-<div class="row total">
-<span class="summary-label">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M5 2h14v20l-3-2-4 2-4-2-3 2zM8 7h8m-8 4h8m-8 4h4"/>
-</svg>Total pago</span>
-<strong id="receiptTotal">R$ 119,90</strong>
-</div>
-</div>
-</section>
-<section class="card progress-card">
-<h2>Próximos passos</h2>
-<ol class="order-progress">
-<li class="complete">
-<span class="progress-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="m5 12 4 4L19 6"/>
-</svg>
-</span>
-<span>Pagamento<br>confirmado</span>
-</li>
-<li class="current" aria-current="step">
-<span class="progress-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10M7.5 4.5l9 5"/>
-</svg>
-</span>
-<span>Preparação<br>do pedido</span>
-</li>
-<li class="">
-<span class="progress-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M2 4h13v14H2zM15 9h4l4 5v4h-8"/>
-<circle cx="6" cy="19" r="2"/>
-<circle cx="19" cy="19" r="2"/>
-</svg>
-</span>
-<span>Em<br>transporte</span>
-</li>
-<li class="">
-<span class="progress-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="m2 11 10-9 10 9M5 9v13h5v-8h4v8h5V9"/>
-</svg>
-</span>
-<span>Entregue</span>
-</li>
-</ol>
-<p class="preparing-note">Seu pedido já está em preparação.</p>
-</section>
-<section class="card order-details" id="orderDetails" hidden>
-<h2>Informações do seu pedido</h2>
-<dl>
-<div>
-<span class="detail-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<circle cx="12" cy="7" r="4"/>
-<path d="M4 22v-3a8 8 0 0 1 16 0v3"/>
-</svg>
-</span>
-<dt>Quem vai receber</dt>
-<dd id="recipientName">
-</dd>
-</div>
-<div>
-<span class="detail-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="2" y="4" width="20" height="16" rx="2"/>
-<path d="m2 5 10 8 10-8"/>
-</svg>
-</span>
-<dt>E-mail para atualizações</dt>
-<dd id="recipientEmail">
-</dd>
-</div>
-<div>
-<span class="detail-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M19 9c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 14 0z"/>
-<circle cx="12" cy="9" r="2"/>
-</svg>
-</span>
-<dt>Endereço de entrega</dt>
-<dd id="recipientAddress">
-</dd>
-</div>
-</dl>
-</section>
-<section class="help">
-<h2>Conte com a gente</h2>
-<p>Se precisar de ajuda com seu pedido, fale com nosso suporte.</p>
-<a href="mailto:suporte@mareazul.com">suporte@mareazul.com</a>
-</section>
-<a class="back" href="../">Voltar à loja</a>
-<noscript>Ative o JavaScript para consultar a confirmação do pagamento.</noscript>
-<footer>Maré Azul · CNPJ: 42.008.813/0001-15</footer>
-</main>
-<script>
-function personalizeOrder(order){
- if(!order||typeof order.name!=='string'||typeof order.email!=='string')return;
- const name=order.name.trim().slice(0,160),email=order.email.trim().slice(0,254);
- if(!name||!email)return;
- document.getElementById('customerGreeting').textContent='Obrigado, '+name.split(/\s+/)[0]+'!';
- const message=document.getElementById('customerMessage');message.textContent='Seu pedido foi recebido. Vamos enviar as informações e atualizações para ';
- const emphasis=document.createElement('strong');emphasis.textContent=email;message.append(emphasis,document.createTextNode('.'));
- document.getElementById('recipientName').textContent=name;
- document.getElementById('recipientEmail').textContent=email;
- const clean=key=>typeof order[key]==='string'?order[key].trim().slice(0,160):'';
- const address=[[clean('street'),clean('number')].filter(Boolean).join(', '),clean('extra'),[clean('district'),[clean('city'),clean('state')].filter(Boolean).join(' — ')].filter(Boolean).join(' · '),clean('cep')?'CEP '+clean('cep'):''].filter(Boolean).join('\n');
- const addressElement=document.getElementById('recipientAddress');addressElement.textContent=address;addressElement.parentElement.hidden=!address;
- if(['Azul','Preto','Verde','Vermelho'].includes(order.color))document.getElementById('orderColor').textContent=' · Cor: '+order.color;
- document.getElementById('orderDetails').hidden=false;
-}
-</script>
-<!-- generated:thankyou:start -->
-<script>
-(()=>{var b="mareazul.ironpayOrder",l="mareazul.ironpayIntent",T="pix-live-v2";function u(t=b){try{let e=JSON.parse(sessionStorage.getItem(t)||"null");return/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(e?.id||"")&&/^[a-f0-9]{64}$/.test(e?.accessToken||"")?e:null}catch{return null}}function p(t){window.__mareAzulPixDiagnostics=Object.freeze({version:T,page:location.pathname,code:t.code||null,httpStatus:t.httpStatus||null,orderStatus:t.orderStatus||null,hasPix:!!t.hasPix,hasSession:!!u(),checkedAt:new Date().toISOString()})}async function I(t){if(!t.headers.get("Content-Type")?.includes("application/json"))throw new Error("API_RESPONSE_INVALID");try{return await t.json()}catch{throw new Error("API_RESPONSE_INVALID")}}function _(t,e){return t?.id===e&&["creating","uncertain","rejected","pending","paid","canceled","refunded"].includes(t.status)}var a="DA5U5MRC77U8NT7JF3A0",O="jbkikbdjti",D="Kit Dobr\xE1vel Duo 3 em 1",d=!1,x=!1;var m=new Map,E=new Set,f=(t,e)=>`mareazul.tiktok.${a}.${e==="Purchase"?"purchase":"paid"}.${t}`;function w(t,e){if(E.has(f(t,e)))return!0;try{return localStorage.getItem(f(t,e))==="sent"}catch{return!1}}function h(t=119.9){return{currency:"BRL",value:t,content_type:"product",contents:[{content_id:O,content_name:D,quantity:1,price:t}]}}function C(){if(x)for(let[t,{id:e,amount:o,event:n}]of m){if(!w(e,n)){window.ttq.track(n,h(o/100),{event_id:`mareazul_${n==="Purchase"?"purchase":"paid"}_${e}`}),E.add(t);try{localStorage.setItem(t,"sent")}catch{}}m.delete(t)}}function A(){if(!document.querySelector('meta[name="checkout-test-mode"]')&&!(d||location.hostname!=="mare-azul.pages.dev")&&["/","/index.html","/checkout/","/pagamento/","/obrigado/"].includes(location.pathname)){d=!0;try{window.TiktokAnalyticsObject="ttq";let t=window.ttq=window.ttq||[];t.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],t.setAndDefer=(o,n)=>{o[n]=function(){o.push([n,...arguments])}};for(let o of t.methods)t.setAndDefer(t,o);t.instance=o=>{let n=t._i[o]||[];for(let c of t.methods)t.setAndDefer(n,c);return n},t._i=t._i||{},t._i[a]=[],t._i[a]._u="https://analytics.tiktok.com/i18n/pixel/events.js",t._t=t._t||{},t._t[a]=Date.now(),t._o=t._o||{},t._o[a]={};let e=document.createElement("script");e.async=!0,e.src=`${t._i[a]._u}?sdkid=${a}&lib=ttq`,e.onload=()=>{x=!0;try{C()}catch{}},document.head.appendChild(e),t.page(),["/","/index.html"].includes(location.pathname)&&t.track("ViewContent",h()),location.pathname==="/checkout/"&&t.track("InitiateCheckout",h())}catch{d=!1}}}function P(t){t?.status==="paid"&&v(t,"PedidoPago")}function v(t,e){if(!(!d||!/^[a-f0-9-]{36}$/i.test(t.id||"")||!Number.isSafeInteger(t.amount)||t.amount<=0||w(t.id,e))){m.set(f(t.id,e),{id:t.id,amount:t.amount,event:e});try{C()}catch{}}}A();var r=u(),g=document.getElementById("customerGreeting"),y=document.getElementById("customerMessage"),k=document.getElementById("receiptRetry"),S=!1;async function N(){if(S)return;if(!r){g.textContent="Pedido n\xE3o encontrado nesta sess\xE3o",y.textContent="Abra o pagamento no navegador em que iniciou a compra.",p({code:"SESSION_MISSING"});return}S=!0,k.hidden=!0;let t=new AbortController,e=setTimeout(()=>t.abort(),2e4);try{let o=await fetch("/api/orders/"+encodeURIComponent(r.id),{headers:{Authorization:"Bearer "+r.accessToken},cache:"no-store",signal:t.signal}),n=await I(o);if(p({code:n.code,httpStatus:o.status,orderStatus:n.status}),!o.ok||!_(n,r.id))throw new Error("RECEIPT_UNAVAILABLE");if(n.status!=="paid"){location.replace("../pagamento/");return}P(n),document.body.dataset.paymentState="paid",g.textContent="Obrigado pela sua compra!",y.textContent="Seu pagamento foi confirmado.",n.receipt&&personalizeOrder(n.receipt);let c=s=>(s/100).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});Number.isSafeInteger(n.amount)&&n.amount>0&&(document.getElementById("receiptTotal").textContent=c(n.amount));let i=n.pricing?.shipping;if(i){let s=document.getElementById("receiptShipping");s.textContent=i.name+" \u2014 "+(i.amount?c(i.amount):"Gr\xE1tis"),s.classList.toggle("free",i.amount===0)}u(l)?.id===r.id&&sessionStorage.removeItem(l)}catch{g.textContent="N\xE3o foi poss\xEDvel consultar o pedido",y.textContent="Tente consultar novamente para verificar a confirma\xE7\xE3o do pagamento.",k.hidden=!1}finally{clearTimeout(e),S=!1}}k.addEventListener("click",N);N();})();
 
+<main class="main">
+
+  <!-- CARD 1: CÓDIGO DE RASTREIO POR EMAIL -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      </div>
+      <div class="card-header-text">
+        <h2>Código de Rastreamento por E-mail</h2>
+        <span>Atualizações automáticas da sua encomenda</span>
+      </div>
+    </div>
+
+    <p style="font-size:13.5px;color:#374151;margin-bottom:8px">
+      Assim que sua caixa for despachada, o <strong>código de rastreio oficial</strong> e o link para acompanhar em tempo real serão enviados diretamente para:
+    </p>
+
+    <div class="email-box">
+      <div class="email-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+      </div>
+      <div class="email-data">
+        <small>E-mail de Cadastro</small>
+        <strong id="client-email">seu-email@gmail.com</strong>
+      </div>
+    </div>
+
+    <div class="info-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+      <span><strong>Fique atento:</strong> Caso não encontre na caixa de entrada principal, verifique também as pastas de <em>Spam</em> ou <em>Promoções</em>.</span>
+    </div>
+  </div>
+
+  <!-- CARD 2: ENDEREÇO DE ENTREGA -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon orange">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      </div>
+      <div class="card-header-text">
+        <h2>Endereço de Entrega</h2>
+        <span>Onde sua encomenda será entregue</span>
+      </div>
+    </div>
+
+    <p style="font-size:13.5px;color:#374151">
+      Sua caixa está sendo embalada e será despachada com segurança para o seguinte destino:
+    </p>
+
+    <div class="address-box">
+      <div class="address-title">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        Destino Confirmado
+      </div>
+      <div class="address-text" id="delivery-address">
+        Rua das Flores, 123 — Apto 402
+      </div>
+      <div class="address-sub" id="delivery-sub">
+        Centro — São Paulo / SP · CEP 01001-000
+      </div>
+      <div class="shipping-badge-row">
+        <span>📦 Prazo estimado: <strong>3 a 7 dias úteis</strong></span>
+        <span class="badge-free">Frete com Seguro</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3: RESUMO DO PEDIDO -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+      </div>
+      <div class="card-header-text">
+        <h2>Itens Inclusos na Sua Caixa</h2>
+        <span>Produtos reservados para envio</span>
+      </div>
+    </div>
+
+    <div class="product-summary-card">
+      <img class="product-summary-img" id="box-image" src="/assets/4533661a7b85490c.png" alt="Caixa Surpresa">
+      <div class="product-summary-info">
+        <h3 id="box-title">Caixa Surpresa Prata (3 kg)</h3>
+        <div class="product-tag-wrap">
+          <span class="prod-tag bonus">🎁 Brinde Extra Liberado</span>
+          <span class="prod-tag upgrade" id="tag-upgrade">⚡ Upgrade Premium</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 4: PRÓXIMOS PASSOS -->
+  <div class="card">
+    <div class="card-header" style="margin-bottom:10px">
+      <div class="card-icon orange">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+      </div>
+      <div class="card-header-text">
+        <h2>O que acontece agora?</h2>
+        <span>Acompanhe o fluxo da sua entrega</span>
+      </div>
+    </div>
+
+    <ol class="timeline">
+      <li class="timeline-item done">
+        <div class="timeline-dot">✓</div>
+        <div class="timeline-text">
+          <strong>Pagamento Confirmado</strong>
+          <span>Seu pagamento foi aprovado instantaneamente pelo sistema.</span>
+        </div>
+      </li>
+      <li class="timeline-item active">
+        <div class="timeline-dot">2</div>
+        <div class="timeline-text">
+          <strong>Separação & Embalagem</strong>
+          <span>Sua caixa misteriosa e brindes estão sendo montados e embalados.</span>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <div class="timeline-dot">3</div>
+        <div class="timeline-text">
+          <strong>Envio do Código de Rastreio</strong>
+          <span>Mandaremos o código rastreável dos Correios / Transportadora para seu e-mail.</span>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <div class="timeline-dot">4</div>
+        <div class="timeline-text">
+          <strong>Entrega no seu Endereço</strong>
+          <span>Receba sua caixa com segurança no conforto da sua casa!</span>
+        </div>
+      </li>
+    </ol>
+
+    <div style="margin-top:20px">
+      <a class="btn-action" href="/">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        Voltar à Página Inicial
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>© 2026 Deveu Perdeu — Todos os direitos reservados.</p>
+  <p style="margin-top:4px">Dúvidas ou suporte? Entre em contato pelo e-mail: <a href="mailto:sac@deveuperdeuoficial.com">sac@deveuperdeuoficial.com</a></p>
+</footer>
+
+<script>
+(function() {
+  // 1. Recuperar parâmetros da URL ou do sessionStorage do checkout
+  var q = new URLSearchParams(location.search);
+  var stored = {};
+  try {
+    stored = JSON.parse(sessionStorage.getItem('deveu_customer') || '{}');
+  } catch(e) {}
+
+  function getParam(key, fallbackKey) {
+    return q.get(key) || q.get(fallbackKey) || stored[key] || stored[fallbackKey] || '';
+  }
+
+  // Nome do cliente
+  var rawName = getParam('nome', 'name');
+  if (rawName) {
+    // Formatar primeiro nome com inicial maiúscula
+    var firstName = rawName.trim().split(/\s+/)[0];
+    firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+    document.getElementById('client-name').textContent = firstName;
+  } else {
+    // Caso nenhum nome seja fornecido
+    document.getElementById('name-container').style.display = 'none';
+  }
+
+  // E-mail do cliente
+  var email = getParam('email', 'mail');
+  if (email) {
+    document.getElementById('client-email').textContent = email.trim();
+  } else {
+    document.getElementById('client-email').textContent = 'O e-mail informado no checkout';
+  }
+
+  // Endereço
+  var street = getParam('rua', 'street');
+  var num = getParam('numero', 'number');
+  var comp = getParam('complemento', 'extra');
+  var district = getParam('bairro', 'district');
+  var city = getParam('cidade', 'city');
+  var state = getParam('uf', 'state');
+  var cep = getParam('cep', 'zip_code');
+
+  var addrLine1 = '';
+  if (street) {
+    addrLine1 = street + (num ? ', ' + num : '') + (comp ? ' — ' + comp : '');
+  }
+  var addrLine2 = '';
+  if (district || city || state || cep) {
+    var parts = [];
+    if (district) parts.push(district);
+    if (city && state) parts.push(city + ' / ' + state.toUpperCase());
+    else if (city) parts.push(city);
+    if (cep) parts.push('CEP ' + cep);
+    addrLine2 = parts.join(' · ');
+  }
+
+  if (addrLine1) {
+    document.getElementById('delivery-address').textContent = addrLine1;
+  } else {
+    document.getElementById('delivery-address').textContent = 'Endereço fornecido no checkout';
+  }
+  if (addrLine2) {
+    document.getElementById('delivery-sub').textContent = addrLine2;
+  } else {
+    document.getElementById('delivery-sub').textContent = 'Entrega rápida com rastreamento ativo';
+  }
+
+  // Código de referência do pedido
+  var ref = q.get('ref') || stored.orderId || '';
+  if (!ref) {
+    // Gerar um código elegante aleatório caso não haja um
+    ref = 'DP-' + Math.floor(10000 + Math.random() * 90000);
+  } else if (!ref.startsWith('#') && !ref.startsWith('DP-')) {
+    ref = 'DP-' + ref.slice(0, 6).toUpperCase();
+  }
+  document.getElementById('order-ref').textContent = ref;
+
+  // Plano e Upgrade
+  var plan = getParam('plano', 'plan') || 'prata';
+  plan = plan.toLowerCase();
+  var planMap = {
+    bronze: { title: 'Caixa Surpresa Bronze (1 kg)', img: '/assets/f27b4f275c81d505.png' },
+    prata: { title: 'Caixa Surpresa Prata (3 kg)', img: '/assets/4533661a7b85490c.png' },
+    ouro: { title: 'Caixa Surpresa Ouro (5 kg)', img: '/assets/e7067139f8507f7c.png' }
+  };
+  var planData = planMap[plan] || planMap.prata;
+  document.getElementById('box-title').textContent = planData.title;
+  document.getElementById('box-image').src = planData.img;
+
+  var upgrade = getParam('upgrade', 'upg');
+  var tagUpgrade = document.getElementById('tag-upgrade');
+  if (upgrade === 'dobro') {
+    tagUpgrade.textContent = '⚡ Caixa em Dobro';
+    tagUpgrade.style.display = 'inline-flex';
+  } else if (upgrade === 'none') {
+    tagUpgrade.style.display = 'none';
+  } else {
+    tagUpgrade.textContent = '⚡ Upgrade Premium';
+    tagUpgrade.style.display = 'inline-flex';
+  }
+})();
 </script>
-<!-- generated:thankyou:end -->
-</body></html>
+</body>
+</html>
