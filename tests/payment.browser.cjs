@@ -294,12 +294,15 @@ test('slow status reads do not overlap polls or create duplicate QR canvases', a
 
 async function fillCheckout(page) {
   await page.goto(`${ORIGIN}/checkout/?cor=Azul`);
-  for (const [id, value] of Object.entries({ email: 'fixture@example.invalid', name: 'Pessoa Teste', phone: '11999999999', cpf: '52998224725', cep: '01001000' })) {
+  for (const [id, value] of Object.entries({ email: 'fixture@example.invalid', name: 'Pessoa Teste', phone: '11999999999', cpf: '52998224725' })) {
     await page.locator(`#${id}`).fill(value);
   }
+  await page.locator('#body-dados .btn-continuar').click();
+  await page.locator('#cep').fill('01001000');
   await page.waitForFunction(() => document.getElementById('street').value === 'Praça da Sé');
   await page.locator('#number').fill('123');
   await page.locator('#extra').fill('Teste local');
+  await page.locator('#continuar-entrega').click();
 }
 
 for (const trigger of ['click', 'Enter']) {
@@ -307,7 +310,7 @@ for (const trigger of ['click', 'Enter']) {
     const h = await harness(t, { session: false });
     await fillCheckout(h.page);
     if (trigger === 'click') await h.page.click('#finish');
-    else await h.page.locator('#extra').press('Enter');
+    else await h.page.locator('#finish').press('Enter');
     await h.page.waitForURL('**/pagamento/');
     assert.equal(h.state.posts.length, 1);
     assert.match(h.state.posts[0].id, /^[0-9a-f-]{36}$/i);
@@ -438,4 +441,18 @@ test('thank-you without session cannot claim payment confirmation', async t => {
   assert.doesNotMatch(await h.page.locator('body').innerText(), /Pagamento confirmado|Total pago|preparação/i);
   assert.equal(h.state.gets, 0);
   assert.deepEqual(h.state.pageErrors, []);
+});
+
+test('each box displays the real test total and has no paid upgrade', async t => {
+ const h=await harness(t,{session:false});
+ for(const [plan,name] of [['bronze','Bronze'],['prata','Prata'],['ouro','Ouro']]) {
+  await h.page.goto(`${ORIGIN}/checkout/?plano=${plan}`);
+  assert.match(await h.page.locator('#sum-name').innerText(),new RegExp(name));
+  assert.match(await h.page.locator('#sum-total').innerText(),/119,90/);
+  assert.match(await h.page.locator('#sum-price').innerText(),/119,90/);
+  assert.equal(await h.page.locator('#upgrade').count(),0);
+  assert.equal(await h.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ }
+ assert.equal(h.state.posts.length,0);
+ assert.deepEqual(h.state.pageErrors,[]);
 });

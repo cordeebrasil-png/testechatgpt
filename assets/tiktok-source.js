@@ -26,6 +26,7 @@ function flushPurchases() {
   }
 }
 export function initTikTok() {
+  if (document.querySelector('meta[name="checkout-test-mode"]')) return;
   // Preview deployments and the separate low-value test checkout must not pollute the ads pixel.
   if (active || location.hostname !== 'mare-azul.pages.dev') return;
   if (!['/', '/index.html', '/checkout/', '/pagamento/', '/obrigado/'].includes(location.pathname)) return;

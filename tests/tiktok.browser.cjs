@@ -8,7 +8,7 @@ const ID = '11111111-1111-4111-8111-111111111111';
 let browser;
 before(async () => { browser = await chromium.launch({ executablePath: '/usr/bin/chromium', args: ['--no-sandbox'] }); });
 after(async () => browser.close());
-async function setup(t, { status = 'paid', pixCode = 'FIXTURE_NOT_PAYABLE', blocked = false, hostname = 'mare-azul.pages.dev' } = {}) {
+async function setup(t, { status = 'paid', pixCode = 'FIXTURE_NOT_PAYABLE', blocked = false, hostname = 'mare-azul.pages.dev', testMode = false } = {}) {
   const context = await browser.newContext();
   t.after(() => context.close());
   const sdkRequests = [];
@@ -25,7 +25,7 @@ async function setup(t, { status = 'paid', pixCode = 'FIXTURE_NOT_PAYABLE', bloc
     if (url.hostname !== hostname) return route.abort();
     if (url.pathname.startsWith('/api/orders/')) return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ id: ID, status, amount: 11990, pixCode, expiresAt: Date.now() + 86400000 }) });
     const file = path.join(ROOT, url.pathname === '/' ? 'index.html' : url.pathname.replace(/^\//, '') + (url.pathname.endsWith('/') ? 'index.html' : ''));
-    return fs.existsSync(file) ? route.fulfill({ contentType: file.endsWith('.html') ? 'text/html' : 'application/octet-stream', body: fs.readFileSync(file) }) : route.fulfill({ status: 404, body: '' });
+    return fs.existsSync(file) ? route.fulfill({ contentType: file.endsWith('.html') ? 'text/html' : 'application/octet-stream', body: file.endsWith('.html') && !testMode ? fs.readFileSync(file, 'utf8').replace(/<meta name="checkout-test-mode"[^>]*>/g, '') : fs.readFileSync(file) }) : route.fulfill({ status: 404, body: '' });
   });
   const page = await context.newPage();
   return { page, sdkRequests, origin: 'https://' + hostname };
@@ -98,7 +98,7 @@ test('address typing sends AddPaymentInfo once without address data; focus and b
   const h = await setup(t);
   await h.page.goto(h.origin + '/checkout/');
   await h.page.waitForFunction(() => window.pixelEvents);
-  await h.page.evaluate(() => { document.getElementById('addressFields').hidden = false; });
+  await h.page.evaluate(() => { document.getElementById('body-entrega').classList.remove('sf-hidden'); });
   const events = () => h.page.evaluate(() => window.pixelEvents.filter(e => e[1] === 'AddPaymentInfo'));
   await h.page.locator('#street').focus();
   assert.equal((await events()).length, 0);
@@ -114,4 +114,15 @@ test('address typing sends AddPaymentInfo once without address data; focus and b
   assert.equal(tracked[0][2].currency, 'BRL');
   assert.doesNotMatch(JSON.stringify(tracked), /Rua|street|address|email|phone/);
   assert.equal(await h.page.evaluate(() => window.pixelEvents.some(e => e[1] === 'Purchase')), false);
+});
+
+// Exercise the actual deployed test-mode markup, without removing its analytics guard.
+test('temporary boxes test never loads the production pixel on any funnel page', async t => {
+ const h=await setup(t,{testMode:true});
+ for(const page of ['/','/checkout/','/pagamento/','/obrigado/']) {
+  await h.page.goto(h.origin+page);
+  if(page==='/pagamento/')await h.page.waitForURL(url=>url.pathname==='/obrigado/');
+  assert.equal(await h.page.evaluate(()=>typeof window.ttq),'undefined');
+ }
+ assert.equal(h.sdkRequests.length,0);
 });

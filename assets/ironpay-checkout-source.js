@@ -1,5 +1,6 @@
 import { SESSION_KEY, INTENT_KEY, readSession, readJson, validOrder, diagnostic } from './order-session.js';
 import { initTikTok, trackAddressStarted } from './tiktok-source.js';
+export function initIronPayCheckout(validateCheckout) {
 initTikTok();
 document.getElementById('street').addEventListener('input', event => {
   if (event.isTrusted && event.target.value.trim()) trackAddressStarted();
@@ -97,3 +98,5 @@ async function start(event) {
 }
 button.addEventListener('click', start);
 form.addEventListener('submit', start);
+
+}

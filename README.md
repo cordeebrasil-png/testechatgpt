@@ -1,3 +1,21 @@
+# Teste visual das caixas — integração Maré Azul preservada
+
+A página de vendas e o checkout usam o layout Deveu Perdeu. Os três planos são variantes visuais de teste: o checkout informa R$ 119,90 antes do pagamento, sem o upgrade adicional. O servidor continua usando o produto, oferta e preço anteriores da IronPay. No painel do provedor, a cobrança continua associada ao Kit Dobrável; esta troca não cadastra novos produtos.
+
+As rotinas de criação, sessão, conciliação, webhook e confirmação do Pix permanecem as mesmas. A página de pagamento conserva o contador sugerido de 30 minutos e a cópia do Pix. Pedidos anteriores continuam consultáveis.
+
+O marcador `checkout-test-mode` nas quatro páginas impede eventos no pixel durante este teste. A lógica e o ID do pixel foram preservados. Remover o marcador apenas após configurar produtos e valores definitivos de tracking.
+
+Fonte do novo checkout: `assets/boxes-checkout-source.js`; rotina compartilhada IronPay: `assets/ironpay-checkout-source.js`. Rodar `npm run build` após mudanças. Os arquivos gerados são versionados, pois o Pages está configurado sem build.
+
+O vídeo original não veio no snapshot; somente a capa. O contador da oferta permanece no valor capturado até configurar uma data real em `assets/boxes-home.js`. As etapas ocultas de endereço/pagamento foram reconstruídas. A integração não cria nem simula sorteios.
+
+Rotas antigas `/checkout.html` e `/checkout/checkout` levam ao checkout integrado, preservando o parâmetro do plano. Não alteramos os secrets ou o binding D1 do Cloudflare.
+
+---
+
+## Documentação da integração original
+
 # Maré Azul
 
 Página de vendas e checkout Pix com integração IronPay via Cloudflare Pages Functions.

@@ -1,727 +1,129 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<style>html{touch-action:pan-x pan-y}</style>
-<title>Finalizar pedido — Maré Azul</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--navy:#07194f;--blue:#0877ff;--muted:#7283a1;--green:#098b45}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#fff 20%,#f9fbfe 100%);font:14px 'Plus Jakarta Sans',Arial,sans-serif;color:var(--navy);line-height:1.4}button,input,select{font:inherit}button{cursor:pointer}.wrap{max-width:820px;margin:auto;padding:20px 24px 25px}header{display:flex;align-items:center;justify-content:space-between;padding:0 35px 17px;gap:25px}.logo{display:block;width:330px;max-width:100%;height:auto}.secure{display:flex;gap:13px;align-items:center;white-space:nowrap}.secure svg{width:28px;height:31px}.secure strong{display:block;font-weight:800}.secure span{display:block;color:var(--muted);margin-top:3px}.card{background:#fff;border:1px solid #e8edf3;border-radius:26px;padding:22px;margin-bottom:18px;box-shadow:0 8px 29px rgba(19,38,64,.065)}.product{display:flex;gap:25px;align-items:center;padding:16px 22px}.product>img{width:205px;height:205px;object-fit:cover;border-radius:15px;flex-shrink:0}.product-info{flex:1;min-width:0}.product h1{font-weight:800;line-height:1.3;letter-spacing:-.9px;margin:0 0 5px}.product p{color:var(--muted);margin:0}.product-bottom{display:flex;gap:20px;align-items:end;justify-content:space-between;margin-top:29px}.old{color:#8993a5;text-decoration:line-through;white-space:nowrap}.price{letter-spacing:-1.4px;font-weight:800;white-space:nowrap;margin-top:5px;line-height:1.2}.saving{display:flex;gap:13px;align-items:center;background:#eefaF2;padding:15px 18px;border-radius:14px;color:#078337;white-space:nowrap;}.saving svg{height:23px;width:23px}.saving strong{display:block;margin-top:1px}.title{display:flex;align-items:flex-start;gap:22px;margin:0 0 17px}.title>svg{width:39px;height:39px;flex-shrink:0;color:var(--blue)}svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.title h2{margin:0;font-weight:800;letter-spacing:-.7px;line-height:1.3}.title p{color:var(--muted);margin:3px 0 0}.fields{display:grid;gap:12px}.field{position:relative}.field>svg{position:absolute;width:26px;height:26px;left:22px;top:18px;color:#85909f;pointer-events:none}.field input,.field select{height:61px;width:100%;border:1.5px solid #dee3ed;border-radius:18px;padding:14px 18px 14px 69px;outline:none;background:white;color:var(--navy);transition:border-color .15s}.field input::placeholder{color:#8190a6;opacity:1}.field input:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #0877ff0a}.shipping{margin-top:19px;background:linear-gradient(115deg,#edfcf3,#f2fcf5);border:1px solid #cef1db;padding:16px 22px;border-radius:14px;color:#087b36;display:flex;align-items:center;gap:20px}.shipping svg{width:39px;height:39px;flex-shrink:0}.shipping strong{font-weight:800;color:#075b21}.shipping p{margin:2px 0 0}.checks{display:flex;margin-top:21px}.check{flex:1;display:flex;gap:16px;align-items:center;padding:0 17px;border-right:1px solid #dce4ed;color:#23477c}.check:first-child{padding-left:17px}.check:last-child{border:0}.checkmark{display:grid;place-items:center;background:linear-gradient(135deg,#00ae65,#007c3a);border-radius:50%;color:white;width:27px;height:27px;flex-shrink:0}.payment .title>svg{color:#115699}.pix-option{display:flex;align-items:center;gap:23px;border:2px solid #0877ff;background:linear-gradient(120deg,#f5fbff,#f9fcff);padding:13px 20px;border-radius:13px}.pix-logo{width:47px;height:47px;color:#00b6a2;stroke:none;flex-shrink:0}.pix-option strong{font-weight:800}.pix-option p{margin:0;color:#36588c}.radio{margin-left:auto;width:28px;height:28px;border:2px solid #0877ff;border-radius:50%;padding:4px;background:#0877ff;background-clip:content-box;flex-shrink:0}.finish{width:100%;border:0;border-radius:26px;min-height:75px;background:linear-gradient(110deg,#1ab78a,#089143);color:white;font-weight:800;box-shadow:0 12px 24px #086d3c20;display:flex;align-items:center;justify-content:center;gap:24px;padding:15px;margin-top:-3px}.finish span{font-weight:400}.finish:hover{filter:brightness(.96)}.footer-trust{display:flex;padding:22px 45px 0;gap:15px}.footer-trust>div{display:flex;gap:15px;align-items:center;flex:1;border-right:1px solid #d3ddeb}.footer-trust>div:last-child{border:0}.footer-trust svg{width:31px;height:31px;flex-shrink:0}.demo-note{text-align:center;color:#8290a2;margin-top:18px}.waves{position:fixed;bottom:0;left:0;width:100%;height:55px;pointer-events:none;z-index:-1;background:#e7f5ff;clip-path:polygon(0 35%,8% 26%,18% 50%,29% 73%,40% 72%,53% 40%,66% 29%,79% 50%,90% 25%,100% 11%,100% 100%,0 100%)}.address-fields[hidden],.modal[hidden]{display:none}.address-fields{display:grid;gap:12px;margin-top:12px}.address-fields input,.address-fields select{padding-left:18px;}.pair{display:grid;grid-template-columns:1fr 130px;gap:12px}.modal{position:fixed;inset:0;background:#07194f80;display:grid;place-items:center;padding:20px;z-index:99}.modal-box{width:100%;max-width:390px;background:white;padding:26px;border-radius:22px;text-align:center}.modal-box h2{}.modal-box p{color:var(--muted)}.modal-box button{background:var(--green);border:0;border-radius:9px;color:white;padding:12px 18px;font-weight:600}.qr-placeholder{border:2px dashed #d5e1ed;display:grid;place-items:center;width:170px;height:170px;margin:18px auto;border-radius:13px;color:#8395ab;background:#f7faff;}.manual-address{background:none;border:0;color:#47739f;padding:8px 0 0;text-decoration:underline}.finish:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
-@media(max-width:600px){.wrap{padding:16px 13px 20px}header{padding:0 8px 17px;gap:15px}.logo{width:200px}.secure{gap:7px}.secure svg{width:18px;height:23px}.secure span{}.card{padding:18px 16px;border-radius:20px;margin-bottom:14px}.product{gap:12px;padding:13px}.product>img{width:105px;height:139px;border-radius:11px}.product h1{letter-spacing:-.5px}.product p{}.product-bottom{gap:9px;margin-top:15px;flex-wrap:wrap}.old{}.price{letter-spacing:-.8px}.saving{padding:7px 9px;gap:7px;border-radius:8px}.saving strong{}.saving svg{width:16px;height:16px}.title{gap:12px;margin-bottom:16px}.title>svg{width:29px;height:29px}.title h2{letter-spacing:-.5px}.title p{}.field input,.field select{height:54px;border-radius:14px;padding-left:55px}.field>svg{left:17px;top:16px;width:22px;height:22px}.shipping{padding:13px 12px;gap:12px;border-radius:11px;margin-top:17px}.shipping svg{width:30px;height:30px}.shipping strong{}.shipping p{}.checks{margin-top:17px}.check{gap:7px;padding:0 8px;line-height:1.45}.check:first-child{padding-left:0}.checkmark{width:21px;height:21px;}.pix-option{padding:12px 13px;gap:13px}.pix-logo{width:36px;height:36px}.pix-option strong{}.pix-option p{}.radio{width:25px;height:25px}.finish{min-height:65px;border-radius:20px;gap:14px}.finish span{}.footer-trust{padding:20px 8px 0;gap:8px}.footer-trust>div{gap:7px;}.footer-trust svg{width:23px;height:23px}.address-fields input,.address-fields select{padding-left:15px}}
-@media(max-width:360px){.logo{width:170px}.secure{}.product>img{width:91px}.product h1{}.title h2{}.finish{}}
-
-/* Tipografia equilibrada e CPF na etapa de pagamento. */
-.product h1{letter-spacing:-.6px}.product p{}.price{}.old{}
-.saving{}.saving strong{}
-.title h2{letter-spacing:-.4px}.title p{}
-.field input,.field select{height:56px}.field>svg{top:16px}
-.shipping strong{}.shipping p{}.check{}
-.pix-option strong{}.pix-option p{}.payment-cpf{margin-bottom:15px}
-.finish{min-height:69px}.finish span{}
-@media(max-width:600px){.product h1{}.product p{}.price{}.old{}.saving{}.saving strong{}.title h2{}.title p{}.field input,.field select{height:51px}.field>svg{top:14px}.shipping strong{}.shipping p{}.check{}.pix-option strong{}.pix-option p{}.finish{min-height:60px}.finish span{}.payment-cpf{margin-bottom:13px}}
-
-.cep-status{color:#487395;margin:8px 0 0;line-height:1.5}.cep-status:empty{display:none}.cep-status.error{color:#a34536}.manual-address[hidden]{display:none}#retryCep{margin-right:15px}
-/* Economia com leitura mais clara em todos os tamanhos. */
-.saving{padding:12px 14px;gap:10px}.saving strong{}.saving svg{width:22px;height:22px;flex-shrink:0}
-@media(max-width:600px){.product-bottom{align-items:flex-start;gap:12px}.saving{padding:10px 12px;gap:9px;white-space:normal}.saving strong{white-space:nowrap}.saving svg{width:20px;height:20px}}
-
-.field{--field-green:#17844b}.field.is-complete::after{content:'✓';position:absolute;right:16px;top:17px;color:var(--field-green);font-weight:700;pointer-events:none}.field.is-complete input,.field.is-complete select{padding-right:44px}.field.is-complete select{background-position:right 34px center}.field input:focus,.field select:focus{border-color:#0877ff;box-shadow:0 0 0 3px #0877ff18}.field.is-invalid input,.field.is-invalid select{border-color:#c54c40}.field-error{line-height:1.5;color:#ae382e;margin:6px 3px 0}.field-error:empty{display:none}#checkoutForm>.card{transition:border-color .2s,box-shadow .2s;scroll-margin-top:20px}#checkoutForm>.card.next-section{border-color:#b6d7ff;box-shadow:0 8px 29px #13264010,0 0 0 2px #0877ff08}.finish{box-shadow:0 9px 22px #08723e35;border:1px solid #087f42}.finish:active{transform:translateY(1px)}@media(prefers-reduced-motion:reduce){#checkoutForm>.card{transition:none}}
-
-.freight-card{margin-top:18px;border:1px solid #c6eed9;border-radius:14px;background:linear-gradient(120deg,#fff,#fbfefc);padding:12px 10px;box-shadow:0 4px 12px #11814304}.freight-heading{display:flex;align-items:center;gap:14px}.freight-truck{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:#d8f7e5;color:#075d2e;flex-shrink:0}.freight-truck svg{width:27px;height:27px;stroke-width:2}.freight-heading h3{margin:0;color:#10472d;line-height:1.4;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:12px}.freight-confirm{display:grid;place-items:center;width:20px;height:20px;background:#078341;color:white;border-radius:50%;font-weight:700}.freight-heading p{margin:2px 0 0;color:#70819f;line-height:1.5}.freight-benefits{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid #e8edf3;margin-top:11px;padding-top:11px}.freight-benefits>div{display:flex;align-items:center;justify-content:center;gap:9px;padding:0 10px;border-right:1px solid #e4eaf1;line-height:1.3;color:#29446a}.freight-benefits>div:first-child{justify-content:flex-start;padding-left:0}.freight-benefits>div:last-child{border-right:0;padding-right:0}.freight-benefits svg{width:25px;height:25px;color:#076132;flex-shrink:0;stroke-width:2.2}@media(max-width:600px){.freight-heading{gap:12px}.freight-heading h3{gap:10px}.freight-heading p{}.freight-benefits>div{gap:7px;padding:0 8px}.freight-benefits svg{width:23px;height:23px}}@media(max-width:360px){.freight-heading h3{}.freight-heading p{}.freight-benefits>div{gap:5px;padding:0 5px}.freight-benefits svg{width:21px;height:21px}}
-.freight-benefits .correios-symbol{width:29px;height:27px;stroke:none}@media(max-width:600px){.freight-benefits .correios-symbol{width:25px;height:24px}}
-
-.checkout-footer{margin-top:28px;border-top:1px solid #e1e8f0;padding-top:24px}.assurance-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.assurance-card{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid #e3eaf2;border-radius:16px;padding:18px 15px;box-shadow:0 5px 16px #17395907}.assurance-icon{display:grid;place-items:center;width:40px;height:40px;flex-shrink:0;background:#eef3f8;border-radius:50%;color:#0d2e61}.assurance-icon svg{width:23px;height:23px;stroke-width:2}.assurance-card h3{font-weight:700;line-height:1.4;margin:1px 0 5px;color:#10254d}.assurance-card p{line-height:1.6;color:#52637d;margin:0}.footer-contact{text-align:center;line-height:1.65;color:#62728b;padding:22px 12px 18px}.footer-contact a{color:#254b78;text-decoration:none}.footer-contact a:hover{text-decoration:underline}.footer-contact p{margin:12px 0 0}.waves{display:none}@media(max-width:600px){.checkout-footer{margin-top:24px;padding-top:20px}.assurance-grid{grid-template-columns:1fr;gap:12px}.assurance-card{padding:17px 16px;gap:13px}.assurance-card h3{}.assurance-card p{}.assurance-icon{width:42px;height:42px}}
-.footer-contact{padding-top:24px;padding-bottom:12px}.demo-note{margin-bottom:0}
-
-.pix-guidance{margin:0 0 18px}.pix-price-note{display:flex;align-items:flex-start;gap:13px;padding:18px 17px;background:linear-gradient(115deg,#f0fcf5,#f2fcf7);border:1px solid #e6f6ec;border-radius:19px;color:#00674e}.pix-price-note>span{display:block;width:37px;flex-shrink:0;color:#08a268}.pix-price-note svg{width:37px;height:37px}.pix-price-note h3{line-height:1.35;font-weight:700;margin:0 0 5px;letter-spacing:-.3px}.pix-price-note p{line-height:1.6;color:#526e8d;margin:0}.pix-process{margin-top:0;border:1px solid #edf1f6;border-radius:18px;background:linear-gradient(110deg,#fff,#fbfdff);padding:22px 20px;display:grid;gap:27px}.pix-process-row{display:flex;align-items:flex-start;gap:18px}.pix-process-row>svg{width:24px;height:24px;flex-shrink:0;color:#071b42;stroke-width:1.9}.pix-process-row h3{line-height:1.5;font-weight:700;color:#0b2043;margin:0 0 3px}.pix-process-row p{line-height:1.6;color:#71819f;margin:0;max-width:420px}@media(min-width:601px){.pix-copy-break{display:none}.pix-price-note h3 br{display:none}.pix-process{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.pix-process-row{gap:10px}.pix-price-note{align-items:center}.pix-price-note h3{}}@media(max-width:360px){.pix-process{padding:20px 17px}.pix-process-row{gap:15px}.pix-price-note h3{}}
-
-.payment .pix-guidance{margin:14px 0 0;border-top:1px solid #e5edf5;padding-top:12px}.payment .pix-price-note{padding:10px 12px;gap:9px;border-radius:10px;align-items:center}.payment .pix-price-note>span,.payment .pix-price-note svg{width:25px;height:25px}.payment .pix-price-note h3{margin:0 0 2px;letter-spacing:0}.payment .pix-price-note h3 br,.payment .pix-copy-break{display:none}.payment .pix-price-note h3 br::after{content:' '}.payment .pix-price-note p{line-height:1.5}.payment .pix-process{background:transparent;border:0;padding:12px 2px 0;border-radius:0;gap:11px;grid-template-columns:1fr}.payment .pix-process-row{gap:10px}.payment .pix-process-row>svg{width:18px;height:18px;margin-top:2px}.payment .pix-process-row h3{margin:0 0 1px;line-height:1.45}.payment .pix-process-row p{line-height:1.45;max-width:none}@media(min-width:601px){.payment .pix-process{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}}
-
-.payment .pix-price-note svg{fill:none;stroke-width:1.9}
-.payment .pix-process{margin-top:10px}
-
-.payment .pix-price-note{padding:12px 14px;gap:11px;align-items:center}.payment .pix-price-note h3{margin-bottom:7px;line-height:1.4}.payment .pix-price-note p{line-height:1.55}.payment .pix-price-note h3 span,.payment .pix-price-note p span{display:block;white-space:nowrap}@media(max-width:340px){.payment .pix-price-note{padding:11px 10px;gap:8px}.payment .pix-price-note h3{}.payment .pix-price-note p{}.payment .pix-price-note>span,.payment .pix-price-note svg{width:22px;height:22px}}
-
-.payment .pix-price-note h3{}.payment .pix-price-note p{}.payment .pix-price-note>span,.payment .pix-price-note svg{width:27px;height:27px}@media(max-width:380px){.payment .pix-price-note{padding:12px 10px;gap:9px}.payment .pix-price-note h3{}.payment .pix-price-note p{}.payment .pix-price-note>span,.payment .pix-price-note svg{width:23px;height:23px}}@media(max-width:330px){.payment .pix-price-note h3{}.payment .pix-price-note p{}.payment .pix-price-note{padding:11px 8px;gap:7px}}
-
-/* Shared checkout typography: all sizes are defined here. */
-:root{--type-title:18px;--type-body:13px;--type-label:14px;--type-input:16px;--type-price:30px;--type-fine:11px}
-body{font-size:var(--type-body);line-height:1.55;font-weight:400}
-.product h1,.title h2,.modal-box h2{font-size:var(--type-title);line-height:1.35;letter-spacing:-.3px;font-weight:700}
-.title p,.product p,.secure span,.saving,.pix-option p,.shipping p,.check,.cep-status,.field-error,.manual-address,.payment .pix-price-note p,.payment .pix-process-row p,.assurance-card p,.footer-payment,.footer-contact,.modal-box p{font-size:var(--type-body);line-height:1.55;font-weight:400}
-.secure,.shipping strong,.pix-option strong,.payment .pix-price-note h3,.payment .pix-process-row h3,.assurance-card h3,.footer-pix{font-size:var(--type-label);line-height:1.4;letter-spacing:0;font-weight:700}
-.field input,.field select,.address-fields input,.address-fields select{font-size:var(--type-input);line-height:1.4;font-weight:400}
-.price,.modal-box>strong{font-size:var(--type-price);line-height:1.2;font-weight:800;letter-spacing:-.6px}
-.old{font-size:var(--type-label);line-height:1.4;font-weight:400}
-.saving strong{font-size:var(--type-title);line-height:1.35;font-weight:700}
-.finish{font-size:var(--type-input);line-height:1.4;font-weight:700;letter-spacing:0}.finish span{font-size:24px}
-.demo-note,.qr-placeholder{font-size:var(--type-fine);line-height:1.5}
-.checkmark,.freight-confirm{font-size:14px}
-.freight-heading h3{font-size:var(--type-label);line-height:1.4;font-weight:700;letter-spacing:0}.freight-heading p,.freight-benefits>div{font-size:var(--type-body);line-height:1.45}
-.payment .pix-process{grid-template-columns:1fr;gap:15px}.payment .pix-process-row{gap:11px}.payment .pix-process-row h3{margin-bottom:4px}.payment .pix-price-note h3{margin-bottom:7px}
-.secure{white-space:normal}.freight-benefits>div{padding:0 7px;gap:6px}.freight-benefits svg{width:21px;height:21px}.payment .pix-price-note{padding:12px 10px;gap:9px}.payment .pix-price-note>span,.payment .pix-price-note svg{width:24px;height:24px}
-@media(min-width:601px){:root{--type-title:21px;--type-body:14px;--type-label:15px;--type-price:34px;--type-fine:12px}.secure{white-space:nowrap}.payment .pix-price-note{padding:14px;gap:12px}.freight-benefits>div{padding:0 10px;gap:9px}}
-@media(max-width:380px){:root{--type-body:12px;--type-label:13px;--type-title:17px;--type-price:28px}.payment .pix-price-note{padding:12px 8px;gap:7px}}
-/* Restore the original header and product summary. */
-header{display:flex;align-items:center;justify-content:space-between;padding:0 35px 17px;gap:25px}
-.logo{display:block;width:330px;max-width:100%;height:auto}
-.secure{display:flex;gap:13px;align-items:center;font-size:16px;white-space:nowrap}
-.secure svg{width:28px;height:31px}
-.secure strong{display:block;font-weight:800}
-.secure span{display:block;font-size:14px;color:var(--muted);margin-top:3px}
-.product{display:flex;gap:25px;align-items:center;padding:16px 22px}
-.product>img{width:205px;height:205px;object-fit:cover;border-radius:15px;flex-shrink:0}
-.product-info{flex:1;min-width:0}
-.product h1{font-size:27px;font-weight:800;line-height:1.3;letter-spacing:-.9px;margin:0 0 5px}
-.product p{font-size:18px;color:var(--muted);margin:0}
-.product-bottom{display:flex;gap:20px;align-items:end;justify-content:space-between;margin-top:29px}
-.old{font-size:21px;color:#8993a5;text-decoration:line-through;white-space:nowrap}
-.price{font-size:39px;letter-spacing:-1.4px;font-weight:800;white-space:nowrap;margin-top:5px;line-height:1.2}
-.saving{display:flex;gap:13px;align-items:center;background:#eefaF2;padding:15px 18px;border-radius:14px;color:#078337;white-space:nowrap;font-size:16px}
-.saving svg{height:23px;width:23px}
-.saving strong{display:block;font-size:21px;margin-top:1px}
-@media(max-width:600px){header{padding:0 8px 17px;gap:15px}
-.logo{width:200px}
-.secure{font-size:10px;gap:7px}
-.secure svg{width:18px;height:23px}
-.secure span{font-size:9px}
-.product{gap:12px;padding:13px}
-.product>img{width:105px;height:139px;border-radius:11px}
-.product h1{font-size:17px;letter-spacing:-.5px}
-.product p{font-size:12px}
-.product-bottom{gap:9px;margin-top:15px;flex-wrap:wrap}
-.old{font-size:13px}
-.price{font-size:27px;letter-spacing:-.8px}
-.saving{font-size:10px;padding:7px 9px;gap:7px;border-radius:8px}
-.saving strong{font-size:13px}
-.saving svg{width:16px;height:16px}}
-@media(max-width:360px){.logo{width:170px}
-.secure{font-size:9px}
-.product>img{width:91px}
-.product h1{font-size:16px}}
-.product h1{font-size:23px;letter-spacing:-.6px}
-.product p{font-size:16px}
-.price{font-size:34px}
-.old{font-size:18px}
-.saving{font-size:14px}
-.saving strong{font-size:18px}
-@media(max-width:600px){.product h1{font-size:16px}
-.product p{font-size:11px}
-.price{font-size:25px}
-.old{font-size:12px}
-.saving{font-size:10px}
-.saving strong{font-size:12px}}
-.saving{font-size:14px;padding:12px 14px;gap:10px}
-.saving strong{font-size:21px}
-.saving svg{width:22px;height:22px;flex-shrink:0}
-@media(max-width:600px){.product-bottom{align-items:flex-start;gap:12px}
-.saving{font-size:12px;padding:10px 12px;gap:9px;white-space:normal}
-.saving strong{font-size:18px;white-space:nowrap}
-.saving svg{width:20px;height:20px}}
-.secure{line-height:1.4;font-weight:400;white-space:nowrap}.secure span{line-height:1.4}.product h1{font-weight:800;line-height:1.3}.saving{font-weight:400;line-height:1.4}.saving strong{line-height:1.4}.old{font-weight:400;line-height:1.4}
-
-/* Compact summary, subordinate to the checkout form. */
-.card.product{padding:12px 15px;gap:15px;border-radius:18px;margin-bottom:16px}.product>img{width:120px;height:120px;border-radius:10px}.product h1{font-size:19px;line-height:1.3;margin-bottom:0}.product-bottom{margin-top:12px;gap:12px;align-items:center}.product .old{font-size:13px}.product .price{font-size:28px;margin-top:3px}.product .saving{padding:9px 11px;gap:8px;font-size:12px;border-radius:9px}.product .saving strong{font-size:17px}.product .saving svg{width:19px;height:19px}
-@media(max-width:600px){.card.product{padding:11px 12px;gap:11px;margin-bottom:14px}.product>img{width:82px;height:108px}.product h1{font-size:15px;letter-spacing:-.3px}.product-bottom{margin-top:8px;gap:7px;align-items:flex-start;flex-wrap:wrap}.product .old{font-size:11px}.product .price{font-size:23px;letter-spacing:-.5px}.product .saving{padding:6px 9px;gap:6px;font-size:11px}.product .saving strong{font-size:15px}.product .saving svg{width:17px;height:17px}}
-
-.freight-benefits{grid-template-columns:1.15fr 1fr 1fr}.freight-benefits>div{gap:7px;padding:0 8px;min-width:0}.freight-benefits>div>span>span{display:block;white-space:nowrap}.freight-benefits>div>svg{width:21px;height:23px}.freight-benefits .correios-symbol{width:24px;height:23px}@media(max-width:380px){.freight-benefits>div{gap:5px;padding:0 6px;font-size:11px}.freight-benefits>div>svg{width:18px;height:21px}.freight-benefits .correios-symbol{width:21px;height:21px}}
-
-/* Balanced freight benefits with a consistent icon/text hierarchy. */
-.freight-benefits{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:14px;padding-top:14px}.freight-benefits>div,.freight-benefits>div:first-child,.freight-benefits>div:last-child{flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;padding:0 5px;text-align:center;font-size:12px;line-height:1.45;color:#435a77}.freight-benefits>div>svg,.freight-benefits .correios-symbol{width:24px;height:24px}.freight-benefits>div>span>span{display:block;white-space:normal}.freight-benefits>div>span{width:100%}@media(max-width:360px){.freight-benefits>div,.freight-benefits>div:first-child,.freight-benefits>div:last-child{font-size:11px;gap:7px}}
-
-/* Highlight free shipping while preserving the balanced benefits row. */
-.freight-card{border-color:#bde8cf;background:#fff;padding:0;overflow:hidden;box-shadow:0 4px 14px #10834b08}.freight-heading{padding:16px 13px;background:linear-gradient(115deg,#eafaf0,#f4fcf7);gap:12px}.freight-truck{width:46px;height:46px;background:#cff3df;color:#087437}.freight-truck svg{width:27px;height:27px}.freight-heading h3{font-size:18px;font-weight:800;line-height:1.3;color:#075c31;gap:9px;letter-spacing:-.25px}.freight-confirm{width:20px;height:20px;flex-shrink:0;background:#078b46}.freight-heading p{font-size:12px;color:#48755f;line-height:1.5;margin-top:5px}.freight-benefits{margin:0;border-top:1px solid #dbeee2;padding:14px 8px;background:#fff}@media(max-width:360px){.freight-heading{padding:14px 11px;gap:10px}.freight-heading h3{font-size:17px}.freight-truck{width:40px;height:40px}.freight-heading p{font-size:11px}}
-
-.freight-heading{padding:10px 12px;gap:10px}.freight-truck{width:34px;height:34px}.freight-truck svg{width:21px;height:21px}.freight-heading h3{font-size:16px;gap:8px}.freight-confirm{width:17px;height:17px;font-size:11px}.freight-heading p{font-size:11px;margin-top:3px}.freight-benefits{padding:10px 7px}.freight-benefits>div,.freight-benefits>div:first-child,.freight-benefits>div:last-child{gap:5px;font-size:11px;line-height:1.35}.freight-benefits>div>svg,.freight-benefits .correios-symbol{width:20px;height:20px}
-
-.assurance-slider{width:100%;min-width:0}.assurance-slider .assurance-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:2px 0 8px;overscroll-behavior-x:contain}.assurance-slider .assurance-grid::-webkit-scrollbar{display:none}.assurance-slider .assurance-card{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;box-sizing:border-box}.assurance-dots{display:flex;justify-content:center;gap:9px;margin-top:8px}.assurance-dots button{border:0;background:transparent;padding:8px;position:relative;width:24px;height:24px;border-radius:50%}.assurance-dots button::after{content:'';position:absolute;inset:8px;border-radius:50%;background:#cbd6e4}.assurance-dots button[aria-pressed="true"]::after{background:#164f91}.assurance-dots button:focus-visible{outline:2px solid #0877ff;outline-offset:2px}
-
-.checkout-footer{margin-top:32px;padding-top:0;border-top:0}.assurance-area{padding:20px 14px 16px;background:#eef3f8;border-top:1px solid #dce5ef;border-bottom:1px solid #dce5ef;border-radius:16px;margin-top:0}.assurance-heading{margin:0 0 13px;color:#64758d;text-align:center;font-size:12px;font-weight:500;line-height:1.5}.assurance-slider .assurance-card{background:#fff;border-color:#dce5ef;box-shadow:0 3px 10px #183b6307}.assurance-dots{margin-top:10px}.footer-contact{padding-top:24px}
-
-.footer-contact.footer-details{position:relative;text-align:left;margin-top:22px;padding:27px 24px 20px;border:1px solid #e7edf4;border-radius:18px;background:#fff;overflow:hidden;display:grid;gap:20px}.footer-detail{position:relative;z-index:1;display:flex;gap:17px;align-items:flex-start;max-width:570px;width:100%;margin:auto;color:#102d60;font-size:14px;line-height:1.45}.footer-detail>svg{width:26px;height:26px;flex-shrink:0;stroke-width:2;margin-top:1px}.footer-detail p{margin:0}.footer-detail a{color:#102d60;font-weight:600;text-decoration:none;overflow-wrap:anywhere}.footer-detail .footer-detail-muted{color:#657692;margin-top:3px}.footer-contact .footer-copyright{position:relative;z-index:1;margin:4px 0 0;text-align:center;font-size:11px;color:#657692}.footer-water{position:absolute;bottom:0;left:0;width:100%;height:65px;pointer-events:none}.footer-water svg{display:block;width:100%;height:100%;stroke:none}@media(max-width:380px){.footer-contact.footer-details{padding:23px 17px 18px;gap:18px}.footer-detail{font-size:13px;gap:13px}.footer-detail>svg{width:24px;height:24px}}
-
-.pix-option-label{margin:0 0 10px 4px;color:#506181;font-size:14px;font-weight:700;line-height:1.4}.pix-option{padding:17px 14px;gap:13px;border:2px solid #0877ff;border-radius:13px;background:linear-gradient(115deg,#f9fcff,#fff);align-items:center}.pix-option .pix-logo{width:42px;height:42px}.pix-option>div{min-width:0}.pix-option>div>strong{font-size:17px;font-weight:700}.pix-option>div>p{font-size:12px;line-height:1.4;margin-top:3px;color:#7283a1}.pix-option .pix-option-price{font-size:19px;font-weight:700;color:#008251;white-space:nowrap;margin-left:auto;line-height:1.3}.pix-option .radio{margin-left:2px;width:28px;height:28px;padding:5px}@media(max-width:380px){.pix-option{padding:14px 10px;gap:9px}.pix-option .pix-logo{width:33px;height:33px}.pix-option>div>strong{font-size:16px}.pix-option>div>p{font-size:11px}.pix-option .pix-option-price{font-size:17px}.pix-option .radio{width:25px;height:25px;padding:4px}}@media(max-width:330px){.pix-option{gap:7px}.pix-option .pix-option-price{font-size:15px}.pix-option>div>p{max-width:105px}}
-
-.pix-offer{border:2px solid #0877ff;border-radius:14px;overflow:hidden;background:#fff}.pix-offer-heading{display:flex;align-items:center;gap:13px;padding:13px 17px;color:#fff;background:linear-gradient(125deg,#08275c 0%,#074878 65%,#008fac 100%)}.pix-offer-heading>svg{width:25px;height:25px;flex-shrink:0;color:#ffe23c;stroke-width:1.9}.pix-offer-heading strong{display:block;font-size:14px;line-height:1.4;font-weight:700}.pix-offer-heading p{margin:3px 0 0;font-size:13px;line-height:1.4;color:#e1ecf7}.pix-offer .pix-option{border:0;border-radius:0;padding:18px 14px;background:linear-gradient(110deg,#fff,#f7fbff)}.pix-offer .pix-option-price{font-size:21px;font-weight:800}.pix-offer .pix-option>div>p{max-width:110px;font-size:12px;line-height:1.5}@media(max-width:380px){.pix-offer-heading{padding:12px 12px;gap:10px}.pix-offer-heading strong{font-size:13px}.pix-offer-heading p{font-size:12px}.pix-offer .pix-option{padding:16px 10px;gap:9px}.pix-offer .pix-option-price{font-size:19px}.pix-offer .pix-option>div>p{font-size:11px;max-width:88px}}@media(max-width:330px){.pix-offer .pix-option-price{font-size:17px}.pix-offer .pix-option{gap:7px}}
-.payment>.finish{margin-top:16px;margin-bottom:0}
-
-.pix-offer{border:1px solid #8bc4ff;border-radius:14px;background:#fff}.pix-offer-heading{background:linear-gradient(115deg,#eaf6ff,#e1f1ff);color:#08285e;padding:15px 18px;gap:15px;border-bottom:1px solid #d3e8fc}.pix-offer-heading>svg{color:#0877ff;width:28px;height:28px;stroke-width:1.8}.pix-offer-heading strong{font-size:14px;font-weight:700;line-height:1.35}.pix-offer-heading p{color:#31568c;font-size:13px;margin-top:3px}.pix-offer .pix-option{padding:20px 13px;gap:13px;background:#fff}.pix-offer .pix-logo{width:48px;height:48px}.pix-offer .pix-option>div>strong{font-size:18px;color:#07194f}.pix-offer .pix-option>div>p{font-size:12px;max-width:100px;line-height:1.5}.pix-offer .pix-option-price{font-size:21px;color:#00884b}.pix-offer .radio{width:28px;height:28px;padding:5px;margin-left:0}@media(max-width:380px){.pix-offer-heading{padding:14px 15px;gap:13px}.pix-offer-heading strong{font-size:13px}.pix-offer-heading p{font-size:12px}.pix-offer .pix-option{padding:19px 11px;gap:10px}.pix-offer .pix-logo{width:42px;height:42px}.pix-offer .pix-option>div>strong{font-size:17px}.pix-offer .pix-option>div>p{font-size:12px;max-width:90px}.pix-offer .pix-option-price{font-size:19px}.pix-offer .radio{width:27px;height:27px}}@media(max-width:330px){.pix-offer .pix-option{gap:7px}.pix-offer .pix-logo{width:36px;height:36px}.pix-offer .pix-option-price{font-size:17px}.pix-offer .pix-option>div>p{font-size:11px}}
-.find-cep-link{display:block;margin:8px 0 2px auto;padding:4px 0;border:0;background:none;color:#1766ab;font-size:12px;text-decoration:underline}.cep-search-dialog{width:calc(100% - 28px);max-width:440px;max-height:88dvh;overflow:auto;margin:auto;border:1px solid #dce6f1;border-radius:20px;padding:22px;background:#fff;color:#102955;box-shadow:0 15px 55px #07194f33}.cep-search-dialog::backdrop{background:#10295588}.cep-search-header{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.cep-search-header h2{margin:0;font-size:20px}.cep-search-header p{margin:5px 0 17px;font-size:13px;color:#6b7d96}.cep-search-header button{background:none;border:0;color:#60748f;font-size:26px;padding:0 5px;line-height:1}.cep-search-dialog label{display:block;margin:11px 0 5px;font-size:13px;font-weight:600}.cep-search-dialog input,.cep-search-dialog select{width:100%;height:47px;padding:10px 12px;border:1px solid #d7e2ef;border-radius:10px;background:#fff;color:#183658;font-size:16px}.cep-search-tip{font-size:11px;color:#72839a;margin:8px 0 15px}.cep-search-submit{width:100%;border:0;border-radius:10px;background:#0877ff;color:white;font-weight:600;font-size:14px;padding:13px}.cep-search-submit:disabled{opacity:.65}.cep-search-status{font-size:12px;color:#56708f;margin:14px 0 8px}.cep-search-results{display:grid;gap:8px}.cep-result{display:block;text-align:left;width:100%;background:#f7fbff;border:1px solid #dce8f5;border-radius:11px;padding:12px;color:#23466c}.cep-result strong{display:block;font-size:14px;color:#0865b9}.cep-result span{display:block;font-size:12px;line-height:1.5;margin-top:3px}.cep-result:hover{border-color:#0877ff}.cep-manual{display:block;margin:17px auto 0;border:0;background:none;font-size:12px;text-decoration:underline;color:#627b97}
-
-/* Soft green guarantee slides and a continuous contact footer. */
-.assurance-area{padding:19px 11px 5px;border:1px solid #ceeee6;border-radius:15px;background:linear-gradient(120deg,#edf9f6,#eaf8f5)}.assurance-slider .assurance-grid{padding-top:2px;padding-bottom:9px}.assurance-slider .assurance-card{position:relative;isolation:isolate;overflow:hidden;padding:17px 14px;gap:12px;min-height:118px;border:1px solid #bee6dc;border-radius:18px;background:linear-gradient(125deg,#fff,#f9fffd);box-shadow:0 6px 13px #167e6314}.assurance-slider .assurance-card::before,.assurance-slider .assurance-card::after{content:'';position:absolute;z-index:-1;pointer-events:none;background:linear-gradient(125deg,#d5f5eb,#e8faf5);border-radius:50%}.assurance-slider .assurance-card::before{width:155px;height:68px;left:-55px;bottom:-39px;transform:rotate(27deg);box-shadow:40px -5px 0 #e9faf560}.assurance-slider .assurance-card::after{width:130px;height:65px;right:-72px;top:-28px;transform:rotate(40deg);box-shadow:-5px 137px 0 8px #ddf7ef}.assurance-icon{width:44px;height:44px;background:#e0f8f0;color:#00866a}.assurance-icon svg{width:23px;height:23px;stroke-width:2}.assurance-card h3{font-size:13px;line-height:1.4;margin:1px 0 6px;color:#143965}.assurance-card p{font-size:12px;line-height:1.6;color:#617b9d}.assurance-dots{margin-top:0;gap:3px}.assurance-dots button[aria-pressed="true"]::after{background:#0766bc}.assurance-dots button::after{background:#bfd0dc}.footer-contact.footer-details{width:100vw;margin-left:calc(50% - 50vw);margin-top:28px;margin-bottom:-25px;padding:28px max(24px,calc((100vw - 720px)/2)) 23px;background:#edf3f8;border:0;border-top:1px solid #dae5ee;border-radius:0;box-shadow:none;overflow:visible;gap:20px}.footer-detail{max-width:720px}.footer-contact .footer-copyright{border-top:1px solid #d9e4ee;padding-top:18px;margin-top:1px;color:#718399}@media(max-width:600px){.footer-contact.footer-details{margin-bottom:-20px;padding:25px 24px 20px}.footer-detail{font-size:12px;gap:13px}.footer-detail>svg{width:22px;height:22px}}
-
-.assurance-area{border:0;background:transparent;border-radius:0;padding:0}.assurance-slider .assurance-card{border-color:#d4ebdd;background:linear-gradient(125deg,#fff,#f5fcf7);box-shadow:0 5px 13px #098b4510}.assurance-slider .assurance-card::before,.assurance-slider .assurance-card::after{background:linear-gradient(125deg,#def4e6,#eefaf2)}.assurance-slider .assurance-card::before{box-shadow:40px -5px 0 #effaf360}.assurance-slider .assurance-card::after{box-shadow:-5px 137px 0 8px #e3f6ea}.assurance-icon{background:#e3f6eb;color:#098b45}
-
-#checkoutForm>section.card{box-shadow:0 8px 22px rgba(18,48,82,.10),0 2px 5px rgba(18,48,82,.045)}#checkoutForm>section.card.next-section{box-shadow:0 8px 22px rgba(18,48,82,.10),0 2px 5px rgba(18,48,82,.045),0 0 0 2px #0877ff08}
-</style>
-</head>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Checkout – Deveu Perdeu</title>
+<style>@font-face{font-family:"Inter";font-style:normal;font-weight:400 900;src:url(/assets/3100e775e8616cd2.woff2)format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--primary:#F15A24;--primary-dark:#d44d1a;--bg:#f5f5f5;--white:#ffffff;--text:#1a1a1a;--text-muted:#6b7280;--border:#e5e7eb;--error:#ef4444;--radius:14px;--shadow:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04)}body{background:var(--bg);color:var(--text);min-height:100vh}.header{display:flex;align-items:center}.header-logo{left:50%;display:flex;align-items:center}.header-logo img{object-fit:contain}.header-secure{display:flex;align-items:center;gap:5px;text-align:right;line-height:1.2}.header-secure svg{flex-shrink:0}.banner{text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;overflow:hidden}.banner svg{flex-shrink:0}.main{margin:0 auto}.section{background:var(--white);border-radius:var(--radius);overflow:hidden}.section-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}.section-left{display:flex;align-items:center}.step-badge{border-radius:50%;color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}.step-title{color:var(--text)}.step-sub{color:var(--text-muted);margin-top:1px}.section-icon{color:var(--text-muted)}.section-icon.orange{color:var(--primary)}.chevron{transition:transform 0.25s}.chevron.open{transform:rotate(180deg)}.section-body.open{display:block}.form-group label{display:block}.form-group input{width:100%;border:1.5px solid var(--border);color:var(--text);font-family:inherit;outline:none;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none}.form-group input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(241,90,36,0.1);background:#fff}.form-group input::placeholder{color:#c4c9d4;font-weight:400}.form-row{display:grid;grid-template-columns:1fr 1fr}.field-error{font-size:11px;color:var(--error);margin-top:4px;font-weight:600}@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}.product-row{display:flex;align-items:center}.product-img{object-fit:contain;border-radius:10px;flex-shrink:0}.product-name{font-weight:800}.product-price{font-weight:900;color:var(--primary)}.summary-lines{border-top:1.5px solid var(--border);padding-top:12px}.summary-line{display:flex;justify-content:space-between;font-weight:600;color:var(--text-muted)}.summary-total{display:flex;justify-content:space-between;font-weight:900;color:var(--text);border-top:1.5px solid var(--border)}.summary-total span:last-child{color:var(--primary)}.trust-grid{display:grid}.trust-item{display:flex;align-items:center;background:var(--white);border:1.5px solid var(--border);border-radius:12px;font-weight:700}.trust-icon{border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}.trust-icon svg{color:#fff}.trust-sub{font-weight:400;color:var(--text-muted)}.footer{text-align:center;color:var(--text-muted);display:flex;align-items:center;justify-content:center;gap:6px}.footer svg{width:13px;height:13px}#loading-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:14px}@keyframes spin{to{transform:rotate(360deg)}}#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a1a1a;color:#fff;border-radius:10px;padding:12px 20px;font-size:13px;font-weight:700;z-index:1000;transition:transform 0.3s ease;pointer-events:none;white-space:nowrap;align-items:center;gap:8px}.section-locked{opacity:0.45;pointer-events:none}.section-locked .step-badge{background:#d1d5db}.btn-continuar{width:100%;background:var(--primary);border:none;color:#fff;font-family:inherit;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;transition:background 0.2s,transform 0.1s}.btn-continuar:hover{background:var(--primary-dark)}.btn-continuar:active{transform:scale(0.98)}.btn-continuar svg{width:16px;height:16px}:root{--primary:#ff6b00;--primary-dark:#e85d00;--bg:#f6f5f2;--border:#e8e6e1;--text:#16181d;--text-muted:#6b6f78;--radius:14px;--shadow:0 1px 2px rgba(16,18,22,.05),0 8px 24px rgba(16,18,22,.05)}body{font-family:"Inter",system-ui,sans-serif;font-size:14px;-webkit-font-smoothing:antialiased}.header{position:sticky!important;top:0;z-index:50;background:#121316;padding:0 16px;height:58px;justify-content:space-between}.header-logo{position:static;transform:none}.header-logo img{height:32px}.header-secure{color:#d1d5db;font-size:11px;font-weight:700;letter-spacing:.02em}.header-secure svg{width:15px;height:15px;color:#4ade80}.banner{background:var(--primary);color:#fff;font-size:11.5px;font-weight:700;padding:7px 12px;white-space:normal;line-height:1.3}.banner svg{width:15px;height:15px}.steps{display:flex;justify-content:center;gap:6px;align-items:center;font-size:11px;font-weight:700;color:var(--text-muted);margin:4px 0 12px}.steps span{display:flex;align-items:center;gap:5px}.steps i{font-style:normal;width:18px;height:18px;border-radius:50%;background:#121316;color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center}.steps hr{width:18px;border:0;border-top:1.5px dashed #c9c6bf}.main{max-width:520px;padding:14px 12px 40px}.section{margin-bottom:10px;border:1px solid var(--border);box-shadow:var(--shadow)}.section-header{padding:13px 14px}.section-left{gap:10px}.step-badge{width:28px;height:28px;font-size:13px;background:#121316}.step-title{font-size:15px;font-weight:800;letter-spacing:-.01em}.step-sub{font-size:11.5px}.section-icon{display:flex;align-items:center;gap:6px}.section-icon svg{width:18px;height:18px}.section-icon .chevron{margin-top:0!important}.section-body{padding:0 14px 14px}.form-group{margin-bottom:10px}.form-group label{font-size:12px;font-weight:700;margin-bottom:5px;color:#3b3f47}.form-group input{background:#fff;padding:11px 12px;font-size:15px;font-weight:500;border-radius:10px;border-width:1px}.form-group input:focus{box-shadow:0 0 0 3px rgba(255,107,0,.12)}.form-row{gap:8px}.btn-continuar{border-radius:12px;padding:13px;font-size:15px;font-weight:800;box-shadow:0 6px 18px rgba(255,107,0,.28);text-transform:none;letter-spacing:0}.product-row{gap:12px;margin-bottom:12px}.product-img{width:72px;height:72px;background:var(--bg);border:1px solid var(--border)}.product-name{font-size:14px;margin-bottom:2px}.product-price{font-size:18px}.summary-line{font-size:13px;padding:4px 0}.summary-total{font-size:17px;padding-top:10px;margin-top:6px}.trust-grid{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}.trust-item{flex-direction:column;text-align:center;padding:10px 6px;gap:6px;font-size:11.5px;border-width:1px}.trust-item[style]{grid-column:auto!important}.trust-icon{width:30px;height:30px;background:#121316}.trust-icon svg{width:15px;height:15px}.trust-sub{font-size:10px}.footer{padding:16px;font-size:11px}@media (min-width:900px){.header{padding:0 32px}.main{margin-top:12px}}.rl-overlay{position:fixed;inset:0;z-index:900;background:rgba(10,11,13,.82);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}@keyframes rlIn{from{transform:scale(.92);opacity:0}to{transform:none;opacity:1}}@keyframes rlFall{to{transform:translateY(110vh) rotate(720deg)}}@keyframes rlPulse{0%,100%{border-color:var(--border);transform:none}40%{border-color:var(--primary);transform:translateY(-3px);box-shadow:0 6px 14px rgba(255,107,0,.25)}}@keyframes mbShake{0%,55%,100%{transform:rotate(0)}60%{transform:rotate(-5deg) translateY(-3px)}68%{transform:rotate(5deg) translateY(-3px)}76%{transform:rotate(-4deg)}84%{transform:rotate(3deg)}92%{transform:rotate(-1deg)}}@keyframes mbFloat{0%,100%{margin-top:0}50%{margin-top:-7px}}@keyframes mbPop{0%{margin-top:0}50%{margin-top:-14px}100%{margin-top:-4px}}@keyframes mbGlow{0%{box-shadow:0 0 0 0 rgba(255,200,120,.9)}100%{box-shadow:0 0 60px 70px rgba(255,200,120,0)}}html{touch-action:pan-x pan-y}</style>
+<meta name="referrer" content="no-referrer"><style>.sf-hidden{display:none!important}</style><link rel="stylesheet" href="/assets/boxes-interactions.css"><meta name="checkout-test-mode" content="boxes-11990"></head>
 <body>
-<main class="wrap">
-<header>
-<a href="../" aria-label="Voltar à loja">
-<img class="logo" src="../assets/icone-mareazul.png" alt="Maré Azul" width="440" height="122">
-</a>
-<div class="secure">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="5" y="10" width="14" height="12" rx="2"/>
-<path d="M8 10V6a4 4 0 0 1 8 0v4m-4 4v3"/>
-</svg>
-<div>
-<strong>COMPRA SEGURA</strong>
-<span>Seus dados protegidos</span>
+<div id="loading-overlay" class="sf-hidden">
+
+
 </div>
+<div id="toast" class="sf-hidden"></div>
+<div class="rl-overlay sf-hidden" id="rl-overlay">
+
 </div>
+<header class="header" style="position:relative">
+ <div class="header-logo">
+ <img src="/assets/f4e97641be0a8ceb.png" alt="Deveu Perdeu">
+ </div>
+ <div class="header-secure">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+ <span>Pagamento 100% seguro</span>
+ </div>
 </header>
-<section class="card product">
-<img src="../assets/home-1.webp" alt="Kit Dobrável Duo 3 em 1">
-<div class="product-info">
-<h1>Kit Dobrável Duo 3 em 1</h1>
-<div class="product-bottom">
-<div>
-<div class="old">R$ 269,90</div>
-<div class="price">R$ 119,90</div>
-</div>
-<div class="saving">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M4 5h14v4H4a2 2 0 0 1 0-4zm0 4h17v12H4a2 2 0 0 1-2-2V7"/>
-<path d="M16 13h5v4h-5z"/>
-</svg>
-<div>Você economiza<strong>R$ 150,00</strong>
-</div>
-</div>
-</div>
-</div>
-</section>
-<form id="checkoutForm">
-<section class="card">
-<div class="title">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<circle cx="12" cy="7" r="4"/>
-<path d="M4 22v-3a8 8 0 0 1 16 0v3"/>
-</svg>
-<div>
-<h2>Informações Pessoais</h2>
-<p>Para quem devemos entregar o pedido?</p>
-</div>
-</div>
-<div class="fields">
-<div class="field">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="3" y="5" width="18" height="14" rx="2"/>
-<path d="m3 6 9 7 9-7"/>
-</svg>
-<input id="email" name="email" type="email" placeholder="E-mail*" aria-label="E-mail*" autocomplete="email" required>
-</div>
-<div class="field">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<circle cx="12" cy="7" r="4"/>
-<path d="M4 22v-3a8 8 0 0 1 16 0v3"/>
-</svg>
-<input id="name" name="name" type="text" placeholder="Nome completo*" aria-label="Nome completo*" autocomplete="name" required>
-</div>
-<div class="field">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M5 3h4l2 5-3 2a14 14 0 0 0 6 6l2-3 5 2v4c0 2-2 3-4 2C9 19 5 15 3 7c-1-2 0-4 2-4z"/>
-</svg>
-<input id="phone" name="phone" type="tel" placeholder="Celular*" aria-label="Celular*" autocomplete="tel" maxlength="15" required>
-</div>
-<div class="field">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="2" y="5" width="20" height="14" rx="2"/>
-<circle cx="7" cy="10" r="1.5"/>
-<path d="M5 15h4m3-5h7m-7 4h7"/>
-</svg>
-<input id="cpf" name="cpf" type="text" placeholder="CPF*" aria-label="CPF*" maxlength="14" required>
-</div>
-</div>
-</section>
-<section class="card">
-<div class="title">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M2 4h13v14H2zM15 9h4l4 5v4h-8"/>
-<circle cx="6" cy="19" r="2"/>
-<circle cx="19" cy="19" r="2"/>
-</svg>
-<div>
-<h2>Informações de Entrega</h2>
-<p>Para onde devemos entregar o pedido?</p>
-</div>
-</div>
-<div class="field">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M19 10c0 5-7 12-7 12S5 15 5 10a7 7 0 0 1 14 0z"/>
-<circle cx="12" cy="10" r="2"/>
-</svg>
-<input id="cep" name="cep" type="text" placeholder="CEP*" aria-label="CEP*" autocomplete="postal-code" maxlength="9" required>
-</div>
-<p class="cep-status" id="cepStatus" role="status" aria-live="polite">
-</p>
-<button class="manual-address" type="button" id="retryCep" hidden>Tentar buscar novamente</button>
-<button class="manual-address" type="button" id="openCepSearch">Não sei meu CEP</button>
-<div class="address-fields" id="addressFields" hidden>
-<div class="field">
-<input id="street" placeholder="Endereço*" aria-label="Endereço" autocomplete="address-line1" required>
-</div>
-<div class="pair">
-<div class="field">
-<input id="district" placeholder="Bairro*" aria-label="Bairro" required>
-</div>
-<div class="field">
-<input id="number" placeholder="Número*" aria-label="Número" required>
-</div>
-</div>
-<div class="pair">
-<div class="field">
-<input id="city" placeholder="Cidade*" aria-label="Cidade" autocomplete="address-level2" required>
-</div>
-<div class="field">
-<select id="state" aria-label="Estado" autocomplete="address-level1" required>
-<option value="">Estado*</option>
-</select>
-</div>
-</div>
-<div class="field">
-<input id="extra" placeholder="Complemento (opcional)" aria-label="Complemento" autocomplete="address-line2">
-</div>
-</div>
-<div class="freight-card">
-<div class="freight-heading">
-<span class="freight-truck">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M3 5h11v12H3zM14 9h4l3 4v4h-7"/>
-<circle cx="7" cy="18" r="2"/>
-<circle cx="17" cy="18" r="2"/>
-</svg>
-</span>
-<div>
-<h3>Seu frete é grátis! <span class="freight-confirm" aria-hidden="true">✓</span>
-</h3>
-<p>Entrega sem custo adicional para sua região.</p>
-</div>
-</div>
-<div class="freight-benefits">
-<div>
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M19 9c0 5-7 12-7 12S5 14 5 9a7 7 0 0 1 14 0z"/>
-<circle cx="12" cy="9" r="2"/>
-</svg>
-<span>
-<span>Rastreamento</span>
-<span>nacional</span>
-</span>
-</div>
-<div>
-<svg class="correios-symbol" viewBox="0 0 40 36" aria-hidden="true">
-<defs>
-<linearGradient id="correiosBlue" x1="0" x2="1">
-<stop stop-color="#075782"/>
-<stop offset="1" stop-color="#08a2d2"/>
-</linearGradient>
-<linearGradient id="correiosYellow" x1="0" x2="1">
-<stop stop-color="#efc000"/>
-<stop offset="1" stop-color="#ffe039"/>
-</linearGradient>
-</defs>
-<path fill="url(#correiosBlue)" d="M19 1h13l8 12-8 12H19l8-12z"/>
-<path fill="#06476c" d="m19 1 8 12 6-8-1-4z"/>
-<path fill="url(#correiosYellow)" d="M21 11H8L0 23l8 12h13l-8-12z"/>
-<path fill="#b58b00" d="m13 23 8 12H8l-4-6z"/>
-</svg>
-<span>
-<span>Entrega via</span>
-<span>Correios</span>
-</span>
-</div>
-<div>
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10M7.5 4.5l9 5"/>
-</svg>
-<span>
-<span>Sem taxas</span>
-<span>extras</span>
-</span>
-</div>
-</div>
-</div>
-</section>
-<section class="card payment">
-<div class="title">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="2" y="4" width="20" height="16" rx="2"/>
-<path d="M2 10h20"/>
-</svg>
-<div>
-<h2>Método de pagamento</h2>
-<p>Escolha como deseja pagar seu pedido.</p>
-</div>
-</div>
-<div class="pix-offer">
-<div class="pix-offer-heading">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path fill="currentColor" stroke="none" d="M3 10h8v11H4a1 1 0 0 1-1-1zm10 0h8v10a1 1 0 0 1-1 1h-7zM2 7h9v2H2zm11 0h9v2h-9z"/>
-<path d="M12 7C9 7 5 7 5 4c0-4 7-2 7 3zm0 0c3 0 7 0 7-3 0-4-7-2-7 3z"/>
-</svg>
-<div>
-<strong>OFERTA EXCLUSIVA VIA PIX</strong>
-<p>Pagamento à vista via Pix</p>
-</div>
-</div>
-<div class="pix-option">
-<svg class="pix-logo" viewBox="0 0 24 24" aria-hidden="true">
-<path fill="currentColor" d="m12 1 5 5h-2l-3 3-3-3H7zm0 22-5-5h2l3-3 3 3h2zM6 7h3l3 3 3-3h3l5 5-5 5h-3l-3-3-3 3H6l-5-5z"/>
-</svg>
-<div>
-<strong>Pix</strong>
-<p>Pagamento à vista via Pix</p>
-</div>
-<strong class="pix-option-price">R$ 119,90</strong>
-<span class="radio" aria-hidden="true">
-</span>
-</div>
-</div>
-<button class="finish" id="finish" type="submit" disabled>COMPRAR AGORA VIA PIX <span aria-hidden="true">→</span>
-</button>
-<noscript>Ative o JavaScript no navegador para gerar o Pix.</noscript>
-<div class="pix-guidance">
-<div class="pix-price-note">
-<span>
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M3 3h8l10 10a2 2 0 0 1 0 3l-5 5a2 2 0 0 1-3 0L3 11z"/>
-<circle cx="8" cy="8" r="1.5"/>
-</svg>
-</span>
-<div>
-<h3>
-<span>Você garantiu o preço</span>
-<span>promocional!</span>
-</h3>
-<p>
-<span>Essa promoção é exclusiva para</span>
-<span>pagamentos à vista via Pix.</span>
-</p>
-</div>
-</div>
-<div class="pix-process">
-<div class="pix-process-row">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="2" y="2" width="7" height="7" rx="1"/>
-<rect x="15" y="2" width="7" height="7" rx="1"/>
-<rect x="2" y="15" width="7" height="7" rx="1"/>
-<path d="M5.5 5.5h.01m13 0h.01m-13 13h.01M12 2v3m0 6v3h3m3-2h4m-10 6v4m4-5h3v3h3m0-6v1"/>
-</svg>
-<div>
-<h3>Falta pouco para concluir!</h3>
-<p>Finalize seu pedido para gerar o código Pix e realizar o pagamento.</p>
-</div>
-</div>
-<div class="pix-process-row">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path fill="#ffd467" d="m13 2-9 12h7l-1 8 10-13h-7z"/>
-</svg>
-<div>
-<h3>Pagamento instantâneo via Pix</h3>
-<p>Pagou? Identificamos o pagamento em poucos minutos.</p>
-</div>
-</div>
-<div class="pix-process-row">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<circle cx="12" cy="12" r="10"/>
-<path d="m7 12 3 3 7-7"/>
-</svg>
-<div>
-<h3>Pagamento confirmado, pedido a caminho!</h3>
-<p>Após identificarmos seu pagamento, seu pedido seguirá para preparação e envio.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-</form>
-<footer class="checkout-footer" aria-label="Segurança e contato">
-<div class="assurance-area">
-<div class="assurance-slider" role="region" aria-label="Garantias da compra">
-<div class="assurance-grid" id="assuranceTrack">
-<div class="assurance-card">
-<span class="assurance-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="m12 2 8 3v6c0 6-8 10-8 10S4 17 4 11V5z"/>
-<path d="m8 11 3 3 5-6"/>
-</svg>
-</span>
-<div>
-<h3>Compra Segura</h3>
-<p>Precisa de ajuda com sua compra? Conte com nosso suporte para dúvidas, trocas e devoluções.</p>
-</div>
-</div>
-<div class="assurance-card">
-<span class="assurance-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M2 4h13v14H2zM15 9h4l4 5v4h-8"/>
-<circle cx="6" cy="19" r="2"/>
-<circle cx="19" cy="19" r="2"/>
-</svg>
-</span>
-<div>
-<h3>Entrega Rastreável</h3>
-<p>Acompanhe o caminho do seu pedido até a entrega com o código de rastreamento.</p>
-</div>
-</div>
-<div class="assurance-card">
-<span class="assurance-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="5" y="10" width="14" height="11" rx="2"/>
-<path d="M8 10V6a4 4 0 0 1 8 0v4m-4 5v2"/>
-</svg>
-</span>
-<div>
-<h3>Dados Protegidos</h3>
-<p>Seus dados são utilizados para processar o pedido e realizar a entrega com segurança.</p>
-</div>
-</div>
-</div>
-<div class="assurance-dots" aria-label="Escolher card">
-<button type="button" aria-label="Ver Compra Segura" aria-pressed="true" data-assurance="0">
-</button>
-<button type="button" aria-label="Ver Entrega Rastreável" aria-pressed="false" data-assurance="1">
-</button>
-<button type="button" aria-label="Ver Dados Protegidos" aria-pressed="false" data-assurance="2">
-</button>
-</div>
-</div>
-</div>
-<div class="footer-contact footer-details">
-<div class="footer-detail">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="2" y="4" width="20" height="16" rx="1"/>
-<path d="m2 5 10 8 10-8"/>
-</svg>
-<div>
-<a href="mailto:suporte@mareazul.com">suporte@mareazul.com</a>
-</div>
-</div>
-<div class="footer-detail">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M20 9c0 6-8 13-8 13S4 15 4 9a8 8 0 0 1 16 0z"/>
-<circle cx="12" cy="9" r="2.5"/>
-</svg>
-<div>
-<p>Av. Brigadeiro Faria Lima, 2371 — Jardim Paulistano</p>
-<p class="footer-detail-muted">São Paulo, SP</p>
-</div>
-</div>
-<div class="footer-detail">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M3 22V2h12v20M15 10h6v12H1M8 22v-5h3v5M7 6h1m3 0h1M7 10h1m3 0h1M7 14h1m3 0h1M18 14h.1m-.1 4h.1"/>
-</svg>
-<div>
-<p>Maré Azul</p>
-<p class="footer-detail-muted">CNPJ: 42.008.813/0001-15</p>
-</div>
-</div>
-<p class="footer-copyright">© 2026 Maré Azul. Todos os direitos reservados.</p>
-</div>
+<div class="banner">
+ <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8c.76 0 1.5.11 2.2.31L16 2.31A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10M7.91 10.08L6.5 11.5 11 16 21 6l-1.41-1.42L11 13.17l-3.09-3.09Z"></path></svg>
+ Preencha as informações corretamente para envio do código de rastreio.
+</div>
+<main class="main"><form id="checkoutForm" novalidate>
+ <div class="steps"><span><i>1</i>Dados</span><hr><span><i>2</i>Entrega</span><hr><span><i>3</i>Pagamento</span></div>
+
+ <div class="section" id="sec-dados">
+ <div class="section-header">
+ <div class="section-left">
+ <div class="step-badge" id="badge-1">1</div>
+ <div><div class="step-title">Dados pessoais</div><div class="step-sub">Precisamos apenas das informações essenciais.</div></div>
+ </div>
+ <div class="section-icon orange">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+ <svg class="chevron open" id="chev-dados" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;margin-top:4px"><polyline points="18 15 12 9 6 15"></polyline></svg>
+ </div>
+ </div>
+ <div class="section-body open" id="body-dados">
+ <div class="form-group" id="fg-name"><label>Nome completo</label><input type="text" id="name" placeholder="Seu nome completo" autocomplete="name" value="" style=""><div class="field-error sf-hidden">Informe seu nome completo.</div></div>
+ <div class="form-row">
+ <div class="form-group" id="fg-email"><label>E-mail</label><input type="email" id="email" placeholder="seu@email.com" autocomplete="email" value="" style=""><div class="field-error sf-hidden">E-mail inválido.</div></div>
+ <div class="form-group" id="fg-phone"><label>WhatsApp</label><input type="tel" id="phone" placeholder="(11) 99999-9999" autocomplete="tel" value="" style=""><div class="field-error sf-hidden">Número inválido.</div></div>
+ </div>
+ <div class="form-group" id="fg-cpf"><label>CPF</label><input type="text" id="cpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" value="" style=""><div class="field-error sf-hidden">CPF inválido.</div></div>
+ <button type="button" class="btn-continuar">Continuar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+ </div>
+ </div>
+
+ <div class="section" id="sec-entrega">
+ <div class="section-header">
+ <div class="section-left">
+ <div class="step-badge" id="badge-2">2</div>
+ <div><div class="step-title">Entrega</div><div class="step-sub">Informe o endereço para envio.</div></div>
+ </div>
+ <div class="section-icon">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+ <svg class="chevron" id="chev-entrega" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;margin-top:4px"><polyline points="18 15 12 9 6 15"></polyline></svg>
+ </div>
+ </div>
+ <div class="section-body sf-hidden" id="body-entrega">
+
+
+
+
+
+
+
+
+ </div>
+ </div>
+
+ <div class="section section-locked" id="sec-pagamento">
+ <div class="section-header" id="header-pagamento">
+ <div class="section-left">
+ <div class="step-badge" id="badge-3">3</div>
+ <div><div class="step-title">Pagamento</div><div class="step-sub">Escolha a forma de pagamento.</div></div>
+ </div>
+ <div class="section-icon orange">
+ <svg class="chevron" id="chev-pagamento" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px"><polyline points="18 9 12 15 6 9"></polyline></svg>
+ </div>
+ </div>
+ <div class="section-body sf-hidden" id="body-pagamento">
+
+
+
+ </div>
+ </div>
+
+ <div class="section" style="margin-top:18px">
+ <div class="section-header" style="cursor:default"><span style="font-size:16px;font-weight:900">Resumo do pedido</span></div>
+ <div style="padding:0 18px 18px">
+ <div class="product-row">
+ <img class="product-img" id="sum-img" src="/assets/f27b4f275c81d505.png" alt="Caixa">
+ <div><div class="product-name" id="sum-name">Caixa Surpresa Bronze</div><div class="product-price" id="sum-price">R$ 119,90</div></div>
+ </div>
+ <div class="summary-lines">
+ <div class="summary-line"><span>Subtotal</span><span id="sum-subtotal">R$ 119,90</span></div>
+ <div class="summary-line"><span id="sum-frete-label">Frete Grátis</span><span id="sum-frete" style="color:#22c55e">Grátis</span></div>
+
+ <div class="summary-line" id="sum-premio-line" style="display:none;color:#16a34a;font-weight:700"></div>
+ <div class="summary-total"><span>Total do teste</span><span id="sum-total">R$ 119,90</span></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="trust-grid">
+ <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><div><div>Compra Segura</div><div class="trust-sub">Pagamento protegido</div></div></div>
+ <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div><div><div>Envio rápido</div><div class="trust-sub">Pedidos enviados em até 24h</div></div></div>
+ <div class="trust-item" style="grid-column:1/-1"><div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div><div><div>Site oficial</div><div class="trust-sub">Ambiente 100% seguro</div></div></div>
+ </div>
+</form></main>
+<footer class="footer">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+ Deveu Perdeu © Todos os direitos reservados.
 </footer>
-</main>
-<script>
-const states='AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(' ');for(const v of states){const o=document.createElement('option');o.value=v;o.textContent=v;document.getElementById('state').append(o)}
-const digits=v=>v.replace(/\D/g,'');const address=document.getElementById('addressFields');function showAddress(){address.hidden=false}
 
-const cepInput=document.getElementById('cep');
-const cepStatus=document.getElementById('cepStatus');
-const retryCep=document.getElementById('retryCep');
-let cepController=null,cepSequence=0,lastCep='',filledAddress={};
-function clearPreviousAddress(){
- for(const [id,value] of Object.entries(filledAddress)){
-  const field=document.getElementById(id);if(field.value===value){field.value='';paintField(field,false)}
- }
- filledAddress={};
-}
-function setCepStatus(message,error=false){cepStatus.textContent=message;cepStatus.classList.toggle('error',error)}
-async function lookupCep(cep){
- if(cep.length!==8)return;
- cepController?.abort();const sequence=++cepSequence;
- const controller=new AbortController();cepController=controller;lastCep=cep;
- retryCep.hidden=true;showAddress();cepInput.setAttribute('aria-busy','true');setCepStatus('Buscando endereço…');
- const timeout=setTimeout(()=>controller.abort(),18000);
- try{
-  const providers=[
-   {url:'https://brasilapi.com.br/api/cep/v1/'+cep,map:d=>({logradouro:d.street,bairro:d.neighborhood,localidade:d.city,uf:d.state})},
-   {url:'https://viacep.com.br/ws/'+cep+'/json/',map:d=>d}
-  ];
-  if(location.protocol==='https:'||location.protocol==='http:')providers.unshift({url:'/api/cep/'+cep,map:d=>d});
-  let data=null,lastError;
-  for(const provider of providers){
-   try{
-    const response=await fetch(provider.url,{signal:controller.signal,credentials:'omit'});
-    if(!response.ok)throw new Error('http');
-    const raw=await response.json();const candidate=provider.map(raw);
-    if(candidate.erro){data=candidate;continue}
-    if(!candidate.localidade||!states.includes(candidate.uf))throw new Error('invalid-response');
-    data=candidate;break;
-   }catch(error){lastError=error;if(controller.signal.aborted)throw error}
-  }
-  if(!data)throw lastError||new Error('lookup-failed');
-  if(sequence!==cepSequence||digits(cepInput.value)!==cep)return;
-  if(data.erro){clearPreviousAddress();setCepStatus('CEP não encontrado. Confira o CEP ou preencha o endereço manualmente.',true);lastCep='';return}
-  if(!data.localidade||!states.includes(data.uf))throw new Error('invalid-response');
-  const values={street:data.logradouro||'',district:data.bairro||'',city:data.localidade,state:data.uf};
-  for(const [id,value] of Object.entries(values))document.getElementById(id).value=value;
-  filledAddress=values;refreshFields();
-  setCepStatus(values.street&&values.district?'Endereço encontrado. Confira os dados e informe o número.':'CEP encontrado. Complete a rua, o bairro e o número.');
- }catch(error){
-  if(sequence!==cepSequence||digits(cepInput.value)!==cep)return;
-  setCepStatus('Não foi possível consultar o CEP. Preencha o endereço ou tente novamente.',true);retryCep.hidden=false;lastCep='';
- }finally{
-  clearTimeout(timeout);
-  if(sequence===cepSequence){cepInput.removeAttribute('aria-busy');cepController=null}
- }
-}
-cepInput.addEventListener('input',e=>{
- const cep=digits(e.target.value).slice(0,8);applyMask(e.target,v=>digits(v).slice(0,8).replace(/^(\d{5})(\d)/,'$1-$2'));
- if(cep===lastCep)return;
- cepController?.abort();cepSequence++;cepInput.removeAttribute('aria-busy');retryCep.hidden=true;
- clearPreviousAddress();lastCep='';setCepStatus('');
- if(cep.length===8)lookupCep(cep);
-});
-retryCep.addEventListener('click',()=>lookupCep(digits(cepInput.value)));
-document.getElementById('cpf').inputMode='numeric';document.getElementById('cep').inputMode='numeric';
-function formatCpf(value){const v=digits(value).slice(0,11);return v.replace(/^(\d{3})(\d)/,'$1.$2').replace(/^(\d{3})\.(\d{3})(\d)/,'$1.$2.$3').replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3-$4')}
-function formatPhone(value){const v=digits(value).slice(0,11);if(v.length<=2)return v;if(v.length<=6)return '('+v.slice(0,2)+') '+v.slice(2);const cut=v.length===11?7:6;return '('+v.slice(0,2)+') '+v.slice(2,cut)+'-'+v.slice(cut)}
-function applyMask(input,formatter){
- const cursor=input.selectionStart??input.value.length;
- const count=digits(input.value.slice(0,cursor)).length;
- const atEnd=cursor===input.value.length;
- input.value=formatter(input.value);
- let position=0,seen=0;
- while(position<input.value.length&&seen<count){if(/\d/.test(input.value[position]))seen++;position++}
- input.setSelectionRange(atEnd?input.value.length:position,atEnd?input.value.length:position);
-}
-for(const [id,formatter] of [['cpf',formatCpf],['phone',formatPhone],['cep',v=>digits(v).slice(0,8).replace(/^(\d{5})(\d)/,'$1-$2')]]){
- const input=document.getElementById(id);
- input.addEventListener('beforeinput',event=>{
-  const start=input.selectionStart,end=input.selectionEnd;
-  if(start!==end||start===null)return;
-  if(event.inputType==='deleteContentBackward'&&start>0&&/\D/.test(input.value[start-1])){
-   let from=start-1;while(from>0&&/\D/.test(input.value[from]))from--;
-   event.preventDefault();input.setRangeText('',from,start,'start');input.dispatchEvent(new Event('input',{bubbles:true}));
-  }else if(event.inputType==='deleteContentForward'&&start<input.value.length&&/\D/.test(input.value[start])){
-   let to=start;while(to<input.value.length&&/\D/.test(input.value[to]))to++;
-   event.preventDefault();input.setRangeText('',start,Math.min(to+1,input.value.length),'start');input.dispatchEvent(new Event('input',{bubbles:true}));
-  }
- });
- if(id!=='cep')input.addEventListener('input',()=>applyMask(input,formatter));
-}
-const checkoutForm=document.getElementById('checkoutForm');
-const controls=[...checkoutForm.querySelectorAll('input,select')];
-const sections=[...checkoutForm.querySelectorAll('section.card')];
-function validCpf(value){
- const cpf=digits(value);if(cpf.length!==11||/^(\d)\1{10}$/.test(cpf))return false;
- for(let size=9;size<=10;size++){let sum=0;for(let i=0;i<size;i++)sum+=Number(cpf[i])*(size+1-i);let check=(sum*10)%11;if(check===10)check=0;if(check!==Number(cpf[size]))return false}return true;
-}
-function fieldIssue(control){
- const value=control.value.trim();
- if(!value)return control.required?({email:'Informe seu e-mail.',name:'Informe seu nome completo.',phone:'Informe seu celular com DDD.',cep:'Informe seu CEP.',street:'Informe a rua ou avenida.',district:'Informe o bairro.',number:'Informe o número ou S/N.',city:'Informe a cidade.',state:'Selecione o estado.',cpf:'Informe seu CPF.'}[control.id]||'Preencha este campo.') : '';
- if(control.id==='email'&&control.validity.typeMismatch)return 'Informe um e-mail válido, como nome@exemplo.com.';
- if(control.id==='name'&&value.split(/\s+/).length<2)return 'Informe seu nome e sobrenome.';
- if(control.id==='phone'&&!/^[1-9]\d9\d{8}$/.test(digits(value)))return 'Informe um celular válido com DDD e 11 dígitos.';
- if(control.id==='cep'&&digits(value).length!==8)return 'O CEP deve ter 8 dígitos.';
- if(control.id==='cpf'&&!validCpf(value))return 'Confira o CPF: os dígitos informados não são válidos.';
- return '';
-}
-function paintField(control,showError=false){
- const issue=fieldIssue(control),field=control.closest('.field');
- field.classList.toggle('is-complete',Boolean(control.value.trim())&&!issue);
- field.classList.toggle('is-invalid',showError&&Boolean(issue));
- control.setAttribute('aria-invalid',String(showError&&Boolean(issue)));
- document.getElementById(control.id+'Error').textContent=showError?issue:'';
- return !issue;
-}
-function refreshSections(){
- let found=false;
- for(const section of sections){
-  const incomplete=[...section.querySelectorAll('input[required],select[required]')].some(c=>Boolean(fieldIssue(c)));
-  section.classList.toggle('next-section',!found&&incomplete);if(incomplete)found=true;
- }
-}
-function refreshFields(){for(const control of controls)paintField(control,control.getAttribute('aria-invalid')==='true');refreshSections()}
-for(const control of controls){
- const error=document.createElement('p');error.id=control.id+'Error';error.className='field-error';error.setAttribute('aria-live','polite');control.closest('.field').append(error);
- const described=control.getAttribute('aria-describedby');control.setAttribute('aria-describedby',[described,error.id].filter(Boolean).join(' '));
- control.addEventListener('blur',()=>{paintField(control,true);refreshSections()});
- control.addEventListener('input',()=>{paintField(control,false);refreshSections()});
- control.addEventListener('change',()=>{paintField(control,true);refreshSections()});
-}
-checkoutForm.noValidate=true;
-function validateCheckout(){
- let firstInvalid=null;
- for(const control of controls){if(!paintField(control,true)&&!firstInvalid)firstInvalid=control}
- refreshSections();
- if(firstInvalid){
-  if(firstInvalid.closest('#addressFields'))showAddress();
-  firstInvalid.focus({preventScroll:true});
-  const rect=firstInvalid.getBoundingClientRect();
-  if(rect.top<0||rect.bottom>innerHeight)firstInvalid.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
-  return false;
- }
- return true;
-}
-refreshFields();
-window.addEventListener('pageshow',refreshFields);
 
-const assuranceTrack=document.getElementById('assuranceTrack');
-const assuranceDots=[...document.querySelectorAll('[data-assurance]')];
-function updateAssurance(){const step=assuranceTrack.firstElementChild.getBoundingClientRect().width+14;const current=Math.max(0,Math.min(2,Math.round(assuranceTrack.scrollLeft/step)));assuranceDots.forEach((dot,i)=>dot.setAttribute('aria-pressed',String(i===current)))}
-assuranceDots.forEach((dot,i)=>dot.addEventListener('click',()=>{const step=assuranceTrack.firstElementChild.getBoundingClientRect().width+14;assuranceTrack.scrollTo({left:step*i,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}));
-assuranceTrack.addEventListener('scroll',updateAssurance,{passive:true});
-window.addEventListener('resize',updateAssurance);updateAssurance();
-</script><dialog id="cepSearchDialog" class="cep-search-dialog" aria-labelledby="cepSearchTitle"><div class="cep-search-header"><div><h2 id="cepSearchTitle">Encontre seu CEP</h2><p>Informe onde fica sua rua.</p></div><button id="closeCepSearch" type="button" aria-label="Fechar busca de CEP">×</button></div><form id="cepSearchForm"><label for="searchState">Estado</label><select id="searchState" required><option value="">Selecione o estado</option></select><label for="searchCity">Cidade</label><input id="searchCity" autocomplete="address-level2" placeholder="Ex.: São Paulo" minlength="3" maxlength="100" required><label for="searchStreet">Rua ou avenida</label><input id="searchStreet" autocomplete="address-line1" placeholder="Ex.: Avenida Paulista" minlength="3" maxlength="150" required><p class="cep-search-tip">Digite o nome da rua, sem o número da casa.</p><button class="cep-search-submit" type="submit" id="searchCepButton">Buscar meu CEP</button></form><p id="cepSearchStatus" class="cep-search-status" role="status" aria-live="polite"></p><div id="cepSearchResults" class="cep-search-results"></div><button type="button" class="cep-manual" id="cepSearchManual">Voltar e preencher manualmente</button></dialog><script>
-(()=>{
- const dialog=document.getElementById('cepSearchDialog'),form=document.getElementById('cepSearchForm'),uf=document.getElementById('searchState'),city=document.getElementById('searchCity'),street=document.getElementById('searchStreet'),status=document.getElementById('cepSearchStatus'),results=document.getElementById('cepSearchResults'),button=document.getElementById('searchCepButton');
- let controller=null,sequence=0;
- for(const state of states){const option=document.createElement('option');option.value=state;option.textContent=state;uf.append(option)}
- function cancelSearch(){sequence++;controller?.abort();controller=null;button.disabled=false;button.textContent='Buscar meu CEP'}
- function closeSearch(){dialog.close()}
- document.getElementById('openCepSearch').addEventListener('click',()=>{uf.value=document.getElementById('state').value;city.value=document.getElementById('city').value;street.value=document.getElementById('street').value;status.textContent='';results.replaceChildren();dialog.showModal()});
- document.getElementById('closeCepSearch').addEventListener('click',closeSearch);
- dialog.addEventListener('close',()=>{cancelSearch();document.getElementById('openCepSearch').focus()});
- document.getElementById('cepSearchManual').addEventListener('click',()=>{closeSearch();showAddress();document.getElementById('cep').focus()});
- for(const field of [uf,city,street])field.addEventListener('input',()=>{cancelSearch();status.textContent='';results.replaceChildren()});
- form.addEventListener('submit',async event=>{
-  event.preventDefault();if(!form.reportValidity())return;
-  if(city.value.trim().length<3||street.value.trim().length<3){status.textContent='Digite pelo menos 3 caracteres na cidade e na rua.';return}
-  cancelSearch();const current=sequence;controller=new AbortController();const active=controller;
-  button.disabled=true;button.textContent='Buscando…';status.textContent='Consultando endereços…';results.replaceChildren();
-  const timeout=setTimeout(()=>active.abort(),12000);
-  try{
-   const url='https://viacep.com.br/ws/'+encodeURIComponent(uf.value)+'/'+encodeURIComponent(city.value.trim())+'/'+encodeURIComponent(street.value.trim())+'/json/';
-   const response=await fetch(url,{signal:active.signal,credentials:'omit'});if(!response.ok)throw new Error('lookup-failed');
-   const data=await response.json();if(current!==sequence)return;
-   if(!Array.isArray(data))throw new Error('invalid-response');
-   const addresses=data.filter(item=>typeof item.cep==='string'&&/^\d{5}-?\d{3}$/.test(item.cep)&&item.uf===uf.value);
-   if(!addresses.length){status.textContent='Não encontramos essa rua. Confira cidade e estado ou tente parte do nome da rua.';return}
-   status.textContent=addresses.length>=50?'Vários endereços encontrados. Confira o bairro ou detalhe mais o nome da rua.':'Selecione o endereço que corresponde à sua rua e ao seu bairro.';
-   for(const item of addresses.slice(0,50)){
-    const result=document.createElement('button');result.type='button';result.className='cep-result';
-    const title=document.createElement('strong');title.textContent=item.cep;
-    const description=document.createElement('span');description.textContent=[item.logradouro,item.complemento,item.bairro,[item.localidade,item.uf].filter(Boolean).join(' — ')].filter(Boolean).join(' · ');
-    result.append(title,description);results.append(result);
-    result.addEventListener('click',()=>{
-     cepController?.abort();cepSequence++;clearPreviousAddress();
-     const values={cep:item.cep,street:item.logradouro||'',district:item.bairro||'',city:item.localidade||'',state:item.uf};
-     showAddress();for(const [id,value] of Object.entries(values))document.getElementById(id).value=value;
-     lastCep=digits(item.cep);filledAddress={street:values.street,district:values.district,city:values.city,state:values.state};
-     cepInput.removeAttribute('aria-busy');retryCep.hidden=true;setCepStatus('Endereço selecionado. Confira os dados e informe o número.');refreshFields();closeSearch();document.getElementById('number').focus();
-    });
-   }
-  }catch{if(current===sequence)status.textContent='Não foi possível buscar agora. Tente novamente ou preencha o endereço manualmente.'}
-  finally{clearTimeout(timeout);if(current===sequence){button.disabled=false;button.textContent='Buscar meu CEP';controller=null}}
- });
-})();
-</script><!-- generated:checkout:start -->
+<!-- generated:checkout:start -->
 <script>
-(()=>{var y="mareazul.ironpayOrder",f="mareazul.ironpayIntent",v="pix-live-v2";function S(t=y){try{let e=JSON.parse(sessionStorage.getItem(t)||"null");return/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(e?.id||"")&&/^[a-f0-9]{64}$/.test(e?.accessToken||"")?e:null}catch{return null}}function u(t){window.__mareAzulPixDiagnostics=Object.freeze({version:v,page:location.pathname,code:t.code||null,httpStatus:t.httpStatus||null,orderStatus:t.orderStatus||null,hasPix:!!t.hasPix,hasSession:!!S(),checkedAt:new Date().toISOString()})}async function _(t){if(!t.headers.get("Content-Type")?.includes("application/json"))throw new Error("API_RESPONSE_INVALID");try{return await t.json()}catch{throw new Error("API_RESPONSE_INVALID")}}function k(t,e){return t?.id===e&&["creating","uncertain","rejected","pending","paid","canceled","refunded"].includes(t.status)}var c="DA5U5MRC77U8NT7JF3A0",j="jbkikbdjti",z="Kit Dobr\xE1vel Duo 3 em 1",m=!1,x=!1,I=!1,w=new Map,C=new Set,T=(t,e)=>`mareazul.tiktok.${c}.${e==="Purchase"?"purchase":"paid"}.${t}`;function $(t,e){if(C.has(T(t,e)))return!0;try{return localStorage.getItem(T(t,e))==="sent"}catch{return!1}}function h(t=119.9){return{currency:"BRL",value:t,content_type:"product",contents:[{content_id:j,content_name:z,quantity:1,price:t}]}}function B(){if(x)for(let[t,{id:e,amount:n,event:o}]of w){if(!$(e,o)){window.ttq.track(o,h(n/100),{event_id:`mareazul_${o==="Purchase"?"purchase":"paid"}_${e}`}),C.add(t);try{localStorage.setItem(t,"sent")}catch{}}w.delete(t)}}function N(){if(!(m||location.hostname!=="mare-azul.pages.dev")&&["/","/index.html","/checkout/","/pagamento/","/obrigado/"].includes(location.pathname)){m=!0;try{window.TiktokAnalyticsObject="ttq";let t=window.ttq=window.ttq||[];t.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],t.setAndDefer=(n,o)=>{n[o]=function(){n.push([o,...arguments])}};for(let n of t.methods)t.setAndDefer(t,n);t.instance=n=>{let o=t._i[n]||[];for(let a of t.methods)t.setAndDefer(o,a);return o},t._i=t._i||{},t._i[c]=[],t._i[c]._u="https://analytics.tiktok.com/i18n/pixel/events.js",t._t=t._t||{},t._t[c]=Date.now(),t._o=t._o||{},t._o[c]={};let e=document.createElement("script");e.async=!0,e.src=`${t._i[c]._u}?sdkid=${c}&lib=ttq`,e.onload=()=>{x=!0;try{B()}catch{}},document.head.appendChild(e),t.page(),["/","/index.html"].includes(location.pathname)&&t.track("ViewContent",h()),location.pathname==="/checkout/"&&t.track("InitiateCheckout",h())}catch{m=!1}}}function P(){if(!(!m||location.pathname!=="/checkout/"||I))try{window.ttq.track("AddPaymentInfo",h()),I=!0}catch{}}N();document.getElementById("street").addEventListener("input",t=>{t.isTrusted&&t.target.value.trim()&&P()});var s=document.getElementById("finish"),U=document.getElementById("checkoutForm"),r=t=>document.getElementById(t)?.value?.trim()||"",q=s.innerHTML,E=!1,d=!1;window.__mareAzulIronpayLoaded=!0;s.disabled=!1;u({code:"READY"});function b(t){return t.status==="paid"||t.status==="pending"&&typeof t.pixCode=="string"&&t.pixCode.trim()&&!t.pixCode.includes("DEMONSTRACAO")}async function O(t,e){if(sessionStorage.setItem(y,JSON.stringify({id:e.id,accessToken:e.accessToken,creationCode:typeof t.code=="string"&&/^[A-Z_]+$/.test(t.code)?t.code:null})),u({code:t.code,httpStatus:200,orderStatus:t.status,hasPix:!!t.pixCode}),!b(t)){let n=new AbortController,o=setTimeout(()=>n.abort(),2e4);try{let a=await fetch("/api/orders/"+encodeURIComponent(e.id),{headers:{Authorization:"Bearer "+e.accessToken},cache:"no-store",signal:n.signal}),i=await _(a);if(u({code:i.code||t.code,httpStatus:a.status,orderStatus:i.status,hasPix:!!i.pixCode}),!a.ok||!k(i,e.id)){d=!0;return}t=i}finally{clearTimeout(o)}}b(t)?location.assign("../pagamento/"):d=!0}async function D(t){if(t.preventDefault(),E||!validateCheckout())return;E=!0,d=!1,s.disabled=!0,s.textContent="Preparando Pix\u2026";let e=null;try{let n={name:r("name"),email:r("email"),phone_number:r("phone"),document:r("cpf"),street_name:r("street"),number:r("number"),complement:r("extra"),neighborhood:r("district"),city:r("city"),state:r("state"),zip_code:r("cep")},o=new URLSearchParams(location.search).get("cor")||"Azul",a=[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(JSON.stringify({customer:n,color:o}))))].map(g=>g.toString(16).padStart(2,"0")).join(""),i=S(f);if(i&&i.fingerprint!==a){await O({status:"uncertain"},i);return}if(!i){let g=[...crypto.getRandomValues(new Uint8Array(32))].map(L=>L.toString(16).padStart(2,"0")).join("");i={id:crypto.randomUUID(),accessToken:g,fingerprint:a},sessionStorage.setItem(f,JSON.stringify(i))}let A=new AbortController,R=setTimeout(()=>A.abort(),25e3),l;try{l=await fetch("/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},signal:A.signal,body:JSON.stringify({id:i.id,accessToken:i.accessToken,customer:n,color:o})})}finally{clearTimeout(R)}e=l.status;let p=await _(l);if(!l.ok){(p.retrySafe||l.status===422&&p.fields)&&sessionStorage.removeItem(f),u({code:p.code||"CREATE_FAILED",httpStatus:e}),d=!0;return}if(!k(p,i.id))throw new Error("API_RESPONSE_INVALID");await O(p,i)}catch(n){let o=n.message==="API_RESPONSE_INVALID"?n.message:"CREATE_CONNECTION_FAILED";u({code:o,httpStatus:e}),d=!0}finally{E=!1,s.disabled=!1,d?s.textContent="TENTAR NOVAMENTE":s.innerHTML=q}}s.addEventListener("click",D);U.addEventListener("submit",D);})();
+(()=>{var I="mareazul.ironpayOrder",k="mareazul.ironpayIntent",Q="pix-live-v2";function _(e=I){try{let t=JSON.parse(sessionStorage.getItem(e)||"null");return/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(t?.id||"")&&/^[a-f0-9]{64}$/.test(t?.accessToken||"")?t:null}catch{return null}}function h(e){window.__mareAzulPixDiagnostics=Object.freeze({version:Q,page:location.pathname,code:e.code||null,httpStatus:e.httpStatus||null,orderStatus:e.orderStatus||null,hasPix:!!e.hasPix,hasSession:!!_(),checkedAt:new Date().toISOString()})}async function $(e){if(!e.headers.get("Content-Type")?.includes("application/json"))throw new Error("API_RESPONSE_INVALID");try{return await e.json()}catch{throw new Error("API_RESPONSE_INVALID")}}function T(e,t){return e?.id===t&&["creating","uncertain","rejected","pending","paid","canceled","refunded"].includes(e.status)}var p="DA5U5MRC77U8NT7JF3A0",ee="jbkikbdjti",te="Kit Dobr\xE1vel Duo 3 em 1",C=!1,M=!1,D=!1,B=new Map,j=new Set,q=(e,t)=>`mareazul.tiktok.${p}.${t==="Purchase"?"purchase":"paid"}.${e}`;function ne(e,t){if(j.has(q(e,t)))return!0;try{return localStorage.getItem(q(e,t))==="sent"}catch{return!1}}function w(e=119.9){return{currency:"BRL",value:e,content_type:"product",contents:[{content_id:ee,content_name:te,quantity:1,price:e}]}}function oe(){if(M)for(let[e,{id:t,amount:a,event:n}]of B){if(!ne(t,n)){window.ttq.track(n,w(a/100),{event_id:`mareazul_${n==="Purchase"?"purchase":"paid"}_${t}`}),j.add(e);try{localStorage.setItem(e,"sent")}catch{}}B.delete(e)}}function z(){if(!document.querySelector('meta[name="checkout-test-mode"]')&&!(C||location.hostname!=="mare-azul.pages.dev")&&["/","/index.html","/checkout/","/pagamento/","/obrigado/"].includes(location.pathname)){C=!0;try{window.TiktokAnalyticsObject="ttq";let e=window.ttq=window.ttq||[];e.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],e.setAndDefer=(a,n)=>{a[n]=function(){a.push([n,...arguments])}};for(let a of e.methods)e.setAndDefer(e,a);e.instance=a=>{let n=e._i[a]||[];for(let i of e.methods)e.setAndDefer(n,i);return n},e._i=e._i||{},e._i[p]=[],e._i[p]._u="https://analytics.tiktok.com/i18n/pixel/events.js",e._t=e._t||{},e._t[p]=Date.now(),e._o=e._o||{},e._o[p]={};let t=document.createElement("script");t.async=!0,t.src=`${e._i[p]._u}?sdkid=${p}&lib=ttq`,t.onload=()=>{M=!0;try{oe()}catch{}},document.head.appendChild(t),e.page(),["/","/index.html"].includes(location.pathname)&&e.track("ViewContent",w()),location.pathname==="/checkout/"&&e.track("InitiateCheckout",w())}catch{C=!1}}}function U(){if(!(!C||location.pathname!=="/checkout/"||D))try{window.ttq.track("AddPaymentInfo",w()),D=!0}catch{}}function F(e){z(),document.getElementById("street").addEventListener("input",r=>{r.isTrusted&&r.target.value.trim()&&U()});let t=document.getElementById("finish"),a=document.getElementById("checkoutForm"),n=r=>document.getElementById(r)?.value?.trim()||"",i=t.innerHTML,c=!1,d=!1;window.__mareAzulIronpayLoaded=!0,t.disabled=!1,h({code:"READY"});function S(r){return r.status==="paid"||r.status==="pending"&&typeof r.pixCode=="string"&&r.pixCode.trim()&&!r.pixCode.includes("DEMONSTRACAO")}async function N(r,u){if(sessionStorage.setItem(I,JSON.stringify({id:u.id,accessToken:u.accessToken,creationCode:typeof r.code=="string"&&/^[A-Z_]+$/.test(r.code)?r.code:null})),h({code:r.code,httpStatus:200,orderStatus:r.status,hasPix:!!r.pixCode}),!S(r)){let l=new AbortController,f=setTimeout(()=>l.abort(),2e4);try{let g=await fetch("/api/orders/"+encodeURIComponent(u.id),{headers:{Authorization:"Bearer "+u.accessToken},cache:"no-store",signal:l.signal}),s=await $(g);if(h({code:s.code||r.code,httpStatus:g.status,orderStatus:s.status,hasPix:!!s.pixCode}),!g.ok||!T(s,u.id)){d=!0;return}r=s}finally{clearTimeout(f)}}S(r)?location.assign("../pagamento/"):d=!0}async function O(r){if(r.preventDefault(),c||!e())return;c=!0,d=!1,t.disabled=!0,t.textContent="Preparando Pix\u2026";let u=null;try{let l={name:n("name"),email:n("email"),phone_number:n("phone"),document:n("cpf"),street_name:n("street"),number:n("number"),complement:n("extra"),neighborhood:n("district"),city:n("city"),state:n("state"),zip_code:n("cep")},f=new URLSearchParams(location.search).get("cor")||"Azul",g=[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(JSON.stringify({customer:l,color:f}))))].map(x=>x.toString(16).padStart(2,"0")).join(""),s=_(k);if(s&&s.fingerprint!==g){await N({status:"uncertain"},s);return}if(!s){let x=[...crypto.getRandomValues(new Uint8Array(32))].map(Z=>Z.toString(16).padStart(2,"0")).join("");s={id:crypto.randomUUID(),accessToken:x,fingerprint:g},sessionStorage.setItem(k,JSON.stringify(s))}let R=new AbortController,X=setTimeout(()=>R.abort(),25e3),v;try{v=await fetch("/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},signal:R.signal,body:JSON.stringify({id:s.id,accessToken:s.accessToken,customer:l,color:f})})}finally{clearTimeout(X)}u=v.status;let b=await $(v);if(!v.ok){(b.retrySafe||v.status===422&&b.fields)&&sessionStorage.removeItem(k),h({code:b.code||"CREATE_FAILED",httpStatus:u}),d=!0;return}if(!T(b,s.id))throw new Error("API_RESPONSE_INVALID");await N(b,s)}catch(l){let f=l.message==="API_RESPONSE_INVALID"?l.message:"CREATE_CONNECTION_FAILED";h({code:f,httpStatus:u}),d=!0}finally{c=!1,t.disabled=!1,d?t.textContent="TENTAR NOVAMENTE":t.innerHTML=i}}t.addEventListener("click",O),a.addEventListener("submit",O)}var L={bronze:{name:"Bronze",amount:11990,image:"f27b4f275c81d505.png"},prata:{name:"Prata",amount:11990,image:"4533661a7b85490c.png"},ouro:{name:"Ouro",amount:11990,image:"e7067139f8507f7c.png"}},J=new URLSearchParams(location.search).get("plano"),A=Object.hasOwn(L,J)?L[J]:L.prata,o=e=>document.getElementById(e),H=e=>(e/100).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});o("sum-name").textContent=`Caixa Surpresa ${A.name}`;o("sum-img").src=`/assets/${A.image}`;o("sum-img").alt=`Caixa ${A.name}`;o("sum-price").textContent=o("sum-subtotal").textContent=H(A.amount);o("sum-total").textContent=H(A.amount);function m(e,t,a,n,i=""){return`<div class="form-group" id="fg-${e}"><label for="${e}">${t}</label><input id="${e}" type="text" placeholder="${a}" autocomplete="${n}" ${i?`maxlength="${i}"`:""}><div class="field-error sf-hidden">Preencha ${t.toLowerCase()} corretamente.</div></div>`}o("body-entrega").innerHTML=m("cep","CEP","00000-000","postal-code",9)+m("street","Endere\xE7o","Rua ou avenida","address-line1")+`<div class="form-row">${m("number","N\xFAmero","N\xFAmero","off")}${m("extra","Complemento (opcional)","Apartamento, bloco...","address-line2")}</div>`+m("district","Bairro","Seu bairro","address-level3")+`<div class="form-row">${m("city","Cidade","Sua cidade","address-level2")}${m("state","Estado","UF","address-level1",2)}</div><div class="delivery-option"><span>Entrega padr\xE3o</span><span>Frete gr\xE1tis</span></div><button type="button" class="btn-continuar" id="continuar-entrega">Continuar \u2192</button>`;o("body-pagamento").innerHTML='<div class="payment-option"><strong>Pix</strong><span>Pagamento \xE0 vista</span></div><p class="preview-note">Total deste teste: <strong>R$ 119,90</strong>.</p><button type="submit" class="btn-continuar" id="finish" disabled>GERAR PIX DE R$ 119,90</button>';for(let e of document.querySelectorAll(".form-group input"))e.previousElementSibling?.setAttribute("for",e.id),e.addEventListener("input",()=>{e.removeAttribute("aria-invalid"),e.parentElement.querySelector(".field-error")?.classList.add("sf-hidden")});var y=e=>e.replace(/\D/g,"");o("cpf").addEventListener("input",e=>{let t=y(e.target.value).slice(0,11);e.target.value=t.replace(/^(\d{3})(\d)/,"$1.$2").replace(/^(\d{3})\.(\d{3})(\d)/,"$1.$2.$3").replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,"$1.$2.$3-$4")});o("phone").addEventListener("input",e=>{e.target.value=e.target.value.replace(/[^\d+() -]/g,"").slice(0,22)});o("cep").inputMode="numeric";o("cep").addEventListener("input",e=>{e.target.value=y(e.target.value).slice(0,8).replace(/(\d{5})(\d)/,"$1-$2")});o("state").addEventListener("input",e=>{e.target.value=e.target.value.replace(/[^a-z]/gi,"").toUpperCase()});function ae(e){let t=y(e);if(t.length!==11||/^(\d)\1+$/.test(t))return!1;for(let a=9;a<=10;a++){let n=0;for(let c=0;c<a;c++)n+=Number(t[c])*(a+1-c);let i=n*10%11;if((i===10?0:i)!==Number(t[a]))return!1}return!0}function K(e){let t=null;for(let[a,n]of e){let i=o(a),c=i.parentElement.querySelector(".field-error");i.setAttribute("aria-invalid",String(!n)),c?.classList.toggle("sf-hidden",n),!n&&!t&&(t=i)}return t?.focus(),!t}var Y=()=>K([["name",o("name").value.trim().split(/\s+/).filter(Boolean).length>=2],["email",/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(o("email").value.trim())],["phone",/^[1-9]\d9\d{8}$/.test(W())],["cpf",ae(o("cpf").value)]]),re=new Set("AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO".split(" ")),G=()=>K([["cep",y(o("cep").value).length===8],...["street","number","district","city"].map(e=>[e,o(e).value.trim().length>0]),["state",re.has(o("state").value)]]);function E(e){for(let t of["dados","entrega","pagamento"]){let a=t===e;o("body-"+t).classList.toggle("sf-hidden",!a),o("body-"+t).classList.toggle("open",a),o("chev-"+t).classList.toggle("open",a),document.querySelector("#sec-"+t+" .section-header").setAttribute("aria-expanded",String(a))}o("sec-"+e).scrollIntoView({behavior:"smooth",block:"start"})}function P(e){if(e!=="dados"&&!Y()){E("dados");return}if(e==="pagamento"&&!G()){E("entrega");return}e==="pagamento"&&o("sec-pagamento").classList.remove("section-locked"),E(e)}document.querySelector("#body-dados .btn-continuar").addEventListener("click",()=>P("entrega"));o("continuar-entrega").addEventListener("click",()=>P("pagamento"));for(let e of["dados","entrega","pagamento"]){let t=document.querySelector("#sec-"+e+" .section-header");t.setAttribute("role","button"),t.tabIndex=0,t.setAttribute("aria-controls","body-"+e),t.setAttribute("aria-expanded",String(e==="dados")),t.addEventListener("click",()=>P(e)),t.addEventListener("keydown",a=>{(a.key==="Enter"||a.key===" ")&&(a.preventDefault(),P(e))})}function W(){let e=y(o("phone").value);return e.length===13&&e.startsWith("55")?e.slice(2):e}function ie(){return Y()?G()?(o("phone").value=W(),!0):(E("entrega"),!1):(E("dados"),!1)}var V=0;o("cep").addEventListener("input",async()=>{let e=++V,t=y(o("cep").value);if(t.length!==8)return;let a=Object.fromEntries(["street","district","city","state"].map(n=>[n,o(n).value]));try{let n=await fetch("/api/cep/"+t,{signal:AbortSignal.timeout(14e3)});if(!n.ok)return;let i=await n.json();if(e!==V)return;let c={street:i.logradouro,district:i.bairro,city:i.localidade,state:i.uf};for(let[d,S]of Object.entries(c))typeof S=="string"&&o(d).value===a[d]&&(o(d).value=S)}catch{}});F(ie);})();
 
 </script>
 <!-- generated:checkout:end --></body></html>

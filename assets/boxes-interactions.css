@@ -1,0 +1,10 @@
+/* Interaction states. Original page geometry is kept in each HTML document. */
+:focus-visible{outline:3px solid #ff6b00;outline-offset:3px}
+.field-error:not(.sf-hidden){display:block}
+.form-group input[aria-invalid="true"]{border-color:var(--error)}
+.section-header[role="button"]:focus-visible{outline-offset:-3px}
+.delivery-option,.payment-option,.upgrade-option{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:12px;font-size:13px;line-height:1.5}
+.delivery-option span:last-child{margin-left:auto;color:#16a34a;font-weight:700}
+.upgrade-option input{accent-color:var(--primary);width:18px;height:18px;flex-shrink:0}
+.preview-note{padding:12px;border:1px solid var(--border);border-radius:10px;color:var(--text-muted);font-size:12px;line-height:1.6;margin:12px 0}
+#play .video-message{display:block;width:auto;height:auto;max-width:85%;padding:16px;border-radius:12px;color:white;font:600 14px/1.5 Inter,system-ui,sans-serif;box-shadow:none}
