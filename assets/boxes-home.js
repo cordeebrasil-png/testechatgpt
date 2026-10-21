@@ -1,6 +1,6 @@
 'use strict';
 // The snapshot contains the poster only. Add the original MP4 here when available.
-const VIDEO_URL = '';
+const VIDEO_URL = '/assets/testimonial.mp4';
 // Set the real campaign deadline in ISO 8601 format. Until then retain snapshot digits.
 const OFFER_ENDS_AT = '';
 const track = document.getElementById('track');
