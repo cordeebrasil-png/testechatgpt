@@ -96,3 +96,9 @@ O catálogo fica em `shared/shipping.js`. O servidor ignora valores enviados pel
 A fotografia de preços de cada pedido é persistida em `orders.receipt_json.pricing` antes de consultar a IronPay. Não é necessária migração D1. Consulta e webhook validam o valor retornado contra esse total salvo, nunca contra o catálogo atual ou dados enviados no webhook. Registros antigos sem preços salvos continuam associados a R$ 119,90. Alterar o frete depois de já emitir um Pix não substitui automaticamente a cobrança existente: a tentativa é conciliada para evitar duplicação.
 
 Os testes usam respostas interceptadas; não pagam nem criam transações reais. A aceitação do valor acrescido pela oferta específica de produção deve ser confirmada com uma emissão real pelo checkout. Se o provedor devolver outro valor, o código Pix não é liberado para aquele pedido.
+
+## Presell
+
+A entrada opcional do funil é `/acesso/`. A página prepara os recursos visuais e revela o botão **PROSSEGUIR**, que leva à página de vendas em `/`. Não há redirecionamento automático. Query string e fragmento são preservados no clique; parâmetros não podem alterar o destino para outro domínio. A interface não simula consulta de estoque. Sem JavaScript, o botão continua acessível. Fontes, logo, CSS e JavaScript são locais.
+
+Use `/acesso/` nos links de entrada dos anúncios. A página de vendas continua acessível diretamente em `/`. O pixel permanece pausado durante o teste conforme a configuração atual do funil.
