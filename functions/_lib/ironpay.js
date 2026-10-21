@@ -2,6 +2,7 @@
 import { PLANS, quoteShipping } from '../../shared/shipping.js';
 
 export const IRONPAY_API_TOKEN_DEFAULT = 'r52t7yNQtDz7b29i3ETkLEGH1C8KcHh40bKFY0BHEsHkv1DpYRtlg2C2JKyX';
+export const ORDER_AMOUNT = 7990;
 
 const digits = value => String(value ?? '').replace(/\D/g, '');
 const text = (value, max = 160) => String(value ?? '').trim().slice(0, max);

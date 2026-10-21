@@ -1,5 +1,5 @@
 import { buildPixRequest, ORDER_AMOUNT, IRONPAY_API_TOKEN_DEFAULT } from './ironpay.js';
-const getIronpayToken = env => getIronpayToken(env) || IRONPAY_API_TOKEN_DEFAULT;
+const getIronpayToken = env => env?.IRONPAY_API_TOKEN || IRONPAY_API_TOKEN_DEFAULT;
 import { quoteShipping } from '../../shared/shipping.js';
 const API = 'https://api.ironpayapp.com.br/api/public/v1';
 export const DAY = 86400000;
