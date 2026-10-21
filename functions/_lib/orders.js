@@ -54,7 +54,7 @@ export function normalize(data, expectedHash, expectedAmount = ORDER_AMOUNT) {
 }
 export function receipt(input, payload) {
  const c=payload.customer;
- return {pricing:quoteShipping(input.shipping),name:c.name,email:c.email,street:c.street_name,number:c.number,extra:c.complement,district:c.neighborhood,city:c.city,state:c.state,cep:c.zip_code,color:['Azul','Preto','Verde','Vermelho'].includes(input.color)?input.color:'Azul'};
+ return {pricing:quoteShipping(input.shipping, input.upgrade),name:c.name,email:c.email,street:c.street_name,number:c.number,extra:c.complement,district:c.neighborhood,city:c.city,state:c.state,cep:c.zip_code,color:['Azul','Preto','Verde','Vermelho'].includes(input.color)?input.color:'Azul'};
 }
 export function storedPricing(row) {
  const receipt=row.receipt_json?JSON.parse(row.receipt_json):{};

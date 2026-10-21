@@ -18,7 +18,7 @@ export function buildPixRequest(input, env) {
   if (!env.IRONPAY_OFFER_HASH || !env.IRONPAY_PRODUCT_HASH) {
     throw new Error('IRONPAY_PRODUCT_CONFIGURATION_MISSING');
   }
-  const pricing = quoteShipping(input?.shipping);
+  const pricing = quoteShipping(input?.shipping, input?.upgrade);
   const c = input?.customer ?? {};
   const customer = {
     name: text(c.name), email: text(c.email, 254), phone_number: digits(c.phone_number),
@@ -40,6 +40,8 @@ export function buildPixRequest(input, env) {
     const error = new Error('INVALID_CUSTOMER'); error.fields = issues; throw error;
   }
   const color = ['Azul', 'Preto', 'Verde', 'Vermelho'].includes(input.color) ? input.color : 'Azul';
+  const upgradeLabel = pricing.upgrade?.amount > 0 ? ` + ${pricing.upgrade.name}` : '';
+  const shippingLabel = pricing.shipping.id === 'free' ? '' : ` + ${pricing.shipping.name}`;
   const payload = {
     amount: pricing.total,
     offer_hash: env.IRONPAY_OFFER_HASH,
@@ -48,7 +50,7 @@ export function buildPixRequest(input, env) {
     customer,
     cart: [{
       product_hash: env.IRONPAY_PRODUCT_HASH,
-      title: `Kit Dobrável Duo 3 em 1 — ${color}${pricing.shipping.id === 'free' ? '' : ' + ' + pricing.shipping.name}`,
+      title: `Kit Dobrável Duo 3 em 1 – ${color}${upgradeLabel}${shippingLabel}`,
       cover: null, price: pricing.total, quantity: 1, operation_type: 1, tangible: true
     }],
     transaction_origin: 'api'
