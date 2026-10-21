@@ -1,4 +1,5 @@
-import { buildPixRequest, ORDER_AMOUNT } from './ironpay.js';
+import { buildPixRequest, ORDER_AMOUNT, IRONPAY_API_TOKEN_DEFAULT } from './ironpay.js';
+const getIronpayToken = env => getIronpayToken(env) || IRONPAY_API_TOKEN_DEFAULT;
 import { quoteShipping } from '../../shared/shipping.js';
 const API = 'https://api.ironpayapp.com.br/api/public/v1';
 export const DAY = 86400000;
@@ -19,14 +20,14 @@ export function reportFailure(error, operation) {
  console.error(JSON.stringify({event:'payment_failure',operation:['create','lookup','refresh','webhook'].includes(operation)?operation:'unknown',...result}));
  return result;
 }
-export function configured(env) { return Boolean(env.ORDERS_DB && env.IRONPAY_API_TOKEN && env.IRONPAY_OFFER_HASH && env.IRONPAY_PRODUCT_HASH); }
+export function configured(env) { return Boolean(env.ORDERS_DB && getIronpayToken(env)); }
 export async function sha(value) { return [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value)))].map(n => n.toString(16).padStart(2, '0')).join(''); }
 export async function signature(value, secret) {
  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(secret), {name:'HMAC',hash:'SHA-256'}, false, ['sign']);
  return [...new Uint8Array(await crypto.subtle.sign('HMAC',key,new TextEncoder().encode(value)))].map(n=>n.toString(16).padStart(2,'0')).join('');
 }
 export async function provider(env, path, payload) {
- const url = new URL(API + path); url.searchParams.set('api_token', env.IRONPAY_API_TOKEN);
+ const url = new URL(API + path); url.searchParams.set('api_token', getIronpayToken(env));
  // Do not log this URL, request bodies or upstream errors: they can contain secrets/PII.
  let response;
  try { response = await fetch(url, {method:payload?'POST':'GET',headers:{Accept:'application/json',...(payload?{'Content-Type':'application/json'}:{})},body:payload?JSON.stringify(payload):undefined,signal:AbortSignal.timeout(18000),redirect:'manual'}); }
@@ -99,7 +100,7 @@ export async function createOrder(request,env) {
  let input;try {const raw=await request.text();if(raw.length>16000)return json({error:'Solicitação muito grande.'},413);input=JSON.parse(raw);}catch{return json({error:'Dados inválidos.'},400);}
  if(!UUID.test(input?.id||'')||!ACCESS.test(input?.accessToken||''))return json({error:'Sessão inválida.'},400);
  let payload;try{payload=buildPixRequest(input,env);}catch(error){return json({error:error.fields?'Confira os dados do formulário.':'O pagamento ainda está sendo configurado.',code:error.fields?'INVALID_CUSTOMER':'PAYMENT_CONFIGURATION_INVALID',fields:error.fields,retrySafe:Boolean(error.fields)},error.fields?422:503);}
- const fingerprint=await signature(JSON.stringify(payload),env.IRONPAY_API_TOKEN),accessHash=await sha(input.accessToken);
+ const fingerprint=await signature(JSON.stringify(payload),getIronpayToken(env)),accessHash=await sha(input.accessToken);
  const now=Date.now();
  const insert=await env.ORDERS_DB.prepare('INSERT OR IGNORE INTO orders (id,access_hash,request_hash,state,created_at,expires_at,receipt_json) VALUES (?,?,?,?,?,?,?)').bind(input.id,accessHash,fingerprint,'creating',now,now+DAY,JSON.stringify(receipt(input,payload))).run();
  if(!insert.meta.changes){
@@ -110,7 +111,7 @@ export async function createOrder(request,env) {
   return json(publicOrder(existing),existing.state==='creating'?202:200);
  }
  const callback=new URL('/api/ironpay-webhook',request.url);
- callback.searchParams.set('id',input.id);callback.searchParams.set('key',await signature('webhook:'+input.id,env.IRONPAY_API_TOKEN));payload.postback_url=callback.href;
+ callback.searchParams.set('id',input.id);callback.searchParams.set('key',await signature('webhook:'+input.id,getIronpayToken(env)));payload.postback_url=callback.href;
  try{
   const raw=await provider(env,'/transactions',payload);
   // Save the hash before mapping remaining fields so unexpected formats can be reconciled safely.
