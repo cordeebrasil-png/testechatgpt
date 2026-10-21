@@ -435,7 +435,7 @@ function renderInlinePix(orderData,creds){
             if(waitBox){
               waitBox.innerHTML='<span style="color:#16a34a;font-weight:900;font-size:15px">✓ Pagamento Confirmado! Preparando seu envio...</span>';
             }
-            showToast("Pagamento confirmado com sucesso!");setTimeout(()=>{location.assign("../obrigado/");},2000);
+            showToast("Pagamento confirmado com sucesso!");setTimeout(()=>{location.assign("../obrigado/?ref=" + encodeURIComponent((creds?.id || "").slice(0, 8).toUpperCase()));},2000);
           }
         }
       }catch(e){}
