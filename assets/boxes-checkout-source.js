@@ -3,9 +3,9 @@ import { initIronPayCheckout } from './ironpay-checkout-source.js';
 // Address/payment contents were absent from SingleFile: reconstructed with original design tokens.
 // Existing IronPay product: server-owned base price plus selected shipping.
 const plans = {
-  bronze: {name:'Bronze', amount:11990, image:'f27b4f275c81d505.png'},
-  prata: {name:'Prata', amount:11990, image:'4533661a7b85490c.png'},
-  ouro: {name:'Ouro', amount:11990, image:'e7067139f8507f7c.png'},
+  bronze: {name:'Bronze', amount:7990, image:'f27b4f275c81d505.png'},
+  prata: {name:'Prata', amount:7990, image:'4533661a7b85490c.png'},
+  ouro: {name:'Ouro', amount:9990, image:'e7067139f8507f7c.png'},
 };
 const key = new URLSearchParams(location.search).get('plano');
 const plan = Object.hasOwn(plans, key) ? plans[key] : plans.prata;
@@ -32,7 +32,7 @@ $('body-entrega').innerHTML = field('cep','CEP','00000-000','postal-code',9)
  + `<div class="form-group"><label for="state">Estado</label><select id="state" autocomplete="address-level1"><option value="">Selecione...</option>${'AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(' ').map(uf=>`<option value="${uf}">${uf}</option>`).join('')}</select><div class="field-error sf-hidden">Selecione um estado.</div></div>`
  + `<fieldset class="shipping-options"><legend>Escolha o frete:</legend>${shippingOptions.map((option,index)=>`<label class="shipping-choice"><input type="radio" name="shipping" value="${option.id}" ${index===0?'checked':''}><span class="shipping-icon ${option.icon}" aria-hidden="true"><svg viewBox="0 0 24 24">${shippingIcons[option.icon]}</svg></span><span class="shipping-copy"><strong>${option.name}</strong><small class="${option.id==='express'?'express-copy':''}">${option.description}</small></span><span class="shipping-price ${option.price===0?'free-price':''}">${option.price===0?'Grátis':money(option.price)}</span><span class="shipping-radio" aria-hidden="true"></span></label>`).join('')}</fieldset>`
  + '<button type="button" class="btn-continuar" id="continuar-entrega">Continuar para Pagamento <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg></button>';
-$('body-pagamento').innerHTML = '<div class="payment-option"><strong>Pix</strong><span>Pagamento à vista</span></div><p class="preview-note">Total com frete: <strong id="payment-total">R$ 119,90</strong>.</p><button type="submit" class="btn-continuar" id="finish" disabled>GERAR PIX DE R$ 119,90</button>';
+$('body-pagamento').innerHTML = '<div class="payment-option"><strong>Pix</strong><span>Pagamento à vista</span></div><p class="preview-note">Total com frete: <strong id="payment-total">R$ 79,90</strong>.</p><button type="submit" class="btn-continuar" id="finish" disabled>GERAR PIX DE R$ 79,90</button>';
 function updateShipping() {
  const pricing=quoteShipping(document.querySelector('input[name="shipping"]:checked').value);
  $('sum-frete-label').textContent=pricing.shipping.name;
