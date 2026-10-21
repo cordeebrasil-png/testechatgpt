@@ -8,3 +8,23 @@
 .upgrade-option input{accent-color:var(--primary);width:18px;height:18px;flex-shrink:0}
 .preview-note{padding:12px;border:1px solid var(--border);border-radius:10px;color:var(--text-muted);font-size:12px;line-height:1.6;margin:12px 0}
 #play .video-message{display:block;width:auto;height:auto;max-width:85%;padding:16px;border-radius:12px;color:white;font:600 14px/1.5 Inter,system-ui,sans-serif;box-shadow:none}
+/* Delivery step matched to the supplied expanded reference. */
+.form-group select{width:100%;border:1px solid var(--border);background:#fff;color:var(--text);font:500 15px Inter,system-ui,sans-serif;padding:11px 12px;border-radius:10px;outline:none;appearance:none}
+.form-group select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(255,107,0,.12)}
+.form-group select[aria-invalid="true"]{border-color:var(--error)}
+.shipping-options{border:0;padding:0;margin:0 0 14px;min-width:0}
+.shipping-options legend{padding:0;margin:0 0 8px;font-size:13px;font-weight:700;color:#16181d}
+.shipping-choice{display:flex;align-items:center;gap:10px;position:relative;min-height:53px;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:#fff;cursor:pointer}
+.shipping-choice+.shipping-choice{margin-top:6px}
+.shipping-choice:has(input:checked){border-color:var(--primary);background:#fff2e8}
+.shipping-choice:has(input:focus-visible){outline:3px solid #ff6b0066;outline-offset:2px}
+.shipping-choice>input{position:absolute;width:1px;height:1px;opacity:0;margin:0}
+.shipping-icon{width:30px;height:30px;display:grid;place-items:center;border-radius:8px;background:#f0f0f0;flex-shrink:0;color:#666}
+.shipping-icon.gift{color:#00ce58}.shipping-icon.pin,.shipping-icon.bolt{color:#ff6b00}
+.shipping-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.shipping-copy{flex:1;min-width:0;line-height:1.25}.shipping-copy strong{display:block;font-size:13px;font-weight:800}.shipping-copy small{display:block;font-size:11px;color:var(--text-muted);margin-top:2px}.shipping-copy .express-copy{color:var(--primary);font-weight:600}
+.shipping-price{font-size:13px;font-weight:800;white-space:nowrap;color:var(--text)}.shipping-price.free-price{color:#00ce58}
+.shipping-radio{width:18px;height:18px;flex-shrink:0;border:2px solid var(--border);border-radius:50%;display:grid;place-items:center}
+.shipping-choice input:checked~.shipping-radio{background:var(--primary);border-color:var(--primary)}
+.shipping-choice input:checked~.shipping-radio::after{content:'';width:4px;height:8px;border:solid #fff;border-width:0 1.5px 1.5px 0;transform:translateY(-1px) rotate(45deg)}
+#sec-entrega{scroll-margin-top:68px}

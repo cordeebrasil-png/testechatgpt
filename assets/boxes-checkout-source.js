@@ -18,14 +18,33 @@ $('sum-total').textContent = money(plan.amount);
 function field(id, label, placeholder, autocomplete, max = '') {
   return `<div class="form-group" id="fg-${id}"><label for="${id}">${label}</label><input id="${id}" type="text" placeholder="${placeholder}" autocomplete="${autocomplete}" ${max ? `maxlength="${max}"` : ''}><div class="field-error sf-hidden">Preencha ${label.toLowerCase()} corretamente.</div></div>`;
 }
+const shippingOptions = [
+ {id:'free',name:'Frete Grátis',description:'4 a 7 dias úteis',price:0,icon:'gift'},
+ {id:'jadlog',name:'JadLog',description:'3 a 5 dias úteis',price:990,icon:'truck'},
+ {id:'pickup',name:'Retirada no Shopping Iguatemi',description:'Ribeirão Preto · retire no mesmo dia',price:0,icon:'pin'},
+ {id:'express',name:'Full 24hrs',description:'Entrega em 24 horas ⚡',price:1990,icon:'bolt'},
+];
+const shippingIcons = {
+ gift:'<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8H8a3 3 0 1 1 3-3l1 3Zm0 0h4a3 3 0 1 0-3-3l-1 3Z"/>',
+ truck:'<path d="M1 4h13v13H1zM14 9h5l4 5v3h-9M18 9v5h5"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/>',
+ pin:'<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+ bolt:'<path d="m13 2-10 12h8l-1 8L22 9h-9l1-7Z"/>',
+};
 $('body-entrega').innerHTML = field('cep','CEP','00000-000','postal-code',9)
- + field('street','Endereço','Rua ou avenida','address-line1')
- + `<div class="form-row">${field('number','Número','Número','off')}${field('extra','Complemento (opcional)','Apartamento, bloco...','address-line2')}</div>`
- + field('district','Bairro','Seu bairro','address-level3')
- + `<div class="form-row">${field('city','Cidade','Sua cidade','address-level2')}${field('state','Estado','UF','address-level1',2)}</div>`
- + '<div class="delivery-option"><span>Entrega padrão</span><span>Frete grátis</span></div><button type="button" class="btn-continuar" id="continuar-entrega">Continuar →</button>';
+ + field('street','Rua / Endereço','Rua, Avenida...','address-line1')
+ + `<div class="form-row">${field('number','Número','123','off')}${field('extra','Complemento','Apto, Bloco...','address-line2')}</div>`
+ + `<div class="form-row">${field('district','Bairro','Bairro','address-level3')}${field('city','Cidade','Cidade','address-level2')}</div>`
+ + `<div class="form-group"><label for="state">Estado</label><select id="state" autocomplete="address-level1"><option value="">Selecione...</option>${'AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(' ').map(uf=>`<option value="${uf}">${uf}</option>`).join('')}</select><div class="field-error sf-hidden">Selecione um estado.</div></div>`
+ + `<fieldset class="shipping-options"><legend>Escolha o frete:</legend>${shippingOptions.map((option,index)=>`<label class="shipping-choice"><input type="radio" name="shipping" value="${option.id}" ${index===0?'checked':''}><span class="shipping-icon ${option.icon}" aria-hidden="true"><svg viewBox="0 0 24 24">${shippingIcons[option.icon]}</svg></span><span class="shipping-copy"><strong>${option.name}</strong><small class="${option.id==='express'?'express-copy':''}">${option.description}</small></span><span class="shipping-price ${option.price===0?'free-price':''}">${option.price===0?'Grátis':money(option.price)}</span><span class="shipping-radio" aria-hidden="true"></span></label>`).join('')}</fieldset>`
+ + '<button type="button" class="btn-continuar" id="continuar-entrega">Continuar para Pagamento <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg></button>';
+// Shipping selection is visual in this fixed-price test; never change the API amount.
+for(const input of document.querySelectorAll('input[name="shipping"]')) input.addEventListener('change',()=>{
+ const option=shippingOptions.find(item=>item.id===input.value);
+ $('sum-frete-label').textContent=option.name;
+ $('sum-frete').textContent=option.price?'Incluído no teste':'Grátis';
+});
 $('body-pagamento').innerHTML = '<div class="payment-option"><strong>Pix</strong><span>Pagamento à vista</span></div><p class="preview-note">Total deste teste: <strong>R$ 119,90</strong>.</p><button type="submit" class="btn-continuar" id="finish" disabled>GERAR PIX DE R$ 119,90</button>';
-for (const input of document.querySelectorAll('.form-group input')) {
+for (const input of document.querySelectorAll('.form-group input, .form-group select')) {
   input.previousElementSibling?.setAttribute('for', input.id);
   input.addEventListener('input', () => {
     input.removeAttribute('aria-invalid');
@@ -40,7 +59,7 @@ $('cpf').addEventListener('input', e => {
 $('phone').addEventListener('input', e => { e.target.value=e.target.value.replace(/[^\d+() -]/g,'').slice(0,22); });
 $('cep').inputMode = 'numeric';
 $('cep').addEventListener('input', e => {e.target.value=digits(e.target.value).slice(0,8).replace(/(\d{5})(\d)/,'$1-$2');});
-$('state').addEventListener('input', e => {e.target.value=e.target.value.replace(/[^a-z]/gi,'').toUpperCase();});
+
 function validCPF(value) {
   const v=digits(value); if(v.length!==11 || /^(\d)\1+$/.test(v))return false;
   for(let size=9;size<=10;size++) { let sum=0;for(let i=0;i<size;i++)sum+=Number(v[i])*(size+1-i);const digit=(sum*10)%11; if((digit===10?0:digit)!==Number(v[size]))return false; }return true;
