@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calças Jeans Premium UltraModel — Cordee</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  --font-logo: 'Cormorant Garamond', serif;
+  --navy:        #312737;
+  --navy-deep:   #201822;
+  --navy-mid:    #4b3a50;
+  --sand:        #c77d8f;
+  --sand-light:  #fff0f3;
+  --cream:       #fbf7f4;
+  --cream-dark:  #f3e7e5;
+  --white:       #ffffff;
+  --text:        #18212e;
+  --muted:       #6b7a8d;
+  --border:      #eadbd8;
+  --cta:         #1a8f4e;
+  --cta-hover:   #157a40;
+  --cta-glow:    rgba(26,143,78,.32);
+  --cta-light:   #e6f5ec;
+  --green-text:  #1a6e3d;
+  --pix:         #32bcad;
+  --star:        #f5a623;
+}
+
+html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
+body { font-family: var(--font-main); color: var(--text); background: var(--cream); line-height: 1.6; max-width: 100%; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+.announce-bar {
+  background: #201822;
+  color: #fff5f7;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+  text-align: center; padding: 0 16px; overflow: hidden;
+  text-transform: uppercase;
+  height: 36px; display: flex; align-items: center;
+}
+.announce-track { display: flex; animation: annSlide 15s infinite ease-in-out; width: 100%; }
+.announce-item  { min-width: 100%; display: flex; align-items: center; justify-content: center; white-space: normal; line-height: 1.2; }
+@keyframes annSlide {
+  0%,28%  { transform: translateX(0%); }
+  33%,61% { transform: translateX(-100%); }
+  66%,94% { transform: translateX(-200%); }
+  99%,100%{ transform: translateX(0%); }
+}
+
+header {
+  background: rgba(255,255,255,.94);
+  padding: 22px 48px 18px;
+  display: flex; justify-content: center;
+  align-items: center; flex-direction: column; gap: 14px;
+  border-bottom: 1px solid rgba(234,219,216,.9);
+  box-shadow: 0 8px 34px rgba(49,39,55,.08);
+}
+.logo-wrap { text-align: center; }
+.logo { 
+  font-family: var(--font-logo); 
+  font-size: 36px; 
+  font-weight: 700; 
+  color: var(--navy); 
+  letter-spacing: 2.5px; 
+  line-height: 1.1; 
+  text-transform: uppercase;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+.logo-sub { 
+  font-size: 11px; 
+  letter-spacing: 5px; 
+  text-transform: uppercase; 
+  margin-top: 6px; 
+  font-weight: 700;
+  color: var(--sand);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  filter: none;
+  display: block;
+}
+.header-nav {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  width: 100%;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .2px; text-transform: none;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(234,219,216,.75);
+  padding: 10px 0 0;
+}
+.header-nav a { position: relative; padding-bottom: 2px; color: var(--muted); }
+.header-nav a:last-child { color: var(--navy-mid); font-weight: 700; }
+.header-nav .nav-home { color: var(--muted); }
+.header-nav .nav-sep { color: #d5c3c0; font-size: 10px; font-weight: 600; letter-spacing: 0; line-height: 1; }
+.header-nav a::after {
+  content: ''; position: absolute; left: 50%; bottom: 0; width: 0; height: 2px;
+  background: var(--sand); transition: all .2s; transform: translateX(-50%);
+}
+.header-nav a:hover::after { width: 100%; }
+
+.breadcrumb { background: #fff8f9; border-bottom: 1px solid var(--border); padding: 10px 48px; font-size: 11.5px; color: var(--muted); }
+.breadcrumb a { color: var(--muted); transition: color .2s; }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb span { color: var(--text); font-weight: 500; }
+
+.product-wrap {
+  max-width: 1200px; margin: 0 auto; padding: 48px 48px 88px;
+  display: grid; grid-template-columns: 54% 1fr; gap: 68px; align-items: start;
+}
+
+.gallery { position: sticky; top: 20px; min-width: 0; }
+.main-img-wrap {
+  width: 100%; aspect-ratio: 1/1; border-radius: 14px; overflow: hidden;
+  background: var(--white); border: 1px solid var(--border);
+  margin-bottom: 12px; position: relative;
+  box-shadow: 0 14px 54px rgba(49,39,55,.12);
+}
+
+/* Carousel Styles */
+.carousel-container { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.carousel-track { display: flex; transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); height: 100%; }
+.carousel-slide { min-width: 100%; height: 100%; }
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+.carousel-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 15px; pointer-events: none; z-index: 10; }
+.nav-arrow { 
+  width: 28px; height: 28px; background: rgba(255,255,255,0.7); border-radius: 50%; 
+  display: flex; align-items: center; justify-content: center; cursor: pointer; 
+  pointer-events: auto; border: 1px solid rgba(0,0,0,0.05); 
+  transition: all 0.2s;
+}
+.nav-arrow:hover { background: rgba(255,255,255,1); transform: scale(1.05); }
+.nav-arrow svg { width: 14px; height: 14px; fill: var(--navy); opacity: 0.8; }
+
+.badge-over {
+  position: absolute; top: 14px; right: 14px;
+  background: var(--cta); color: #fff;
+  font-size: 10px; font-weight: 800;
+  letter-spacing: 0.3px; text-transform: uppercase;
+  padding: 5px 11px; border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(26,143,78,.22);
+  z-index: 5;
+}
+.thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.thumbs::-webkit-scrollbar { height: 4px; }
+.thumbs::-webkit-scrollbar-track { background: transparent; }
+.thumbs::-webkit-scrollbar-thumb { background: #dcc9c7; border-radius: 999px; }
+.thumb { flex: 0 0 calc((100% - 32px) / 5); aspect-ratio: 1; scroll-snap-align: start; border-radius: 8px; overflow: hidden; border: 2px solid transparent; cursor: pointer; background: var(--white); transition: border-color .2s, transform .2s; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.thumb:hover { border-color: var(--sand); transform: translateY(-2px); }
+.thumb.active { border-color: var(--navy); }
+
+.product-info { padding-top: 2px; min-width: 0; }
+.sold-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--sand-light); border: 1px solid #efc1cc;
+  border-radius: 6px; padding: 5px 13px;
+  font-size: 11.5px; font-weight: 700; color: #8f3a50;
+  margin-bottom: 16px; letter-spacing: .3px;
+}
+.badge-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.badge-row .sold-badge { margin-bottom: 0; }
+.deal-badge {
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  background: #ff4f7a; color: #fff; border-radius: 5px;
+  padding: 6px 9px; font-size: 11px; font-weight: 900;
+  letter-spacing: .25px; text-transform: uppercase;
+  box-shadow: 0 6px 16px rgba(255,79,122,.16);
+}
+.deal-badge::before {
+  content: '%'; width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 900; line-height: 1;
+}
+h1 { font-size: 28px; font-weight: 800; line-height: 1.2; color: var(--navy); margin-bottom: 8px; letter-spacing: -0.8px; }
+.vendor { font-size: 13px; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; font-weight: 500; }
+.vendor::before { content: ''; display: inline-block; width: 18px; height: 2px; background: var(--sand); border-radius: 2px; }
+.stars { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+.star-icons { color: var(--star); font-size: 14px; letter-spacing: 1.5px; }
+.star-count { font-size: 13px; color: var(--muted); font-weight: 500; }
+.divider { height: 1px; background: var(--border); margin: 18px 0; }
+
+.price-original { font-size: 13px; color: var(--muted); text-decoration: line-through; margin-bottom: 4px; }
+.price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+.price-main { font-size: 34px; font-weight: 800; color: var(--navy); line-height: 1; letter-spacing: -1px; }
+.discount-pill { background: var(--cta-light); border: 1.5px solid #9bddba; color: var(--green-text); font-size: 12px; font-weight: 700; padding: 4px 11px; border-radius: 50px; letter-spacing: .5px; }
+.installments { font-size: 13px; color: var(--muted); margin: 4px 0 2px; }
+.installments strong { color: var(--text); font-weight: 600; }
+.savings-text { font-size: 13px; color: var(--cta); font-weight: 600; }
+
+.pix-box {
+  background: #f5fbf7;
+  border: 1px solid #b8d9c4; border-radius: 10px;
+  padding: 12px 16px; display: flex; align-items: center; gap: 12px; margin: 12px 0 20px;
+}
+.pix-icon { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.pix-icon img { width: 100%; height: 100%; object-fit: contain; }
+.pix-price { font-size: 19px; font-weight: 700; color: #0f7a6b; letter-spacing: -0.3px; }
+.pix-label { font-size: 11px; color: #1a9a88; font-weight: 500; }
+
+.variants-section { margin-bottom: 22px; }
+.variants-label { font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 12px; }
+.variants-label strong { color: var(--navy); font-weight: 700; font-size: 14px; }
+.variants-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.variant-btn { border: 2px solid #9ca3af; background: var(--white); border-radius: 12px; padding: 16px 20px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-family: var(--font-main); text-align: center; flex: 1; min-width: 130px; position: relative; }
+.variant-btn .vb-name { font-size: 14px; font-weight: 700; color: #111827; display: block; }
+.variant-btn .vb-price { font-size: 13px; color: #374151; display: block; margin-top: 4px; font-weight: 600; }
+.variant-btn:hover { border-color: #9ca3af; transform: translateY(-2px); }
+.variant-btn.active { border-color: var(--cta); background: #f0fdf4; border-width: 3px; transform: scale(1.05); box-shadow: 0 10px 25px rgba(26,143,78,0.15); z-index: 10; }
+.variant-btn.active::after { content: '✓'; position: absolute; top: -10px; right: -10px; background: var(--cta); color: white; width: 24px; height: 24px; border-radius: 50%; font-size: 14px; display: flex; align-items: center; justify-content: center; font-weight: 800; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.variant-btn.active .vb-name { color: var(--green-text); font-size: 16px; font-weight: 800; }
+.variant-btn.active .vb-price { color: var(--green-text); opacity: 1; font-weight: 700; font-size: 14px; }
+.color-pickers { margin-bottom: 22px; }
+.color-summary { display: none; }
+.color-summary { font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 12px; }
+.color-summary strong { color: var(--navy); font-weight: 700; font-size: 14px; }
+.color-picker { margin-bottom: 16px; }
+.color-picker:last-child { margin-bottom: 0; }
+.color-picker-title {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 14px;
+  letter-spacing: -0.3px; text-transform: none;
+}
+.color-picker-title .step {
+  width: 42px; height: 42px; border-radius: 11px; background: #fff0f3; color: #d85064;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 900; flex-shrink: 0;
+}
+.color-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: start; }
+.color-option {
+  border: 0; padding: 0; background: transparent; cursor: pointer; position: relative;
+  display: flex; flex-direction: column; align-items: center;
+  transition: transform .2s;
+}
+.color-option img {
+  width: 100%; aspect-ratio: 1; object-fit: cover; object-position: center top; display: block;
+  border-radius: 50%; border: 1.5px solid #eadfdd; background: var(--white);
+  box-shadow: 0 4px 16px rgba(24,22,44,.06);
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.color-option:hover { transform: translateY(-1px); }
+.color-option:hover img { border-color: var(--sand); }
+.color-option.active img { border-color: var(--cta); border-width: 3px; box-shadow: 0 10px 24px rgba(26,143,78,.15); }
+.color-option.active::after {
+  content: '✓'; position: absolute; top: -2px; right: 7px; background: var(--cta); color: white;
+  width: 25px; height: 25px; border-radius: 50%; font-size: 15px; display: flex;
+  align-items: center; justify-content: center; font-weight: 800; border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+.color-name {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 30px;
+  margin-top: -12px; padding: 7px 13px 8px; border: 1px solid #eadfdd; border-radius: 999px;
+  background: var(--white); color: var(--navy); box-shadow: 0 5px 14px rgba(24,22,44,.05);
+  font-size: 12.5px; font-weight: 700; line-height: 1.05; text-align: center; position: relative; z-index: 1;
+  white-space: nowrap;
+}
+.color-option.active .color-name { border-color: var(--cta); color: #0b6838; }
+.size-section { margin: -6px 0 22px; }
+.size-label { font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 12px; }
+.size-label strong { color: var(--navy); font-weight: 700; font-size: 14px; }
+.size-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.size-btn {
+  border: 1.5px solid #d8d1d0; background: var(--white); border-radius: 10px; padding: 12px 10px;
+  cursor: pointer; transition: border-color .2s, background .2s, box-shadow .2s, transform .2s;
+  font-family: var(--font-main); font-size: 13px; font-weight: 800; color: var(--navy);
+  position: relative;
+}
+.size-btn span { display: block; margin-top: 2px; font-size: 11px; font-weight: 600; color: var(--muted); }
+.size-btn:hover { border-color: var(--sand); transform: translateY(-1px); }
+.size-btn.active { border-color: var(--cta); border-width: 3px; background: #f0fdf4; box-shadow: 0 8px 18px rgba(26,143,78,.12); color: var(--green-text); }
+.size-btn.active::after {
+  content: '✓'; position: absolute; top: -10px; right: -10px; background: var(--cta); color: white;
+  width: 22px; height: 22px; border-radius: 50%; font-size: 13px; display: flex;
+  align-items: center; justify-content: center; font-weight: 800; border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.size-btn.active span { color: var(--green-text); }
+
+.cta-btn {
+  width: 100%; background: var(--cta); color: #fff;
+  border: none; border-radius: 12px; padding: 20px 24px;
+  font-size: 17px; font-weight: 700; letter-spacing: -0.2px;
+  cursor: pointer; transition: background .2s, transform .15s, box-shadow .2s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  box-shadow: 0 6px 28px var(--cta-glow); margin-bottom: 12px;
+  position: relative; overflow: hidden;
+}
+.cta-btn::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg,rgba(255,255,255,.08) 0%,transparent 60%); pointer-events: none; }
+.cta-btn:hover { background: var(--cta-hover); transform: translateY(-2px); box-shadow: 0 10px 36px var(--cta-glow); }
+.cta-btn:active { transform: translateY(0); }
+
+.cta-sub { text-align: center; font-size: 11.5px; color: var(--muted); margin-bottom: 22px; letter-spacing: .2px; }
+.cta-sub span { color: var(--cta); font-weight: 600; }
+
+.trust-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 22px; }
+.trust-item { background: var(--white); padding: 14px 10px; text-align: center; }
+.trust-item .ti { font-size: 20px; margin-bottom: 5px; display: block; }
+.trust-item strong { display: block; font-size: 10.5px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px; }
+.trust-item span { font-size: 11px; color: var(--muted); line-height: 1.4; display: block; }
+
+.payment-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.payment-icons { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.pay-chip { background: var(--white); border: 1px solid #e5e7eb; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; justify-content: center; height: 38px; min-width: 64px; }
+.pay-chip img { height: 22px; width: auto; object-fit: contain; }
+.pay-chip.elo-chip img { height: 16px; }
+.pay-chip.pix-chip img { height: 24px; }
+
+.desc-section { background: var(--white); padding: 80px 48px; border-top: 1px solid var(--border); }
+.section-heading { text-align: center; margin-bottom: 52px; }
+.section-heading h2 { font-size: 34px; font-weight: 800; color: var(--navy); letter-spacing: -1px; margin-bottom: 12px; }
+.section-heading p { font-size: 16px; color: var(--muted); max-width: 520px; margin: 0 auto; line-height: 1.6; }
+.heading-line { width: 44px; height: 3px; background: var(--sand); border-radius: 2px; margin: 14px auto 0; }
+.desc-images { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; box-shadow: 0 16px 64px rgba(27,42,59,.13); }
+.desc-images img { width: 100%; }
+
+.benefits-section { background: var(--white); padding: 58px 48px; border-top: 1px solid var(--border); }
+.benefits-section .section-heading h2 { color: var(--navy); }
+.benefits-section .section-heading p { color: var(--muted); }
+.benefits-section .section-heading { margin-bottom: 28px; }
+.benefits-section .section-heading h2 { font-size: 26px; letter-spacing: -.4px; margin-bottom: 6px; }
+.benefits-section .section-heading p { font-size: 14px; max-width: 460px; }
+.benefits-section .heading-line { width: 34px; height: 2px; margin-top: 12px; }
+.benefits-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; max-width: 980px; margin: 0 auto; }
+.benefit-card { background: #fff8f9; border: 1px solid #f0dedc; border-radius: 12px; padding: 18px 16px; text-align: left; transition: border-color .25s, box-shadow .25s, transform .25s; }
+.benefit-card:hover { border-color: #e9bbc5; box-shadow: 0 12px 30px rgba(49,39,55,.07); transform: translateY(-2px); }
+.benefit-icon { width: 34px; height: 34px; background: var(--white); border: 1px solid #ead6d8; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 15px; margin: 0 0 10px; }
+.benefit-card h3 { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 5px; }
+.benefit-card p { font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+.testimonials { background: var(--white); padding: 80px 48px; border-top: 1px solid var(--border); overflow-anchor: none; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; overflow-anchor: none; }
+.testi-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s; }
+.testi-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+.testi-card.no-photo { min-height: 280px; border-top: 3px solid #e9bbc5; }
+.testi-card.no-photo .testi-content { min-height: 100%; }
+.testi-img { width: 100%; aspect-ratio: 1/1; overflow: hidden; }
+.testi-img img { width: 100%; height: 100%; object-fit: cover; }
+.testi-img img.focus-waist { object-position: center 28%; }
+.testi-content { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+.testi-stars { color: var(--star); font-size: 14px; margin-bottom: 12px; }
+.testi-text { font-size: 14px; color: var(--text); line-height: 1.6; margin-bottom: 16px; font-weight: 400; flex-grow: 1; }
+.testi-footer { display: flex; align-items: center; gap: 12px; border-top: 1px solid #f0f0f0; padding-top: 16px; }
+.testi-author { font-size: 14px; font-weight: 700; color: var(--navy); }
+.testi-author span { color: var(--muted); font-weight: 400; display: block; font-size: 12px; margin-top: 2px; }
+.verified-badge { font-size: 10px; font-weight: 700; color: #8f3a50; background: #fff0f3; padding: 2px 8px; border-radius: 50px; text-transform: uppercase; margin-left: auto; }
+.review-pages { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 30px; }
+.review-page {
+  width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 999px;
+  background: var(--white); color: var(--muted); font: 700 13px/1 var(--font-main);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: border-color .2s, color .2s, background .2s, transform .2s;
+}
+.review-page:hover { border-color: var(--sand); color: var(--navy); transform: translateY(-1px); }
+.review-page.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.review-page.more { border: 0; background: transparent; cursor: default; width: auto; color: #c0a7aa; }
+
+@media (max-width: 960px) {
+  .testi-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+
+.mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; padding: 12px 16px; background: var(--white); border-top: 1px solid var(--border); z-index: 300; box-shadow: 0 -4px 20px rgba(0,0,0,.1); }
+.mobile-cta button { width: 100%; background: var(--cta); color: #fff; border: none; border-radius: 12px; padding: 18px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 20px var(--cta-glow); }
+
+footer { background: var(--navy-deep); color: rgba(255,255,255,.58); padding: 72px 48px 36px; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 52px; max-width: 1100px; margin: 0 auto 52px; }
+.footer-logo { font-size: 24px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; margin-bottom: 16px; }
+.footer-logo em { font-style: normal; color: var(--sand); }
+.footer-about { font-size: 14px; line-height: 1.8; max-width: 280px; }
+.footer-col h4 { font-size: 11px; font-weight: 700; color: var(--sand); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,.5); transition: color .2s; }
+.footer-col ul li a:hover { color: var(--sand); }
+.footer-col p { font-size: 13px; line-height: 2; }
+.footer-col strong { color: rgba(255,255,255,.8); font-weight: 500; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,.25); max-width: 1100px; margin: 0 auto; flex-wrap: wrap; gap: 10px; }
+
+@media (max-width: 960px) {
+  .product-wrap { grid-template-columns: 1fr; gap: 28px; padding: 24px 20px 60px; }
+  .gallery { position: static; }
+  h1 { font-size: 22px; } .price-main { font-size: 36px; }
+  .benefits-grid { grid-template-columns: 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .testi-grid { grid-template-columns: 1fr; }
+  header { padding: 18px 20px 16px; }
+  .breadcrumb { padding: 10px 20px; display: none; }
+  .desc-section, .benefits-section, .testimonials, footer { padding-left: 20px; padding-right: 20px; }
+  .mobile-cta { display: block; }
+}
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+  .announce-bar { height: 35px; font-size: 10px; padding: 0 10px; }
+  header { width: 100%; padding: 18px 12px 14px; gap: 11px; }
+  .logo-wrap { width: 100%; }
+  .logo { font-size: 38px; letter-spacing: 2px; }
+  .logo-sub { font-size: 10px; letter-spacing: 3.8px; margin-top: 5px; }
+  .product-wrap { padding: 16px 12px 52px; gap: 20px; }
+  .main-img-wrap { border-radius: 12px; margin-bottom: 10px; }
+  .badge-over { top: 10px; right: 10px; font-size: 11px; padding: 6px 12px; }
+  .thumbs { gap: 7px; padding-bottom: 4px; scrollbar-width: none; }
+  .thumbs::-webkit-scrollbar { display: none; }
+  .thumb { flex-basis: calc((100% - 28px) / 5); }
+  .sold-badge { font-size: 11.5px; padding: 5px 12px; margin-bottom: 14px; }
+  .badge-row { gap: 7px; margin-bottom: 14px; }
+  .badge-row .sold-badge { margin-bottom: 0; }
+  .deal-badge { font-size: 10.5px; padding: 5px 8px; gap: 4px; }
+  .deal-badge::before { width: 13px; height: 13px; font-size: 8px; }
+  h1 { font-size: 24px; letter-spacing: -0.35px; margin-bottom: 7px; }
+  .vendor { font-size: 12.5px; margin-bottom: 12px; }
+  .stars { margin-bottom: 14px; }
+  .star-icons { font-size: 13.5px; }
+  .star-count { font-size: 12.5px; }
+  .divider { margin: 14px 0; }
+  .price-original { font-size: 12.5px; }
+  .price-main { font-size: 32px; }
+  .discount-pill { font-size: 11.5px; padding: 4px 10px; }
+  .installments, .savings-text { font-size: 12.5px; }
+  .pix-box { padding: 12px 14px; margin: 12px 0 18px; }
+  .pix-icon { width: 30px; height: 30px; }
+  .pix-price { font-size: 19px; }
+  .pix-label { font-size: 11.5px; }
+  .variants-row { gap: 8px; }
+  .variants-label, .size-label { font-size: 13px; margin-bottom: 10px; }
+  .variants-label strong, .size-label strong { font-size: 13.5px; }
+  .color-pickers { margin-bottom: 20px; }
+  .color-summary { font-size: 13px; margin-bottom: 12px; }
+  .color-summary strong { font-size: 13.5px; }
+  .color-picker { margin-bottom: 14px; }
+  .color-picker-title { gap: 9px; font-size: 16px; margin-bottom: 10px; letter-spacing: -0.2px; }
+  .color-picker-title .step { width: 32px; height: 32px; border-radius: 9px; font-size: 16px; }
+  .color-options { gap: 9px; }
+  .color-option.active::after { top: -3px; right: 1px; width: 22px; height: 22px; font-size: 13px; border-width: 2px; }
+  .color-name { min-height: 27px; margin-top: -10px; font-size: 10.5px; font-weight: 700; padding: 6px 8px 7px; max-width: 100%; white-space: normal; }
+  .variant-btn { min-width: 0; flex: 1 1 calc(50% - 4px); padding: 14px 14px; border-radius: 10px; }
+  .variant-btn:first-child { flex-basis: 100%; }
+  .variant-btn .vb-name { font-size: 15.5px; }
+  .variant-btn .vb-price { font-size: 13.2px; }
+  .variant-btn.active .vb-name { font-size: 15.8px; }
+  .variant-btn.active .vb-price { font-size: 13.2px; }
+  .variant-btn.active { transform: none; }
+  .size-row { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .size-btn { padding: 13px 9px; font-size: 14px; }
+  .size-btn span { font-size: 11.5px; }
+  .cta-sub { font-size: 11.5px; margin-bottom: 18px; }
+  .trust-item { padding: 13px 10px; }
+  .trust-item .ti { font-size: 20px; }
+  .trust-item strong { font-size: 11px; }
+  .trust-item span { font-size: 11.5px; }
+  .payment-label { font-size: 10.5px; margin-bottom: 10px; }
+  .payment-icons { gap: 8px; }
+  .pay-chip { min-width: 52px; height: 34px; padding: 5px 9px; }
+  .desc-section, .benefits-section, .testimonials, footer { padding-top: 50px; padding-bottom: 50px; }
+  .section-heading { margin-bottom: 28px; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .benefit-card { padding: 17px 15px; }
+  .benefits-section .benefit-card { text-align: center; }
+  .benefit-icon { width: 34px; height: 34px; font-size: 15px; margin: 0 auto 10px; }
+  .benefit-card h3 { font-size: 14.5px; margin-bottom: 6px; }
+  .benefit-card p { font-size: 13px; line-height: 1.5; }
+  .footer-top { grid-template-columns: 1fr; }
+  .header-nav {
+    width: 100%; justify-content: center; gap: 6px; font-size: 11.5px;
+    padding-top: 10px; max-width: 100%; flex-wrap: wrap; line-height: 1.35;
+  }
+  .trust-grid { grid-template-columns: 1fr; }
+  .section-heading h2 { font-size: 26px; letter-spacing: -0.4px; }
+  .section-heading p { font-size: 13.5px; }
+  .desc-images { border-radius: 12px; }
+  .testi-content { padding: 17px; }
+  .testi-text { font-size: 13.5px; line-height: 1.55; }
+  .testi-author { font-size: 13.5px; }
+  .testi-author span { font-size: 11.5px; }
+  .verified-badge { font-size: 9.5px; padding: 2px 8px; }
+  .review-pages { gap: 6px; margin-top: 24px; }
+  .review-page { width: 31px; height: 31px; font-size: 12px; }
+  .mobile-cta { padding: 10px 12px; }
+  .mobile-cta button { padding: 17px; font-size: 16px; }
+  .footer-about, .footer-col p, .footer-col ul li a { font-size: 13px; }
+  .footer-bottom { display: block; line-height: 1.7; }
+}
+</style>
+</head>
+<body>
+
+<div class="announce-bar">
+  <div class="announce-track">
+    <div class="announce-item">🔥 OFERTA ESPECIAL — 63% OFF NO KIT COM 2 CALÇAS</div>
+    <div class="announce-item">💸 PAGUE COM PIX OU CARTÃO COM SEGURANÇA</div>
+    <div class="announce-item">🚚 FRETE GRÁTIS PARA TODO BRASIL ACIMA DE R$49,90</div>
+  </div>
+</div>
+
+<header>
+  <div class="logo-wrap">
+    <div class="logo">Cordee</div>
+    <div class="logo-sub">Moda Feminina</div>
+  </div>
+  <nav class="header-nav" aria-label="Categorias">
+    <a class="nav-home" href="#">Início</a>
+    <span class="nav-sep">&gt;</span>
+    <a href="#">Jeans</a>
+    <span class="nav-sep">&gt;</span>
+    <a href="#">Novidades</a>
+    <span class="nav-sep">&gt;</span>
+    <a href="#">Promoções</a>
+  </nav>
+</header>
+
+<div class="breadcrumb">
+  <a href="#">Início</a> &rsaquo; <a href="#">Moda Feminina</a> &rsaquo;
+  <span>Calças Jeans Premium UltraModel</span>
+</div>
+
+<div class="product-wrap">
+  <div class="gallery">
+    <div class="main-img-wrap">
+      <div class="badge-over">63% OFF</div>
+      <div class="carousel-container" id="carouselContainer">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-azuis-69ba6a587b8e9-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - imagem 1"></div>
+          <div class="carousel-slide"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-azuis-69ba6a5844c63-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - imagem 2"></div>
+          <div class="carousel-slide"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-azuis-69ba6a5866635-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - imagem 3"></div>
+          <div class="carousel-slide"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-azuis-69ba6a587e71a-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - imagem 4"></div>
+          <div class="carousel-slide"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-pretas-69ba6a58e4b0a-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - imagem 5"></div>
+          <div class="carousel-slide"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-pretas-69ba6a5906c37-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - imagem 6"></div>
+          <div class="carousel-slide"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-pretas-69ba6a58592c1-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - imagem 7"></div>
+          <div class="carousel-slide"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-pretas-69ba6a592d3a5-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - imagem 8"></div>
+          <div class="carousel-slide"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-1-preta-1-azul-69ba6a594ff95-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - imagem 9"></div>
+          <div class="carousel-slide"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-1-preta-1-azul-69ba6a5a11bc6-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - imagem 10"></div>
+          <div class="carousel-slide"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-1-preta-1-azul-69ba6a595f145-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - imagem 11"></div>
+          <div class="carousel-slide"><img src="assets/slides/slide-14.png" alt="Calça Jeans Premium UltraModel - imagem 12"></div>
+          <div class="carousel-slide"><img src="assets/slides/slide-13.png" alt="Calça Jeans Premium UltraModel - imagem 13"></div>
+          <div class="carousel-slide"><img src="assets/slides/slide-12.png" alt="Calça Jeans Premium UltraModel - imagem 14"></div>
+        </div>
+        <div class="carousel-nav">
+          <div class="nav-arrow prev" onclick="prevSlide()">
+            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+          </div>
+          <div class="nav-arrow next" onclick="nextSlide()">
+            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="thumbs">
+      <div class="thumb active" onclick="goToSlide(0)"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-azuis-69ba6a587b8e9-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - miniatura 1"></div>
+      <div class="thumb" onclick="goToSlide(1)"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-azuis-69ba6a5844c63-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - miniatura 2"></div>
+      <div class="thumb" onclick="goToSlide(2)"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-azuis-69ba6a5866635-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - miniatura 3"></div>
+      <div class="thumb" onclick="goToSlide(3)"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-azuis-69ba6a587e71a-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - miniatura 4"></div>
+      <div class="thumb" onclick="goToSlide(4)"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-pretas-69ba6a58e4b0a-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - miniatura 5"></div>
+      <div class="thumb" onclick="goToSlide(5)"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-pretas-69ba6a5906c37-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - miniatura 6"></div>
+      <div class="thumb" onclick="goToSlide(6)"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-pretas-69ba6a58592c1-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - miniatura 7"></div>
+      <div class="thumb" onclick="goToSlide(7)"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-2-pretas-69ba6a592d3a5-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - miniatura 8"></div>
+      <div class="thumb" onclick="goToSlide(8)"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-1-preta-1-azul-69ba6a594ff95-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - miniatura 9"></div>
+      <div class="thumb" onclick="goToSlide(9)"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-1-preta-1-azul-69ba6a5a11bc6-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - miniatura 10"></div>
+      <div class="thumb" onclick="goToSlide(10)"><img src="https://images.yampi.me/assets/stores/cordee-brasil/uploads/images/calca-preta-azul-jeans-kit-c-2-calcas-jeans-ultramodel-1-preta-1-azul-69ba6a595f145-large.jpg" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - miniatura 11"></div>
+      <div class="thumb" onclick="goToSlide(11)"><img src="assets/slides/slide-14.png" alt="Calça Jeans Premium UltraModel - miniatura 12"></div>
+      <div class="thumb" onclick="goToSlide(12)"><img src="assets/slides/slide-13.png" alt="Calça Jeans Premium UltraModel - miniatura 13"></div>
+      <div class="thumb" onclick="goToSlide(13)"><img src="assets/slides/slide-12.png" alt="Calça Jeans Premium UltraModel - miniatura 14"></div>
+    </div>
+  </div>
+
+  <div class="product-info">
+    <div class="badge-row">
+      <div class="sold-badge">🔥 PREÇO DE ATACADO</div>
+      <div class="deal-badge">PAGUE 1 LEVE 2</div>
+    </div>
+    <h1>Calças Jeans Premium UltraModel</h1>
+    <p class="vendor">Vendido e garantido pela Cordee</p>
+    <div class="stars">
+      <span class="star-icons">★★★★★</span>
+      <span class="star-count">4.8 · 117 avaliações</span>
+    </div>
+    <div class="divider"></div>
+    <div class="price-original">De R$ 269,90</div>
+    <div class="price-row">
+      <span class="price-main" id="priceMain">R$ 99,90</span>
+      <span class="discount-pill">63% OFF</span>
+    </div>
+    <div class="installments">Ou em até 12x de <strong>R$ 8,33</strong> sem juros</div>
+    <div class="savings-text">✓ Você economiza R$ 170,00</div>
+    <div class="pix-box">
+      <div class="pix-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 100%; height: 100%;"><path d="M242.4 292.5C247.8 287.1 257.1 287.1 262.5 292.5L339.5 369.5C353.7 383.7 372.6 391.5 392.6 391.5H407.7L310.6 488.6C280.3 518.1 231.1 518.1 200.8 488.6L103.3 391.2H112.6C132.6 391.2 151.5 383.4 165.7 369.2L242.4 292.5zM262.5 218.9C256.1 224.4 247.9 224.5 242.4 218.9L165.7 142.2C151.5 127.1 132.6 120.2 112.6 120.2H103.3L200.7 22.76C231.1-7.586 280.3-7.586 310.6 22.76L407.8 119.9H392.6C372.6 119.9 353.7 127.7 339.5 141.9L262.5 218.9zM112.6 142.7C126.4 142.7 139.1 148.3 149.7 158.1L226.4 234.8C233.6 241.1 243 245.6 252.5 245.6C261.9 245.6 271.3 241.1 278.5 234.8L355.5 157.8C365.3 148.1 378.8 142.5 392.6 142.5H430.3L488.6 200.8C518.9 231.1 518.9 280.3 488.6 310.6L430.3 368.9H392.6C378.8 368.9 365.3 363.3 355.5 353.5L278.5 276.5C264.6 262.6 240.3 262.6 226.4 276.6L149.7 353.2C139.1 363 126.4 368.6 112.6 368.6H80.78L22.76 310.6C-7.586 280.3-7.586 231.1 22.76 200.8L80.78 142.7H112.6z" fill="#32bcad"/></svg>
+      </div>
+      <div>
+        <div class="pix-price" id="pixPrice">R$ 94,91</div>
+        <div class="pix-label">5% de desconto pagando via PIX</div>
+      </div>
+    </div>
+    <div class="color-pickers">
+      <div class="color-summary">Cores escolhidas: <strong id="variantLabel">1 Azul + 1 Preta</strong></div>
+      <div class="color-picker" data-pant="1">
+        <div class="color-picker-title"><span class="step">1ª</span><span>Escolha a cor da 1ª calça</span></div>
+        <div class="color-options">
+          <button class="color-option" type="button" onclick="selectPantColor(this, 1, 'preta', 'Preta')"><img src="assets/variants/preta.png" alt="Calça preta"><span class="color-name">Preta</span></button>
+          <button class="color-option active" type="button" onclick="selectPantColor(this, 1, 'azul', 'Azul escuro')"><img src="assets/variants/azul-escuro.png" alt="Calça azul escuro"><span class="color-name">Azul escuro</span></button>
+          <button class="color-option" type="button" onclick="selectPantColor(this, 1, 'azul', 'Azul médio')"><img src="assets/variants/azul-medio.png" alt="Calça azul médio"><span class="color-name">Azul médio</span></button>
+          <button class="color-option" type="button" onclick="selectPantColor(this, 1, 'azul', 'Azul claro')"><img src="assets/variants/azul-claro.png" alt="Calça azul claro"><span class="color-name">Azul claro</span></button>
+        </div>
+      </div>
+      <div class="color-picker" data-pant="2">
+        <div class="color-picker-title"><span class="step">2ª</span><span>Escolha a cor da 2ª calça</span></div>
+        <div class="color-options">
+          <button class="color-option active" type="button" onclick="selectPantColor(this, 2, 'preta', 'Preta')"><img src="assets/variants/preta.png" alt="Calça preta"><span class="color-name">Preta</span></button>
+          <button class="color-option" type="button" onclick="selectPantColor(this, 2, 'azul', 'Azul escuro')"><img src="assets/variants/azul-escuro.png" alt="Calça azul escuro"><span class="color-name">Azul escuro</span></button>
+          <button class="color-option" type="button" onclick="selectPantColor(this, 2, 'azul', 'Azul médio')"><img src="assets/variants/azul-medio.png" alt="Calça azul médio"><span class="color-name">Azul médio</span></button>
+          <button class="color-option" type="button" onclick="selectPantColor(this, 2, 'azul', 'Azul claro')"><img src="assets/variants/azul-claro.png" alt="Calça azul claro"><span class="color-name">Azul claro</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="size-section">
+      <div class="size-label">Tamanho: <strong id="sizeLabel">P (34-36)</strong></div>
+      <div class="size-row">
+        <button class="size-btn active" onclick="selectSize(this,'P (34-36)')">P <span>34-36</span></button>
+        <button class="size-btn" onclick="selectSize(this,'M (38-40)')">M <span>38-40</span></button>
+        <button class="size-btn" onclick="selectSize(this,'G (42-44)')">G <span>42-44</span></button>
+        <button class="size-btn" onclick="selectSize(this,'GG (46-48)')">GG <span>46-48</span></button>
+        <button class="size-btn" onclick="selectSize(this,'XGG (50-52)')">XGG <span>50-52</span></button>
+        <button class="size-btn" onclick="selectSize(this,'XXGG (54-56)')">XXGG <span>54-56</span></button>
+      </div>
+    </div>
+    <p class="cta-sub">🔒 Pagamento 100% seguro &nbsp;·&nbsp; <span>Peça com envio imediato</span></p>
+    <div class="trust-grid">
+      <div class="trust-item"><span class="ti">🛡️</span><strong>Compra Garantida</strong><span>Satisfação ou dinheiro de volta</span></div>
+      <div class="trust-item"><span class="ti">🔄</span><strong>Troca Grátis</strong><span>7 dias para trocas e devoluções</span></div>
+      <div class="trust-item"><span class="ti">⭐</span><strong>RA 1000</strong><span>Bem avaliada no Reclame Aqui</span></div>
+    </div>
+    <div class="payment-label">Formas de pagamento</div>
+    <div class="payment-icons">
+      <span class="pay-chip"><img src="https://img.icons8.com/color/48/visa.png" alt="Visa"></span>
+      <span class="pay-chip"><img src="https://img.icons8.com/color/48/mastercard.png" alt="Mastercard"></span>
+      <span class="pay-chip elo-chip"><img src="https://cdn.worldvectorlogo.com/logos/elo-1.svg" alt="Elo"></span>
+      <span class="pay-chip"><img src="https://img.icons8.com/color/48/amex.png" alt="Amex"></span>
+      <span class="pay-chip"><img src="https://logospng.org/download/hipercard/logo-hipercard-1024.png" alt="Hipercard"></span>
+      <span class="pay-chip pix-chip"><img src="https://img.icons8.com/color/48/pix.png" alt="Pix"></span>
+    </div>
+  </div>
+</div>
+
+<div class="desc-section">
+  <div class="section-heading">
+    <h2>Conheça a Calça UltraModel</h2>
+    <p>Kit com 2 calças jeans versáteis, confortáveis e prontas para combinar com o dia a dia.</p>
+    <div class="heading-line"></div>
+  </div>
+  <div class="desc-images">
+    <img src="https://cdn.shopify.com/s/files/1/0590/6631/8900/files/INFORMACOES_Qual_material_da_calca_97_poliester_e_3_elastano_O_que_vai_chegar_no_meu_pacote_Voce_vai_receber_2_calcas_1_cinto_de_brinde_11.webp?v=1726596740" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - detalhes 1" loading="lazy">
+    <img src="https://king-assets.yampi.me/dooki/67d5e2518baa1/67d5e2518baa7.png" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - detalhes 2" loading="lazy">
+    <img src="https://king-assets.yampi.me/dooki/67d5e81d30410/67d5e81d30418.png" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - detalhes 3" loading="lazy">
+    <img src="https://cdn.shopify.com/s/files/1/0457/8466/2180/files/promo2.png?v=1705103005" alt="Calça Preta + Azul Jeans - Kit c 2/ Calças Jeans UltraModel - detalhes 4" loading="lazy">
+  </div>
+</div>
+
+<div class="testimonials">
+  <div class="section-heading">
+    <h2>Avaliações de quem já usa 💖</h2>
+    <p>Confira as avaliações das poderosas que usam e aprovam</p>
+    <div class="heading-line"></div>
+  </div>
+  <div class="testi-grid" id="reviewsGrid">
+    <div class="testi-card">
+      <div class="testi-img">
+        <img class="focus-waist" src="https://img.shein.com/images3/2024/07/10/82/17205724107a85bc47290a3be44c0b375de078b5a2_thumbnail_x460.webp" alt="Review 1">
+      </div>
+      <div class="testi-content">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">As calças superaram as expectativas são muitas lindas, caimento ótimo tecido bem gostoso babe aquele jeans grosso demais que incomoda, eu visto 42 ficou um pouco justa mais acredito que depois vai ceder um pouco ainda sim da pra usar tranquilo 😍😍 sem contar que por esse valor suas calças está ótimo.</p>
+        <div class="testi-footer">
+          <div class="testi-author">Mariana S. <span>São Paulo, SP</span></div>
+          <div class="verified-badge">Verificado</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-img">
+        <img src="https://down-br.img.susercontent.com/file/br-11134103-81ztc-mjk02vuf43yaa7.webp" alt="Review 2">
+      </div>
+      <div class="testi-content">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Gostei, indico com certeza. Chegou certinho dentro do prazo, são confiáveis no corpo, só acho que no cós deveria ser mais acenturado, mas eu gostei.</p>
+        <div class="testi-footer">
+          <div class="testi-author">Carolina M. <span>Curitiba, PR</span></div>
+          <div class="verified-badge">Verificado</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-img">
+        <img src="https://down-br.img.susercontent.com/file/br-11134103-7r98o-m8dgjgrdp05t2b.webp" alt="Review 3">
+      </div>
+      <div class="testi-content">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Pessoal, chegou certinho e antes do prazo, amei, era o que eu esperava, definiu o corpo, principalmente o bumbum. Tecido bom adorei muito a compra, recomendo.</p>
+        <div class="testi-footer">
+          <div class="testi-author">Fernanda L. <span>Belo Horizonte, MG</span></div>
+          <div class="verified-badge">Verificado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="review-pages" aria-label="Paginação das avaliações">
+    <button class="review-page active" type="button" onclick="showReviewPage(1, this)">1</button>
+    <button class="review-page" type="button" onclick="showReviewPage(2, this)">2</button>
+    <button class="review-page" type="button" onclick="showReviewPage(3, this)">3</button>
+    <button class="review-page" type="button" onclick="showReviewPage(4, this)">4</button>
+    <span class="review-page more">...</span>
+  </div>
+</div>
+
+<div class="benefits-section">
+  <div class="section-heading">
+    <h2>Por que escolher a Cordee?</h2>
+    <p>Compra simples, segura e pensada para renovar seus looks.</p>
+    <div class="heading-line"></div>
+  </div>
+  <div class="benefits-grid">
+    <div class="benefit-card"><div class="benefit-icon">🚚</div><h3>Frete Grátis</h3><p>Envio com rastreio para acompanhar cada etapa.</p></div>
+    <div class="benefit-card"><div class="benefit-icon">★</div><h3>RA1000</h3><p>Nota 1000 no Reclame Aqui para comprar com mais confiança.</p></div>
+    <div class="benefit-card"><div class="benefit-icon">🎧</div><h3>Suporte Diário</h3><p>Atendimento para dúvidas de pedido e entrega.</p></div>
+    <div class="benefit-card"><div class="benefit-icon">🔒</div><h3>Compra Segura</h3><p>Pagamento protegido via PIX ou cartão.</p></div>
+  </div>
+</div>
+
+<div class="mobile-cta">
+  <button id="mobileCtaBtn" onclick="handleBuy(this)">COMPRAR AGORA</button>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="logo-wrap" style="text-align: left;">
+        <div class="logo" style="font-size: 20px;">Cordee</div>
+        <div class="logo-sub" style="font-size: 8px; text-align: left;">Moda Feminina</div>
+      </div>
+      <p class="footer-about" style="margin-top: 16px;">Curadoria de moda feminina com peças versáteis para vestir rotina, trabalho e fim de semana com praticidade.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Institucional</h4>
+      <ul><li><a href="#">Sobre Nós</a></li><li><a href="#">Depoimentos</a></li><li><a href="#">Dúvidas Frequentes</a></li><li><a href="#">Moda e Ofertas</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Atendimento</h4>
+      <ul><li><a href="#">Política de Envio</a></li><li><a href="#">Trocas e Devoluções</a></li><li><a href="#">Privacidade</a></li><li><a href="#">Termos de Uso</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <p><strong>Seg-Dom, 8h-18h</strong><br>suporte@cordeebrasil.com<br><br>Av. Brigadeiro Faria Lima, 2371 — Jardim Paulistano<br>São Paulo, SP<br>CNPJ: 42.009.818/0001-15</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Cordee. Todos os direitos reservados.</span>
+    <span>Oferta exclusiva neste site oficial. Evite golpes comprando apenas aqui.</span>
+  </div>
+</footer>
+
+<script>
+  let currentSlide = 0;
+  const track = document.getElementById('carouselTrack');
+  let slides = Array.from(document.querySelectorAll('.carousel-slide'));
+  let thumbs = Array.from(document.querySelectorAll('.thumb'));
+  let totalSlides = slides.length;
+
+  function refreshCarouselItems() {
+    slides = Array.from(document.querySelectorAll('.carousel-slide'));
+    thumbs = Array.from(document.querySelectorAll('.thumb'));
+    totalSlides = slides.length;
+    if (currentSlide >= totalSlides) currentSlide = Math.max(totalSlides - 1, 0);
+    thumbs.forEach((thumb, idx) => {
+      thumb.onclick = () => goToSlide(idx);
+    });
+  }
+
+  function removeBrokenCarouselImage(img) {
+    const slide = img.closest('.carousel-slide');
+    const index = slides.indexOf(slide);
+    const thumb = thumbs[index];
+    slide?.remove();
+    thumb?.remove();
+    refreshCarouselItems();
+    updateCarousel();
+  }
+
+  slides.forEach(slide => {
+    const img = slide.querySelector('img');
+    if (!img) return;
+    img.addEventListener('error', () => removeBrokenCarouselImage(img), { once: true });
+    if (img.complete && img.naturalWidth === 0) removeBrokenCarouselImage(img);
+  });
+
+  function updateCarousel() {
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    thumbs.forEach((t, idx) => {
+      t.classList.toggle('active', idx === currentSlide);
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+  }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    updateCarousel();
+  }
+
+  // Touch Support
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const container = document.getElementById('carouselContainer');
+
+  container.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, {passive: true});
+
+  container.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, {passive: true});
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    if (touchEndX < touchStartX - swipeThreshold) nextSlide();
+    if (touchEndX > touchStartX + swipeThreshold) prevSlide();
+  }
+
+  const reviewsGrid = document.getElementById('reviewsGrid');
+  const firstReviewPage = reviewsGrid ? reviewsGrid.innerHTML : '';
+  const reviewPages = {
+    2: [
+      {
+        text: 'Compre sem medo, e pelo valor tem muita qualidade 🥰 voltarei a comprar amei',
+        author: 'Juliana R.',
+        city: 'Campinas, SP'
+      },
+      {
+        text: 'Ótimas calças. Tenho 1.70cm e peso 75kg peguei a 42 e ficou ótima, não ficou apertada',
+        author: 'Patrícia A.',
+        city: 'Niterói, RJ'
+      },
+      {
+        text: 'Chegou dentro do prazo previsto, tecido de ótima qualidade. Corte e costura impecáveis, peguei número 46 pq minhas filhas são bem fortinhas e ficou perfeito.',
+        author: 'Larissa P.',
+        city: 'Goiânia, GO'
+      },
+      {
+        text: 'Recomendo a compra, muita boa a qualidade.. 😄',
+        author: 'Sabrina L.',
+        city: 'Fortaleza, CE'
+      }
+    ],
+    3: [
+      {
+        text: 'Gostei bastante do caimento no corpo. A modelagem valoriza sem apertar demais e o tecido não é aquele jeans duro. Pelo valor, achei excelente.',
+        author: 'Amanda C.',
+        city: 'Recife, PE'
+      },
+      {
+        text: 'As duas calças vieram certinhas, sem defeito e com acabamento bom. A preta virou minha favorita porque combina com tudo no guarda-roupa.',
+        author: 'Bianca F.',
+        city: 'Porto Alegre, RS'
+      },
+      {
+        text: 'Fiquei surpresa com a qualidade. Visto 42, ficou mais ajustada no começo, mas confortável para usar. Entrega rápida e compra tranquila.',
+        author: 'Renata M.',
+        city: 'Salvador, BA'
+      }
+    ],
+    4: [
+      {
+        text: 'Chegou tudo direitinho. O jeans é macio, bonito e veste bem no quadril. Gostei muito porque dá para montar look casual e também mais arrumado.',
+        author: 'Camila T.',
+        city: 'Florianópolis, SC'
+      },
+      {
+        text: 'Indico demais. Comprei para testar e valeu a pena, principalmente pelo preço do kit. A cintura ficou boa e o comprimento também.',
+        author: 'Débora L.',
+        city: 'Belo Horizonte, MG'
+      },
+      {
+        text: 'A compra foi melhor do que eu esperava. As calças são bonitas, confortáveis e chegaram no prazo. Já usei várias vezes e continuam ótimas.',
+        author: 'Vanessa S.',
+        city: 'São Paulo, SP'
+      }
+    ]
+  };
+
+  function reviewCard(review) {
+    return `
+      <div class="testi-card no-photo">
+        <div class="testi-content">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">${review.text}</p>
+          <div class="testi-footer">
+            <div class="testi-author">${review.author} <span>${review.city}</span></div>
+            <div class="verified-badge">Verificado</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function showReviewPage(page, btn) {
+    if (!reviewsGrid) return;
+    const buttonTop = btn.getBoundingClientRect().top;
+    reviewsGrid.innerHTML = page === 1 ? firstReviewPage : reviewPages[page].map(reviewCard).join('');
+    document.querySelectorAll('.review-page').forEach(item => item.classList.remove('active'));
+    btn.classList.add('active');
+    requestAnimationFrame(() => {
+      const newButtonTop = btn.getBoundingClientRect().top;
+      window.scrollBy({ top: newButtonTop - buttonTop, left: 0, behavior: 'auto' });
+    });
+  }
+
+  const universalCheckoutUrl = '/calcas/checkout/';
+  let selectedPurchaseUrl = universalCheckoutUrl;
+  const selectedPantColors = {
+    1: { group: 'azul', label: 'Azul escuro' },
+    2: { group: 'preta', label: 'Preta' }
+  };
+
+  function selectVariant(el, label, price, pix, purchaseUrl) {
+    document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('variantLabel').textContent = label;
+    document.getElementById('priceMain').textContent = price;
+    document.getElementById('pixPrice').textContent = pix;
+    selectedPurchaseUrl = universalCheckoutUrl;
+  }
+
+  function updateColorCheckout() {
+    const first = selectedPantColors[1].group;
+    const second = selectedPantColors[2].group;
+    let label = '1 Azul + 1 Preta';
+    selectedPurchaseUrl = universalCheckoutUrl;
+
+    if (first === 'azul' && second === 'azul') {
+      label = '2 Azuis';
+      selectedPurchaseUrl = universalCheckoutUrl;
+    }
+
+    if (first === 'preta' && second === 'preta') {
+      label = '2 Pretas';
+      selectedPurchaseUrl = universalCheckoutUrl;
+    }
+
+    document.getElementById('variantLabel').textContent = label;
+    document.getElementById('priceMain').textContent = 'R$ 99,90';
+    document.getElementById('pixPrice').textContent = 'R$ 94,91';
+  }
+
+  function selectPantColor(el, pant, group, label) {
+    const picker = el.closest('.color-picker');
+    picker.querySelectorAll('.color-option').forEach(btn => btn.classList.remove('active'));
+    el.classList.add('active');
+    selectedPantColors[pant] = { group, label };
+    updateColorCheckout();
+  }
+
+  function selectSize(el, label) {
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('sizeLabel').textContent = label;
+  }
+
+  function handleBuy(btn) {
+    btn.innerHTML = 'Redirecionando...';
+    btn.style.background = '#0f6636';
+    setTimeout(() => {
+      const checkout = new URL(universalCheckoutUrl, location.origin);
+      for (const [key,value] of new URLSearchParams(location.search)) if (/^(utm_|ttclid$|sck$)/.test(key)) checkout.searchParams.set(key,value);
+      checkout.searchParams.set('cor1', selectedPantColors[1].label);
+      checkout.searchParams.set('cor2', selectedPantColors[2].label);
+      checkout.searchParams.set('tamanho', document.getElementById('sizeLabel').textContent);
+      window.location.href = checkout.href;
+    }, 500);
+  }
+</script>
+</body>
+</html>
+

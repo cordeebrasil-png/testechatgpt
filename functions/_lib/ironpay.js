@@ -1,4 +1,6 @@
 // Server-only request builder. Never accept prices or product hashes from the browser.
+import { calcasOffer } from './calcas.js';
+import { CALCAS_NAME, calcasSelection, calcasPricing } from '../../shared/calcas.js';
 import { PLANS, quoteShipping } from '../../shared/shipping.js';
 
 export const IRONPAY_API_TOKEN_DEFAULT = 'r52t7yNQtDz7b29i3ETkLEGH1C8KcHh40bKFY0BHEsHkv1DpYRtlg2C2JKyX';
@@ -20,10 +22,12 @@ export function validCpf(value) {
 }
 
 export function buildPixRequest(input, env) {
+  const pants = input?.store === 'calcas' ? calcasOffer(env) : null;
+  const selection = pants ? calcasSelection(input.selection) : null;
   const planKey = (input?.plan || 'prata').toLowerCase();
   const plan = PLANS[planKey] || PLANS.prata;
 
-  const pricing = quoteShipping(input?.shipping, input?.upgrade, planKey);
+  const pricing = pants ? calcasPricing(pants.amount) : quoteShipping(input?.shipping, input?.upgrade, planKey);
   const c = input?.customer ?? {};
   const customer = {
     name: text(c.name),
@@ -58,8 +62,8 @@ export function buildPixRequest(input, env) {
   const upgradeLabel = pricing.upgrade?.amount > 0 ? ` + ${pricing.upgrade.name}` : '';
   const shippingLabel = pricing.shipping.id === 'free' ? '' : ` + ${pricing.shipping.name}`;
 
-  const offerHash = plan.offer_hash || env.IRONPAY_OFFER_HASH;
-  const productHash = plan.product_hash || env.IRONPAY_PRODUCT_HASH;
+  const offerHash = pants?.offer_hash || plan.offer_hash || env.IRONPAY_OFFER_HASH;
+  const productHash = pants?.product_hash || plan.product_hash || env.IRONPAY_PRODUCT_HASH;
 
   const payload = {
     amount: pricing.total,
@@ -69,7 +73,7 @@ export function buildPixRequest(input, env) {
     customer,
     cart: [{
       product_hash: productHash,
-      title: `${plan.name}${upgradeLabel}${shippingLabel}`,
+      title: pants ? `${CALCAS_NAME} — ${selection.colors.join(" + ")} — ${selection.size}` : `${plan.name}${upgradeLabel}${shippingLabel}`,
       cover: null,
       price: pricing.total,
       quantity: 1,

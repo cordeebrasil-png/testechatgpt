@@ -1,3 +1,4 @@
+import { calcasSelection, calcasPricing } from '../../shared/calcas.js';
 import { buildPixRequest, ORDER_AMOUNT, IRONPAY_API_TOKEN_DEFAULT } from './ironpay.js';
 const getIronpayToken = env => env?.IRONPAY_API_TOKEN || IRONPAY_API_TOKEN_DEFAULT;
 import { quoteShipping } from '../../shared/shipping.js';
@@ -55,7 +56,7 @@ export function normalize(data, expectedHash, expectedAmount = ORDER_AMOUNT) {
 }
 export function receipt(input, payload) {
  const c=payload.customer;
- return {pricing:quoteShipping(input.shipping, input.upgrade, input.plan),name:c.name,email:c.email,street:c.street_name,number:c.number,extra:c.complement,district:c.neighborhood,city:c.city,state:c.state,cep:c.zip_code,color:['Azul','Preto','Verde','Vermelho'].includes(input.color)?input.color:'Azul'};
+ return {...(input.store==='calcas'?{store:'calcas',selection:calcasSelection(input.selection)}:{}),pricing:input.store==='calcas'?calcasPricing(payload.amount):quoteShipping(input.shipping, input.upgrade, input.plan),name:c.name,email:c.email,street:c.street_name,number:c.number,extra:c.complement,district:c.neighborhood,city:c.city,state:c.state,cep:c.zip_code,color:['Azul','Preto','Verde','Vermelho'].includes(input.color)?input.color:'Azul'};
 }
 export function storedPricing(row) {
  const receipt=row.receipt_json?JSON.parse(row.receipt_json):{};

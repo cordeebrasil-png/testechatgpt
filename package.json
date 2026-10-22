@@ -5,7 +5,8 @@
   "scripts": {
     "build": "echo 'Static pages ready'",
     "test": "node --test tests/*.test.js",
-    "test:browser": "node --test tests/*.browser.cjs"
+    "test:browser": "node --test tests/*.browser.cjs",
+    "build:calcas": "node scripts/build-calcas.mjs"
   },
   "dependencies": {
     "qrcode": "1.5.4"
