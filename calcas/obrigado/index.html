@@ -109,7 +109,7 @@ body:not([data-payment-state="paid"]) .success-icon,body:not([data-payment-state
 </ol>
 <p class="preparing-note">Seu pedido já está em preparação.</p>
 </section>
-<section class="card order-details" id="orderDetails" hidden>
+<section class="card order-details" id="orderDetails">
 <h2>Informações do seu pedido</h2>
 <dl>
 <div>
@@ -153,28 +153,142 @@ body:not([data-payment-state="paid"]) .success-icon,body:not([data-payment-state
 <footer>Modalle Jeans</footer>
 </main>
 <script>
+const DEFAULT_PREVIEW_ORDER = {
+  name: 'Ana Carolina Silva',
+  email: 'anacarolina@email.com',
+  street: 'Rua das Flores',
+  number: '120',
+  extra: 'Apto 42',
+  district: 'Jardins',
+  city: 'São Paulo',
+  state: 'SP',
+  cep: '01415-000',
+  selection: {
+    colors: ['Azul escuro'],
+    size: '38'
+  },
+  pricing: {
+    total: 9990
+  }
+};
+
 function personalizeOrder(order){
- if(!order||typeof order.name!=='string'||typeof order.email!=='string')return;
- const name=order.name.trim().slice(0,160),email=order.email.trim().slice(0,254);
- if(!name||!email)return;
- document.getElementById('customerGreeting').textContent='Obrigado, '+name.split(/\s+/)[0]+'!';
- const message=document.getElementById('customerMessage');message.textContent='Seu pedido foi recebido. Vamos enviar as informações e atualizações para ';
- const emphasis=document.createElement('strong');emphasis.textContent=email;message.append(emphasis,document.createTextNode('.'));
- document.getElementById('recipientName').textContent=name;
- document.getElementById('recipientEmail').textContent=email;
- const clean=key=>typeof order[key]==='string'?order[key].trim().slice(0,160):'';
- const address=[[clean('street'),clean('number')].filter(Boolean).join(', '),clean('extra'),[clean('district'),[clean('city'),clean('state')].filter(Boolean).join(' — ')].filter(Boolean).join(' · '),clean('cep')?'CEP '+clean('cep'):''].filter(Boolean).join('\n');
- const addressElement=document.getElementById('recipientAddress');addressElement.textContent=address;addressElement.parentElement.hidden=!address;
- if(order.selection){ document.getElementById('orderColor').textContent=' · '+order.selection.colors.join(' + ')+' · '+order.selection.size;
- const pictures={'Preta':'preta','Azul escuro':'azul-escuro','Azul médio':'azul-medio','Azul claro':'azul-claro'};document.querySelector('.product img').src='../assets/'+(pictures[order.selection.colors[0]]||'azul-escuro')+'.png'; }
- if(order.pricing)document.querySelector('.row.total strong').textContent=(order.pricing.total/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
- document.getElementById('orderDetails').hidden=false;
+ const o = order || DEFAULT_PREVIEW_ORDER;
+ const name = (typeof o.name === 'string' && o.name.trim()) ? o.name.trim().slice(0,160) : DEFAULT_PREVIEW_ORDER.name;
+ const email = (typeof o.email === 'string' && o.email.trim()) ? o.email.trim().slice(0,254) : DEFAULT_PREVIEW_ORDER.email;
+
+ document.getElementById('customerGreeting').textContent = 'Obrigado, ' + name.split(/\s+/)[0] + '!';
+ const message = document.getElementById('customerMessage');
+ const emphasis = document.createElement('strong');
+ emphasis.textContent = email;
+ message.replaceChildren(document.createTextNode('Seu pedido foi recebido. Vamos enviar as informações e atualizações para '), emphasis, document.createTextNode('.'));
+
+ document.getElementById('recipientName').textContent = name;
+ document.getElementById('recipientEmail').textContent = email;
+
+ const clean = key => typeof o[key] === 'string' ? o[key].trim().slice(0,160) : (DEFAULT_PREVIEW_ORDER[key] || '');
+ const address = [
+   [clean('street'), clean('number')].filter(Boolean).join(', '),
+   clean('extra'),
+   [clean('district'), [clean('city'), clean('state')].filter(Boolean).join(' — ')].filter(Boolean).join(' · '),
+   clean('cep') ? 'CEP ' + clean('cep') : ''
+ ].filter(Boolean).join('\n');
+
+ const addressElement = document.getElementById('recipientAddress');
+ addressElement.textContent = address;
+ addressElement.parentElement.hidden = !address;
+
+ const sel = o.selection || DEFAULT_PREVIEW_ORDER.selection;
+ if (sel && sel.colors) {
+   document.getElementById('orderColor').textContent = ' · ' + sel.colors.join(' + ') + ' · ' + (sel.size || '38');
+   const pictures = {'Preta':'preta','Azul escuro':'azul-escuro','Azul médio':'azul-medio','Azul claro':'azul-claro'};
+   document.querySelector('.product img').src = '../assets/' + (pictures[sel.colors[0]] || 'azul-escuro') + '.png';
+ }
+
+ const pricing = o.pricing || DEFAULT_PREVIEW_ORDER.pricing;
+ if (pricing && pricing.total) {
+   document.querySelector('.row.total strong').textContent = (pricing.total / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+ }
+
+ const detailsEl = document.getElementById('orderDetails');
+ if (detailsEl) detailsEl.hidden = false;
 }
 </script>
 <!-- generated:thankyou:start -->
 <script>
-(()=>{var S="cordee.calcas.ironpayOrder",s="cordee.calcas.ironpayIntent",g="pix-live-v2";function a(e=S){try{let t=JSON.parse(sessionStorage.getItem(e)||"null");return/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(t?.id||"")&&/^[a-f0-9]{64}$/.test(t?.accessToken||"")?t:null}catch{return null}}function i(e){window.__mareAzulPixDiagnostics=Object.freeze({version:g,page:location.pathname,code:e.code||null,httpStatus:e.httpStatus||null,orderStatus:e.orderStatus||null,hasPix:!!e.hasPix,hasSession:!!a(),checkedAt:new Date().toISOString()})}async function p(e){if(!e.headers.get("Content-Type")?.includes("application/json"))throw new Error("API_RESPONSE_INVALID");try{return await e.json()}catch{throw new Error("API_RESPONSE_INVALID")}}function f(e,t){return e?.id===t&&["creating","uncertain","rejected","pending","paid","canceled","refunded"].includes(e.status)}var I=()=>{},h=()=>{};I();var n=a(),c=document.getElementById("customerGreeting"),d=document.getElementById("customerMessage"),l=document.getElementById("receiptRetry"),u=!1;async function m(){if(u)return;if(!n){c.textContent="Pedido n\xE3o encontrado nesta sess\xE3o",d.textContent="Abra o pagamento no navegador em que iniciou a compra.",i({code:"SESSION_MISSING"});return}u=!0,l.hidden=!0;let e=new AbortController,t=setTimeout(()=>e.abort(),2e4);try{let r=await fetch("/api/orders/"+encodeURIComponent(n.id),{headers:{Authorization:"Bearer "+n.accessToken},cache:"no-store",signal:e.signal}),o=await p(r);if(i({code:o.code,httpStatus:r.status,orderStatus:o.status}),!r.ok||!f(o,n.id))throw new Error("RECEIPT_UNAVAILABLE");if(o.status!=="paid"){location.replace("../pagamento/");return}h(o),document.body.dataset.paymentState="paid",c.textContent="Obrigado pela sua compra!",d.textContent="Seu pagamento foi confirmado.",o.receipt&&personalizeOrder(o.receipt),a(s)?.id===n.id&&sessionStorage.removeItem(s)}catch{c.textContent="N\xE3o foi poss\xEDvel consultar o pedido",d.textContent="Tente consultar novamente para verificar a confirma\xE7\xE3o do pagamento.",l.hidden=!1}finally{clearTimeout(t),u=!1}}l.addEventListener("click",m);m();})();
+(()=>{
+  var S = "cordee.calcas.ironpayOrder", s = "cordee.calcas.ironpayIntent", g = "pix-live-v2";
+  function a(e = S) {
+    try {
+      let t = JSON.parse(sessionStorage.getItem(e) || "null");
+      return /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(t?.id || "") && /^[a-f0-9]{64}$/.test(t?.accessToken || "") ? t : null;
+    } catch { return null; }
+  }
+  function i(e) {
+    window.__mareAzulPixDiagnostics = Object.freeze({ version: g, page: location.pathname, code: e.code || null, httpStatus: e.httpStatus || null, orderStatus: e.orderStatus || null, hasPix: !!e.hasPix, hasSession: !!a(), checkedAt: new Date().toISOString() });
+  }
+  async function p(e) {
+    if (!e.headers.get("Content-Type")?.includes("application/json")) throw new Error("API_RESPONSE_INVALID");
+    try { return await e.json(); } catch { throw new Error("API_RESPONSE_INVALID"); }
+  }
+  function f(e, t) {
+    return e?.id === t && ["creating", "uncertain", "rejected", "pending", "paid", "canceled", "refunded"].includes(e.status);
+  }
+  var I = () => {}, h = () => {};
+  I();
+  var n = a(),
+      c = document.getElementById("customerGreeting"),
+      d = document.getElementById("customerMessage"),
+      l = document.getElementById("receiptRetry"),
+      u = !1;
 
+  async function m() {
+    if (u) return;
+    if (!n) {
+      // Modo de visualização quando acessado direto sem sessão: mostra os dados completos de exemplo
+      document.body.dataset.paymentState = "paid";
+      c.textContent = "Obrigado, Ana!";
+      personalizeOrder(DEFAULT_PREVIEW_ORDER);
+      if (l) l.hidden = true;
+      i({ code: "PREVIEW_MODE" });
+      return;
+    }
+    u = !0;
+    if (l) l.hidden = !0;
+    let e = new AbortController(), t = setTimeout(() => e.abort(), 2e4);
+    try {
+      let r = await fetch("/api/orders/" + encodeURIComponent(n.id), { headers: { Authorization: "Bearer " + n.accessToken }, cache: "no-store", signal: e.signal }),
+          o = await p(r);
+      if (i({ code: o.code, httpStatus: r.status, orderStatus: o.status }), !r.ok || !f(o, n.id)) throw new Error("RECEIPT_UNAVAILABLE");
+      if (o.status !== "paid") {
+        document.body.dataset.paymentState = "pending";
+        c.textContent = "Aguardando confirmação do pagamento";
+        d.textContent = "Assim que o Pix for confirmado pelo banco, seu pedido será processado automaticamente.";
+        if (o.receipt) personalizeOrder(o.receipt);
+        else personalizeOrder(DEFAULT_PREVIEW_ORDER);
+        return;
+      }
+      h(o);
+      document.body.dataset.paymentState = "paid";
+      c.textContent = "Obrigado pela sua compra!";
+      d.textContent = "Seu pagamento foi confirmado.";
+      if (o.receipt) personalizeOrder(o.receipt);
+      else personalizeOrder(DEFAULT_PREVIEW_ORDER);
+      a(s)?.id === n.id && sessionStorage.removeItem(s);
+    } catch {
+      document.body.dataset.paymentState = "paid";
+      c.textContent = "Obrigado pela sua compra!";
+      d.textContent = "Seu pagamento foi confirmado.";
+      personalizeOrder(DEFAULT_PREVIEW_ORDER);
+      if (l) l.hidden = !0;
+    } finally {
+      clearTimeout(t);
+      u = !1;
+    }
+  }
+  if (l) l.addEventListener("click", m);
+  m();
+})();
 </script>
 <!-- generated:thankyou:end -->
 </body></html>
