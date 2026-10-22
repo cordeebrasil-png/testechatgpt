@@ -44,11 +44,11 @@ test('production landing and checkout send the correct pixel and funnel events',
     assert.equal(tracked[0][2].value, 119.9);
   }
   assert.equal(h.sdkRequests.length, 2);
-  assert.ok(h.sdkRequests.every(url => new URL(url).searchParams.get('sdkid') === 'DA5U5MRC77U8NT7JF3A0'));
+  assert.ok(h.sdkRequests.every(url => new URL(url).searchParams.get('sdkid') === 'DBCS5ORC77U29DFSUC6G'));
 });
 test('authenticated paid receipt sends PedidoPago once and does not send Purchase again', async t => {
   const h = await setup(t);
-  await h.page.addInitScript(id => { localStorage.setItem(`mareazul.tiktok.DA5U5MRC77U8NT7JF3A0.purchase.${id}`, 'sent'); }, ID);
+  await h.page.addInitScript(id => { localStorage.setItem(`mareazul.tiktok.DBCS5ORC77U29DFSUC6G.purchase.${id}`, 'sent'); }, ID);
   await h.page.goto(h.origin + '/obrigado/?status=paid&value=1');
   await h.page.waitForFunction(() => window.pixelEvents?.some(e => e[1] === 'PedidoPago'));
   const events = await h.page.evaluate(() => window.pixelEvents);

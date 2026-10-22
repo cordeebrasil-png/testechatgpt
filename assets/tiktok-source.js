@@ -1,4 +1,4 @@
-export const PIXEL_ID = 'DA5U5MRC77U8NT7JF3A0';
+export const PIXEL_ID = 'DBCS5ORC77U29DFSUC6G';
 const PRODUCT_ID = 'jbkikbdjti';
 const PRODUCT_NAME = 'Kit Dobrável Duo 3 em 1';
 let active = false, loaded = false;
@@ -28,8 +28,9 @@ function flushPurchases() {
 export function initTikTok() {
   if (document.querySelector('meta[name="checkout-test-mode"]')) return;
   // Preview deployments and the separate low-value test checkout must not pollute the ads pixel.
-  if (active || location.hostname !== 'mare-azul.pages.dev') return;
-  if (!['/', '/index.html', '/checkout/', '/pagamento/', '/obrigado/'].includes(location.pathname)) return;
+  const isAllowedHost = location.hostname === 'mare-azul.pages.dev' || location.hostname === 'modallejeans.urlx.online' || location.hostname === 'www.modallejeans.urlx.online';
+  if (active || !isAllowedHost) return;
+  if (!['/', '/index.html', '/checkout/', '/pagamento/', '/obrigado/', '/calcas/', '/calcas/index.html', '/calcas/checkout/', '/calcas/pagamento/', '/calcas/obrigado/'].includes(location.pathname)) return;
   active = true;
   try {
     window.TiktokAnalyticsObject = 'ttq';
@@ -53,8 +54,8 @@ export function initTikTok() {
     script.onload = () => { loaded = true; try { flushPurchases(); } catch { /* Tracking never blocks checkout. */ } };
     document.head.appendChild(script);
     ttq.page();
-    if (['/', '/index.html'].includes(location.pathname)) ttq.track('ViewContent', product());
-    if (location.pathname === '/checkout/') ttq.track('InitiateCheckout', product());
+    if (['/', '/index.html', '/calcas/', '/calcas/index.html'].includes(location.pathname)) ttq.track('ViewContent', product());
+    if (['/checkout/', '/calcas/checkout/'].includes(location.pathname)) ttq.track('InitiateCheckout', product());
   } catch { active = false; }
 }
 export function trackPaidPurchase(order) {
@@ -76,7 +77,7 @@ function trackOrderEvent(order, event) {
   try { flushPurchases(); } catch { /* Payment confirmation remains independent of analytics. */ }
 }
 export function trackAddressStarted() {
-  if (!active || location.pathname !== '/checkout/' || paymentInfoSent) return;
+  if (!active || !['/checkout/', '/calcas/checkout/'].includes(location.pathname) || paymentInfoSent) return;
   try {
     window.ttq.track('AddPaymentInfo', product());
     paymentInfoSent = true;

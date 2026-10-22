@@ -71,7 +71,7 @@ Nenhuma chave de API está incluída no repositório. A documentação confirma 
 
 ## Pixel TikTok
 
-Pixel público: `DA5U5MRC77U8NT7JF3A0`. Fonte: `assets/tiktok-source.js`, incluída nos bundles gerados por `npm run build`.
+Pixel público: `DBCS5ORC77U29DFSUC6G`. Fonte: `assets/tiktok-source.js`, incluída nos bundles gerados por `npm run build`.
 
 - Somente o hostname de produção `mare-azul.pages.dev` carrega o pixel. Prévia, localhost e rotas de testes não carregam. Ao adotar um domínio próprio, atualizar a lista de hosts e validar novamente.
 - `PageView` via `ttq.page()` nas páginas do funil; `ViewContent` na página de vendas; `InitiateCheckout` na entrada do checkout.

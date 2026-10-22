@@ -1,8 +1,11 @@
 import { PLANS, quoteShipping } from '../shared/shipping.js';
 
-const PIXEL = 'DA5U5MRC77U8NT7JF3A0';
+const PIXEL = 'DBCS5ORC77U29DFSUC6G';
 const path = location.pathname;
-const allowed = location.hostname === 'mare-azul.pages.dev' && ['/', '/checkout/', '/obrigado/'].includes(path);
+const isAllowedHost = location.hostname === 'mare-azul.pages.dev' ||
+  location.hostname === 'modallejeans.urlx.online' ||
+  location.hostname === 'www.modallejeans.urlx.online';
+const allowed = isAllowedHost && ['/', '/index.html', '/checkout/', '/obrigado/', '/calcas/', '/calcas/index.html', '/calcas/checkout/', '/calcas/pagamento/', '/calcas/obrigado/'].includes(path);
 const pending = new Map();
 const sent = new Set();
 let ready = false;
@@ -37,15 +40,34 @@ function orderEvent(name, order) {
   if (!allowed || !/^[a-f0-9-]{36}$/i.test(order?.id || '') || !Number.isSafeInteger(order.amount) || order.amount <= 0) return;
   if (name === 'Purchase' && (order.status !== 'pending' || !order.pixCode?.trim() || order.pixCode.includes('DEMONSTRACAO') || (order.expiresAt && Number(order.expiresAt) <= Date.now()))) return;
   if (name === 'PedidoPago' && (order.status !== 'paid' || order.verificationDelayed)) return;
+  
+  let payload;
   const plan = order.pricing?.plan?.id;
-  if (!Object.hasOwn(PLANS, plan)) return;
+  if (plan && Object.hasOwn(PLANS, plan)) {
+    payload = product(plan, order.amount);
+  } else {
+    payload = {
+      currency: 'BRL',
+      value: order.amount / 100,
+      content_type: 'product',
+      contents: [{
+        content_id: 'calcas-modalle',
+        content_name: 'Kit 2 Calças Jeans Modalle',
+        quantity: 1,
+        price: order.amount / 100
+      }]
+    };
+  }
+  
   const id = `boxes_${name}_${order.id}`;
-  pending.set(`${PIXEL}.${id}`, { name, id, payload: product(plan, order.amount) });
+  pending.set(`${PIXEL}.${id}`, { name, id, payload });
   flush();
 }
 async function verifyPaid() {
   let session;
-  try { session = JSON.parse(sessionStorage.getItem('mareazul.ironpayOrder')); } catch { return; }
+  try {
+    session = JSON.parse(sessionStorage.getItem('cordee.calcas.ironpayOrder') || sessionStorage.getItem('mareazul.ironpayOrder') || 'null');
+  } catch { return; }
   if (!/^[a-f0-9-]{36}$/i.test(session?.id || '') || !/^[a-f0-9]{64}$/.test(session?.accessToken || '')) return;
   for (let attempt = 0; attempt < 5; attempt++) {
     try {
@@ -56,7 +78,10 @@ async function verifyPaid() {
       if (response.ok) {
         const order = await response.json();
         if (order.id !== session.id) return;
-        if (order.status === 'paid' && !order.verificationDelayed) { orderEvent('PedidoPago', order); return; }
+        if (order.status === 'paid' && !order.verificationDelayed) {
+          orderEvent('PedidoPago', order);
+          return;
+        }
         if (['canceled', 'refunded', 'rejected'].includes(order.status)) return;
       }
     } catch {}
@@ -77,7 +102,13 @@ if (allowed) {
   script.onload = () => { ready = true; flush(); };
   document.head.appendChild(script);
   ttq.page();
-  if (path === '/') ttq.track('ViewContent', { content_type: 'product', currency: 'BRL', contents: Object.values(PLANS).map(p => ({ content_id: p.product_hash, content_name: p.name, quantity: 1, price: p.price / 100 })) });
+  
+  if (['/', '/index.html'].includes(path)) {
+    ttq.track('ViewContent', { content_type: 'product', currency: 'BRL', contents: Object.values(PLANS).map(p => ({ content_id: p.product_hash, content_name: p.name, quantity: 1, price: p.price / 100 })) });
+  }
+  if (['/calcas/', '/calcas/index.html'].includes(path)) {
+    ttq.track('ViewContent', { content_type: 'product', currency: 'BRL', value: 94.90, contents: [{ content_id: 'calcas-modalle', content_name: 'Kit 2 Calças Jeans Modalle', quantity: 1, price: 94.90 }] });
+  }
   if (path === '/checkout/') {
     ttq.track('InitiateCheckout', product(selectedPlan(), PLANS[selectedPlan()].price));
     let addressSent = false;
@@ -88,5 +119,17 @@ if (allowed) {
     });
     window.addEventListener('boxes:pix-ready', event => { try { orderEvent('Purchase', event.detail); } catch {} });
   }
-  if (path === '/obrigado/') void verifyPaid();
+  if (path === '/calcas/checkout/') {
+    ttq.track('InitiateCheckout', { currency: 'BRL', value: 94.90, content_type: 'product', contents: [{ content_id: 'calcas-modalle', content_name: 'Kit 2 Calças Jeans Modalle', quantity: 1, price: 94.90 }] });
+    let addressSent = false;
+    document.addEventListener('input', event => {
+      if (!event.isTrusted || (event.target.id !== 'cep' && event.target.id !== 'street') || addressSent) return;
+      if (event.target.id === 'cep' && event.target.value.replace(/\D/g, '').length !== 8) return;
+      if (event.target.id === 'street' && !event.target.value.trim()) return;
+      addressSent = true;
+      ttq.track('AddPaymentInfo', { currency: 'BRL', value: 94.90, content_type: 'product', contents: [{ content_id: 'calcas-modalle', content_name: 'Kit 2 Calças Jeans Modalle', quantity: 1, price: 94.90 }] });
+    });
+    window.addEventListener('boxes:pix-ready', event => { try { orderEvent('Purchase', event.detail); } catch {} });
+  }
+  if (['/obrigado/', '/calcas/obrigado/'].includes(path)) void verifyPaid();
 }
