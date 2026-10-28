@@ -551,29 +551,19 @@ a { color: inherit; text-decoration: none; }
   background: #ffffff;
 }
 
-/* Correios Brand Block */
+/* Correios Real Brand Block */
 .ship-brand-col {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 58px;
+  width: 82px;
 }
-.correios-icon {
-  width: 38px;
-  height: 26px;
+.correios-real-logo {
+  width: 80px;
+  height: auto;
+  max-height: 22px;
   display: block;
-}
-.correios-text {
-  font-size: 13.5px;
-  font-weight: 800;
-  font-style: italic;
-  color: #004182;
-  letter-spacing: -0.2px;
-  line-height: 1;
-  margin-top: 3px;
-  font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* Ship Info Column */
@@ -834,6 +824,14 @@ a { color: inherit; text-decoration: none; }
 .pm-icon-wrap.pix {
   background: #00bdae;
   color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pm-icon-wrap.pix svg {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 .pm-icon-wrap.card {
   background: #edf3f8;
@@ -1584,11 +1582,42 @@ a { color: inherit; text-decoration: none; }
           </div>
 
           <div class="ship-brand-col">
-            <svg class="correios-icon" width="36" height="26" viewBox="0 0 34 26" fill="none">
-              <path d="M12 2L4 12L12 22H19L11 12L19 2H12Z" fill="#F8B100"/>
-              <path d="M19 2L11 12L19 22H26L18 12L26 2H19Z" fill="#004182"/>
-            </svg>
-            <span class="correios-text">Correios</span>
+            <svg class="correios-real-logo" viewBox="0 0 445.3 91.2" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="corG1" gradientUnits="userSpaceOnUse" x1="68.84" y1="28.89" x2="10.05" y2="74.82">
+      <stop offset="0" stop-color="#FFDD00"/>
+      <stop offset="0.9" stop-color="#D49F00"/>
+      <stop offset="1" stop-color="#FFDD00"/>
+    </linearGradient>
+    <linearGradient id="corG2" gradientUnits="userSpaceOnUse" x1="70.01" y1="75.86" x2="27.21" y2="75.86">
+      <stop offset="0" stop-color="#D49F00"/>
+      <stop offset="1" stop-color="#AB5808"/>
+    </linearGradient>
+    <linearGradient id="corG3" gradientUnits="userSpaceOnUse" x1="55.92" y1="62.21" x2="114.81" y2="16.37">
+      <stop offset="0" stop-color="#00537E"/>
+      <stop offset="0.9" stop-color="#18AAE2"/>
+      <stop offset="1" stop-color="#107BC0"/>
+    </linearGradient>
+    <linearGradient id="corG4" gradientUnits="userSpaceOnUse" x1="91.80" y1="-4.21" x2="66.79" y2="15.32">
+      <stop offset="0" stop-color="#002542"/>
+      <stop offset="1" stop-color="#004169"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#corG1)" fill-rule="evenodd" clip-rule="evenodd" d="M31.7 91.2h-4c-3.2 0-6.1-1.5-8-3.9L0.7 62.9C0.3 62.3 0 61.6 0 60.8c0-0.8 0.3-1.5 0.7-2.1l19.1-24.4c1.9-2.4 4.7-3.9 8-3.9H70l-24 30.1L28.5 82.6L31.7 91.2z"/>
+  <path fill="url(#corG2)" fill-rule="evenodd" clip-rule="evenodd" d="M46.3 60.8l-0.2-0.3L28.5 82.6c-0.7 0.9-1.3 2.1-1.3 4.1c0 2 1.9 4.5 5.7 4.5H70L46.3 60.8z"/>
+  <path fill="url(#corG3)" fill-rule="evenodd" clip-rule="evenodd" d="M96.3 8.6L93.1 0h4c3.2 0 6.1 1.5 8 3.9l19.1 24.4c0.4 0.6 0.7 1.3 0.7 2.1c0 0.8-0.3 1.5-0.7 2.1L105 56.9c-1.9 2.4-4.7 3.9-8 3.9H54.8l24-30.1L96.3 8.6z"/>
+  <path fill="url(#corG4)" fill-rule="evenodd" clip-rule="evenodd" d="M78.6 30.4l0.2 0.3L96.3 8.6c0.7-0.9 1.3-2.1 1.3-4.1c0-2-1.9-4.5-5.7-4.5H54.8L78.6 30.4z"/>
+  <path fill="#0BBBEF" d="M97.3 8.2c0.7-0.9 1.1-1.9 1.1-3.1c0-2.8-2.3-5.1-5.1-5.1H92C94.8 0 97 2.3 97 5.1c0 1.2-0.4 2.3-1.1 3.1L78.6 30.4L54.9 60.7L97.3 8.2z"/>
+  <path fill="#FFD500" d="M27.6 83c-0.7 0.9-1.1 1.9-1.1 3.1c0 2.8 2.3 5.1 5.1 5.1h1.3c-2.8 0-5.1-2.3-5.1-5.1c0-1.2 0.4-2.3 1.1-3.1l17.4-22.2L70 30.5L27.6 83z"/>
+  <path fill="#06416A" d="M283.2 42.8c-2.4 0-4.3.3-6.3.9-3.2 1-5.6 2.7-7.4 5.1-3.1 4-3 8.8-3 8.8v33.4h8.9c.6 0 1-.5 1-1V58.3c0-.6.1-2.8 1.3-3.9 1-.9 2.3-1.3 3.6-1.5 1.4-.2 2.8-.1 3.5 0h.2c.7 0 1.2-.4 1.5-.9l4.6-7.9c-2.4-.9-5-1.4-7.9-1.3"/>
+  <path fill="#06416A" d="M257 42.8c-2.4 0-4.4.3-6.3.9-3.2 1-5.6 2.7-7.4 5.1-3.1 4-3 8.8-3 8.8v33.4h8.9c.6 0 1-.5 1-1V58.3c0-.6.1-2.8 1.3-3.9 1-.9 2.3-1.3 3.6-1.5 1.4-.2 2.8-.1 3.5 0h.2c.6 0 1.2-.4 1.5-.9L265 44c-2.6-.8-5.1-1.3-8-1.2"/>
+  <path fill="#06416A" d="M179.2 78.7c-.3-.4-.9-.7-1.5-.7-.3 0-.7.1-.9.3-3 1.8-6.6 2.9-10.4 2.9-11.2 0-20.3-9.1-20.3-20.4 0-11.2 9.1-20.3 20.3-20.3 3.8 0 7.4 1 10.4 2.9.3.2.6.3 1 .3.6 0 1.1-.3 1.5-.7l5.1-6.6c-5-3.7-11.2-5.9-18-5.9-16.8 0-30.4 13.6-30.4 30.4 0 16.8 13.6 30.4 30.4 30.4 6.7 0 12.9-2.2 18-5.9l-5.6-7.3z"/>
+  <path fill="#06416A" d="M314.3 51.7c6.6 0 12.2 4.3 14.2 10.2h-28.3c2-5.9 7.6-10.2 14.1-10.2m0-9.6c-13.5 0-24.5 11-24.5 24.5 0 13.4 11 24.4 24.5 24.5h.7c5.3 0 9.6-.7 15.3-4.4l.9-.6-5.1-6.6c-.3-.4-.9-.7-1.4-.7-.3 0-.6.1-.9.2-1.3.7-5.2 2.4-9.5 2.4-6.5 0-12-4.1-14.1-9.9h33.6l3.9 0c.6 0 1-.5 1-1l.1-2.8c0-.4 0-.7 0-1.1 0-13.5-11-24.5-24.6-24.5z"/>
+  <path fill="#06416A" d="M345.6 91.2c-.6 0-1-.4-1-1V44.7c0-.5.4-1 1-1h7.9c.6 0 1 .5 1 1v45.5c0 .6-.5 1-1 1h-7.9z"/>
+  <path fill="#06416A" d="M210.7 51.5c-8.2 0-14.8 6.6-14.8 14.8s6.6 14.8 14.8 14.8 14.8-6.6 14.8-14.8-6.6-14.8-14.8-14.8m0 39.7c-13.7 0-24.8-11.1-24.8-24.8 0-13.7 11.1-24.8 24.8-24.8 13.7 0 24.8 11.1 24.8 24.8 0 13.6-11.1 24.8-24.8 24.8z"/>
+  <path fill="#06416A" d="M384.1 51.9c-8.1 0-14.7 6.6-14.7 14.7 0 8.1 6.6 14.6 14.7 14.6 8.1 0 14.7-6.6 14.7-14.6 0-8.1-6.6-14.7-14.7-14.7m0 39.2c-13.6 0-24.6-11-24.6-24.6 0-13.6 11-24.6 24.6-24.6 13.6 0 24.6 11 24.6 24.6 0 13.6-11 24.6-24.6 24.6z"/>
+  <path fill="#06416A" d="M436.6 62.8c-1.7-.8-3.9-1.3-6.3-1.9-3.5-.9-6.8-1.1-8-3-1.1-1.8-.5-3.8 1-4.9 3.5-2.4 8.2-1.4 10.8-.2.5.2 2.4 1.3 2.4 1.3.3.2.6.3.9.3.6 0 1.1-.3 1.5-.8 0 0 5-6.4 5-6.4l-.8-.7c-.5-.4-1.2-.8-1.9-1.2-1.5-.8-6-3.4-12.5-3.4-.2 0-.4 0-.6 0-14.3.3-16.3 10.4-16.3 14 0 5.4 2.8 9.3 7 11.7 3.4 1.9 9.7 3 12.9 4 1.7.5 2.9 1.7 3.4 2.8.2.5.3 1 .3 1.6.1 1.9-.9 4-3.7 4.9-3.1.9-7.9.5-12.3-2.9-.1-.1-.6-.5-.8-.6-.2-.1-.4-.1-.7-.1-.6 0-1.1.3-1.5.8-.1.1-4.9 6.3-4.9 6.3s1.7 1.4 2.3 1.8c2.8 2.1 7.8 4.9 14.3 4.9h.2c13.8 0 17-9.8 17-15.2-.1-4.7-3.4-10-8.8-12.4z"/>
+</svg>
           </div>
 
           <div class="ship-info-col">
@@ -1610,11 +1639,42 @@ a { color: inherit; text-decoration: none; }
           </div>
 
           <div class="ship-brand-col">
-            <svg class="correios-icon" width="36" height="26" viewBox="0 0 34 26" fill="none">
-              <path d="M12 2L4 12L12 22H19L11 12L19 2H12Z" fill="#F8B100"/>
-              <path d="M19 2L11 12L19 22H26L18 12L26 2H19Z" fill="#004182"/>
-            </svg>
-            <span class="correios-text">Correios</span>
+            <svg class="correios-real-logo" viewBox="0 0 445.3 91.2" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="corG1" gradientUnits="userSpaceOnUse" x1="68.84" y1="28.89" x2="10.05" y2="74.82">
+      <stop offset="0" stop-color="#FFDD00"/>
+      <stop offset="0.9" stop-color="#D49F00"/>
+      <stop offset="1" stop-color="#FFDD00"/>
+    </linearGradient>
+    <linearGradient id="corG2" gradientUnits="userSpaceOnUse" x1="70.01" y1="75.86" x2="27.21" y2="75.86">
+      <stop offset="0" stop-color="#D49F00"/>
+      <stop offset="1" stop-color="#AB5808"/>
+    </linearGradient>
+    <linearGradient id="corG3" gradientUnits="userSpaceOnUse" x1="55.92" y1="62.21" x2="114.81" y2="16.37">
+      <stop offset="0" stop-color="#00537E"/>
+      <stop offset="0.9" stop-color="#18AAE2"/>
+      <stop offset="1" stop-color="#107BC0"/>
+    </linearGradient>
+    <linearGradient id="corG4" gradientUnits="userSpaceOnUse" x1="91.80" y1="-4.21" x2="66.79" y2="15.32">
+      <stop offset="0" stop-color="#002542"/>
+      <stop offset="1" stop-color="#004169"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#corG1)" fill-rule="evenodd" clip-rule="evenodd" d="M31.7 91.2h-4c-3.2 0-6.1-1.5-8-3.9L0.7 62.9C0.3 62.3 0 61.6 0 60.8c0-0.8 0.3-1.5 0.7-2.1l19.1-24.4c1.9-2.4 4.7-3.9 8-3.9H70l-24 30.1L28.5 82.6L31.7 91.2z"/>
+  <path fill="url(#corG2)" fill-rule="evenodd" clip-rule="evenodd" d="M46.3 60.8l-0.2-0.3L28.5 82.6c-0.7 0.9-1.3 2.1-1.3 4.1c0 2 1.9 4.5 5.7 4.5H70L46.3 60.8z"/>
+  <path fill="url(#corG3)" fill-rule="evenodd" clip-rule="evenodd" d="M96.3 8.6L93.1 0h4c3.2 0 6.1 1.5 8 3.9l19.1 24.4c0.4 0.6 0.7 1.3 0.7 2.1c0 0.8-0.3 1.5-0.7 2.1L105 56.9c-1.9 2.4-4.7 3.9-8 3.9H54.8l24-30.1L96.3 8.6z"/>
+  <path fill="url(#corG4)" fill-rule="evenodd" clip-rule="evenodd" d="M78.6 30.4l0.2 0.3L96.3 8.6c0.7-0.9 1.3-2.1 1.3-4.1c0-2-1.9-4.5-5.7-4.5H54.8L78.6 30.4z"/>
+  <path fill="#0BBBEF" d="M97.3 8.2c0.7-0.9 1.1-1.9 1.1-3.1c0-2.8-2.3-5.1-5.1-5.1H92C94.8 0 97 2.3 97 5.1c0 1.2-0.4 2.3-1.1 3.1L78.6 30.4L54.9 60.7L97.3 8.2z"/>
+  <path fill="#FFD500" d="M27.6 83c-0.7 0.9-1.1 1.9-1.1 3.1c0 2.8 2.3 5.1 5.1 5.1h1.3c-2.8 0-5.1-2.3-5.1-5.1c0-1.2 0.4-2.3 1.1-3.1l17.4-22.2L70 30.5L27.6 83z"/>
+  <path fill="#06416A" d="M283.2 42.8c-2.4 0-4.3.3-6.3.9-3.2 1-5.6 2.7-7.4 5.1-3.1 4-3 8.8-3 8.8v33.4h8.9c.6 0 1-.5 1-1V58.3c0-.6.1-2.8 1.3-3.9 1-.9 2.3-1.3 3.6-1.5 1.4-.2 2.8-.1 3.5 0h.2c.7 0 1.2-.4 1.5-.9l4.6-7.9c-2.4-.9-5-1.4-7.9-1.3"/>
+  <path fill="#06416A" d="M257 42.8c-2.4 0-4.4.3-6.3.9-3.2 1-5.6 2.7-7.4 5.1-3.1 4-3 8.8-3 8.8v33.4h8.9c.6 0 1-.5 1-1V58.3c0-.6.1-2.8 1.3-3.9 1-.9 2.3-1.3 3.6-1.5 1.4-.2 2.8-.1 3.5 0h.2c.6 0 1.2-.4 1.5-.9L265 44c-2.6-.8-5.1-1.3-8-1.2"/>
+  <path fill="#06416A" d="M179.2 78.7c-.3-.4-.9-.7-1.5-.7-.3 0-.7.1-.9.3-3 1.8-6.6 2.9-10.4 2.9-11.2 0-20.3-9.1-20.3-20.4 0-11.2 9.1-20.3 20.3-20.3 3.8 0 7.4 1 10.4 2.9.3.2.6.3 1 .3.6 0 1.1-.3 1.5-.7l5.1-6.6c-5-3.7-11.2-5.9-18-5.9-16.8 0-30.4 13.6-30.4 30.4 0 16.8 13.6 30.4 30.4 30.4 6.7 0 12.9-2.2 18-5.9l-5.6-7.3z"/>
+  <path fill="#06416A" d="M314.3 51.7c6.6 0 12.2 4.3 14.2 10.2h-28.3c2-5.9 7.6-10.2 14.1-10.2m0-9.6c-13.5 0-24.5 11-24.5 24.5 0 13.4 11 24.4 24.5 24.5h.7c5.3 0 9.6-.7 15.3-4.4l.9-.6-5.1-6.6c-.3-.4-.9-.7-1.4-.7-.3 0-.6.1-.9.2-1.3.7-5.2 2.4-9.5 2.4-6.5 0-12-4.1-14.1-9.9h33.6l3.9 0c.6 0 1-.5 1-1l.1-2.8c0-.4 0-.7 0-1.1 0-13.5-11-24.5-24.6-24.5z"/>
+  <path fill="#06416A" d="M345.6 91.2c-.6 0-1-.4-1-1V44.7c0-.5.4-1 1-1h7.9c.6 0 1 .5 1 1v45.5c0 .6-.5 1-1 1h-7.9z"/>
+  <path fill="#06416A" d="M210.7 51.5c-8.2 0-14.8 6.6-14.8 14.8s6.6 14.8 14.8 14.8 14.8-6.6 14.8-14.8-6.6-14.8-14.8-14.8m0 39.7c-13.7 0-24.8-11.1-24.8-24.8 0-13.7 11.1-24.8 24.8-24.8 13.7 0 24.8 11.1 24.8 24.8 0 13.6-11.1 24.8-24.8 24.8z"/>
+  <path fill="#06416A" d="M384.1 51.9c-8.1 0-14.7 6.6-14.7 14.7 0 8.1 6.6 14.6 14.7 14.6 8.1 0 14.7-6.6 14.7-14.6 0-8.1-6.6-14.7-14.7-14.7m0 39.2c-13.6 0-24.6-11-24.6-24.6 0-13.6 11-24.6 24.6-24.6 13.6 0 24.6 11 24.6 24.6 0 13.6-11 24.6-24.6 24.6z"/>
+  <path fill="#06416A" d="M436.6 62.8c-1.7-.8-3.9-1.3-6.3-1.9-3.5-.9-6.8-1.1-8-3-1.1-1.8-.5-3.8 1-4.9 3.5-2.4 8.2-1.4 10.8-.2.5.2 2.4 1.3 2.4 1.3.3.2.6.3.9.3.6 0 1.1-.3 1.5-.8 0 0 5-6.4 5-6.4l-.8-.7c-.5-.4-1.2-.8-1.9-1.2-1.5-.8-6-3.4-12.5-3.4-.2 0-.4 0-.6 0-14.3.3-16.3 10.4-16.3 14 0 5.4 2.8 9.3 7 11.7 3.4 1.9 9.7 3 12.9 4 1.7.5 2.9 1.7 3.4 2.8.2.5.3 1 .3 1.6.1 1.9-.9 4-3.7 4.9-3.1.9-7.9.5-12.3-2.9-.1-.1-.6-.5-.8-.6-.2-.1-.4-.1-.7-.1-.6 0-1.1.3-1.5.8-.1.1-4.9 6.3-4.9 6.3s1.7 1.4 2.3 1.8c2.8 2.1 7.8 4.9 14.3 4.9h.2c13.8 0 17-9.8 17-15.2-.1-4.7-3.4-10-8.8-12.4z"/>
+</svg>
           </div>
 
           <div class="ship-info-col">
@@ -1658,12 +1718,9 @@ a { color: inherit; text-decoration: none; }
           <div class="payment-card active">
             <div class="payment-card-left">
               <div class="pm-icon-wrap pix">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.06 11.57L13.3 7.8a.77.77 0 0 0-1.08 0l-3.77 3.77a.77.77 0 0 0 0 1.08l3.77 3.77a.77.77 0 0 0 1.08 0l3.76-3.77a.77.77 0 0 0 0-1.08z"/>
-                  <path d="M21.17 7.47l-2.35-2.35a2.32 2.32 0 0 0-1.64-.68h-1.3l3.5 3.5a2.32 2.32 0 0 1 0 3.28l-3.5 3.5h1.3a2.32 2.32 0 0 0 1.64-.68l2.35-2.35a2.32 2.32 0 0 0 0-3.22z"/>
-                  <path d="M6.18 5.12a2.32 2.32 0 0 0-1.64.68L2.19 8.15a2.32 2.32 0 0 0 0 3.22l2.35 2.35a2.32 2.32 0 0 0 1.64.68h1.3L4 10.9a2.32 2.32 0 0 1 0-3.28l3.48-3.5z"/>
-                  <path d="M7.48 18.88a2.32 2.32 0 0 0 1.64-.68l2.35-2.35a2.32 2.32 0 0 1 1.64-.68c.62 0 1.2.24 1.64.68l2.35 2.35a2.32 2.32 0 0 0 1.64.68h1.3l-3.5-3.5a2.32 2.32 0 0 0-3.28 0l-3.5 3.5h1.32z"/>
-                </svg>
+                <svg class="pix-real-icon" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5.283 18.36a3.505 3.505 0 0 0 2.493-1.032l3.6-3.6a.684.684 0 0 1 .946 0l3.613 3.613a3.504 3.504 0 0 0 2.493 1.032h.71l-4.56 4.56a3.647 3.647 0 0 1-5.156 0L4.85 18.36ZM18.428 5.627a3.505 3.505 0 0 0-2.493 1.032l-3.613 3.614a.67.67 0 0 1-.946 0l-3.6-3.6A3.505 3.505 0 0 0 5.283 5.64h-.434l4.573-4.572a3.646 3.646 0 0 1 5.156 0l4.559 4.559ZM1.068 9.422 3.79 6.699h1.492a2.483 2.483 0 0 1 1.744.722l3.6 3.6a1.73 1.73 0 0 0 2.443 0l3.614-3.613a2.482 2.482 0 0 1 1.744-.723h1.767l2.737 2.737a3.646 3.646 0 0 1 0 5.156l-2.736 2.736h-1.768a2.482 2.482 0 0 1-1.744-.722l-3.613-3.613a1.77 1.77 0 0 0-2.444 0l-3.6 3.6a2.483 2.483 0 0 1-1.744.722H3.791l-2.723-2.723a3.646 3.646 0 0 1 0-5.156"/>
+</svg>
               </div>
               <div class="pm-texts">
                 <h3>PIX</h3>
@@ -2076,7 +2133,7 @@ a { color: inherit; text-decoration: none; }
           applyAddressData(data);
           if (statusEl) {
             statusEl.style.color = '#16a34a';
-            statusEl.textContent = '✓ Endereço preenchido com sucesso! Digite o número.';
+            statusEl.textContent = '';
           }
           if (el('number')) {
             el('number').focus();
@@ -2106,7 +2163,11 @@ a { color: inherit; text-decoration: none; }
       if (data.bairro && el('district')) el('district').value = data.bairro;
       if (data.localidade && el('city')) el('city').value = data.localidade;
       if (data.uf && el('state')) el('state').value = data.uf.toUpperCase();
-      if (data.cep && el('cep')) el('cep').value = data.cep;
+      if (el('cep')) {
+        const rawC = data.cep || el('cep').value || '';
+        const d = digits(rawC).slice(0, 8);
+        el('cep').value = d.length > 5 ? d.slice(0, 5) + '-' + d.slice(5) : d;
+      }
 
       ['street', 'district', 'city', 'state', 'cep'].forEach(id => {
         const input = el(id);
@@ -2140,7 +2201,7 @@ a { color: inherit; text-decoration: none; }
           applyAddressData(best);
           if (statusEl) {
             statusEl.style.color = '#16a34a';
-            statusEl.textContent = '✓ CEP ' + best.cep + ' encontrado e preenchido com sucesso!';
+            statusEl.textContent = '';
           }
           if (el('number')) el('number').focus();
         } else {
@@ -2224,7 +2285,7 @@ a { color: inherit; text-decoration: none; }
               const mainStatus = el('cepStatus');
               if (mainStatus) {
                 mainStatus.style.color = '#16a34a';
-                mainStatus.textContent = '✓ CEP ' + item.cep + ' selecionado com sucesso!';
+                mainStatus.textContent = '';
               }
               if (el('number')) el('number').focus();
             });
@@ -2247,9 +2308,17 @@ a { color: inherit; text-decoration: none; }
     el('cep').addEventListener('input', () => {
       clearTimeout(cepDebounceTimer);
       cepAbortController?.abort();
-      el('cep').value = digits(el('cep').value).slice(0, 8).replace(/(d{5})(d)/, '$1-$2');
-      if (digits(el('cep').value).length === 8) {
+      const d = digits(el('cep').value).slice(0, 8);
+      el('cep').value = d.length > 5 ? d.slice(0, 5) + '-' + d.slice(5) : d;
+      if (d.length === 8) {
         cepDebounceTimer = setTimeout(lookupCep, 400);
+      }
+    });
+
+    el('cep').addEventListener('blur', () => {
+      const d = digits(el('cep').value).slice(0, 8);
+      if (d.length === 8) {
+        el('cep').value = d.slice(0, 5) + '-' + d.slice(5);
       }
     });
 
