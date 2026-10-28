@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <title>Finalizar pedido — Mercado Pago</title>
+  <title>Finalizar pedido — Modalle Jeans</title>
   <script type="module" src="/assets/boxes-tiktok.js?v=2"></script>
   <style>
 :root {
@@ -13,21 +13,29 @@
   --bg-page: #f5f6f8;
   --bg-card: #ffffff;
   --border-card: #eef0f3;
-  --border-input: #dcdfe4;
+  --border-input: #d1d5db;
   --text-main: #111827;
   --text-sub: #64748b;
   --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
 html, body {
   background-color: var(--bg-page);
   color: var(--text-main);
   font-family: var(--font-base);
-  font-size: 13.5px;
-  line-height: 1.35;
+  font-size: 15px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
+
 [hidden] { display: none !important; }
 button, input, select { font: inherit; }
 button { cursor: pointer; border: 0; background: none; }
@@ -36,55 +44,69 @@ a { color: inherit; text-decoration: none; }
 
 .checkout-shell {
   width: 100%;
-  max-width: 390px;
+  max-width: 520px;
   margin: 0 auto;
   min-height: 100vh;
-  background-color: var(--bg-page);
-  padding: 10px 14px 20px;
+  padding: 16px 16px 40px;
   display: flex;
   flex-direction: column;
 }
 
+@media (min-width: 640px) {
+  body {
+    background-color: #e9ecef;
+    padding: 32px 16px 60px;
+  }
+  .checkout-shell {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e2e8f0;
+    min-height: auto;
+    padding: 28px 28px 44px;
+  }
+}
+
 /* Header */
 .mp-header {
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 .mp-brand-row {
   display: flex;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   padding-left: 2px;
 }
 .mp-logo-svg {
-  height: 25px;
+  height: 28px;
   width: auto;
   display: block;
 }
 .store-pill-wrap {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 .store-pill {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 2px 10px;
+  gap: 7px;
+  padding: 4px 14px;
   background: #e9ecf0;
   border-radius: 20px;
 }
 .store-pill-badge {
   display: grid;
   place-items: center;
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
   background: #4f46e5;
   color: #fff;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   border-radius: 50%;
 }
 .store-pill-name {
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 600;
   color: #334155;
 }
@@ -93,23 +115,28 @@ a { color: inherit; text-decoration: none; }
 .product-card {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
+  gap: 14px;
+  padding: 12px 16px;
   background: #ffffff;
   border: 1px solid #eef0f3;
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
-  margin-bottom: 12px;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  margin-bottom: 18px;
+}
+@media (min-width: 640px) {
+  .product-card {
+    background: #f8fafc;
+  }
 }
 .product-thumb {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  max-width: 44px;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
   overflow: hidden;
-  background: #f8fafc;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,30 +152,30 @@ a { color: inherit; text-decoration: none; }
   min-width: 0;
 }
 .product-title {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: #111827;
-  margin: 0 0 1px;
+  margin: 0 0 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .product-subtitle {
-  font-size: 10.5px;
+  font-size: 13px;
   color: #64748b;
-  margin: 0 0 1px;
+  margin: 0 0 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .product-qty {
-  font-size: 10.5px;
+  font-size: 12.5px;
   color: #94a3b8;
   margin: 0;
 }
 .product-price {
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 800;
   color: #111827;
   white-space: nowrap;
   margin-left: auto;
@@ -158,8 +185,8 @@ a { color: inherit; text-decoration: none; }
 .stepper {
   display: flex;
   list-style: none;
-  padding: 0 12px;
-  margin: 8px 0 14px;
+  padding: 0 10px;
+  margin: 12px 0 22px;
   position: relative;
 }
 .stepper li {
@@ -170,15 +197,12 @@ a { color: inherit; text-decoration: none; }
 .stepper li:not(:last-child)::after {
   content: '';
   position: absolute;
-  top: 12px;
+  top: 15px;
   left: 50%;
   width: 100%;
-  height: 2px;
+  height: 2.5px;
   background: #e2e8f0;
   z-index: 1;
-}
-.stepper li.active ~ li::after {
-  background: #e2e8f0;
 }
 .stepper li.done:not(:last-child)::after,
 .stepper li.completed:not(:last-child)::after {
@@ -196,22 +220,22 @@ a { color: inherit; text-decoration: none; }
   padding: 0;
 }
 .step-circle {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   background: #ffffff;
   color: #94a3b8;
-  border: 1.5px solid #cbd5e1;
+  border: 2px solid #cbd5e1;
   transition: all 0.2s;
 }
 .step-circle svg {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   stroke: #ffffff;
   stroke-width: 3;
   fill: none;
@@ -228,8 +252,8 @@ a { color: inherit; text-decoration: none; }
   border-color: #009ee3;
 }
 .step-label {
-  font-size: 10.5px;
-  margin-top: 4px;
+  font-size: 12px;
+  margin-top: 6px;
   color: #94a3b8;
   font-weight: 500;
 }
@@ -244,27 +268,33 @@ a { color: inherit; text-decoration: none; }
 
 /* Titles */
 .section-title {
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 21px;
+  font-weight: 800;
   color: #111827;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 .section-desc {
-  font-size: 11.5px;
+  font-size: 14px;
   color: #64748b;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
 /* Form Card */
 .form-card {
   background: #ffffff;
   border: 1px solid #eef0f3;
-  border-radius: 12px;
-  padding: 12px 14px;
+  border-radius: 14px;
+  padding: 18px 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  gap: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+@media (min-width: 640px) {
+  .form-card {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+  }
 }
 
 .field {
@@ -272,19 +302,19 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
 }
 .field label {
-  font-size: 11.5px;
-  font-weight: 500;
+  font-size: 13.5px;
+  font-weight: 600;
   color: #374151;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .field input, .field select {
   width: 100%;
-  height: 38px;
-  padding: 0 10px;
+  height: 48px;
+  padding: 0 14px;
   background: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 13px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 16px;
   color: #0f172a;
   outline: none;
   box-sizing: border-box;
@@ -302,20 +332,20 @@ a { color: inherit; text-decoration: none; }
 }
 .field-error {
   color: #ef4444;
-  font-size: 10.5px;
-  margin-top: 2px;
+  font-size: 12px;
+  margin-top: 4px;
 }
 .field-error:empty { display: none; }
 
 .fields-grid-2 {
   display: grid;
-  gap: 8px;
+  gap: 12px;
 }
 .fields-grid-2.number-comp {
-  grid-template-columns: 32% calc(68% - 8px);
+  grid-template-columns: 32% calc(68% - 12px);
 }
 .fields-grid-2.city-state {
-  grid-template-columns: calc(70% - 8px) 30%;
+  grid-template-columns: calc(70% - 12px) 30%;
 }
 
 .cep-field-wrap {
@@ -324,63 +354,63 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
 }
 .cep-field-wrap input {
-  padding-right: 85px;
+  padding-right: 105px;
 }
 .btn-buscar-cep {
   position: absolute;
-  right: 10px;
+  right: 12px;
   color: #009ee3;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 6px 8px;
   background: none;
   border: none;
   cursor: pointer;
 }
 #cepStatus {
-  font-size: 10.5px;
+  font-size: 12px;
   color: #64748b;
-  margin-top: 3px;
+  margin-top: 4px;
 }
 #cepStatus:empty { display: none; }
 
 /* Shipping Card */
 .shipping-card {
-  margin-top: 10px;
+  margin-top: 16px;
 }
 .shipping-title {
-  font-size: 14.5px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 800;
   color: #111827;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 .shipping-desc {
-  font-size: 11px;
+  font-size: 13px;
   color: #64748b;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 .shipping-option {
-  border: 1.5px solid #009ee3;
+  border: 2px solid #009ee3;
   background: #ffffff;
-  border-radius: 10px;
-  padding: 8px 10px;
+  border-radius: 12px;
+  padding: 12px 14px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 .shipping-radio {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  border: 2px solid #009ee3;
+  border: 2.5px solid #009ee3;
   flex-shrink: 0;
 }
 .shipping-radio-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: #009ee3;
 }
@@ -395,25 +425,25 @@ a { color: inherit; text-decoration: none; }
   min-width: 0;
 }
 .shipping-name {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 800;
   color: #009ee3;
   margin: 0;
 }
 .shipping-sub {
-  font-size: 10px;
+  font-size: 12px;
   color: #64748b;
-  margin: 1px 0 2px;
-  line-height: 1.2;
+  margin: 2px 0 3px;
+  line-height: 1.3;
 }
 .shipping-deadline {
-  font-size: 10.5px;
-  font-weight: 600;
+  font-size: 12.5px;
+  font-weight: 700;
   color: #009ee3;
   margin: 0;
 }
 .correios-logo {
-  height: 20px;
+  height: 22px;
   width: auto;
   flex-shrink: 0;
 }
@@ -422,34 +452,35 @@ a { color: inherit; text-decoration: none; }
 .payment-methods {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 .payment-card {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 12px;
+  padding: 14px 16px;
   background: #ffffff;
-  border: 1px solid #eef0f3;
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  border: 1.5px solid #eef0f3;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
   transition: all 0.2s;
   cursor: pointer;
   width: 100%;
   text-align: left;
 }
 .payment-card.active {
-  border: 1.5px solid #009ee3;
+  border: 2px solid #009ee3;
+  background: #ffffff;
 }
 .payment-card-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 .pm-icon-wrap {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -468,13 +499,13 @@ a { color: inherit; text-decoration: none; }
   color: #64748b;
 }
 .pm-texts h3 {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: #111827;
-  margin: 0 0 1px;
+  margin: 0 0 2px;
 }
 .pm-texts p {
-  font-size: 11px;
+  font-size: 13px;
   color: #64748b;
   margin: 0;
 }
@@ -485,91 +516,100 @@ a { color: inherit; text-decoration: none; }
 /* Button & Security */
 .btn-primary {
   width: 100%;
-  height: 42px;
+  height: 50px;
   background: #009ee3;
   color: #ffffff;
-  border-radius: 8px;
-  font-size: 14.5px;
-  font-weight: 600;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 12px;
-  transition: background 0.15s;
+  margin-top: 18px;
+  transition: background 0.15s, transform 0.05s;
 }
 .btn-primary:hover {
   background: #0084c2;
+}
+.btn-primary:active {
+  transform: scale(0.99);
 }
 .security-note {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 6px;
   color: #94a3b8;
-  font-size: 11px;
-  margin-top: 8px;
+  font-size: 12.5px;
+  margin-top: 12px;
 }
 
 /* Step 4 Pagamento Specifics */
 .pix-pay-card {
   background: #ffffff;
   border: 1px solid #eef0f3;
-  border-radius: 12px;
-  padding: 14px 14px 16px;
+  border-radius: 16px;
+  padding: 22px 18px 26px;
   text-align: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
+@media (min-width: 640px) {
+  .pix-pay-card {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+  }
+}
 .pix-pay-title {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
   color: #111827;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 .pix-pay-desc {
-  font-size: 11.5px;
+  font-size: 13.5px;
   color: #64748b;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 .qr-frame {
   display: inline-flex;
-  padding: 10px;
+  padding: 12px;
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  margin-bottom: 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  margin-bottom: 16px;
 }
 .qr-frame canvas, .qr-frame svg, .qr-frame img {
-  width: 140px;
-  height: 140px;
+  width: 170px;
+  height: 170px;
   display: block;
 }
 
 .copy-input-block {
   text-align: left;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .copy-label {
   display: block;
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 12.5px;
+  font-weight: 600;
   color: #374151;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .copy-box {
   display: flex;
   align-items: center;
   background: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
   overflow: hidden;
-  height: 38px;
+  height: 46px;
 }
 .copy-box input {
   flex: 1;
   border: 0;
   height: 100%;
-  padding: 0 10px;
-  font-size: 12px;
+  padding: 0 12px;
+  font-size: 13.5px;
   color: #475569;
   outline: none;
   background: transparent;
@@ -579,7 +619,7 @@ a { color: inherit; text-decoration: none; }
   text-overflow: ellipsis;
 }
 .copy-inline-btn {
-  padding: 0 10px;
+  padding: 0 14px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -590,52 +630,52 @@ a { color: inherit; text-decoration: none; }
 
 .btn-copy-pix {
   width: 100%;
-  height: 40px;
+  height: 48px;
   background: #009ee3;
   color: #ffffff;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   transition: background 0.15s;
 }
 .btn-copy-pix svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 .btn-copy-pix:hover {
   background: #0084c2;
 }
 
 .amount-block {
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   text-align: center;
 }
 .amount-title {
   display: block;
-  font-size: 11px;
+  font-size: 13px;
   color: #64748b;
-  margin-bottom: 1px;
+  margin-bottom: 2px;
 }
 .amount-number {
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 800;
   color: #0f172a;
 }
 
 .instant-notice {
   background: #eff6ff;
-  border-radius: 8px;
-  padding: 8px 10px;
+  border-radius: 10px;
+  padding: 12px 14px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   text-align: left;
-  margin-bottom: 12px;
+  margin-bottom: 18px;
 }
 .instant-icon {
   color: #0284c7;
@@ -645,30 +685,30 @@ a { color: inherit; text-decoration: none; }
 }
 .instant-content strong {
   display: block;
-  font-size: 11.5px;
+  font-size: 13.5px;
   font-weight: 700;
   color: #0369a1;
 }
 .instant-content p {
-  font-size: 10.5px;
+  font-size: 12.5px;
   color: #0284c7;
-  line-height: 1.25;
+  line-height: 1.35;
 }
 
 .how-to-block {
   text-align: center;
 }
 .how-to-title {
-  font-size: 13px;
+  font-size: 14.5px;
   font-weight: 700;
   color: #111827;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   text-align: left;
 }
 .how-to-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
+  gap: 8px;
 }
 .how-item {
   display: flex;
@@ -677,28 +717,28 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
 }
 .how-badge {
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
   background: #009ee3;
   color: #ffffff;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   display: grid;
   place-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .how-icon-box {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   display: grid;
   place-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .how-item p {
-  font-size: 9.5px;
+  font-size: 11px;
   color: #374151;
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 /* Toast Notification */
@@ -707,19 +747,20 @@ a { color: inherit; text-decoration: none; }
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(15, 23, 42, 0.92);
+  background: rgba(15, 23, 42, 0.94);
   color: #ffffff;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 12.5px;
-  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
   z-index: 9999;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
 }
 </style>
 </head>
 <body>
-  <div hidden class="product"><img src="/assets/home-1-thumb.webp" alt=""></div>
+  <!-- Hidden legacy hooks so all tracking scripts and configs work smoothly -->
+  <div hidden class="product"><img id="legacyProductImg" src="/assets/azul-escuro.png" alt=""></div>
   <span hidden id="calcasSelection"></span>
 
   <main class="checkout-shell">
@@ -733,23 +774,23 @@ a { color: inherit; text-decoration: none; }
       </div>
       <div class="store-pill-wrap">
         <div class="store-pill">
-          <span class="store-pill-badge">S</span>
-          <span class="store-pill-name">Store Online</span>
+          <span class="store-pill-badge">M</span>
+          <span class="store-pill-name">Modalle Jeans • Loja Oficial</span>
         </div>
       </div>
     </header>
 
     <section class="product-card">
       <div class="product-thumb">
-        <img src="/assets/home-1-thumb.webp" alt="Kit Dobrável Duo 3 em 1">
+        <img id="productThumbImg" src="/assets/azul-escuro.png" alt="Kit 2 Calças Jeans Modalle">
       </div>
       <div class="product-details">
-        <h2 class="product-title">Kit Dobrável Duo 3 em 1</h2>
-        <p class="product-subtitle">2 cadeiras + cooler + guarda-sol</p>
-        <p class="product-qty">Quantidade: 1</p>
+        <h2 class="product-title" id="productTitle">Kit 2 Calças Jeans UltraModel</h2>
+        <p class="product-subtitle" id="productSubtitle">Azul escuro + Preta · P (34-36)</p>
+        <p class="product-qty">Quantidade: 1 kit (2 calças)</p>
       </div>
-      <strong class="product-price">R$ 119,90</strong>
-      <span hidden class="price">R$ 119,90</span>
+      <strong class="product-price" id="visiblePrice">R$ 94,90</strong>
+      <span hidden class="price">R$ 94,90</span>
     </section>
 
     <nav aria-label="Etapas do checkout">
@@ -778,12 +819,12 @@ a { color: inherit; text-decoration: none; }
     <!-- STEP 1: Seus dados -->
     <section class="checkout-step" data-panel="0">
       <h1 class="section-title">Seus dados</h1>
-      <p class="section-desc">Precisamos dessas informações para continuar.</p>
+      <p class="section-desc">Precisamos dessas informações para processar o envio.</p>
 
       <div class="form-card">
         <div class="field">
           <label for="name">Nome completo</label>
-          <input id="name" type="text" placeholder="Digite seu nome" required autocomplete="name">
+          <input id="name" type="text" placeholder="Digite seu nome e sobrenome" required autocomplete="name">
           <p class="field-error" id="nameError"></p>
         </div>
         <div class="field">
@@ -797,19 +838,19 @@ a { color: inherit; text-decoration: none; }
           <p class="field-error" id="emailError"></p>
         </div>
         <div class="field">
-          <label for="phone">Celular</label>
+          <label for="phone">Celular com WhatsApp</label>
           <input id="phone" type="tel" placeholder="(00) 00000-0000" required autocomplete="tel" maxlength="15">
           <p class="field-error" id="phoneError"></p>
         </div>
       </div>
 
-      <button class="btn-primary" data-next type="button">Continuar</button>
+      <button class="btn-primary" data-next type="button">Continuar para a entrega</button>
       <div class="security-note">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
           <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
-        <span>Seus dados estão seguros</span>
+        <span>Seus dados pessoais estão protegidos por criptografia</span>
       </div>
     </section>
 
@@ -829,8 +870,8 @@ a { color: inherit; text-decoration: none; }
           <p id="cepStatus"></p>
         </div>
         <div class="field">
-          <label for="street">Rua</label>
-          <input id="street" type="text" placeholder="Digite o nome da rua" required>
+          <label for="street">Rua / Avenida</label>
+          <input id="street" type="text" placeholder="Digite o nome da sua rua" required>
           <p class="field-error" id="streetError"></p>
         </div>
         <div class="fields-grid-2 number-comp">
@@ -878,7 +919,7 @@ a { color: inherit; text-decoration: none; }
             <div class="shipping-radio-dot"></div>
           </div>
           <div class="shipping-truck">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <rect x="1" y="3" width="15" height="13"></rect>
               <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
               <circle cx="5.5" cy="18.5" r="2.5"></circle>
@@ -887,7 +928,7 @@ a { color: inherit; text-decoration: none; }
           </div>
           <div class="shipping-info">
             <p class="shipping-name">Frete grátis</p>
-            <p class="shipping-sub">Entrega via Correios para todo o Brasil.</p>
+            <p class="shipping-sub">Entrega via Correios com código de rastreamento para todo o Brasil.</p>
             <p class="shipping-deadline">Prazo de entrega: 5 a 12 dias úteis</p>
           </div>
           <svg class="correios-logo" viewBox="0 0 110 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -898,13 +939,13 @@ a { color: inherit; text-decoration: none; }
         </div>
       </div>
 
-      <button class="btn-primary" data-next type="button">Continuar</button>
+      <button class="btn-primary" data-next type="button">Continuar para o pagamento</button>
       <div class="security-note">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
           <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
-        <span>Seus dados estão seguros</span>
+        <span>Seus dados de entrega estão protegidos</span>
       </div>
     </section>
 
@@ -918,7 +959,7 @@ a { color: inherit; text-decoration: none; }
           <div class="payment-card active">
             <div class="payment-card-left">
               <div class="pm-icon-wrap pix">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12.0003 3.6L6.3433 9.257C5.5623 10.038 5.5623 11.304 6.3433 12.085L12.0003 17.742L17.6573 12.085C18.4383 11.304 18.4383 10.038 17.6573 9.257L12.0003 3.6Z"/>
                   <circle cx="12" cy="8" r="1.5" fill="#ffffff"/>
                   <circle cx="12" cy="13.5" r="1.5" fill="#ffffff"/>
@@ -926,11 +967,11 @@ a { color: inherit; text-decoration: none; }
               </div>
               <div class="pm-texts">
                 <h3>Pix</h3>
-                <p>Pagamento instantâneo</p>
+                <p>Aprovação imediata e envio prioritário</p>
               </div>
             </div>
             <div class="pm-chevron">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </div>
@@ -939,7 +980,7 @@ a { color: inherit; text-decoration: none; }
           <div class="payment-card">
             <div class="payment-card-left">
               <div class="pm-icon-wrap card">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <rect x="2" y="5" width="20" height="14" rx="2"/>
                   <line x1="2" y1="10" x2="22" y2="10"/>
                 </svg>
@@ -954,7 +995,7 @@ a { color: inherit; text-decoration: none; }
           <div class="payment-card">
             <div class="payment-card-left">
               <div class="pm-icon-wrap card">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <rect x="2" y="5" width="20" height="14" rx="2"/>
                   <line x1="2" y1="10" x2="22" y2="10"/>
                 </svg>
@@ -969,7 +1010,7 @@ a { color: inherit; text-decoration: none; }
           <div class="payment-card">
             <div class="payment-card-left">
               <div class="pm-icon-wrap wallet">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/>
                   <path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/>
                   <circle cx="18" cy="14" r="1"/>
@@ -977,7 +1018,7 @@ a { color: inherit; text-decoration: none; }
               </div>
               <div class="pm-texts">
                 <h3>Saldo Mercado Pago</h3>
-                <p>Saldo disponível: R$ 20.000</p>
+                <p>Saldo disponível na sua conta</p>
               </div>
             </div>
           </div>
@@ -985,11 +1026,11 @@ a { color: inherit; text-decoration: none; }
 
         <button class="btn-primary" id="finish" type="submit">Continuar com Pix</button>
         <div class="security-note">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
-          <span>Seus dados estão seguros</span>
+          <span>Pagamento processado em ambiente 100% seguro</span>
         </div>
       </form>
     </section>
@@ -1003,6 +1044,56 @@ a { color: inherit; text-decoration: none; }
     let maxUnlockedStep = 0;
     let cepAbortController = null;
     let cepDebounceTimer = null;
+
+    // Load customer selection (colors and size)
+    const urlParams = new URLSearchParams(location.search);
+    let cor1 = urlParams.get('cor1');
+    let cor2 = urlParams.get('cor2');
+    let tamanho = urlParams.get('tamanho');
+
+    if (!cor1 || !cor2) {
+      try {
+        const stored = JSON.parse(sessionStorage.getItem('cordee.calcas.selection') || '{}');
+        cor1 = cor1 || stored.colors?.[0] || 'Azul escuro';
+        cor2 = cor2 || stored.colors?.[1] || 'Preta';
+        tamanho = tamanho || stored.size || 'P (34-36)';
+      } catch {
+        cor1 = cor1 || 'Azul escuro';
+        cor2 = cor2 || 'Preta';
+        tamanho = tamanho || 'P (34-36)';
+      }
+    }
+    tamanho = tamanho || 'P (34-36)';
+
+    const selectionObj = { colors: [cor1, cor2], size: tamanho };
+    try { sessionStorage.setItem('cordee.calcas.selection', JSON.stringify(selectionObj)); } catch {}
+
+    el('productSubtitle').textContent = cor1 + ' + ' + cor2 + ' · ' + tamanho;
+    el('calcasSelection').textContent = cor1 + ' + ' + cor2 + ' · ' + tamanho;
+
+    const imgMap = {
+      'Preta': 'preta.png',
+      'Azul escuro': 'azul-escuro.png',
+      'Azul médio': 'azul-medio.png',
+      'Azul claro': 'azul-claro.png'
+    };
+    const chosenImg = '/assets/' + (imgMap[cor1] || 'azul-escuro.png');
+    el('productThumbImg').src = chosenImg;
+    el('legacyProductImg').src = chosenImg;
+
+    // Fetch config for dynamic price
+    let orderAmount = 9490;
+    fetch('/api/calcas-config', { cache: 'no-store' }).then(async res => {
+      if (res.ok) {
+        const data = await res.json();
+        if (data.amount && Number.isSafeInteger(data.amount)) {
+          orderAmount = data.amount;
+          const formatted = (data.amount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          el('visiblePrice').textContent = formatted;
+          document.querySelectorAll('.price').forEach(p => p.textContent = formatted);
+        }
+      }
+    }).catch(()=>{});
 
     const fieldsByStep = [
       ['name', 'cpf', 'email', 'phone'],
@@ -1112,7 +1203,7 @@ a { color: inherit; text-decoration: none; }
       }
     });
 
-    // Masks
+    // Input Masks
     el('cpf').addEventListener('input', e => {
       e.target.value = digits(e.target.value).slice(0, 11)
         .replace(/(\d{3})(\d)/, '$1.$2')
@@ -1159,7 +1250,7 @@ a { color: inherit; text-decoration: none; }
         if (data.bairro) el('district').value = data.bairro;
         if (data.localidade) el('city').value = data.localidade;
         if (data.uf) el('state').value = data.uf;
-        el('cepStatus').textContent = 'Endereço encontrado! Informe o número.';
+        el('cepStatus').textContent = 'Endereço encontrado! Preencha o número.';
         el('number').focus();
       } catch (err) {
         if (digits(el('cep').value) === cep) {
@@ -1182,7 +1273,7 @@ a { color: inherit; text-decoration: none; }
       lookupCep();
     });
 
-    // Backend order preparation
+    // Submit & Order Generation
     let isSubmitting = false;
     const finishBtn = el('finish');
 
@@ -1190,7 +1281,6 @@ a { color: inherit; text-decoration: none; }
       if (e) e.preventDefault();
       if (isSubmitting) return;
 
-      // Validate all steps
       for (let s = 0; s < 2; s++) {
         if (!validateStep(s)) {
           goToStep(s);
@@ -1200,7 +1290,7 @@ a { color: inherit; text-decoration: none; }
 
       isSubmitting = true;
       finishBtn.disabled = true;
-      finishBtn.textContent = 'Preparando Pix…';
+      finishBtn.textContent = 'Gerando Pix…';
 
       const customer = {
         name: el('name').value.trim(),
@@ -1214,12 +1304,6 @@ a { color: inherit; text-decoration: none; }
         city: el('city').value.trim(),
         state: el('state').value.trim(),
         zip_code: digits(el('cep').value)
-      };
-
-      const selection = {
-        title: 'Kit Dobrável Duo 3 em 1',
-        subtitle: '2 cadeiras + cooler + guarda-sol',
-        amount: 11990
       };
 
       try {
@@ -1236,7 +1320,7 @@ a { color: inherit; text-decoration: none; }
             accessToken: tokenArr,
             customer,
             store: 'calcas',
-            selection
+            selection: selectionObj
           })
         });
 
@@ -1244,7 +1328,7 @@ a { color: inherit; text-decoration: none; }
         const finalOrder = {
           id: orderData.id || orderId,
           accessToken: tokenArr,
-          amount: orderData.amount || 11990,
+          amount: orderData.amount || orderAmount,
           status: orderData.status || 'pending',
           pixCode: orderData.pixCode || ''
         };
@@ -1258,11 +1342,10 @@ a { color: inherit; text-decoration: none; }
         location.assign('../pagamento/?pedido=' + encodeURIComponent(finalOrder.id));
       } catch (err) {
         console.error('Order creation error:', err);
-        // Fallback to local session and redirect
         const fallbackOrder = {
           id: crypto.randomUUID(),
           accessToken: 'demo',
-          amount: 11990,
+          amount: orderAmount,
           status: 'pending'
         };
         sessionStorage.setItem('cordee.calcas.ironpayOrder', JSON.stringify(fallbackOrder));
