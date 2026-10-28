@@ -96,50 +96,102 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 16px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   width: 100%;
 }
-.mp-brand-row {
+.mp-top-bar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
+  padding: 2px 2px 14px;
 }
 .mp-logo-img {
-  height: 28px;
+  height: 32px;
   width: auto;
   display: block;
+  object-fit: contain;
 }
-.store-pill-wrap {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 6px;
-  margin-bottom: 6px;
-}
-.store-pill {
+.mp-secure-badge {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 3px 12px;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  border-radius: 20px;
+  gap: 6px;
+  color: #475569;
 }
-.store-pill-badge {
-  display: grid;
-  place-items: center;
+.mp-secure-lock {
+  width: 15px;
+  height: 15px;
+  stroke: #475569;
+  flex-shrink: 0;
+}
+.mp-secure-text {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #475569;
+  letter-spacing: -0.1px;
+}
+
+/* Store Partner Card 1:1 */
+.store-partner-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+}
+.store-avatar {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 50%;
+  background-color: #8b9cb6;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  user-select: none;
+}
+.store-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+}
+.store-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.store-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+}
+.store-verified-icon {
   width: 18px;
   height: 18px;
-  background: #4f46e5;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  border-radius: 50%;
+  min-width: 18px;
+  display: block;
 }
-.store-pill-name {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: #334155;
+.store-subtext {
+  font-size: 13px;
+  font-weight: 400;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Product Card */
@@ -833,13 +885,28 @@ a { color: inherit; text-decoration: none; }
 
   <main class="checkout-shell">
     <header class="mp-header">
-      <div class="mp-brand-row">
+      <div class="mp-top-bar">
         <img class="mp-logo-img" src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.19.5/mercadopago/logo__large.png" alt="Mercado Pago">
+        <div class="mp-secure-badge">
+          <svg class="mp-secure-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span class="mp-secure-text">Ambiente seguro</span>
+        </div>
       </div>
-      <div class="store-pill-wrap">
-        <div class="store-pill">
-          <span class="store-pill-badge">M</span>
-          <span class="store-pill-name">Modalle Jeans • Loja Oficial</span>
+
+      <div class="store-partner-card">
+        <div class="store-avatar">M</div>
+        <div class="store-info">
+          <div class="store-title-row">
+            <span class="store-name">Modalle Jeans</span>
+            <svg class="store-verified-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M10.586 1.707a2 2 0 0 1 2.828 0l.758.758a2 2 0 0 0 1.414.586h1.071a2 2 0 0 1 2 2v1.071a2 2 0 0 0 .586 1.414l.758.758a2 2 0 0 1 0 2.828l-.758.758a2 2 0 0 0-.586 1.414v1.071a2 2 0 0 1-2 2h-1.071a2 2 0 0 0-1.414.586l-.758.758a2 2 0 0 1-2.828 0l-.758-.758a2 2 0 0 0-1.414-.586H8.071a2 2 0 0 1-2-2v-1.071a2 2 0 0 0-.586-1.414l-.758-.758a2 2 0 0 1 0-2.828l.758-.758a2 2 0 0 0 .586-1.414V6.065a2 2 0 0 1 2-2h1.071a2 2 0 0 0 1.414-.586l.758-.758z" fill="#009ee3"/>
+              <path d="M8.5 12.2l2.3 2.3 4.7-4.7" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="store-subtext">Loja parceira &middot; Pagamento via Mercado Pago</p>
         </div>
       </div>
     </header>

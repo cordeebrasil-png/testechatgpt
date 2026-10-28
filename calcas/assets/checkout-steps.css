@@ -88,50 +88,102 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 16px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   width: 100%;
 }
-.mp-brand-row {
+.mp-top-bar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
+  padding: 2px 2px 14px;
 }
 .mp-logo-img {
-  height: 28px;
+  height: 32px;
   width: auto;
   display: block;
+  object-fit: contain;
 }
-.store-pill-wrap {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 6px;
-  margin-bottom: 6px;
-}
-.store-pill {
+.mp-secure-badge {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 3px 12px;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  border-radius: 20px;
+  gap: 6px;
+  color: #475569;
 }
-.store-pill-badge {
-  display: grid;
-  place-items: center;
+.mp-secure-lock {
+  width: 15px;
+  height: 15px;
+  stroke: #475569;
+  flex-shrink: 0;
+}
+.mp-secure-text {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #475569;
+  letter-spacing: -0.1px;
+}
+
+/* Store Partner Card 1:1 */
+.store-partner-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+}
+.store-avatar {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 50%;
+  background-color: #8b9cb6;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  user-select: none;
+}
+.store-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+}
+.store-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.store-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+}
+.store-verified-icon {
   width: 18px;
   height: 18px;
-  background: #4f46e5;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  border-radius: 50%;
+  min-width: 18px;
+  display: block;
 }
-.store-pill-name {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: #334155;
+.store-subtext {
+  font-size: 13px;
+  font-weight: 400;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Product Card */
