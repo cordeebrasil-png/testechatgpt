@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Compra Confirmada — Modalle Jeans</title>
   <link rel="preconnect" href="https://http2.mlstatic.com">
   <style>
@@ -540,7 +543,7 @@
       } catch {}
 
       const urlParams = new URLSearchParams(location.search);
-      const isPreview = urlParams.get('preview') === '1' || urlParams.get('demo') === '1';
+      const isPreview = urlParams.get('preview') === '1' || urlParams.get('demo') === '1' || urlParams.get('ver') === '1';
 
       // Se não houver pedido válido no navegador e não for preview, redireciona para o checkout
       if (!orderData?.id && !isPreview) {
@@ -558,43 +561,62 @@
         const customer = orderData?.customer || orderData?.receipt?.customer || {};
         const selection = orderData?.selection || JSON.parse(sessionStorage.getItem('cordee.calcas.selection') || '{}');
 
-        if (customer.name) {
-          const firstName = customer.name.trim().split(/\s+/)[0];
-          document.getElementById('clientFirstName').textContent = firstName;
-          document.getElementById('recipientFullName').textContent = customer.name;
+        // Nome do cliente
+        const customerName = customer.name || (isPreview ? 'Matheus' : '');
+        if (customerName) {
+          const firstName = customerName.trim().split(/\s+/)[0];
+          const elFirst = document.getElementById('clientFirstName');
+          const elFull = document.getElementById('recipientFullName');
+          if (elFirst) elFirst.textContent = firstName;
+          if (elFull) elFull.textContent = customerName;
         }
 
-        if (customer.email) {
-          document.getElementById('clientEmailNotice').textContent = customer.email;
-          document.getElementById('recipientEmail').textContent = customer.email;
+        // Email do cliente
+        const customerEmail = customer.email || (isPreview ? 'seu-email@exemplo.com' : '');
+        if (customerEmail) {
+          const elEmailNote = document.getElementById('clientEmailNotice');
+          const elRecipientEmail = document.getElementById('recipientEmail');
+          if (elEmailNote) elEmailNote.textContent = customerEmail;
+          if (elRecipientEmail) elRecipientEmail.textContent = customerEmail;
         }
 
-        if (customer.street_name || customer.street) {
-          const rua = customer.street_name || customer.street || '';
-          const num = customer.number || '';
-          const comp = customer.complement || customer.extra || '';
-          const bairro = customer.neighborhood || customer.district || 'Centro';
-          const cid = customer.city || 'São Paulo';
-          const uf = customer.state || 'SP';
-          document.getElementById('recipientAddress').textContent = `${rua}, ${num}${comp ? ' (' + comp + ')' : ''} — ${bairro} · ${cid}/${uf}`;
+        // Endereço de entrega
+        const rua = customer.street_name || customer.street || (isPreview ? 'Av. Paulista' : '');
+        const num = customer.number || (isPreview ? '1000' : '');
+        const comp = customer.complement || customer.extra || (isPreview ? 'Apto 42' : '');
+        const bairro = customer.neighborhood || customer.district || (isPreview ? 'Bela Vista' : 'Centro');
+        const cid = customer.city || (isPreview ? 'São Paulo' : 'São Paulo');
+        const uf = customer.state || (isPreview ? 'SP' : 'SP');
+        if (rua) {
+          const addrEl = document.getElementById('recipientAddress');
+          if (addrEl) addrEl.textContent = `${rua}, ${num}${comp ? ' (' + comp + ')' : ''} — ${bairro} · ${cid}/${uf}`;
         }
 
-        if (customer.zip_code || customer.cep) {
-          const raw = String(customer.zip_code || customer.cep).replace(/\D/g, '');
-          document.getElementById('recipientCep').textContent = raw.length === 8 ? raw.slice(0,5) + '-' + raw.slice(5) : (customer.zip_code || customer.cep);
+        // CEP
+        const rawCep = String(customer.zip_code || customer.cep || (isPreview ? '01310100' : '')).replace(/\D/g, '');
+        if (rawCep) {
+          const cepEl = document.getElementById('recipientCep');
+          if (cepEl) cepEl.textContent = rawCep.length === 8 ? rawCep.slice(0,5) + '-' + rawCep.slice(5) : rawCep;
         }
 
-        if (selection.colors && selection.colors.length) {
-          document.getElementById('productVariant').textContent = `${selection.colors.join(' + ')} · ${selection.size || 'M (38-40)'}`;
+        // Produto / Variação
+        const colors = selection.colors || (isPreview ? ['Azul escuro', 'Preta'] : []);
+        const size = selection.size || (isPreview ? 'M (38-40)' : '');
+        if (colors.length) {
+          const varEl = document.getElementById('productVariant');
+          if (varEl) varEl.textContent = `${colors.join(' + ')} · ${size}`;
         }
 
         // Envio SEMPRE somente Correios
         const shippingEl = document.getElementById('shippingMethodName');
         if (shippingEl) shippingEl.textContent = 'Correios';
 
-        if (orderData?.amount) {
-          const val = (orderData.amount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-          document.getElementById('orderTotalValue').textContent = val;
+        // Valor total
+        const amount = orderData?.amount || (isPreview ? 9490 : 0);
+        if (amount) {
+          const val = (amount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          const totalEl = document.getElementById('orderTotalValue');
+          if (totalEl) totalEl.textContent = val;
         }
       } catch (e) {
         console.warn('Order display error:', e);
