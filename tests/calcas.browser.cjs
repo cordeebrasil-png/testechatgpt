@@ -1,6 +1,6 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');const fs=require('fs'),path=require('path');const{chromium}=require('playwright');
 const root=path.resolve(__dirname,'..');
-test('Cordee landing, original checkout, Pix copy, authenticated thank-you and isolated session',async()=>{
+test('Modalle landing, three-step checkout, Pix copy, authenticated thank-you and isolated session',async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
  try{const page=await browser.newPage({viewport:{width:390,height:844}});page.setDefaultTimeout(7000);const errors=[],posts=[];let paid=false,configured=true;
  page.on('pageerror',e=>errors.push(e.message));await page.addInitScript(()=>{window.copies=[];Object.defineProperty(navigator,'clipboard',{value:{writeText:async text=>window.copies.push(text)}})});
@@ -17,8 +17,13 @@ test('Cordee landing, original checkout, Pix copy, authenticated thank-you and i
  await page.locator('#mobileCtaBtn').click();await page.waitForURL('**/calcas/checkout/**');assert.match(page.url(),/utm_source=fixture/);assert.match(await page.locator('#calcasSelection').innerText(),/Azul claro \+ Preta.*GG/);
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  fs.mkdirSync('/workspace/calcas-review',{recursive:true});await page.screenshot({path:'/workspace/calcas-review/checkout-mobile.png',fullPage:true});
- for(const[k,v]of Object.entries({name:'Pessoa Teste',email:'teste@example.invalid',phone:'11999999999',cep:'01001000',cpf:'52998224725'}))await page.locator('#'+k).fill(v);
+ await page.locator('[data-next="0"]').click();assert.equal(await page.locator('#name').getAttribute('aria-invalid'),'true');assert.equal(posts.length,0);
+ for(const[k,v]of Object.entries({name:'Pessoa Teste',email:'teste@example.invalid',phone:'11999999999',cpf:'52998224725'}))await page.locator('#'+k).fill(v);
+ await page.locator('[data-next="0"]').click();await page.locator('#cep').fill('01001000');
  await page.waitForFunction(()=>document.getElementById('street').value==='Rua Teste');await page.locator('#number').fill('1');
+ await page.locator('[data-next="1"]').click();assert.equal(posts.length,0);
+ await page.locator('[data-step="0"]').click();assert.equal(await page.locator('#name').inputValue(),'Pessoa Teste');await page.locator('[data-step="2"]').click();
+ await page.screenshot({path:'/workspace/calcas-review/payment-choice.png',fullPage:true});
  await page.locator('#finish').click();await page.waitForURL('**/calcas/pagamento/');await page.waitForFunction(()=>document.getElementById('pixCode').value.startsWith('000201'));
  assert.equal(posts.length,1);assert.equal(posts[0].store,'calcas');assert.deepEqual(posts[0].selection,{colors:['Azul claro','Preta'],size:'GG (46-48)'});
  assert.equal(await page.evaluate(()=>sessionStorage.getItem('mareazul.ironpayOrder')),null);

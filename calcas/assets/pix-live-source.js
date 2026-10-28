@@ -19,7 +19,7 @@ function fitPixCode() {
   field.style.height = 'auto';
   const style = getComputedStyle(field);
   const borders = parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
-  field.style.height = Math.max(96, Math.ceil(field.scrollHeight + borders)) + 'px';
+  field.style.height = Math.max(42, Math.ceil(field.scrollHeight + borders)) + 'px';
 }
 function clearPayment() {
   clearTimeout(copyToastTimer);
@@ -27,6 +27,7 @@ function clearPayment() {
   $('copyBackdrop').hidden = true;
   $('copyToast').textContent = '';
   clearInterval(clockTimer);
+  $('paymentAmount').textContent = '—';
   $('pixCode').value = ''; $('copyPix').disabled = true;
   $('pixCode').style.height = '';
   $('copyPixIcon').disabled = true;
@@ -105,7 +106,9 @@ async function render(data) {
   if (Number(data.expiresAt) > 0 && Date.now() >= Number(data.expiresAt)) {
     issue('Prazo do Pix encerrado', 'Se você já pagou, aguarde enquanto consultamos a confirmação.', 'PIX_EXPIRED'); return;
   }
-  message('Aguardando pagamento', 'Pague via Pix para concluir seu pedido.');
+  message('Pague com Pix', 'Escaneie o QR Code ou copie o código abaixo.');
+  $('paymentAmount').textContent = (data.amount / 100).toLocaleString('pt-BR', {style:'currency',currency:'BRL'});
+  document.querySelector('.product .price').textContent = $('paymentAmount').textContent;
   $('pixCode').value = data.pixCode; $('pixCode').dataset.live = 'true'; $('copyPix').disabled = false;
   trackGeneratedPix(data);
   $('copyPixIcon').disabled = false;
@@ -116,7 +119,7 @@ async function render(data) {
     const qr = document.querySelector('.qr-code');
     const canvas = document.createElement('canvas');
     try {
-      await QRCode.toCanvas(canvas, data.pixCode, { width: 155, margin: 1, color: { dark: '#09205a', light: '#ffffff' } });
+      await QRCode.toCanvas(canvas, data.pixCode, { width: 208, margin: 1, color: { dark: '#09205a', light: '#ffffff' } });
       qr.replaceChildren(canvas); renderedCode = data.pixCode;
       document.querySelector('.qr-section').hidden = false;
     } catch { document.querySelector('.qr-section').hidden = true; }
@@ -185,3 +188,5 @@ else {
   issue('Nenhum pedido nesta sessão', 'Volte ao checkout para iniciar seu pagamento.', 'SESSION_MISSING', false);
   diagnostic({ code: 'SESSION_MISSING' });
 }
+
+try { const selection=JSON.parse(sessionStorage.getItem('cordee.calcas.selection')||'null'); if(selection) { document.getElementById('calcasSelection').textContent=selection.colors.join(' + ')+' · '+selection.size; const images={'Preta':'preta','Azul escuro':'azul-escuro','Azul médio':'azul-medio','Azul claro':'azul-claro'}; document.querySelector('.product>img').src='../assets/'+(images[selection.colors[0]]||'azul-escuro')+'.png'; } } catch {}

@@ -1,3 +1,4 @@
+import './checkout-steps.js';
 import { calcasSelection } from '../../shared/calcas.js';
 import { SESSION_KEY, INTENT_KEY, readSession, readJson, validOrder, diagnostic } from './order-session.js';
 const initTikTok = () => {}, trackAddressStarted = () => {};
@@ -32,7 +33,8 @@ fetch('/api/calcas-config', {cache:'no-store'}).then(async response => {
   if (!Number.isSafeInteger(config.amount) || config.amount <= 0) return;
   const money = value => (value/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
   for (const el of document.querySelectorAll('.price,.pix-option-price')) el.textContent=money(config.amount);
-  document.querySelector('.saving strong').textContent=money(Math.max(0,26990-config.amount));
+  const saving = document.querySelector('.saving strong');
+  if (saving) saving.textContent=money(Math.max(0,26990-config.amount));
   configured=config.configured===true;
   button.disabled=!configured;
   if (!configured) button.textContent='Em breve';
