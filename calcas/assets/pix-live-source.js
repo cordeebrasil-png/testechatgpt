@@ -119,7 +119,7 @@ async function render(data) {
     const qr = document.querySelector('.qr-code');
     const canvas = document.createElement('canvas');
     try {
-      await QRCode.toCanvas(canvas, data.pixCode, { width: 208, margin: 1, color: { dark: '#09205a', light: '#ffffff' } });
+      await QRCode.toCanvas(canvas, data.pixCode, { width: 168, margin: 1, color: { dark: '#10111a', light: '#ffffff' } });
       qr.replaceChildren(canvas); renderedCode = data.pixCode;
       document.querySelector('.qr-section').hidden = false;
     } catch { document.querySelector('.qr-section').hidden = true; }
