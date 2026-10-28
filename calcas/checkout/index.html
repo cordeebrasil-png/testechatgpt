@@ -1658,9 +1658,11 @@ a { color: inherit; text-decoration: none; }
           <div class="payment-card active">
             <div class="payment-card-left">
               <div class="pm-icon-wrap pix">
-                <svg width="22" height="22" viewBox="0 0 512 512" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M112.57 391.19c29.17 0 56.6-11.36 77.23-31.99l66.2-66.2 66.2 66.2c20.63 20.63 48.06 31.99 77.23 31.99h14.94l-73.67-73.67c-17.76-17.76-17.76-46.56 0-64.32l73.67-73.67h-14.94c-29.17 0-56.6 11.36-77.23 31.99l-66.2 66.2-66.2-66.2c-20.63-20.63-48.06-31.99-77.23-31.99H97.63l73.67 73.67c17.76 17.76 17.76 46.56 0 64.32l-73.67 73.67h14.94z"/>
-                  <path d="M409.43 105.87h-14.94c-25.04 0-48.59 9.75-66.3 27.46l-72.19 72.19-72.19-72.19c-17.71-17.71-41.26-27.46-66.3-27.46H102.57C45.91 105.87 0 151.78 0 208.44v95.12c0 56.66 45.91 102.57 102.57 102.57h14.94c25.04 0 48.59-9.75 66.3-27.46l72.19-72.19 72.19 72.19c17.71 17.71 41.26 27.46 66.3 27.46h14.94c56.66 0 102.57-45.91 102.57-102.57v-95.12c0-56.66-45.91-102.57-102.57-102.57zm72.57 197.69c0 39.99-32.58 72.57-72.57 72.57h-14.94c-17.47 0-33.89-6.8-46.24-19.16l-78.25-78.25c-7.81-7.81-20.47-7.81-28.28 0l-78.25 78.25c-12.35 12.36-28.77 19.16-46.24 19.16H102.57c-39.99 0-72.57-32.58-72.57-72.57v-95.12c0-39.99 32.58-72.57 72.57-72.57h14.94c17.47 0 33.89 6.8 46.24 19.16l78.25 78.25c7.81 7.81 20.47 7.81 28.28 0l78.25-78.25c12.35-12.36 28.77-19.16 46.24-19.16h14.94c39.99 0 72.57 32.58 72.57 72.57v95.12z"/>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17.06 11.57L13.3 7.8a.77.77 0 0 0-1.08 0l-3.77 3.77a.77.77 0 0 0 0 1.08l3.77 3.77a.77.77 0 0 0 1.08 0l3.76-3.77a.77.77 0 0 0 0-1.08z"/>
+                  <path d="M21.17 7.47l-2.35-2.35a2.32 2.32 0 0 0-1.64-.68h-1.3l3.5 3.5a2.32 2.32 0 0 1 0 3.28l-3.5 3.5h1.3a2.32 2.32 0 0 0 1.64-.68l2.35-2.35a2.32 2.32 0 0 0 0-3.22z"/>
+                  <path d="M6.18 5.12a2.32 2.32 0 0 0-1.64.68L2.19 8.15a2.32 2.32 0 0 0 0 3.22l2.35 2.35a2.32 2.32 0 0 0 1.64.68h1.3L4 10.9a2.32 2.32 0 0 1 0-3.28l3.48-3.5z"/>
+                  <path d="M7.48 18.88a2.32 2.32 0 0 0 1.64-.68l2.35-2.35a2.32 2.32 0 0 1 1.64-.68c.62 0 1.2.24 1.64.68l2.35 2.35a2.32 2.32 0 0 0 1.64.68h1.3l-3.5-3.5a2.32 2.32 0 0 0-3.28 0l-3.5 3.5h1.32z"/>
                 </svg>
               </div>
               <div class="pm-texts">
@@ -1697,6 +1699,66 @@ a { color: inherit; text-decoration: none; }
       </form>
     </section>
   </main>
+
+  <!-- Modal: Descobrir CEP pelo endereço -->
+  <div id="cepSearchModal" class="cep-modal-backdrop" hidden>
+    <div class="cep-modal-content">
+      <div class="cep-modal-header">
+        <h3>Descobrir CEP pelo endereço</h3>
+        <button type="button" id="btnCloseCepModal" class="btn-close-modal">&times;</button>
+      </div>
+      <div class="cep-modal-body">
+        <p class="cep-modal-desc">Informe seu estado, cidade e nome da rua para localizarmos o CEP oficial:</p>
+        <div class="modal-form-grid">
+          <div class="modal-field">
+            <label>Estado (UF)</label>
+            <select id="modalCepUf" class="modal-input">
+              <option value="SP" selected>SP - São Paulo</option>
+              <option value="RJ">RJ - Rio de Janeiro</option>
+              <option value="MG">MG - Minas Gerais</option>
+              <option value="RS">RS - Rio Grande do Sul</option>
+              <option value="PR">PR - Paraná</option>
+              <option value="SC">SC - Santa Catarina</option>
+              <option value="BA">BA - Bahia</option>
+              <option value="GO">GO - Goiás</option>
+              <option value="PE">PE - Pernambuco</option>
+              <option value="CE">CE - Ceará</option>
+              <option value="DF">DF - Distrito Federal</option>
+              <option value="ES">ES - Espírito Santo</option>
+              <option value="MA">MA - Maranhão</option>
+              <option value="MT">MT - Mato Grosso</option>
+              <option value="MS">MS - Mato Grosso do Sul</option>
+              <option value="PA">PA - Pará</option>
+              <option value="PB">PB - Paraíba</option>
+              <option value="RN">RN - Rio Grande do Norte</option>
+              <option value="AL">AL - Alagoas</option>
+              <option value="PI">PI - Piauí</option>
+              <option value="SE">SE - Sergipe</option>
+              <option value="AM">AM - Amazonas</option>
+              <option value="RO">RO - Rondônia</option>
+              <option value="AC">AC - Acre</option>
+              <option value="AP">AP - Amapá</option>
+              <option value="RR">RR - Roraima</option>
+              <option value="TO">TO - Tocantins</option>
+            </select>
+          </div>
+          <div class="modal-field">
+            <label>Cidade</label>
+            <input type="text" id="modalCepCity" class="modal-input" placeholder="Ex: São Paulo">
+          </div>
+          <div class="modal-field">
+            <label>Rua / Avenida</label>
+            <input type="text" id="modalCepStreet" class="modal-input" placeholder="Ex: Paulista ou Rua das Flores">
+          </div>
+        </div>
+        <button type="button" id="btnDoSearchCepByAddress" class="btn-primary" style="margin-top: 14px; height: 46px; font-size: 15px;">
+          Pesquisar CEP
+        </button>
+        <div id="modalCepStatus" style="margin-top: 10px; font-size: 13.5px; font-weight: 600;"></div>
+        <div id="modalCepResults" class="modal-cep-results"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- generated:checkout:start -->
   <script>
@@ -2277,7 +2339,7 @@ a { color: inherit; text-decoration: none; }
       } finally {
         isSubmitting = false;
         finishBtn.disabled = false;
-        finishBtn.textContent = 'Continuar com Pix Mercado Pago';
+        finishBtn.textContent = 'Continuar com Pix';
       }
     }
 
@@ -2288,66 +2350,6 @@ a { color: inherit; text-decoration: none; }
   })();
   </script>
   <!-- generated:checkout:end -->
-
-  <!-- Modal: Descobrir CEP pelo endereço -->
-  <div id="cepSearchModal" class="cep-modal-backdrop" hidden>
-    <div class="cep-modal-content">
-      <div class="cep-modal-header">
-        <h3>Descobrir CEP pelo endereço</h3>
-        <button type="button" id="btnCloseCepModal" class="btn-close-modal">&times;</button>
-      </div>
-      <div class="cep-modal-body">
-        <p class="cep-modal-desc">Informe seu estado, cidade e nome da rua para localizarmos o CEP oficial:</p>
-        <div class="modal-form-grid">
-          <div class="modal-field">
-            <label>Estado (UF)</label>
-            <select id="modalCepUf" class="modal-input">
-              <option value="SP" selected>SP - São Paulo</option>
-              <option value="RJ">RJ - Rio de Janeiro</option>
-              <option value="MG">MG - Minas Gerais</option>
-              <option value="RS">RS - Rio Grande do Sul</option>
-              <option value="PR">PR - Paraná</option>
-              <option value="SC">SC - Santa Catarina</option>
-              <option value="BA">BA - Bahia</option>
-              <option value="GO">GO - Goiás</option>
-              <option value="PE">PE - Pernambuco</option>
-              <option value="CE">CE - Ceará</option>
-              <option value="DF">DF - Distrito Federal</option>
-              <option value="ES">ES - Espírito Santo</option>
-              <option value="MA">MA - Maranhão</option>
-              <option value="MT">MT - Mato Grosso</option>
-              <option value="MS">MS - Mato Grosso do Sul</option>
-              <option value="PA">PA - Pará</option>
-              <option value="PB">PB - Paraíba</option>
-              <option value="RN">RN - Rio Grande do Norte</option>
-              <option value="AL">AL - Alagoas</option>
-              <option value="PI">PI - Piauí</option>
-              <option value="SE">SE - Sergipe</option>
-              <option value="AM">AM - Amazonas</option>
-              <option value="RO">RO - Rondônia</option>
-              <option value="AC">AC - Acre</option>
-              <option value="AP">AP - Amapá</option>
-              <option value="RR">RR - Roraima</option>
-              <option value="TO">TO - Tocantins</option>
-            </select>
-          </div>
-          <div class="modal-field">
-            <label>Cidade</label>
-            <input type="text" id="modalCepCity" class="modal-input" placeholder="Ex: São Paulo">
-          </div>
-          <div class="modal-field">
-            <label>Rua / Avenida</label>
-            <input type="text" id="modalCepStreet" class="modal-input" placeholder="Ex: Paulista ou Rua das Flores">
-          </div>
-        </div>
-        <button type="button" id="btnDoSearchCepByAddress" class="btn-primary" style="margin-top: 14px; height: 46px; font-size: 15px;">
-          Pesquisar CEP
-        </button>
-        <div id="modalCepStatus" style="margin-top: 10px; font-size: 13.5px; font-weight: 600;"></div>
-        <div id="modalCepResults" class="modal-cep-results"></div>
-      </div>
-    </div>
-  </div>
 
 </body>
 </html>
