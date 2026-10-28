@@ -117,16 +117,17 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 6px 16px;
+  gap: 6px;
+  padding: 5px 12px;
   background: #f0f9ff;
   border: 1.5px solid #bae6fd;
-  border-radius: 24px;
+  border-radius: 20px;
   color: #0369a1;
-  font-size: 13.5px;
+  font-size: 12.5px;
   font-weight: 700;
   margin-bottom: 10px;
   box-shadow: 0 1px 3px rgba(0, 158, 227, 0.08);
+  max-width: 96%;
 }
 .store-pill-wrap {
   text-align: center;
@@ -161,8 +162,8 @@ a { color: inherit; text-decoration: none; }
 .product-card {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
+  gap: 12px;
+  padding: 12px 14px;
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
   border-radius: 14px;
@@ -175,11 +176,11 @@ a { color: inherit; text-decoration: none; }
   }
 }
 .product-thumb {
-  width: 66px;
-  height: 66px;
-  min-width: 66px;
-  max-width: 66px;
-  border-radius: 12px;
+  width: 62px;
+  height: 62px;
+  min-width: 62px;
+  max-width: 62px;
+  border-radius: 10px;
   border: 1.5px solid #cbd5e1;
   overflow: hidden;
   background: #ffffff;
@@ -198,19 +199,19 @@ a { color: inherit; text-decoration: none; }
   min-width: 0;
 }
 .product-title {
-  font-size: 16.5px;
+  font-size: 15.5px;
   font-weight: 700;
   color: #0f172a;
-  margin: 0 0 3px;
+  margin: 0 0 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .product-subtitle {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #334155;
-  margin: 0 0 3px;
+  margin: 0 0 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -222,12 +223,9 @@ a { color: inherit; text-decoration: none; }
   margin: 0;
 }
 .product-price {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   color: #009ee3;
-  white-space: nowrap;
-  margin-left: auto;
-  flex-shrink: 0;
 }
 
 /* Stepper */
@@ -625,10 +623,11 @@ a { color: inherit; text-decoration: none; }
   }
 }
 .pix-pay-title {
-  font-size: 23px;
+  font-size: 19px;
   font-weight: 700;
   color: #0f172a;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  line-height: 1.25;
 }
 .pix-pay-desc {
   font-size: 14.5px;
@@ -862,9 +861,8 @@ a { color: inherit; text-decoration: none; }
       <div class="product-details">
         <h2 class="product-title" id="productTitle">Kit 2 Calças Jeans UltraModel</h2>
         <p class="product-subtitle" id="productSubtitle">Azul escuro + Preta · P (34-36)</p>
-        <p class="product-qty">Quantidade: 1 kit (2 calças)</p>
+        <p class="product-qty">Qtd: 1 kit (2 calças) &bull; <strong class="product-price" id="visiblePrice">R$ 94,90</strong></p>
       </div>
-      <strong class="product-price" id="visiblePrice">R$ 94,90</strong>
       <span hidden class="price">R$ 94,90</span>
     </section>
 
