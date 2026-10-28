@@ -1,4 +1,26 @@
 
+@font-face {
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-semibold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-bold.woff2') format('woff2');
+}
+
 :root {
   --mp-blue: #009ee3;
   --mp-blue-hover: #0084c2;
@@ -9,7 +31,7 @@
   --border-input: #d1d5db;
   --text-main: #111827;
   --text-sub: #64748b;
-  --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-base: 'Proxima Nova', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 * {
@@ -23,7 +45,8 @@ html, body {
   background-color: var(--bg-page);
   color: var(--text-main);
   font-family: var(--font-base);
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 400;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
@@ -47,7 +70,7 @@ a { color: inherit; text-decoration: none; }
 
 @media (min-width: 640px) {
   body {
-    background-color: #e9ecef;
+    background-color: #ebedf2;
     padding: 32px 16px 60px;
   }
   .checkout-shell {
@@ -70,7 +93,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 10px;
   padding-left: 2px;
 }
-.mp-logo-svg {
+.mp-logo-img {
   height: 28px;
   width: auto;
   display: block;
@@ -95,11 +118,11 @@ a { color: inherit; text-decoration: none; }
   background: #4f46e5;
   color: #fff;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   border-radius: 50%;
 }
 .store-pill-name {
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
   color: #334155;
 }
@@ -144,17 +167,20 @@ a { color: inherit; text-decoration: none; }
   flex: 1;
   min-width: 0;
 }
+/* Títulos dos cards: Proxima Nova Semibold 16px */
 .product-title {
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   color: #111827;
   margin: 0 0 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* Textos secundários: Proxima Nova Regular 13px */
 .product-subtitle {
   font-size: 13px;
+  font-weight: 400;
   color: #64748b;
   margin: 0 0 2px;
   white-space: nowrap;
@@ -162,13 +188,14 @@ a { color: inherit; text-decoration: none; }
   text-overflow: ellipsis;
 }
 .product-qty {
-  font-size: 12.5px;
+  font-size: 13px;
+  font-weight: 400;
   color: #94a3b8;
   margin: 0;
 }
 .product-price {
-  font-size: 17px;
-  font-weight: 800;
+  font-size: 16px;
+  font-weight: 600;
   color: #111827;
   white-space: nowrap;
   margin-left: auto;
@@ -220,7 +247,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: center;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   background: #ffffff;
   color: #94a3b8;
   border: 2px solid #cbd5e1;
@@ -245,29 +272,31 @@ a { color: inherit; text-decoration: none; }
   border-color: #009ee3;
 }
 .step-label {
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 400;
   margin-top: 6px;
   color: #94a3b8;
-  font-weight: 500;
 }
 .stepper li.active .step-label {
   color: #111827;
-  font-weight: 700;
+  font-weight: 600;
 }
 .stepper li.done .step-label,
 .stepper li.completed .step-label {
   color: #64748b;
 }
 
-/* Titles */
+/* Títulos das etapas: Proxima Nova Semibold 20px */
 .section-title {
-  font-size: 21px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 600;
   color: #111827;
   margin-bottom: 4px;
 }
+/* Textos secundários: Proxima Nova Regular 13px */
 .section-desc {
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 400;
   color: #64748b;
   margin-bottom: 14px;
 }
@@ -294,9 +323,10 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-direction: column;
 }
+/* Campos e informações: Proxima Nova Regular 14px */
 .field label {
-  font-size: 13.5px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 400;
   color: #374151;
   margin-bottom: 6px;
 }
@@ -307,7 +337,8 @@ a { color: inherit; text-decoration: none; }
   background: #ffffff;
   border: 1.5px solid #d1d5db;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 400;
   color: #0f172a;
   outline: none;
   box-sizing: border-box;
@@ -326,6 +357,7 @@ a { color: inherit; text-decoration: none; }
 .field-error {
   color: #ef4444;
   font-size: 12px;
+  font-weight: 400;
   margin-top: 4px;
 }
 .field-error:empty { display: none; }
@@ -353,15 +385,16 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   right: 12px;
   color: #009ee3;
-  font-size: 13.5px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   padding: 6px 8px;
   background: none;
   border: none;
   cursor: pointer;
 }
 #cepStatus {
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 400;
   color: #64748b;
   margin-top: 4px;
 }
@@ -371,14 +404,17 @@ a { color: inherit; text-decoration: none; }
 .shipping-card {
   margin-top: 16px;
 }
+/* Títulos dos cards: Proxima Nova Semibold 16px */
 .shipping-title {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
   color: #111827;
   margin-bottom: 4px;
 }
+/* Textos secundários: Proxima Nova Regular 13px */
 .shipping-desc {
   font-size: 13px;
+  font-weight: 400;
   color: #64748b;
   margin-bottom: 10px;
 }
@@ -417,21 +453,24 @@ a { color: inherit; text-decoration: none; }
   flex: 1;
   min-width: 0;
 }
+/* Campos e informações: Proxima Nova Regular / Semibold */
 .shipping-name {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 600;
   color: #009ee3;
   margin: 0;
 }
+/* Textos secundários: Proxima Nova Regular 13px */
 .shipping-sub {
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 400;
   color: #64748b;
   margin: 2px 0 3px;
   line-height: 1.3;
 }
 .shipping-deadline {
-  font-size: 12.5px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
   color: #009ee3;
   margin: 0;
 }
@@ -491,14 +530,17 @@ a { color: inherit; text-decoration: none; }
   background: #edf3f8;
   color: #64748b;
 }
+/* Títulos dos cards: Proxima Nova Semibold 16px */
 .pm-texts h3 {
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   color: #111827;
   margin: 0 0 2px;
 }
+/* Textos secundários: Proxima Nova Regular 13px */
 .pm-texts p {
   font-size: 13px;
+  font-weight: 400;
   color: #64748b;
   margin: 0;
 }
@@ -506,7 +548,7 @@ a { color: inherit; text-decoration: none; }
   color: #009ee3;
 }
 
-/* Button & Security */
+/* Botões azuis: Proxima Nova Semibold 16px */
 .btn-primary {
   width: 100%;
   height: 50px;
@@ -514,7 +556,7 @@ a { color: inherit; text-decoration: none; }
   color: #ffffff;
   border-radius: 10px;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -527,13 +569,15 @@ a { color: inherit; text-decoration: none; }
 .btn-primary:active {
   transform: scale(0.99);
 }
+/* Textos secundários: Proxima Nova Regular 13px */
 .security-note {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   color: #94a3b8;
-  font-size: 12.5px;
+  font-size: 13px;
+  font-weight: 400;
   margin-top: 12px;
 }
 
@@ -552,14 +596,17 @@ a { color: inherit; text-decoration: none; }
     border-color: #e2e8f0;
   }
 }
+/* Títulos das etapas: Proxima Nova Semibold 20px */
 .pix-pay-title {
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 600;
   color: #111827;
   margin-bottom: 4px;
 }
+/* Textos secundários: Proxima Nova Regular 13px */
 .pix-pay-desc {
-  font-size: 13.5px;
+  font-size: 13px;
+  font-weight: 400;
   color: #64748b;
   margin-bottom: 16px;
 }
@@ -583,7 +630,7 @@ a { color: inherit; text-decoration: none; }
 }
 .copy-label {
   display: block;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
   color: #374151;
   margin-bottom: 6px;
@@ -603,6 +650,7 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
   padding: 0 12px;
   font-size: 13.5px;
+  font-weight: 400;
   color: #475569;
   outline: none;
   background: transparent;
@@ -621,6 +669,7 @@ a { color: inherit; text-decoration: none; }
   background: #f8fafc;
 }
 
+/* Botões azuis: Proxima Nova Semibold 16px */
 .btn-copy-pix {
   width: 100%;
   height: 48px;
@@ -628,7 +677,7 @@ a { color: inherit; text-decoration: none; }
   color: #ffffff;
   border-radius: 10px;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -648,15 +697,18 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 14px;
   text-align: center;
 }
+/* Textos secundários: Proxima Nova Regular 13px */
 .amount-title {
   display: block;
   font-size: 13px;
+  font-weight: 400;
   color: #64748b;
   margin-bottom: 2px;
 }
+/* Valor do pedido: Proxima Nova Semibold 24px */
 .amount-number {
-  font-size: 26px;
-  font-weight: 800;
+  font-size: 24px;
+  font-weight: 600;
   color: #0f172a;
 }
 
@@ -678,12 +730,13 @@ a { color: inherit; text-decoration: none; }
 }
 .instant-content strong {
   display: block;
-  font-size: 13.5px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   color: #0369a1;
 }
 .instant-content p {
-  font-size: 12.5px;
+  font-size: 13px;
+  font-weight: 400;
   color: #0284c7;
   line-height: 1.35;
 }
@@ -691,9 +744,10 @@ a { color: inherit; text-decoration: none; }
 .how-to-block {
   text-align: center;
 }
+/* Títulos dos cards: Proxima Nova Semibold 16px */
 .how-to-title {
-  font-size: 14.5px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   color: #111827;
   margin-bottom: 10px;
   text-align: left;
@@ -716,7 +770,7 @@ a { color: inherit; text-decoration: none; }
   background: #009ee3;
   color: #ffffff;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   display: grid;
   place-items: center;
   margin-bottom: 6px;
@@ -729,7 +783,8 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 6px;
 }
 .how-item p {
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 400;
   color: #374151;
   line-height: 1.3;
 }
