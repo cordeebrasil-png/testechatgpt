@@ -1,838 +1,587 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="robots" content="noindex, nofollow">
-<title>Pedido Confirmado — Deveu Perdeu</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --ink: #121316;
-    --ink-2: #1c1e23;
-    --ink-3: #2a2d34;
-    --primary: #ff6b00;
-    --primary-dark: #e65c00;
-    --primary-soft: #fff3e8;
-    --green: #16a34a;
-    --green-soft: #dcfce7;
-    --bg: #f6f5f2;
-    --card: #ffffff;
-    --line: #e8e6e1;
-    --text: #16181d;
-    --muted: #6b6f78;
-    --r: 18px;
-    --shadow: 0 2px 4px rgba(16,18,22,.04), 0 10px 28px rgba(16,18,22,.07);
-  }
-  html { touch-action: pan-x pan-y; scroll-behavior: smooth; }
-  body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    padding-bottom: 40px;
-  }
-  img { max-width: 100%; display: block; }
-  svg { display: inline-block; vertical-align: middle; }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Compra Confirmada — Modalle Jeans</title>
+  <link rel="preconnect" href="https://http2.mlstatic.com">
+  <style>
+    @font-face {
+      font-family: 'Proxima Nova';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Proxima Nova';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-semibold.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Proxima Nova';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-bold.woff2') format('woff2');
+    }
 
-  /* HEADER */
-  header.header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(18, 19, 22, 0.96);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 12px 18px;
-  }
-  .header-inner {
-    max-width: 560px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .header-logo img {
-    height: 32px;
-    width: auto;
-  }
-  .header-secure {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #4ade80;
-  }
-  .header-secure svg {
-    width: 15px;
-    height: 15px;
-  }
+    :root {
+      --mp-blue: #009ee3;
+      --mp-green: #00a650;
+      --mp-navy: #002c6c;
+      --bg-page: #f5f6f8;
+      --bg-card: #ffffff;
+      --border-card: #e2e8f0;
+      --text-main: #0f172a;
+      --text-sub: #475569;
+      --font-base: 'Proxima Nova', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
 
-  /* HERO BANNER */
-  .hero {
-    background: radial-gradient(120% 90% at 50% 0%, var(--ink-3) 0%, var(--ink) 70%);
-    color: #fff;
-    text-align: center;
-    padding: 28px 16px 42px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: "";
-    position: absolute;
-    width: 240px;
-    height: 240px;
-    border-radius: 50%;
-    background: var(--primary);
-    top: -90px;
-    left: -70px;
-    opacity: 0.18;
-    filter: blur(40px);
-  }
-  .hero::after {
-    content: "";
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: #22c55e;
-    bottom: -60px;
-    right: -60px;
-    opacity: 0.15;
-    filter: blur(40px);
-  }
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 520px;
-    margin: 0 auto;
-  }
-  .check-circle {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #22c55e, #15803d);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 14px;
-    color: #fff;
-    box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.2), 0 12px 28px rgba(0, 0, 0, 0.35);
-    animation: popCheck 0.6s cubic-bezier(0.18, 1.3, 0.3, 1) both;
-  }
-  .check-circle svg {
-    width: 34px;
-    height: 34px;
-    stroke: #fff;
-    stroke-width: 3.2;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 40;
-    stroke-dashoffset: 40;
-    animation: drawCheck 0.5s 0.4s ease forwards;
-  }
-  @keyframes popCheck {
-    from { transform: scale(0.4); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-  @keyframes drawCheck {
-    to { stroke-dashoffset: 0; }
-  }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-base);
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
 
-  .badge-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11.5px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #4ade80;
-    background: rgba(34, 197, 94, 0.15);
-    border: 1px solid rgba(34, 197, 94, 0.35);
-    border-radius: 999px;
-    padding: 5px 14px;
-    margin-bottom: 10px;
-  }
-  .hero h1 {
-    font-size: clamp(25px, 6.5vw, 34px);
-    font-weight: 900;
-    letter-spacing: -0.025em;
-    line-height: 1.15;
-    margin-bottom: 8px;
-  }
-  .hero h1 span.name-highlight {
-    color: #ff9d42;
-    text-shadow: 0 2px 10px rgba(255, 107, 0, 0.35);
-  }
-  .hero p.lead {
-    font-size: 14.5px;
-    color: #cbd0d8;
-    line-height: 1.5;
-    max-width: 440px;
-    margin: 0 auto;
-  }
-  .order-ref-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 12px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 8px;
-    padding: 5px 12px;
-    font-size: 12.5px;
-    font-weight: 700;
-    color: #fff;
-    font-family: monospace;
-    letter-spacing: 0.04em;
-  }
+    .checkout-shell {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 16px 16px 48px;
+      display: flex;
+      flex-direction: column;
+    }
 
-  /* MAIN WRAPPER */
-  .main {
-    max-width: 540px;
-    margin: -20px auto 0;
-    padding: 0 16px;
-    position: relative;
-    z-index: 10;
-  }
+    @media (min-width: 640px) {
+      body {
+        background-color: #e9ecef;
+        padding: 32px 16px 64px;
+      }
+      .checkout-shell {
+        background: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.07);
+        border: 1.5px solid #cbd5e1;
+        padding: 30px 28px 48px;
+      }
+    }
 
-  /* CARDS */
-  .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    padding: 20px 18px;
-    margin-bottom: 14px;
-    box-shadow: var(--shadow);
-  }
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-  .card-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .card-icon.orange {
-    background: var(--primary-soft);
-    color: var(--primary);
-  }
-  .card-icon.blue {
-    background: #e0f2fe;
-    color: #0284c7;
-  }
-  .card-icon.green {
-    background: var(--green-soft);
-    color: var(--green);
-  }
-  .card-icon svg {
-    width: 22px;
-    height: 22px;
-  }
-  .card-header-text h2 {
-    font-size: 16px;
-    font-weight: 800;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-    line-height: 1.25;
-  }
-  .card-header-text span {
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: 600;
-  }
+    /* MP Header */
+    .mp-header { margin-bottom: 20px; }
+    .mp-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 14px;
+      border-bottom: 1.5px solid #e2e8f0;
+      margin-bottom: 14px;
+    }
+    .mp-logo-img { height: 32px; width: auto; object-fit: contain; }
+    .mp-secure-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f766e;
+      background: #ccfbf1;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+    .mp-secure-lock { width: 14px; height: 14px; }
 
-  /* EMAIL BOX */
-  .email-box {
-    background: #f8fafc;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 14px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 10px 0 12px;
-  }
-  .email-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: #e0f2fe;
-    color: #0284c7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .email-icon svg {
-    width: 18px;
-    height: 18px;
-  }
-  .email-data {
-    overflow: hidden;
-  }
-  .email-data small {
-    display: block;
-    font-size: 11px;
-    text-transform: uppercase;
-    font-weight: 800;
-    color: #64748b;
-    letter-spacing: 0.05em;
-  }
-  .email-data strong {
-    font-size: 14px;
-    color: #0f172a;
-    font-weight: 800;
-    word-break: break-all;
-  }
-  .info-note {
-    font-size: 12.5px;
-    color: #475569;
-    line-height: 1.5;
-    background: #f1f5f9;
-    padding: 10px 12px;
-    border-radius: 10px;
-    display: flex;
-    gap: 8px;
-    align-items: flex-start;
-  }
-  .info-note svg {
-    width: 16px;
-    height: 16px;
-    color: #0284c7;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
+    .store-partner-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+    .store-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #002c6c;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .store-info { display: flex; flex-direction: column; }
+    .store-title-row { display: flex; align-items: center; gap: 6px; }
+    .store-name { font-size: 15px; font-weight: 700; color: #0f172a; }
+    .store-verified-icon { width: 16px; height: 16px; }
+    .store-subtext { font-size: 12.5px; color: #64748b; font-weight: 500; }
 
-  /* ADDRESS BOX */
-  .address-box {
-    background: #fdfaf6;
-    border: 1.5px solid #fed7aa;
-    border-radius: 12px;
-    padding: 14px 16px;
-    margin: 10px 0 12px;
-  }
-  .address-title {
-    font-size: 11.5px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--primary);
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .address-text {
-    font-size: 14px;
-    color: #1f2937;
-    font-weight: 700;
-    line-height: 1.5;
-  }
-  .address-sub {
-    font-size: 13px;
-    color: #6b7280;
-    font-weight: 600;
-    margin-top: 2px;
-  }
-  .shipping-badge-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px dashed #fed7aa;
-    font-size: 12px;
-    font-weight: 700;
-    color: #9a3412;
-  }
-  .shipping-badge-row span.badge-free {
-    color: #15803d;
-    background: #dcfce7;
-    padding: 3px 8px;
-    border-radius: 6px;
-  }
+    /* Success Card */
+    .success-card {
+      background: #ffffff;
+      border: 1.5px solid #bbf7d0;
+      border-radius: 18px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 166, 80, 0.08);
+      margin-bottom: 16px;
+    }
+    .success-icon-wrap {
+      width: 72px;
+      height: 72px;
+      background: #00a650;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 0 0 8px #dcfce7;
+    }
+    .success-icon-wrap svg {
+      width: 38px;
+      height: 38px;
+      stroke: #ffffff;
+      stroke-width: 3;
+    }
+    .success-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #15803d;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .success-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+    .success-desc {
+      font-size: 14.5px;
+      color: #475569;
+      line-height: 1.45;
+    }
 
-  /* ORDER SUMMARY */
-  .product-summary-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    background: #fbfbfc;
-    border: 1.5px solid var(--line);
-    border-radius: 14px;
-    padding: 12px;
-    margin-top: 8px;
-  }
-  .product-summary-img {
-    width: 64px;
-    height: 64px;
-    border-radius: 10px;
-    background: #fff;
-    border: 1px solid var(--line);
-    object-fit: contain;
-    padding: 4px;
-    flex-shrink: 0;
-  }
-  .product-summary-info h3 {
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--ink);
-  }
-  .product-tag-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 4px;
-  }
-  .prod-tag {
-    font-size: 11px;
-    font-weight: 800;
-    padding: 2px 7px;
-    border-radius: 6px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .prod-tag.bonus {
-    background: #fff3e8;
-    color: var(--primary);
-    border: 1px solid #ffd8b2;
-  }
-  .prod-tag.upgrade {
-    background: #f0fdf4;
-    color: #15803d;
-    border: 1px solid #bbf7d0;
-  }
+    /* Notice Banner: Rastreio via E-mail */
+    .email-tracking-banner {
+      background: #eff6ff;
+      border: 1.5px solid #bfdbfe;
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .tracking-icon {
+      width: 26px;
+      height: 26px;
+      stroke: #009ee3;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .tracking-content {
+      font-size: 13.5px;
+      color: #1e3a8a;
+      line-height: 1.5;
+    }
+    .tracking-content strong {
+      color: #002c6c;
+      font-weight: 700;
+    }
 
-  /* TIMELINE */
-  .timeline {
-    list-style: none;
-    display: grid;
-    gap: 14px;
-    margin-top: 8px;
-    position: relative;
-  }
-  .timeline::before {
-    content: "";
-    position: absolute;
-    left: 15px;
-    top: 10px;
-    bottom: 10px;
-    width: 2px;
-    background: #e2e8f0;
-  }
-  .timeline-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    position: relative;
-    z-index: 2;
-  }
-  .timeline-dot {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 900;
-    flex-shrink: 0;
-    background: #fff;
-    border: 2px solid #cbd5e1;
-    color: #64748b;
-  }
-  .timeline-item.done .timeline-dot {
-    background: #16a34a;
-    border-color: #16a34a;
-    color: #fff;
-  }
-  .timeline-item.active .timeline-dot {
-    background: #ff6b00;
-    border-color: #ff6b00;
-    color: #fff;
-    box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.2);
-  }
-  .timeline-text strong {
-    display: block;
-    font-size: 13.5px;
-    font-weight: 800;
-    color: var(--ink);
-    line-height: 1.3;
-  }
-  .timeline-text span {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.4;
-  }
+    /* Cards padrão */
+    .info-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-  /* BUTTONS & FOOTER */
-  .btn-action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    background: var(--primary);
-    color: #fff;
-    font-weight: 800;
-    font-size: 15px;
-    padding: 15px 20px;
-    border-radius: 12px;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 14px rgba(255, 107, 0, 0.3);
-    transition: background 0.15s, transform 0.1s;
-    margin-top: 6px;
-  }
-  .btn-action:hover {
-    background: var(--primary-dark);
-    transform: translateY(-1px);
-  }
-  .btn-action:active {
-    transform: scale(0.98);
-  }
-  .btn-secondary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    background: #fff;
-    color: var(--ink);
-    font-weight: 700;
-    font-size: 14px;
-    padding: 13px 20px;
-    border-radius: 12px;
-    text-decoration: none;
-    border: 1px solid var(--line);
-    margin-top: 10px;
-    transition: background 0.15s;
-  }
-  .btn-secondary:hover {
-    background: #f9fafb;
-  }
+    /* Resumo do produto */
+    .product-row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #f1f5f9;
+      margin-bottom: 14px;
+    }
+    .product-thumb {
+      width: 68px;
+      height: 68px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+    .product-info h3 {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 3px;
+    }
+    .product-info p {
+      font-size: 13px;
+      color: #64748b;
+    }
 
-  footer.footer {
-    text-align: center;
-    color: #8d929a;
-    font-size: 12px;
-    padding: 24px 16px 0;
-    max-width: 520px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-  footer.footer a {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 700;
-  }
-</style>
-<script type="module" src="/assets/boxes-tiktok.js?v=2"></script></head>
+    /* Totais */
+    .totals-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      color: #475569;
+    }
+    .total-row.final {
+      margin-top: 6px;
+      padding-top: 10px;
+      border-top: 1.5px solid #e2e8f0;
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .total-row.final .price-highlight {
+      color: #00a650;
+      font-size: 19px;
+    }
+
+    /* Linha do tempo dos Correios */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      padding-left: 28px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: #cbd5e1;
+    }
+    .timeline-item {
+      position: relative;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -28px;
+      top: 2px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .timeline-item.done .timeline-dot {
+      background: #00a650;
+      border-color: #00a650;
+    }
+    .timeline-item.done .timeline-dot svg {
+      width: 12px;
+      height: 12px;
+      stroke: #ffffff;
+      stroke-width: 3;
+    }
+    .timeline-item.active .timeline-dot {
+      background: #009ee3;
+      border-color: #009ee3;
+      box-shadow: 0 0 0 4px rgba(0, 158, 227, 0.2);
+    }
+    .timeline-item.active .timeline-dot::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #ffffff;
+      border-radius: 50%;
+    }
+    .timeline-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+    .timeline-desc {
+      font-size: 12.5px;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    /* Detalhes do endereço */
+    .address-details-box {
+      font-size: 13.5px;
+      color: #334155;
+      line-height: 1.6;
+      background: #f8fafc;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Botão Voltar à loja */
+    .btn-back-home {
+      display: block;
+      width: 100%;
+      height: 48px;
+      background: #ffffff;
+      color: #009ee3;
+      border: 1.5px solid #009ee3;
+      border-radius: 12px;
+      font-size: 15.5px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 46px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      margin-top: 10px;
+    }
+    .btn-back-home:hover {
+      background: #f0f7ff;
+    }
+
+    .mp-security-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12.5px;
+      color: #64748b;
+      margin-top: 24px;
+      text-align: center;
+    }
+  </style>
+</head>
 <body>
 
-<header class="header">
-  <div class="header-inner">
-    <div class="header-logo">
-      <a href="/"><img src="/assets/f4e97641be0a8ceb.png" alt="Deveu Perdeu"></a>
-    </div>
-    <div class="header-secure">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-      <span>Compra 100% Protegida</span>
-    </div>
-  </div>
-</header>
-
-<div class="hero">
-  <div class="hero-content">
-    <div class="check-circle">
-      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-    </div>
-    <div class="badge-status">
-      <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-      Pedido Confirmado
-    </div>
-    <h1 id="title-greeting">Obrigado<span id="name-container">, <span class="name-highlight" id="client-name">Cliente</span></span>!</h1>
-    <p class="lead">Seu pagamento foi aprovado e a sua caixa surpresa já está sendo preparada com todo cuidado.</p>
-    <div>
-      <span class="order-ref-pill">NÚMERO DO PEDIDO: <strong id="order-ref">#DP-84291</strong></span>
-    </div>
-  </div>
-</div>
-
-<main class="main">
-
-  <!-- CARD 1: CÓDIGO DE RASTREIO POR EMAIL -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon blue">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+  <main class="checkout-shell">
+    <!-- Header Mercado Pago -->
+    <header class="mp-header">
+      <div class="mp-top-bar">
+        <img class="mp-logo-img" src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.19.5/mercadopago/logo__large.png" alt="Mercado Pago">
+        <div class="mp-secure-badge">
+          <svg class="mp-secure-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span>Ambiente seguro</span>
+        </div>
       </div>
-      <div class="card-header-text">
-        <h2>Código de Rastreamento por E-mail</h2>
-        <span>Atualizações automáticas da sua encomenda</span>
+
+      <div class="store-partner-card">
+        <div class="store-avatar">M</div>
+        <div class="store-info">
+          <div class="store-title-row">
+            <span class="store-name">Modalle Jeans</span>
+            <svg class="store-verified-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M10.586 1.707a2 2 0 0 1 2.828 0l.758.758a2 2 0 0 0 1.414.586h1.071a2 2 0 0 1 2 2v1.071a2 2 0 0 0 .586 1.414l.758.758a2 2 0 0 1 0 2.828l-.758.758a2 2 0 0 0-.586 1.414v1.071a2 2 0 0 1-2 2h-1.071a2 2 0 0 0-1.414.586l-.758.758a2 2 0 0 1-2.828 0l-.758-.758a2 2 0 0 0-1.414-.586H8.071a2 2 0 0 1-2-2v-1.071a2 2 0 0 0-.586-1.414l-.758-.758a2 2 0 0 1 0-2.828l.758-.758a2 2 0 0 0 .586-1.414V6.065a2 2 0 0 1 2-2h1.071a2 2 0 0 0 1.414-.586l.758-.758z" fill="#009ee3"/>
+              <path d="M8.5 12.2l2.3 2.3 4.7-4.7" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="store-subtext">Loja parceira · Pagamento processado pelo Mercado Pago</p>
+        </div>
       </div>
+    </header>
+
+    <!-- Card de Sucesso -->
+    <div class="success-card">
+      <div class="success-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <span class="success-badge">Pagamento Aprovado</span>
+      <h1 class="success-title">Obrigado, <span id="clientFirstName">Matheus</span>!</h1>
+      <p class="success-desc">Seu pedido foi confirmado e o pagamento via Pix foi processado com sucesso pelo Mercado Pago.</p>
     </div>
 
-    <p style="font-size:13.5px;color:#374151;margin-bottom:8px">
-      Assim que sua caixa for despachada, o <strong>código de rastreio oficial</strong> e o link para acompanhar em tempo real serão enviados diretamente para:
-    </p>
-
-    <div class="email-box">
-      <div class="email-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-      </div>
-      <div class="email-data">
-        <small>E-mail de Cadastro</small>
-        <strong id="client-email">seu-email@gmail.com</strong>
+    <!-- BANNER DE RASTREIO VIA E-MAIL (EM DESTAQUE) -->
+    <div class="email-tracking-banner">
+      <svg class="tracking-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      <div class="tracking-content">
+        <strong>O código de rastreamento dos Correios</strong> será enviado diretamente para o seu e-mail (<span id="clientEmailNotice">seu-email@exemplo.com</span>) assim que o pacote for despachado.
       </div>
     </div>
 
-    <div class="info-note">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-      <span><strong>Fique atento:</strong> Caso não encontre na caixa de entrada principal, verifique também as pastas de <em>Spam</em> ou <em>Promoções</em>.</span>
-    </div>
-  </div>
-
-  <!-- CARD 2: ENDEREÇO DE ENTREGA -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon orange">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+    <!-- Card da Compra -->
+    <div class="info-card">
+      <h2 class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#009ee3" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Resumo da compra
+      </h2>
+      <div class="product-row">
+        <img class="product-thumb" id="productImg" src="../assets/azul-escuro.png" alt="Kit 2 Calças Jeans">
+        <div class="product-info">
+          <h3>Kit 2 Calças Jeans UltraModel</h3>
+          <p id="productVariant">Azul escuro + Preta · P (34-36)</p>
+          <p>Quantidade: 1 kit (2 calças)</p>
+        </div>
       </div>
-      <div class="card-header-text">
-        <h2>Endereço de Entrega</h2>
-        <span>Onde sua encomenda será entregue</span>
-      </div>
-    </div>
-
-    <p style="font-size:13.5px;color:#374151">
-      Sua caixa está sendo embalada e será despachada com segurança para o seguinte destino:
-    </p>
-
-    <div class="address-box">
-      <div class="address-title">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-        Destino Confirmado
-      </div>
-      <div class="address-text" id="delivery-address">
-        Rua das Flores, 123 — Apto 402
-      </div>
-      <div class="address-sub" id="delivery-sub">
-        Centro — São Paulo / SP · CEP 01001-000
-      </div>
-      <div class="shipping-badge-row">
-        <span>📦 Prazo estimado: <strong>3 a 7 dias úteis</strong></span>
-        <span class="badge-free">Frete com Seguro</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- CARD 3: RESUMO DO PEDIDO -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon green">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-      </div>
-      <div class="card-header-text">
-        <h2>Itens Inclusos na Sua Caixa</h2>
-        <span>Produtos reservados para envio</span>
-      </div>
-    </div>
-
-    <div class="product-summary-card">
-      <img class="product-summary-img" id="box-image" src="/assets/4533661a7b85490c.png" alt="Caixa Surpresa">
-      <div class="product-summary-info">
-        <h3 id="box-title">Caixa Surpresa Prata (3 kg)</h3>
-        <div class="product-tag-wrap">
-          <span class="prod-tag bonus">🎁 Brinde Extra Liberado</span>
-          <span class="prod-tag upgrade" id="tag-upgrade">⚡ Upgrade Premium</span>
+      <div class="totals-list">
+        <div class="total-row">
+          <span>Forma de pagamento</span>
+          <strong>Pix Mercado Pago</strong>
+        </div>
+        <div class="total-row">
+          <span>Envio</span>
+          <strong id="shippingMethodName">Correios (PAC Frete Grátis)</strong>
+        </div>
+        <div class="total-row final">
+          <span>Total pago</span>
+          <span class="price-highlight" id="orderTotalValue">R$ 94,91</span>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- CARD 4: PRÓXIMOS PASSOS -->
-  <div class="card">
-    <div class="card-header" style="margin-bottom:10px">
-      <div class="card-icon orange">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-      </div>
-      <div class="card-header-text">
-        <h2>O que acontece agora?</h2>
-        <span>Acompanhe o fluxo da sua entrega</span>
+    <!-- Linha do Tempo / Próximos Passos -->
+    <div class="info-card">
+      <h2 class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#009ee3" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Próximos passos do seu pedido
+      </h2>
+      <div class="timeline">
+        <div class="timeline-item done">
+          <div class="timeline-dot">
+            <svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h3 class="timeline-title">Pagamento confirmado</h3>
+          <p class="timeline-desc">Aprovado pelo Mercado Pago instantaneamente.</p>
+        </div>
+
+        <div class="timeline-item active">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-title">Preparação e separação</h3>
+          <p class="timeline-desc">Seu kit está sendo embalado cuidadosamente pela nossa equipe.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-title">Envio pelos Correios</h3>
+          <p class="timeline-desc">O código de rastreio será enviado no seu e-mail.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-title">Entrega no seu endereço</h3>
+          <p class="timeline-desc">Receba suas calças no conforto da sua casa.</p>
+        </div>
       </div>
     </div>
 
-    <ol class="timeline">
-      <li class="timeline-item done">
-        <div class="timeline-dot">✓</div>
-        <div class="timeline-text">
-          <strong>Pagamento Confirmado</strong>
-          <span>Seu pagamento foi aprovado instantaneamente pelo sistema.</span>
-        </div>
-      </li>
-      <li class="timeline-item active">
-        <div class="timeline-dot">2</div>
-        <div class="timeline-text">
-          <strong>Separação & Embalagem</strong>
-          <span>Sua caixa misteriosa e brindes estão sendo montados e embalados.</span>
-        </div>
-      </li>
-      <li class="timeline-item">
-        <div class="timeline-dot">3</div>
-        <div class="timeline-text">
-          <strong>Envio do Código de Rastreio</strong>
-          <span>Mandaremos o código rastreável dos Correios / Transportadora para seu e-mail.</span>
-        </div>
-      </li>
-      <li class="timeline-item">
-        <div class="timeline-dot">4</div>
-        <div class="timeline-text">
-          <strong>Entrega no seu Endereço</strong>
-          <span>Receba sua caixa com segurança no conforto da sua casa!</span>
-        </div>
-      </li>
-    </ol>
-
-    <div style="margin-top:20px">
-      <a class="btn-action" href="/">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-        Voltar à Página Inicial
-      </a>
+    <!-- Dados da Entrega -->
+    <div class="info-card">
+      <h2 class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#009ee3" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Dados de entrega
+      </h2>
+      <div class="address-details-box">
+        <p><strong>Destinatário:</strong> <span id="recipientFullName">Matheus Silva</span></p>
+        <p><strong>E-mail de contato:</strong> <span id="recipientEmail">cliente@exemplo.com</span></p>
+        <p><strong>Endereço:</strong> <span id="recipientAddress">Avenida Paulista, 1000, Apto 42 — Bela Vista · São Paulo/SP</span></p>
+        <p><strong>CEP:</strong> <span id="recipientCep">01310-100</span></p>
+      </div>
     </div>
-  </div>
 
-</main>
+    <!-- Botão de Voltar -->
+    <a href="../" class="btn-back-home">Voltar para a página inicial</a>
 
-<footer class="footer">
-  <p>© 2026 Deveu Perdeu — Todos os direitos reservados.</p>
-  <p style="margin-top:4px">Dúvidas ou suporte? Entre em contato pelo e-mail: <a href="mailto:sac@deveuperdeuoficial.com">sac@deveuperdeuoficial.com</a></p>
-</footer>
+    <div class="mp-security-footer">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span>Compra garantida e protegida pelo Mercado Pago</span>
+    </div>
+  </main>
 
-<script>
-(function() {
-  // 1. Recuperar parâmetros da URL ou do sessionStorage do checkout
-  var q = new URLSearchParams(location.search);
-  var stored = {};
-  try {
-    stored = JSON.parse(sessionStorage.getItem('deveu_customer') || '{}');
-  } catch(e) {}
+  <script>
+    // Leitura inteligente de dados (SEM NENHUMA TRAVA DE REDIRECT OU SESSÃO)
+    (()=>{
+      try {
+        const orderData = JSON.parse(sessionStorage.getItem('cordee.calcas.ironpayOrder') || localStorage.getItem('cordee.calcas.ironpayOrder') || '{}');
+        const customer = orderData?.customer || orderData?.receipt?.customer || {};
+        const selection = orderData?.selection || JSON.parse(sessionStorage.getItem('cordee.calcas.selection') || '{}');
+        const shippingMethod = sessionStorage.getItem('cordee.calcas.shippingMethod') || 'pac';
+        const shippingFee = Number(sessionStorage.getItem('cordee.calcas.shippingFee') || 0);
 
-  function getParam(key, fallbackKey) {
-    return q.get(key) || q.get(fallbackKey) || stored[key] || stored[fallbackKey] || '';
-  }
+        if (customer.name) {
+          const firstName = customer.name.trim().split(/\s+/)[0];
+          document.getElementById('clientFirstName').textContent = firstName;
+          document.getElementById('recipientFullName').textContent = customer.name;
+        }
 
-  // Nome do cliente
-  var rawName = getParam('nome', 'name');
-  if (rawName) {
-    // Formatar primeiro nome com inicial maiúscula
-    var firstName = rawName.trim().split(/\s+/)[0];
-    firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
-    document.getElementById('client-name').textContent = firstName;
-  } else {
-    // Caso nenhum nome seja fornecido
-    document.getElementById('name-container').style.display = 'none';
-  }
+        if (customer.email) {
+          document.getElementById('clientEmailNotice').textContent = customer.email;
+          document.getElementById('recipientEmail').textContent = customer.email;
+        }
 
-  // E-mail do cliente
-  var email = getParam('email', 'mail');
-  if (email) {
-    document.getElementById('client-email').textContent = email.trim();
-  } else {
-    document.getElementById('client-email').textContent = 'O e-mail informado no checkout';
-  }
+        if (customer.street_name || customer.street) {
+          const rua = customer.street_name || customer.street || '';
+          const num = customer.number || '';
+          const comp = customer.complement || customer.extra || '';
+          const bairro = customer.neighborhood || customer.district || 'Centro';
+          const cid = customer.city || 'São Paulo';
+          const uf = customer.state || 'SP';
+          document.getElementById('recipientAddress').textContent = `${rua}, ${num}${comp ? ' (' + comp + ')' : ''} — ${bairro} · ${cid}/${uf}`;
+        }
 
-  // Endereço
-  var street = getParam('rua', 'street');
-  var num = getParam('numero', 'number');
-  var comp = getParam('complemento', 'extra');
-  var district = getParam('bairro', 'district');
-  var city = getParam('cidade', 'city');
-  var state = getParam('uf', 'state');
-  var cep = getParam('cep', 'zip_code');
+        if (customer.zip_code || customer.cep) {
+          const raw = String(customer.zip_code || customer.cep).replace(/\D/g, '');
+          document.getElementById('recipientCep').textContent = raw.length === 8 ? raw.slice(0,5) + '-' + raw.slice(5) : (customer.zip_code || customer.cep);
+        }
 
-  var addrLine1 = '';
-  if (street) {
-    addrLine1 = street + (num ? ', ' + num : '') + (comp ? ' — ' + comp : '');
-  }
-  var addrLine2 = '';
-  if (district || city || state || cep) {
-    var parts = [];
-    if (district) parts.push(district);
-    if (city && state) parts.push(city + ' / ' + state.toUpperCase());
-    else if (city) parts.push(city);
-    if (cep) parts.push('CEP ' + cep);
-    addrLine2 = parts.join(' · ');
-  }
+        if (selection.colors && selection.colors.length) {
+          document.getElementById('productVariant').textContent = `${selection.colors.join(' + ')} · ${selection.size || 'M (38-40)'}`;
+        }
 
-  if (addrLine1) {
-    document.getElementById('delivery-address').textContent = addrLine1;
-  } else {
-    document.getElementById('delivery-address').textContent = 'Endereço fornecido no checkout';
-  }
-  if (addrLine2) {
-    document.getElementById('delivery-sub').textContent = addrLine2;
-  } else {
-    document.getElementById('delivery-sub').textContent = 'Entrega rápida com rastreamento ativo';
-  }
+        if (shippingMethod === 'sedex' || shippingFee > 0) {
+          document.getElementById('shippingMethodName').textContent = 'Correios (SEDEX Express)';
+        }
 
-  // Código de referência do pedido
-  var ref = q.get('ref') || stored.orderId || '';
-  if (!ref) {
-    try {
-      var c = JSON.parse(sessionStorage.getItem('mareazul.ironpayOrder') || '{}');
-      if (c && c.id) ref = c.id.slice(0, 8).toUpperCase();
-    } catch(e) {}
-  }
-  if (!ref) {
-    ref = 'DP-' + Math.floor(10000 + Math.random() * 90000);
-  } else if (!ref.startsWith('#') && !ref.startsWith('DP-')) {
-    ref = 'DP-' + ref.slice(0, 6).toUpperCase();
-  }
-  document.getElementById('order-ref').textContent = ref;
-
-  // Plano e Upgrade
-  var plan = getParam('plano', 'plan') || 'prata';
-  plan = plan.toLowerCase();
-  var planMap = {
-    bronze: { title: 'Caixa Surpresa Bronze (1 kg)', img: '/assets/f27b4f275c81d505.png' },
-    prata: { title: 'Caixa Surpresa Prata (3 kg)', img: '/assets/4533661a7b85490c.png' },
-    ouro: { title: 'Caixa Surpresa Ouro (5 kg)', img: '/assets/e7067139f8507f7c.png' }
-  };
-  var planData = planMap[plan] || planMap.prata;
-  document.getElementById('box-title').textContent = planData.title;
-  document.getElementById('box-image').src = planData.img;
-
-  var upgrade = getParam('upgrade', 'upg');
-  var tagUpgrade = document.getElementById('tag-upgrade');
-  if (upgrade === 'dobro') {
-    tagUpgrade.textContent = '⚡ Caixa em Dobro';
-    tagUpgrade.style.display = 'inline-flex';
-  } else if (upgrade === 'none') {
-    tagUpgrade.style.display = 'none';
-  } else {
-    tagUpgrade.textContent = '⚡ Upgrade Premium';
-    tagUpgrade.style.display = 'inline-flex';
-  }
-})();
-</script>
+        if (orderData.amount) {
+          const val = (orderData.amount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          document.getElementById('orderTotalValue').textContent = val;
+        }
+      } catch (e) {
+        console.warn('Preview mode active:', e);
+      }
+    })();
+  </script>
 </body>
 </html>
