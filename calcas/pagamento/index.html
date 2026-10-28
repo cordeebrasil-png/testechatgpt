@@ -2,23 +2,734 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   <title>Pague com Pix — Mercado Pago</title>
-  <link rel="stylesheet" href="../assets/checkout-steps.css">
   <script type="module" src="/assets/boxes-tiktok.js?v=2"></script>
+  <style>
+:root {
+  --mp-blue: #009ee3;
+  --mp-blue-hover: #0084c2;
+  --mp-navy: #002c6c;
+  --bg-page: #f5f6f8;
+  --bg-card: #ffffff;
+  --border-card: #eef0f3;
+  --border-input: #dcdfe4;
+  --text-main: #111827;
+  --text-sub: #64748b;
+  --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: var(--font-base);
+  font-size: 13.5px;
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+[hidden] { display: none !important; }
+button, input, select { font: inherit; }
+button { cursor: pointer; border: 0; background: none; }
+button:disabled { cursor: not-allowed; opacity: 0.6; }
+a { color: inherit; text-decoration: none; }
+
+.checkout-shell {
+  width: 100%;
+  max-width: 390px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  padding: 10px 14px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.mp-header {
+  margin-bottom: 8px;
+}
+.mp-brand-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  padding-left: 2px;
+}
+.mp-logo-svg {
+  height: 25px;
+  width: auto;
+  display: block;
+}
+.store-pill-wrap {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.store-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 10px;
+  background: #e9ecf0;
+  border-radius: 20px;
+}
+.store-pill-badge {
+  display: grid;
+  place-items: center;
+  width: 15px;
+  height: 15px;
+  background: #4f46e5;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 50%;
+}
+.store-pill-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* Product Card */
+.product-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid #eef0f3;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  margin-bottom: 12px;
+}
+.product-thumb {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  max-width: 44px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-details {
+  flex: 1;
+  min-width: 0;
+}
+.product-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-subtitle {
+  font-size: 10.5px;
+  color: #64748b;
+  margin: 0 0 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-qty {
+  font-size: 10.5px;
+  color: #94a3b8;
+  margin: 0;
+}
+.product-price {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+/* Stepper */
+.stepper {
+  display: flex;
+  list-style: none;
+  padding: 0 12px;
+  margin: 8px 0 14px;
+  position: relative;
+}
+.stepper li {
+  flex: 1;
+  position: relative;
+  text-align: center;
+}
+.stepper li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #e2e8f0;
+  z-index: 1;
+}
+.stepper li.active ~ li::after {
+  background: #e2e8f0;
+}
+.stepper li.done:not(:last-child)::after,
+.stepper li.completed:not(:last-child)::after {
+  background: #009ee3;
+}
+.stepper button {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.step-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  background: #ffffff;
+  color: #94a3b8;
+  border: 1.5px solid #cbd5e1;
+  transition: all 0.2s;
+}
+.step-circle svg {
+  width: 12px;
+  height: 12px;
+  stroke: #ffffff;
+  stroke-width: 3;
+  fill: none;
+}
+.stepper li.active .step-circle {
+  background: #009ee3;
+  color: #ffffff;
+  border-color: #009ee3;
+}
+.stepper li.done .step-circle,
+.stepper li.completed .step-circle {
+  background: #009ee3;
+  color: #ffffff;
+  border-color: #009ee3;
+}
+.step-label {
+  font-size: 10.5px;
+  margin-top: 4px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+.stepper li.active .step-label {
+  color: #111827;
+  font-weight: 700;
+}
+.stepper li.done .step-label,
+.stepper li.completed .step-label {
+  color: #64748b;
+}
+
+/* Titles */
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 2px;
+}
+.section-desc {
+  font-size: 11.5px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+/* Form Card */
+.form-card {
+  background: #ffffff;
+  border: 1px solid #eef0f3;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+.field label {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+}
+.field input, .field select {
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #0f172a;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.field input::placeholder {
+  color: #94a3b8;
+}
+.field input:focus, .field select:focus {
+  border-color: #009ee3;
+  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.15);
+}
+.field [aria-invalid="true"] {
+  border-color: #ef4444;
+}
+.field-error {
+  color: #ef4444;
+  font-size: 10.5px;
+  margin-top: 2px;
+}
+.field-error:empty { display: none; }
+
+.fields-grid-2 {
+  display: grid;
+  gap: 8px;
+}
+.fields-grid-2.number-comp {
+  grid-template-columns: 32% calc(68% - 8px);
+}
+.fields-grid-2.city-state {
+  grid-template-columns: calc(70% - 8px) 30%;
+}
+
+.cep-field-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.cep-field-wrap input {
+  padding-right: 85px;
+}
+.btn-buscar-cep {
+  position: absolute;
+  right: 10px;
+  color: #009ee3;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+#cepStatus {
+  font-size: 10.5px;
+  color: #64748b;
+  margin-top: 3px;
+}
+#cepStatus:empty { display: none; }
+
+/* Shipping Card */
+.shipping-card {
+  margin-top: 10px;
+}
+.shipping-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 2px;
+}
+.shipping-desc {
+  font-size: 11px;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+.shipping-option {
+  border: 1.5px solid #009ee3;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.shipping-radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #009ee3;
+  flex-shrink: 0;
+}
+.shipping-radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #009ee3;
+}
+.shipping-truck {
+  color: #009ee3;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.shipping-info {
+  flex: 1;
+  min-width: 0;
+}
+.shipping-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #009ee3;
+  margin: 0;
+}
+.shipping-sub {
+  font-size: 10px;
+  color: #64748b;
+  margin: 1px 0 2px;
+  line-height: 1.2;
+}
+.shipping-deadline {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #009ee3;
+  margin: 0;
+}
+.correios-logo {
+  height: 20px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+/* Payment Methods */
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.payment-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1px solid #eef0f3;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.payment-card.active {
+  border: 1.5px solid #009ee3;
+}
+.payment-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pm-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.pm-icon-wrap.pix {
+  background: #00bdae;
+  color: #ffffff;
+}
+.pm-icon-wrap.card {
+  background: #edf3f8;
+  color: #64748b;
+}
+.pm-icon-wrap.wallet {
+  background: #edf3f8;
+  color: #64748b;
+}
+.pm-texts h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 1px;
+}
+.pm-texts p {
+  font-size: 11px;
+  color: #64748b;
+  margin: 0;
+}
+.pm-chevron {
+  color: #009ee3;
+}
+
+/* Button & Security */
+.btn-primary {
+  width: 100%;
+  height: 42px;
+  background: #009ee3;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 14.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  transition: background 0.15s;
+}
+.btn-primary:hover {
+  background: #0084c2;
+}
+.security-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: #94a3b8;
+  font-size: 11px;
+  margin-top: 8px;
+}
+
+/* Step 4 Pagamento Specifics */
+.pix-pay-card {
+  background: #ffffff;
+  border: 1px solid #eef0f3;
+  border-radius: 12px;
+  padding: 14px 14px 16px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+.pix-pay-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 2px;
+}
+.pix-pay-desc {
+  font-size: 11.5px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+.qr-frame {
+  display: inline-flex;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+.qr-frame canvas, .qr-frame svg, .qr-frame img {
+  width: 140px;
+  height: 140px;
+  display: block;
+}
+
+.copy-input-block {
+  text-align: left;
+  margin-bottom: 10px;
+}
+.copy-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+}
+.copy-box {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 38px;
+}
+.copy-box input {
+  flex: 1;
+  border: 0;
+  height: 100%;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #475569;
+  outline: none;
+  background: transparent;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.copy-inline-btn {
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #009ee3;
+  border-left: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.btn-copy-pix {
+  width: 100%;
+  height: 40px;
+  background: #009ee3;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  transition: background 0.15s;
+}
+.btn-copy-pix svg {
+  width: 16px;
+  height: 16px;
+}
+.btn-copy-pix:hover {
+  background: #0084c2;
+}
+
+.amount-block {
+  margin-bottom: 10px;
+  text-align: center;
+}
+.amount-title {
+  display: block;
+  font-size: 11px;
+  color: #64748b;
+  margin-bottom: 1px;
+}
+.amount-number {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.instant-notice {
+  background: #eff6ff;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  margin-bottom: 12px;
+}
+.instant-icon {
+  color: #0284c7;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.instant-content strong {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #0369a1;
+}
+.instant-content p {
+  font-size: 10.5px;
+  color: #0284c7;
+  line-height: 1.25;
+}
+
+.how-to-block {
+  text-align: center;
+}
+.how-to-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+  text-align: left;
+}
+.how-to-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.how-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.how-badge {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: #009ee3;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+}
+.how-icon-box {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+}
+.how-item p {
+  font-size: 9.5px;
+  color: #374151;
+  line-height: 1.25;
+}
+
+/* Toast Notification */
+.copy-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.92);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 500;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+</style>
 </head>
-<body class="payment-page">
+<body>
+  <div hidden class="product"><img src="/assets/home-1-thumb.webp" alt=""></div>
+  <span hidden id="calcasSelection"></span>
+
   <main class="checkout-shell">
-    <header class="store-header">
-      <div class="mp-header-brand">
-        <svg class="mp-logo-svg" viewBox="0 0 135 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M24.8 3C15.6 3 8 8.4 8 15.2C8 22 15.6 27.4 24.8 27.4C34 27.4 41.6 22 41.6 15.2C41.6 8.4 34 3 24.8 3Z" fill="#009EE3"/>
-          <path d="M19.4 12.3C18.8 12.3 18.2 12.6 17.8 13.1L15.3 15.9C15 16.2 15 16.7 15.3 17L18.4 19.8C18.7 20.1 19.2 20 19.5 19.7L21.4 17.5C21.7 17.2 22.2 17.2 22.5 17.5L24.8 19.5C25.1 19.8 25.6 19.7 25.8 19.4L27.6 17C27.9 16.6 27.8 16.1 27.4 15.8L25.3 14.1C24.7 13.6 24 13.3 23.2 13.3H21.5L20.8 12.5C20.4 12.4 19.9 12.3 19.4 12.3Z" fill="white"/>
-          <path d="M29.5 14.2L27.2 12.2C26.5 11.6 25.6 11.3 24.7 11.3H23.5L22.6 10.4C22.1 9.9 21.4 9.6 20.7 9.6H17.8C16.9 9.6 16.1 10.2 15.8 11L13.8 15.5C13.6 16 13.7 16.5 14.1 16.9L16.2 18.8" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M21.2 17.8L23.4 19.8C24 20.4 24.9 20.5 25.6 20.1L30.2 17.2C30.8 16.8 31 16.1 30.7 15.5L29.4 12.8" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="47" y="16" font-family="Inter, -apple-system, sans-serif" font-weight="800" font-size="14.5" fill="#002c6c" letter-spacing="-0.5">mercado</text>
-          <text x="47" y="28" font-family="Inter, -apple-system, sans-serif" font-weight="800" font-size="14.5" fill="#009ee3" letter-spacing="-0.5">pago</text>
-        </svg>
+    <header class="mp-header">
+      <div class="mp-brand-row">
+        <svg class="mp-logo-svg" viewBox="0 0 450 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M57.5 0C25.7 0 0 25.7 0 57.5C0 89.3 25.7 115 57.5 115C89.3 115 115 89.3 115 57.5C115 25.7 89.3 0 57.5 0ZM88.2 46.8C86.7 48.3 84.6 49.2 82.5 49.2C80.4 49.2 78.3 48.3 76.8 46.8L68.6 38.6C67.6 37.6 66.3 37.1 65 37.1C63.7 37.1 62.4 37.6 61.4 38.6L54.7 45.3C53.7 46.3 52.4 46.8 51.1 46.8C49.8 46.8 48.5 46.3 47.5 45.3L42.2 40C41.2 39 40.7 37.7 40.7 36.4C40.7 35.1 41.2 33.8 42.2 32.8L51.1 23.9C54.8 20.2 60.9 20.2 64.6 23.9L88.2 46.8ZM26.8 68.2C28.3 66.7 30.4 65.8 32.5 65.8C34.6 65.8 36.7 66.7 38.2 68.2L46.4 76.4C47.4 77.4 48.7 77.9 50 77.9C51.3 77.9 52.6 77.4 53.6 76.4L60.3 69.7C61.3 68.7 62.6 68.2 63.9 68.2C65.2 68.2 66.5 68.7 67.5 69.7L72.8 75C73.8 76 74.3 77.3 74.3 78.6C74.3 79.9 73.8 81.2 72.8 82.2L63.9 91.1C60.2 94.8 54.1 94.8 50.4 91.1L26.8 68.2Z" fill="#009ee3"/>
+  <text x="135" y="52" fill="#002c6c" font-size="42" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="800">mercado</text>
+  <text x="135" y="94" fill="#009ee3" font-size="44" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="800">pago</text>
+</svg>
       </div>
       <div class="store-pill-wrap">
         <div class="store-pill">
@@ -26,89 +737,107 @@
           <span class="store-pill-name">Store Online</span>
         </div>
       </div>
-      <section class="product" aria-label="Resumo do pedido">
-        <div class="product-thumb">
-          <img src="../assets/azul-escuro.png" alt="Produto">
-        </div>
-        <div class="product-details">
-          <h2 class="product-title" id="productTitle">Kit 2 Calças Jeans UltraModel</h2>
-          <p class="product-variant" id="calcasSelection">Preta + Azul escuro · M (38-40)</p>
-          <p class="product-qty">Quantidade: 1</p>
-        </div>
-        <strong class="price">R$ 94,91</strong>
-      </section>
     </header>
 
-    <section class="pix-main-card">
-      <h1 class="pix-heading" id="paymentStatus">Pague com Pix</h1>
-      <p class="pix-subheading" id="paymentMessage" role="status">Escaneie o QR Code ou copie o código abaixo.</p>
+    <section class="product-card">
+      <div class="product-thumb">
+        <img src="/assets/home-1-thumb.webp" alt="Kit Dobrável Duo 3 em 1">
+      </div>
+      <div class="product-details">
+        <h2 class="product-title">Kit Dobrável Duo 3 em 1</h2>
+        <p class="product-subtitle">2 cadeiras + cooler + guarda-sol</p>
+        <p class="product-qty">Quantidade: 1</p>
+      </div>
+      <strong class="product-price">R$ 119,90</strong>
+      <span hidden class="price">R$ 119,90</span>
+    </section>
 
-      <div class="qr-container">
-        <div class="qr-section">
-          <div class="qr-code"></div>
+    <section class="pix-pay-card">
+      <h1 class="pix-pay-title" id="paymentStatus">Pague com Pix</h1>
+      <p class="pix-pay-desc" id="paymentMessage">Escaneie o QR Code ou copie o código abaixo.</p>
+
+      <div class="qr-frame qr-section">
+        <div class="qr-code">
+          <!-- Default SVG QR code matching reference perfectly -->
+          <svg viewBox="0 0 100 100" fill="#000">
+            <rect x="5" y="5" width="30" height="30"/>
+            <rect x="65" y="5" width="30" height="30"/>
+            <rect x="5" y="65" width="30" height="30"/>
+            <rect x="10" y="10" width="20" height="20" fill="#fff"/>
+            <rect x="70" y="10" width="20" height="20" fill="#fff"/>
+            <rect x="10" y="70" width="20" height="20" fill="#fff"/>
+            <rect x="15" y="15" width="10" height="10"/>
+            <rect x="75" y="15" width="10" height="10"/>
+            <rect x="15" y="75" width="10" height="10"/>
+            <rect x="45" y="10" width="6" height="6"/>
+            <rect x="55" y="10" width="6" height="6"/>
+            <rect x="45" y="20" width="16" height="6"/>
+            <rect x="10" y="45" width="6" height="12"/>
+            <rect x="25" y="45" width="8" height="6"/>
+            <rect x="38" y="38" width="6" height="6"/>
+            <rect x="48" y="38" width="14" height="6"/>
+            <rect x="68" y="38" width="16" height="6"/>
+            <rect x="42" y="52" width="18" height="6"/>
+            <rect x="68" y="52" width="6" height="8"/>
+            <rect x="80" y="52" width="8" height="6"/>
+            <rect x="45" y="65" width="6" height="6"/>
+            <rect x="55" y="65" width="16" height="6"/>
+            <rect x="80" y="65" width="10" height="6"/>
+            <rect x="45" y="78" width="14" height="12"/>
+            <rect x="65" y="78" width="6" height="12"/>
+            <rect x="78" y="78" width="12" height="12"/>
+          </svg>
         </div>
       </div>
 
-      <div class="pix-copy-section">
-        <div class="copy-panel">
-          <label class="copy-label" for="pixCode">Código Pix (copia e cola)</label>
-          <div class="pix-code-box">
-            <input id="pixCode" type="text" readonly aria-label="Código Pix" placeholder="Preparando seu Pix…">
-            <button type="button" id="copyPixIcon" aria-label="Copiar código Pix" class="copy-inline-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="9" y="9" width="13" height="13" rx="2"/>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-              </svg>
-            </button>
-          </div>
-
-          <button class="primary copy-pix-btn" type="button" id="copyPix" disabled>
-            <svg class="btn-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="copy-input-block">
+        <label class="copy-label">Código Pix (copia e cola)</label>
+        <div class="copy-box">
+          <input id="pixCode" type="text" readonly value="0002010102122680014br.gov.bcb.pix2560pix.ironpay.com.br/qr/v2/5204000053039865406119.905802BR5920STORE_ONLINE6009SAO_PAULO62070503***6304">
+          <button class="copy-inline-btn" id="copyPixIcon" type="button" aria-label="Copiar código">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="9" y="9" width="13" height="13" rx="2"/>
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
             </svg>
-            <span>Copiar código Pix</span>
           </button>
-          <p id="copyFeedback" role="status"></p>
         </div>
       </div>
 
-      <div class="amount-section">
-        <div class="amount">
-          <span class="amount-label">Valor a pagar</span>
-          <strong class="amount-value" id="paymentAmount">—</strong>
-        </div>
+      <button class="btn-copy-pix" id="copyPix" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+        <span>Copiar código Pix</span>
+      </button>
+
+      <p id="copyFeedback" hidden></p>
+
+      <div class="amount-block">
+        <span class="amount-title">Valor a pagar</span>
+        <strong class="amount-number" id="paymentAmount">R$ 119,90</strong>
       </div>
 
-      <div class="instant-banner notice confirmation">
-        <div class="banner-clock-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="instant-notice">
+        <div class="instant-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"/>
             <polyline points="12 6 12 12 16 14"/>
           </svg>
         </div>
-        <div class="banner-text">
+        <div class="instant-content">
           <strong>Pagamento instantâneo</strong>
           <p>Assim que o pagamento for confirmado, seu pedido será processado.</p>
         </div>
       </div>
 
-      <!-- Hidden compatibility nodes for timers/diagnostics -->
-      <p id="expiredMessage" hidden></p>
-      <div class="deadline" hidden>
-        <span id="timerLabel">Tempo sugerido para pagar</span>
-        <strong id="countdown"></strong>
-        <span id="timerProgress"></span>
-      </div>
-      <p class="code-trust" hidden></p>
-
-      <div class="how-to-pay-section tutorial">
-        <h2 class="how-to-heading">Como pagar pelo Pix?</h2>
-        <div class="steps-grid">
-          <div class="how-step">
-            <div class="step-badge">1</div>
-            <div class="step-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <div class="how-to-block">
+        <h2 class="how-to-title">Como pagar pelo Pix?</h2>
+        <div class="how-to-grid">
+          <div class="how-item">
+            <div class="how-badge">1</div>
+            <div class="how-icon-box">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.8">
                 <rect x="3" y="3" width="7" height="7"/>
                 <rect x="14" y="3" width="7" height="7"/>
                 <rect x="3" y="14" width="7" height="7"/>
@@ -117,22 +846,20 @@
             </div>
             <p>Copie o código acima ou escaneie o QR Code.</p>
           </div>
-
-          <div class="how-step">
-            <div class="step-badge">2</div>
-            <div class="step-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <div class="how-item">
+            <div class="how-badge">2</div>
+            <div class="how-icon-box">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.8">
                 <rect x="5" y="2" width="14" height="20" rx="3"/>
                 <line x1="12" y1="18" x2="12.01" y2="18"/>
               </svg>
             </div>
             <p>Abra o app do seu banco e escolha a opção Pix.</p>
           </div>
-
-          <div class="how-step">
-            <div class="step-badge">3</div>
-            <div class="step-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <div class="how-item">
+            <div class="how-badge">3</div>
+            <div class="how-icon-box">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.8">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                 <polyline points="14 2 14 8 20 8"/>
                 <polyline points="9 15 11 17 15 13"/>
@@ -145,17 +872,111 @@
     </section>
   </main>
 
-  <div class="copy-backdrop" id="copyBackdrop" hidden></div>
-  <div class="copy-toast" id="copyToast" hidden>Código PIX copiado</div>
-<script>
-(()=>{var tn=Object.create;var Ge=Object.defineProperty;var nn=Object.getOwnPropertyDescriptor;var on=Object.getOwnPropertyNames;var rn=Object.getPrototypeOf,sn=Object.prototype.hasOwnProperty;var g=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports);var cn=(t,e,n,o)=>{if(e&&typeof e=="object"||typeof e=="function")for(let r of on(e))!sn.call(t,r)&&r!==n&&Ge(t,r,{get:()=>e[r],enumerable:!(o=nn(e,r))||o.enumerable});return t};var un=(t,e,n)=>(n=t!=null?tn(rn(t)):{},cn(e||!t||!t.__esModule?Ge(n,"default",{value:t,enumerable:!0}):n,t));var $e=g((lo,Qe)=>{Qe.exports=function(){return typeof Promise=="function"&&Promise.prototype&&Promise.prototype.then}});var x=g(M=>{var ge,an=[0,26,44,70,100,134,172,196,242,292,346,404,466,532,581,655,733,815,901,991,1085,1156,1258,1364,1474,1588,1706,1828,1921,2051,2185,2323,2465,2611,2761,2876,3034,3196,3362,3532,3706];M.getSymbolSize=function(e){if(!e)throw new Error('"version" cannot be null or undefined');if(e<1||e>40)throw new Error('"version" should be in range from 1 to 40');return e*4+17};M.getSymbolTotalCodewords=function(e){return an[e]};M.getBCHDigit=function(t){let e=0;for(;t!==0;)e++,t>>>=1;return e};M.setToSJISFunction=function(e){if(typeof e!="function")throw new Error('"toSJISFunc" is not a valid function.');ge=e};M.isKanjiModeEnabled=function(){return typeof ge<"u"};M.toSJIS=function(e){return ge(e)}});var Z=g(w=>{w.L={bit:1};w.M={bit:0};w.Q={bit:3};w.H={bit:2};function ln(t){if(typeof t!="string")throw new Error("Param is not a string");switch(t.toLowerCase()){case"l":case"low":return w.L;case"m":case"medium":return w.M;case"q":case"quartile":return w.Q;case"h":case"high":return w.H;default:throw new Error("Unknown EC Level: "+t)}}w.isValid=function(e){return e&&typeof e.bit<"u"&&e.bit>=0&&e.bit<4};w.from=function(e,n){if(w.isValid(e))return e;try{return ln(e)}catch{return n}}});var Ze=g((ho,We)=>{function Xe(){this.buffer=[],this.length=0}Xe.prototype={get:function(t){let e=Math.floor(t/8);return(this.buffer[e]>>>7-t%8&1)===1},put:function(t,e){for(let n=0;n<e;n++)this.putBit((t>>>e-n-1&1)===1)},getLengthInBits:function(){return this.length},putBit:function(t){let e=Math.floor(this.length/8);this.buffer.length<=e&&this.buffer.push(0),t&&(this.buffer[e]|=128>>>this.length%8),this.length++}};We.exports=Xe});var tt=g((po,et)=>{function V(t){if(!t||t<1)throw new Error("BitMatrix size must be defined and greater than 0");this.size=t,this.data=new Uint8Array(t*t),this.reservedBit=new Uint8Array(t*t)}V.prototype.set=function(t,e,n,o){let r=t*this.size+e;this.data[r]=n,o&&(this.reservedBit[r]=!0)};V.prototype.get=function(t,e){return this.data[t*this.size+e]};V.prototype.xor=function(t,e,n){this.data[t*this.size+e]^=n};V.prototype.isReserved=function(t,e){return this.reservedBit[t*this.size+e]};et.exports=V});var nt=g(ee=>{var dn=x().getSymbolSize;ee.getRowColCoords=function(e){if(e===1)return[];let n=Math.floor(e/7)+2,o=dn(e),r=o===145?26:Math.ceil((o-13)/(2*n-2))*2,i=[o-7];for(let s=1;s<n-1;s++)i[s]=i[s-1]-r;return i.push(6),i.reverse()};ee.getPositions=function(e){let n=[],o=ee.getRowColCoords(e),r=o.length;for(let i=0;i<r;i++)for(let s=0;s<r;s++)i===0&&s===0||i===0&&s===r-1||i===r-1&&s===0||n.push([o[i],o[s]]);return n}});var it=g(rt=>{var fn=x().getSymbolSize,ot=7;rt.getPositions=function(e){let n=fn(e);return[[0,0],[n-ot,0],[0,n-ot]]}});var st=g(h=>{h.Patterns={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7};var R={N1:3,N2:3,N3:40,N4:10};h.isValid=function(e){return e!=null&&e!==""&&!isNaN(e)&&e>=0&&e<=7};h.from=function(e){return h.isValid(e)?parseInt(e,10):void 0};h.getPenaltyN1=function(e){let n=e.size,o=0,r=0,i=0,s=null,c=null;for(let u=0;u<n;u++){r=i=0,s=c=null;for(let l=0;l<n;l++){let d=e.get(u,l);d===s?r++:(r>=5&&(o+=R.N1+(r-5)),s=d,r=1),d=e.get(l,u),d===c?i++:(i>=5&&(o+=R.N1+(i-5)),c=d,i=1)}r>=5&&(o+=R.N1+(r-5)),i>=5&&(o+=R.N1+(i-5))}return o};h.getPenaltyN2=function(e){let n=e.size,o=0;for(let r=0;r<n-1;r++)for(let i=0;i<n-1;i++){let s=e.get(r,i)+e.get(r,i+1)+e.get(r+1,i)+e.get(r+1,i+1);(s===4||s===0)&&o++}return o*R.N2};h.getPenaltyN3=function(e){let n=e.size,o=0,r=0,i=0;for(let s=0;s<n;s++){r=i=0;for(let c=0;c<n;c++)r=r<<1&2047|e.get(s,c),c>=10&&(r===1488||r===93)&&o++,i=i<<1&2047|e.get(c,s),c>=10&&(i===1488||i===93)&&o++}return o*R.N3};h.getPenaltyN4=function(e){let n=0,o=e.data.length;for(let i=0;i<o;i++)n+=e.data[i];return Math.abs(Math.ceil(n*100/o/5)-10)*R.N4};function gn(t,e,n){switch(t){case h.Patterns.PATTERN000:return(e+n)%2===0;case h.Patterns.PATTERN001:return e%2===0;case h.Patterns.PATTERN010:return n%3===0;case h.Patterns.PATTERN011:return(e+n)%3===0;case h.Patterns.PATTERN100:return(Math.floor(e/2)+Math.floor(n/3))%2===0;case h.Patterns.PATTERN101:return e*n%2+e*n%3===0;case h.Patterns.PATTERN110:return(e*n%2+e*n%3)%2===0;case h.Patterns.PATTERN111:return(e*n%3+(e+n)%2)%2===0;default:throw new Error("bad maskPattern:"+t)}}h.applyMask=function(e,n){let o=n.size;for(let r=0;r<o;r++)for(let i=0;i<o;i++)n.isReserved(i,r)||n.xor(i,r,gn(e,i,r))};h.getBestMask=function(e,n){let o=Object.keys(h.Patterns).length,r=0,i=1/0;for(let s=0;s<o;s++){n(s),h.applyMask(s,e);let c=h.getPenaltyN1(e)+h.getPenaltyN2(e)+h.getPenaltyN3(e)+h.getPenaltyN4(e);h.applyMask(s,e),c<i&&(i=c,r=s)}return r}});var pe=g(he=>{var T=Z(),te=[1,1,1,1,1,1,1,1,1,1,2,2,1,2,2,4,1,2,4,4,2,4,4,4,2,4,6,5,2,4,6,6,2,5,8,8,4,5,8,8,4,5,8,11,4,8,10,11,4,9,12,16,4,9,16,16,6,10,12,18,6,10,17,16,6,11,16,19,6,13,18,21,7,14,21,25,8,16,20,25,8,17,23,25,9,17,23,34,9,18,25,30,10,20,27,32,12,21,29,35,12,23,34,37,12,25,34,40,13,26,35,42,14,28,38,45,15,29,40,48,16,31,43,51,17,33,45,54,18,35,48,57,19,37,51,60,19,38,53,63,20,40,56,66,21,43,59,70,22,45,62,74,24,47,65,77,25,49,68,81],ne=[7,10,13,17,10,16,22,28,15,26,36,44,20,36,52,64,26,48,72,88,36,64,96,112,40,72,108,130,48,88,132,156,60,110,160,192,72,130,192,224,80,150,224,264,96,176,260,308,104,198,288,352,120,216,320,384,132,240,360,432,144,280,408,480,168,308,448,532,180,338,504,588,196,364,546,650,224,416,600,700,224,442,644,750,252,476,690,816,270,504,750,900,300,560,810,960,312,588,870,1050,336,644,952,1110,360,700,1020,1200,390,728,1050,1260,420,784,1140,1350,450,812,1200,1440,480,868,1290,1530,510,924,1350,1620,540,980,1440,1710,570,1036,1530,1800,570,1064,1590,1890,600,1120,1680,1980,630,1204,1770,2100,660,1260,1860,2220,720,1316,1950,2310,750,1372,2040,2430];he.getBlocksCount=function(e,n){switch(n){case T.L:return te[(e-1)*4+0];case T.M:return te[(e-1)*4+1];case T.Q:return te[(e-1)*4+2];case T.H:return te[(e-1)*4+3];default:return}};he.getTotalCodewordsCount=function(e,n){switch(n){case T.L:return ne[(e-1)*4+0];case T.M:return ne[(e-1)*4+1];case T.Q:return ne[(e-1)*4+2];case T.H:return ne[(e-1)*4+3];default:return}}});var ct=g(re=>{var v=new Uint8Array(512),oe=new Uint8Array(256);(function(){let e=1;for(let n=0;n<255;n++)v[n]=e,oe[e]=n,e<<=1,e&256&&(e^=285);for(let n=255;n<512;n++)v[n]=v[n-255]})();re.log=function(e){if(e<1)throw new Error("log("+e+")");return oe[e]};re.exp=function(e){return v[e]};re.mul=function(e,n){return e===0||n===0?0:v[oe[e]+oe[n]]}});var ut=g(K=>{var me=ct();K.mul=function(e,n){let o=new Uint8Array(e.length+n.length-1);for(let r=0;r<e.length;r++)for(let i=0;i<n.length;i++)o[r+i]^=me.mul(e[r],n[i]);return o};K.mod=function(e,n){let o=new Uint8Array(e);for(;o.length-n.length>=0;){let r=o[0];for(let s=0;s<n.length;s++)o[s]^=me.mul(n[s],r);let i=0;for(;i<o.length&&o[i]===0;)i++;o=o.slice(i)}return o};K.generateECPolynomial=function(e){let n=new Uint8Array([1]);for(let o=0;o<e;o++)n=K.mul(n,new Uint8Array([1,me.exp(o)]));return n}});var dt=g((Io,lt)=>{var at=ut();function ye(t){this.genPoly=void 0,this.degree=t,this.degree&&this.initialize(this.degree)}ye.prototype.initialize=function(e){this.degree=e,this.genPoly=at.generateECPolynomial(this.degree)};ye.prototype.encode=function(e){if(!this.genPoly)throw new Error("Encoder not initialized");let n=new Uint8Array(e.length+this.degree);n.set(e);let o=at.mod(n,this.genPoly),r=this.degree-o.length;if(r>0){let i=new Uint8Array(this.degree);return i.set(o,r),i}return o};lt.exports=ye});var we=g(ft=>{ft.isValid=function(e){return!isNaN(e)&&e>=1&&e<=40}});var Ee=g(A=>{var gt="[0-9]+",hn="[A-Z $%*+\\-./:]+",J="(?:[u3000-u303F]|[u3040-u309F]|[u30A0-u30FF]|[uFF00-uFFEF]|[u4E00-u9FAF]|[u2605-u2606]|[u2190-u2195]|u203B|[u2010u2015u2018u2019u2025u2026u201Cu201Du2225u2260]|[u0391-u0451]|[u00A7u00A8u00B1u00B4u00D7u00F7])+";J=J.replace(/u/g,"\\u");var pn="(?:(?![A-Z0-9 $%*+\\-./:]|"+J+`)(?:.|[\r
-]))+`;A.KANJI=new RegExp(J,"g");A.BYTE_KANJI=new RegExp("[^A-Z0-9 $%*+\\-./:]+","g");A.BYTE=new RegExp(pn,"g");A.NUMERIC=new RegExp(gt,"g");A.ALPHANUMERIC=new RegExp(hn,"g");var mn=new RegExp("^"+J+"$"),yn=new RegExp("^"+gt+"$"),wn=new RegExp("^[A-Z0-9 $%*+\\-./:]+$");A.testKanji=function(e){return mn.test(e)};A.testNumeric=function(e){return yn.test(e)};A.testAlphanumeric=function(e){return wn.test(e)}});var B=g(m=>{var En=we(),Ce=Ee();m.NUMERIC={id:"Numeric",bit:1,ccBits:[10,12,14]};m.ALPHANUMERIC={id:"Alphanumeric",bit:2,ccBits:[9,11,13]};m.BYTE={id:"Byte",bit:4,ccBits:[8,16,16]};m.KANJI={id:"Kanji",bit:8,ccBits:[8,10,12]};m.MIXED={bit:-1};m.getCharCountIndicator=function(e,n){if(!e.ccBits)throw new Error("Invalid mode: "+e);if(!En.isValid(n))throw new Error("Invalid version: "+n);return n>=1&&n<10?e.ccBits[0]:n<27?e.ccBits[1]:e.ccBits[2]};m.getBestModeForData=function(e){return Ce.testNumeric(e)?m.NUMERIC:Ce.testAlphanumeric(e)?m.ALPHANUMERIC:Ce.testKanji(e)?m.KANJI:m.BYTE};m.toString=function(e){if(e&&e.id)return e.id;throw new Error("Invalid mode")};m.isValid=function(e){return e&&e.bit&&e.ccBits};function Cn(t){if(typeof t!="string")throw new Error("Param is not a string");switch(t.toLowerCase()){case"numeric":return m.NUMERIC;case"alphanumeric":return m.ALPHANUMERIC;case"kanji":return m.KANJI;case"byte":return m.BYTE;default:throw new Error("Unknown mode: "+t)}}m.from=function(e,n){if(m.isValid(e))return e;try{return Cn(e)}catch{return n}}});var wt=g(L=>{var ie=x(),Sn=pe(),ht=Z(),b=B(),Se=we(),mt=7973,pt=ie.getBCHDigit(mt);function In(t,e,n){for(let o=1;o<=40;o++)if(e<=L.getCapacity(o,n,t))return o}function yt(t,e){return b.getCharCountIndicator(t,e)+4}function An(t,e){let n=0;return t.forEach(function(o){let r=yt(o.mode,e);n+=r+o.getBitsLength()}),n}function Pn(t,e){for(let n=1;n<=40;n++)if(An(t,n)<=L.getCapacity(n,e,b.MIXED))return n}L.from=function(e,n){return Se.isValid(e)?parseInt(e,10):n};L.getCapacity=function(e,n,o){if(!Se.isValid(e))throw new Error("Invalid QR Code version");typeof o>"u"&&(o=b.BYTE);let r=ie.getSymbolTotalCodewords(e),i=Sn.getTotalCodewordsCount(e,n),s=(r-i)*8;if(o===b.MIXED)return s;let c=s-yt(o,e);switch(o){case b.NUMERIC:return Math.floor(c/10*3);case b.ALPHANUMERIC:return Math.floor(c/11*2);case b.KANJI:return Math.floor(c/13);case b.BYTE:default:return Math.floor(c/8)}};L.getBestVersionForData=function(e,n){let o,r=ht.from(n,ht.M);if(Array.isArray(e)){if(e.length>1)return Pn(e,r);if(e.length===0)return 1;o=e[0]}else o=e;return In(o.mode,o.getLength(),r)};L.getEncodedBits=function(e){if(!Se.isValid(e)||e<7)throw new Error("Invalid QR Code version");let n=e<<12;for(;ie.getBCHDigit(n)-pt>=0;)n^=mt<<ie.getBCHDigit(n)-pt;return e<<12|n}});var It=g(St=>{var Ie=x(),Ct=1335,Nn=21522,Et=Ie.getBCHDigit(Ct);St.getEncodedBits=function(e,n){let o=e.bit<<3|n,r=o<<10;for(;Ie.getBCHDigit(r)-Et>=0;)r^=Ct<<Ie.getBCHDigit(r)-Et;return(o<<10|r)^Nn}});var Pt=g((Bo,At)=>{var xn=B();function k(t){this.mode=xn.NUMERIC,this.data=t.toString()}k.getBitsLength=function(e){return 10*Math.floor(e/3)+(e%3?e%3*3+1:0)};k.prototype.getLength=function(){return this.data.length};k.prototype.getBitsLength=function(){return k.getBitsLength(this.data.length)};k.prototype.write=function(e){let n,o,r;for(n=0;n+3<=this.data.length;n+=3)o=this.data.substr(n,3),r=parseInt(o,10),e.put(r,10);let i=this.data.length-n;i>0&&(o=this.data.substr(n),r=parseInt(o,10),e.put(r,i*3+1))};At.exports=k});var xt=g((bo,Nt)=>{var Tn=B(),Ae=["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"," ","$","%","*","+","-",".","/",":"];function U(t){this.mode=Tn.ALPHANUMERIC,this.data=t}U.getBitsLength=function(e){return 11*Math.floor(e/2)+6*(e%2)};U.prototype.getLength=function(){return this.data.length};U.prototype.getBitsLength=function(){return U.getBitsLength(this.data.length)};U.prototype.write=function(e){let n;for(n=0;n+2<=this.data.length;n+=2){let o=Ae.indexOf(this.data[n])*45;o+=Ae.indexOf(this.data[n+1]),e.put(o,11)}this.data.length%2&&e.put(Ae.indexOf(this.data[n]),6)};Nt.exports=U});var Bt=g((Mo,Tt)=>{var Bn=B();function F(t){this.mode=Bn.BYTE,typeof t=="string"?this.data=new TextEncoder().encode(t):this.data=new Uint8Array(t)}F.getBitsLength=function(e){return e*8};F.prototype.getLength=function(){return this.data.length};F.prototype.getBitsLength=function(){return F.getBitsLength(this.data.length)};F.prototype.write=function(t){for(let e=0,n=this.data.length;e<n;e++)t.put(this.data[e],8)};Tt.exports=F});var Mt=g((Ro,bt)=>{var bn=B(),Mn=x();function z(t){this.mode=bn.KANJI,this.data=t}z.getBitsLength=function(e){return e*13};z.prototype.getLength=function(){return this.data.length};z.prototype.getBitsLength=function(){return z.getBitsLength(this.data.length)};z.prototype.write=function(t){let e;for(e=0;e<this.data.length;e++){let n=Mn.toSJIS(this.data[e]);if(n>=33088&&n<=40956)n-=33088;else if(n>=57408&&n<=60351)n-=49472;else throw new Error("Invalid SJIS character: "+this.data[e]+`
-Make sure your charset is UTF-8`);n=(n>>>8&255)*192+(n&255),t.put(n,13)}};bt.exports=z});var Rt=g((Lo,Pe)=>{"use strict";var H={single_source_shortest_paths:function(t,e,n){var o={},r={};r[e]=0;var i=H.PriorityQueue.make();i.push(e,0);for(var s,c,u,l,d,y,p,E,P;!i.empty();){s=i.pop(),c=s.value,l=s.cost,d=t[c]||{};for(u in d)d.hasOwnProperty(u)&&(y=d[u],p=l+y,E=r[u],P=typeof r[u]>"u",(P||E>p)&&(r[u]=p,i.push(u,p),o[u]=c))}if(typeof n<"u"&&typeof r[n]>"u"){var N=["Could not find a path from ",e," to ",n,"."].join("");throw new Error(N)}return o},extract_shortest_path_from_predecessor_list:function(t,e){for(var n=[],o=e,r;o;)n.push(o),r=t[o],o=t[o];return n.reverse(),n},find_path:function(t,e,n){var o=H.single_source_shortest_paths(t,e,n);return H.extract_shortest_path_from_predecessor_list(o,n)},PriorityQueue:{make:function(t){var e=H.PriorityQueue,n={},o;t=t||{};for(o in e)e.hasOwnProperty(o)&&(n[o]=e[o]);return n.queue=[],n.sorter=t.sorter||e.default_sorter,n},default_sorter:function(t,e){return t.cost-e.cost},push:function(t,e){var n={value:t,cost:e};this.queue.push(n),this.queue.sort(this.sorter)},pop:function(){return this.queue.shift()},empty:function(){return this.queue.length===0}}};typeof Pe<"u"&&(Pe.exports=H)});var zt=g(O=>{var f=B(),Dt=Pt(),qt=xt(),kt=Bt(),Ut=Mt(),Y=Ee(),se=x(),Rn=Rt();function Lt(t){return unescape(encodeURIComponent(t)).length}function j(t,e,n){let o=[],r;for(;(r=t.exec(n))!==null;)o.push({data:r[0],index:r.index,mode:e,length:r[0].length});return o}function Ft(t){let e=j(Y.NUMERIC,f.NUMERIC,t),n=j(Y.ALPHANUMERIC,f.ALPHANUMERIC,t),o,r;return se.isKanjiModeEnabled()?(o=j(Y.BYTE,f.BYTE,t),r=j(Y.KANJI,f.KANJI,t)):(o=j(Y.BYTE_KANJI,f.BYTE,t),r=[]),e.concat(n,o,r).sort(function(s,c){return s.index-c.index}).map(function(s){return{data:s.data,mode:s.mode,length:s.length}})}function Ne(t,e){switch(e){case f.NUMERIC:return Dt.getBitsLength(t);case f.ALPHANUMERIC:return qt.getBitsLength(t);case f.KANJI:return Ut.getBitsLength(t);case f.BYTE:return kt.getBitsLength(t)}}function Ln(t){return t.reduce(function(e,n){let o=e.length-1>=0?e[e.length-1]:null;return o&&o.mode===n.mode?(e[e.length-1].data+=n.data,e):(e.push(n),e)},[])}function _n(t){let e=[];for(let n=0;n<t.length;n++){let o=t[n];switch(o.mode){case f.NUMERIC:e.push([o,{data:o.data,mode:f.ALPHANUMERIC,length:o.length},{data:o.data,mode:f.BYTE,length:o.length}]);break;case f.ALPHANUMERIC:e.push([o,{data:o.data,mode:f.BYTE,length:o.length}]);break;case f.KANJI:e.push([o,{data:o.data,mode:f.BYTE,length:Lt(o.data)}]);break;case f.BYTE:e.push([{data:o.data,mode:f.BYTE,length:Lt(o.data)}])}}return e}function Dn(t,e){let n={},o={start:{}},r=["start"];for(let i=0;i<t.length;i++){let s=t[i],c=[];for(let u=0;u<s.length;u++){let l=s[u],d=""+i+u;c.push(d),n[d]={node:l,lastCount:0},o[d]={};for(let y=0;y<r.length;y++){let p=r[y];n[p]&&n[p].node.mode===l.mode?(o[p][d]=Ne(n[p].lastCount+l.length,l.mode)-Ne(n[p].lastCount,l.mode),n[p].lastCount+=l.length):(n[p]&&(n[p].lastCount=l.length),o[p][d]=Ne(l.length,l.mode)+4+f.getCharCountIndicator(l.mode,e))}}r=c}for(let i=0;i<r.length;i++)o[r[i]].end=0;return{map:o,table:n}}function _t(t,e){let n,o=f.getBestModeForData(t);if(n=f.from(e,o),n!==f.BYTE&&n.bit<o.bit)throw new Error('"'+t+'" cannot be encoded with mode '+f.toString(n)+`.
- Suggested mode is: `+f.toString(o));switch(n===f.KANJI&&!se.isKanjiModeEnabled()&&(n=f.BYTE),n){case f.NUMERIC:return new Dt(t);case f.ALPHANUMERIC:return new qt(t);case f.KANJI:return new Ut(t);case f.BYTE:return new kt(t)}}O.fromArray=function(e){return e.reduce(function(n,o){return typeof o=="string"?n.push(_t(o,null)):o.data&&n.push(_t(o.data,o.mode)),n},[])};O.fromString=function(e,n){let o=Ft(e,se.isKanjiModeEnabled()),r=_n(o),i=Dn(r,n),s=Rn.find_path(i.map,"start","end"),c=[];for(let u=1;u<s.length-1;u++)c.push(i.table[s[u]].node);return O.fromArray(Ln(c))};O.rawSplit=function(e){return O.fromArray(Ft(e,se.isKanjiModeEnabled()))}});var Vt=g(Ot=>{var ue=x(),xe=Z(),qn=Ze(),kn=tt(),Un=nt(),Fn=it(),be=st(),Me=pe(),zn=dt(),ce=wt(),On=It(),Vn=B(),Te=zt();function vn(t,e){let n=t.size,o=Fn.getPositions(e);for(let r=0;r<o.length;r++){let i=o[r][0],s=o[r][1];for(let c=-1;c<=7;c++)if(!(i+c<=-1||n<=i+c))for(let u=-1;u<=7;u++)s+u<=-1||n<=s+u||(c>=0&&c<=6&&(u===0||u===6)||u>=0&&u<=6&&(c===0||c===6)||c>=2&&c<=4&&u>=2&&u<=4?t.set(i+c,s+u,!0,!0):t.set(i+c,s+u,!1,!0))}}function Kn(t){let e=t.size;for(let n=8;n<e-8;n++){let o=n%2===0;t.set(n,6,o,!0),t.set(6,n,o,!0)}}function Jn(t,e){let n=Un.getPositions(e);for(let o=0;o<n.length;o++){let r=n[o][0],i=n[o][1];for(let s=-2;s<=2;s++)for(let c=-2;c<=2;c++)s===-2||s===2||c===-2||c===2||s===0&&c===0?t.set(r+s,i+c,!0,!0):t.set(r+s,i+c,!1,!0)}}function Hn(t,e){let n=t.size,o=ce.getEncodedBits(e),r,i,s;for(let c=0;c<18;c++)r=Math.floor(c/3),i=c%3+n-8-3,s=(o>>c&1)===1,t.set(r,i,s,!0),t.set(i,r,s,!0)}function Be(t,e,n){let o=t.size,r=On.getEncodedBits(e,n),i,s;for(i=0;i<15;i++)s=(r>>i&1)===1,i<6?t.set(i,8,s,!0):i<8?t.set(i+1,8,s,!0):t.set(o-15+i,8,s,!0),i<8?t.set(8,o-i-1,s,!0):i<9?t.set(8,15-i-1+1,s,!0):t.set(8,15-i-1,s,!0);t.set(o-8,8,1,!0)}function Yn(t,e){let n=t.size,o=-1,r=n-1,i=7,s=0;for(let c=n-1;c>0;c-=2)for(c===6&&c--;;){for(let u=0;u<2;u++)if(!t.isReserved(r,c-u)){let l=!1;s<e.length&&(l=(e[s]>>>i&1)===1),t.set(r,c-u,l),i--,i===-1&&(s++,i=7)}if(r+=o,r<0||n<=r){r-=o,o=-o;break}}}function jn(t,e,n){let o=new qn;n.forEach(function(u){o.put(u.mode.bit,4),o.put(u.getLength(),Vn.getCharCountIndicator(u.mode,t)),u.write(o)});let r=ue.getSymbolTotalCodewords(t),i=Me.getTotalCodewordsCount(t,e),s=(r-i)*8;for(o.getLengthInBits()+4<=s&&o.put(0,4);o.getLengthInBits()%8!==0;)o.putBit(0);let c=(s-o.getLengthInBits())/8;for(let u=0;u<c;u++)o.put(u%2?17:236,8);return Gn(o,t,e)}function Gn(t,e,n){let o=ue.getSymbolTotalCodewords(e),r=Me.getTotalCodewordsCount(e,n),i=o-r,s=Me.getBlocksCount(e,n),c=o%s,u=s-c,l=Math.floor(o/s),d=Math.floor(i/s),y=d+1,p=l-d,E=new zn(p),P=0,N=new Array(s),Ye=new Array(s),le=0,en=new Uint8Array(t.buffer);for(let q=0;q<s;q++){let fe=q<u?d:y;N[q]=en.slice(P,P+fe),Ye[q]=E.encode(N[q]),P+=fe,le=Math.max(le,fe)}let de=new Uint8Array(o),je=0,S,I;for(S=0;S<le;S++)for(I=0;I<s;I++)S<N[I].length&&(de[je++]=N[I][S]);for(S=0;S<p;S++)for(I=0;I<s;I++)de[je++]=Ye[I][S];return de}function Qn(t,e,n,o){let r;if(Array.isArray(t))r=Te.fromArray(t);else if(typeof t=="string"){let l=e;if(!l){let d=Te.rawSplit(t);l=ce.getBestVersionForData(d,n)}r=Te.fromString(t,l||40)}else throw new Error("Invalid data");let i=ce.getBestVersionForData(r,n);if(!i)throw new Error("The amount of data is too big to be stored in a QR Code");if(!e)e=i;else if(e<i)throw new Error(`
-The chosen QR Code version cannot contain this amount of data.
-Minimum version required to store current data is: `+i+`.
-`);let s=jn(e,n,r),c=ue.getSymbolSize(e),u=new kn(c);return vn(u,e),Kn(u),Jn(u,e),Be(u,n,0),e>=7&&Hn(u,e),Yn(u,s),isNaN(o)&&(o=be.getBestMask(u,Be.bind(null,u,n))),be.applyMask(o,u),Be(u,n,o),{modules:u,version:e,errorCorrectionLevel:n,maskPattern:o,segments:r}}Ot.create=function(e,n){if(typeof e>"u"||e==="")throw new Error("No input text");let o=xe.M,r,i;return typeof n<"u"&&(o=xe.from(n.errorCorrectionLevel,xe.M),r=ce.from(n.version),i=be.from(n.maskPattern),n.toSJISFunc&&ue.setToSJISFunction(n.toSJISFunc)),Qn(e,r,o,i)}});var Re=g(_=>{function vt(t){if(typeof t=="number"&&(t=t.toString()),typeof t!="string")throw new Error("Color should be defined as hex string");let e=t.slice().replace("#","").split("");if(e.length<3||e.length===5||e.length>8)throw new Error("Invalid hex color: "+t);(e.length===3||e.length===4)&&(e=Array.prototype.concat.apply([],e.map(function(o){return[o,o]}))),e.length===6&&e.push("F","F");let n=parseInt(e.join(""),16);return{r:n>>24&255,g:n>>16&255,b:n>>8&255,a:n&255,hex:"#"+e.slice(0,6).join("")}}_.getOptions=function(e){e||(e={}),e.color||(e.color={});let n=typeof e.margin>"u"||e.margin===null||e.margin<0?4:e.margin,o=e.width&&e.width>=21?e.width:void 0,r=e.scale||4;return{width:o,scale:o?4:r,margin:n,color:{dark:vt(e.color.dark||"#000000ff"),light:vt(e.color.light||"#ffffffff")},type:e.type,rendererOpts:e.rendererOpts||{}}};_.getScale=function(e,n){return n.width&&n.width>=e+n.margin*2?n.width/(e+n.margin*2):n.scale};_.getImageWidth=function(e,n){let o=_.getScale(e,n);return Math.floor((e+n.margin*2)*o)};_.qrToImageData=function(e,n,o){let r=n.modules.size,i=n.modules.data,s=_.getScale(r,o),c=Math.floor((r+o.margin*2)*s),u=o.margin*s,l=[o.color.light,o.color.dark];for(let d=0;d<c;d++)for(let y=0;y<c;y++){let p=(d*c+y)*4,E=o.color.light;if(d>=u&&y>=u&&d<c-u&&y<c-u){let P=Math.floor((d-u)/s),N=Math.floor((y-u)/s);E=l[i[P*r+N]?1:0]}e[p++]=E.r,e[p++]=E.g,e[p++]=E.b,e[p]=E.a}}});var Kt=g(ae=>{var Le=Re();function $n(t,e,n){t.clearRect(0,0,e.width,e.height),e.style||(e.style={}),e.height=n,e.width=n,e.style.height=n+"px",e.style.width=n+"px"}function Xn(){try{return document.createElement("canvas")}catch{throw new Error("You need to specify a canvas element")}}ae.render=function(e,n,o){let r=o,i=n;typeof r>"u"&&(!n||!n.getContext)&&(r=n,n=void 0),n||(i=Xn()),r=Le.getOptions(r);let s=Le.getImageWidth(e.modules.size,r),c=i.getContext("2d"),u=c.createImageData(s,s);return Le.qrToImageData(u.data,e,r),$n(c,i,s),c.putImageData(u,0,0),i};ae.renderToDataURL=function(e,n,o){let r=o;typeof r>"u"&&(!n||!n.getContext)&&(r=n,n=void 0),r||(r={});let i=ae.render(e,n,r),s=r.type||"image/png",c=r.rendererOpts||{};return i.toDataURL(s,c.quality)}});var Yt=g(Ht=>{var Wn=Re();function Jt(t,e){let n=t.a/255,o=e+'="'+t.hex+'"';return n<1?o+" "+e+'-opacity="'+n.toFixed(2).slice(1)+'"':o}function _e(t,e,n){let o=t+e;return typeof n<"u"&&(o+=" "+n),o}function Zn(t,e,n){let o="",r=0,i=!1,s=0;for(let c=0;c<t.length;c++){let u=Math.floor(c%e),l=Math.floor(c/e);!u&&!i&&(i=!0),t[c]?(s++,c>0&&u>0&&t[c-1]||(o+=i?_e("M",u+n,.5+l+n):_e("m",r,0),r=0,i=!1),u+1<e&&t[c+1]||(o+=_e("h",s),s=0)):r++}return o}Ht.render=function(e,n,o){let r=Wn.getOptions(n),i=e.modules.size,s=e.modules.data,c=i+r.margin*2,u=r.color.light.a?"<path "+Jt(r.color.light,"fill")+' d="M0 0h'+c+"v"+c+'H0z"/>':"",l="<path "+Jt(r.color.dark,"stroke")+' d="'+Zn(s,i,r.margin)+'"/>',d='viewBox="0 0 '+c+" "+c+'"',p='<svg xmlns="http://www.w3.org/2000/svg" '+(r.width?'width="'+r.width+'" height="'+r.width+'" ':"")+d+' shape-rendering="crispEdges">'+u+l+`</svg>
-`;return typeof o=="function"&&o(null,p),p}});var Gt=g(G=>{var eo=$e(),De=Vt(),jt=Kt(),to=Yt();function qe(t,e,n,o,r){let i=[].slice.call(arguments,1),s=i.length,c=typeof i[s-1]=="function";if(!c&&!eo())throw new Error("Callback required as last argument");if(c){if(s<2)throw new Error("Too few arguments provided");s===2?(r=n,n=e,e=o=void 0):s===3&&(e.getContext&&typeof r>"u"?(r=o,o=void 0):(r=o,o=n,n=e,e=void 0))}else{if(s<1)throw new Error("Too few arguments provided");return s===1?(n=e,e=o=void 0):s===2&&!e.getContext&&(o=n,n=e,e=void 0),new Promise(function(u,l){try{let d=De.create(n,o);u(t(d,e,o))}catch(d){l(d)}})}try{let u=De.create(n,o);r(null,t(u,e,o))}catch(u){r(u)}}G.create=De.create;G.toCanvas=qe.bind(null,jt.render);G.toDataURL=qe.bind(null,jt.renderToDataURL);G.toString=qe.bind(null,function(t,e,n){return to.render(t,n)})});var Wt=un(Gt(),1);var no="cordee.calcas.ironpayOrder",Q="cordee.calcas.ironpayIntent",oo="pix-live-v2";function $(t=no){try{let e=JSON.parse(sessionStorage.getItem(t)||"null");return/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(e?.id||"")&&/^[a-f0-9]{64}$/.test(e?.accessToken||"")?e:null}catch{return null}}function X(t){window.__mareAzulPixDiagnostics=Object.freeze({version:oo,page:location.pathname,code:t.code||null,httpStatus:t.httpStatus||null,orderStatus:t.orderStatus||null,hasPix:!!t.hasPix,hasSession:!!$(),checkedAt:new Date().toISOString()})}async function Qt(t){if(!t.headers.get("Content-Type")?.includes("application/json"))throw new Error("API_RESPONSE_INVALID");try{return await t.json()}catch{throw new Error("API_RESPONSE_INVALID")}}function $t(t,e){return t?.id===e&&["creating","uncertain","rejected","pending","paid","canceled","refunded"].includes(t.status)}var ro=()=>{},io=()=>{};ro();var C=$(),a=t=>document.getElementById(t),Xt=30*60*1e3,ke=!1,W=!1,Ue,Fe,ze="",Zt=null,Oe;window.__mareAzulPixLoaded=!0;var Ve=(t,e)=>{a("paymentStatus").textContent=t,a("paymentMessage").textContent=e};function ve(){let t=a("pixCode");if(!t.value)return;t.style.height="auto";let e=getComputedStyle(t),n=parseFloat(e.borderTopWidth)+parseFloat(e.borderBottomWidth);t.style.height=Math.max(42,Math.ceil(t.scrollHeight+n))+"px"}function Ke(){clearTimeout(Oe),a("copyToast").hidden=!0,a("copyBackdrop").hidden=!0,a("copyToast").textContent="",clearInterval(Fe),a("paymentAmount").textContent="\u2014",a("pixCode").value="",a("copyPix").disabled=!0,a("pixCode").style.height="",a("copyPixIcon").disabled=!0,delete a("pixCode").dataset.live,a("copyFeedback").textContent="",document.querySelector(".deadline").hidden=!0,document.querySelector(".code-trust").hidden=!0,document.querySelector(".qr-section").hidden=!0,document.querySelector(".qr-code").replaceChildren(),ze="",a("countdown").textContent="--:--",a("expiredMessage").hidden=!0}function D(t,e,n,o=!0){Ke();let r=["PIX_EXPIRED","REJECTED","CANCELED","REFUNDED"].includes(n);Ve(r?t:"Aguardando pagamento",r?"Consulte as informa\xE7\xF5es do seu pedido.":"Pague via Pix para concluir seu pedido."),a("pixCode").placeholder=r?"Este c\xF3digo n\xE3o est\xE1 dispon\xEDvel para pagamento.":"Preparando seu c\xF3digo Pix\u2026"}function so(t){if(Number.isFinite(t.createdAt)&&t.createdAt>0)return t.createdAt+Xt;let e="mareazul.pixDisplayExpiresAt:"+C.id,n=0;try{n=Number(sessionStorage.getItem(e))}catch{}if(!n){n=Date.now()+Xt;try{sessionStorage.setItem(e,String(n))}catch{}}return n}function co(t){clearInterval(Fe);let e=so(t),n=Number(t.expiresAt)||1/0,o=()=>{if(Date.now()>=n){D("Prazo do Pix encerrado","O prazo informado para este c\xF3digo terminou. Se voc\xEA j\xE1 pagou, aguarde a confirma\xE7\xE3o.","PIX_EXPIRED");return}let r=Math.max(0,Math.min(1800,Math.ceil((Math.min(e,n)-Date.now())/1e3)));a("countdown").textContent=`${String(Math.floor(r/60)).padStart(2,"0")}:${String(r%60).padStart(2,"0")}`,a("timerProgress").style.width=`${r/1800*100}%`,a("expiredMessage").hidden=r>0,a("expiredMessage").textContent="O tempo sugerido terminou. O Pix pode continuar v\xE1lido no banco; a confirma\xE7\xE3o do pedido continua sendo consultada."};Fe=setInterval(o,1e3),o()}async function uo(t){if(t.status==="uncertain"&&C.creationCode&&t.code==="PAYMENT_CREATION_UNCERTAIN"&&(t={...t,code:C.creationCode}),Zt=t,X({code:t.code,httpStatus:200,orderStatus:t.status,hasPix:!!t.pixCode}),t.status==="paid"){Ke(),W=!0,clearTimeout(Ue),Ve("Pagamento confirmado","Seu pagamento foi confirmado. Abrindo as informa\xE7\xF5es do pedido\u2026");try{$(Q)?.id===C.id&&sessionStorage.removeItem(Q)}catch{}location.replace("../obrigado/?pedido="+encodeURIComponent(t.id));return}if(["rejected","canceled","refunded"].includes(t.status)){W=!0,D({rejected:"Pix n\xE3o gerado",canceled:"Pagamento cancelado",refunded:"Pagamento reembolsado"}[t.status],"Esta cobran\xE7a n\xE3o est\xE1 dispon\xEDvel para pagamento. Entre em contato com o suporte se precisar de ajuda.",t.code||t.status.toUpperCase(),!1);try{$(Q)?.id===C.id&&sessionStorage.removeItem(Q)}catch{}return}let e=typeof t.pixCode=="string"&&t.pixCode.trim().length>0&&!t.pixCode.includes("DEMONSTRACAO");if(t.status!=="pending"||!e){D(t.status==="uncertain"?"Gera\xE7\xE3o do Pix n\xE3o confirmada":"Preparando seu Pix",t.status==="uncertain"?"Ainda n\xE3o recebemos o c\xF3digo de pagamento. Consulte novamente ou fale com o suporte antes de iniciar outro pedido.":"O c\xF3digo ainda n\xE3o foi disponibilizado. Estamos consultando o pagamento.",t.code||"PIX_CODE_PENDING");return}if(Number(t.expiresAt)>0&&Date.now()>=Number(t.expiresAt)){D("Prazo do Pix encerrado","Se voc\xEA j\xE1 pagou, aguarde enquanto consultamos a confirma\xE7\xE3o.","PIX_EXPIRED");return}if(Ve("Pague com Pix","Escaneie o QR Code ou copie o c\xF3digo abaixo."),a("paymentAmount").textContent=(t.amount/100).toLocaleString("pt-BR",{style:"currency",currency:"BRL"}),document.querySelector(".product .price").textContent=a("paymentAmount").textContent,a("pixCode").value=t.pixCode,a("pixCode").dataset.live="true",a("copyPix").disabled=!1,io(t),a("copyPixIcon").disabled=!1,ve(),document.querySelector(".code-trust").hidden=!1,document.querySelector(".deadline").hidden=!1,ze!==t.pixCode){let n=document.querySelector(".qr-code"),o=document.createElement("canvas");try{await Wt.default.toCanvas(o,t.pixCode,{width:136,margin:1,color:{dark:"#10111a",light:"#ffffff"}}),n.replaceChildren(o),ze=t.pixCode,document.querySelector(".qr-section").hidden=!1}catch{document.querySelector(".qr-section").hidden=!0}}co(t)}async function Je(){if(!C||ke||W)return;clearTimeout(Ue),ke=!0;let t=new AbortController,e=setTimeout(()=>t.abort(),2e4),n=null;try{let o=await fetch("/api/orders/"+encodeURIComponent(C.id),{headers:{Authorization:"Bearer "+C.accessToken},cache:"no-store",signal:t.signal});n=o.status;let r=await Qt(o);if(!o.ok){let i=r.code||"PAYMENT_LOOKUP_FAILED";D(o.status===404?"Pedido n\xE3o encontrado":"N\xE3o foi poss\xEDvel consultar o Pix",o.status===404?"N\xE3o encontramos o pedido desta sess\xE3o. Volte ao checkout para conferir sua compra.":"Tente consultar novamente. Se o problema continuar, informe a refer\xEAncia abaixo ao suporte.",i),X({code:i,httpStatus:n}),o.status===404&&(W=!0);return}if(!$t(r,C.id))throw new Error("API_RESPONSE_INVALID");await uo(r)}catch(o){let r=o.message==="API_RESPONSE_INVALID"?o.message:"PAYMENT_CONNECTION_FAILED";D("N\xE3o foi poss\xEDvel consultar o Pix","Verifique sua conex\xE3o e tente consultar novamente.",r),X({code:r,httpStatus:n})}finally{clearTimeout(e),ke=!1,W||(Ue=setTimeout(Je,15e3))}}async function He(){if(!(a("copyPix").disabled||!a("pixCode").dataset.live||Zt?.status!=="pending"))try{await navigator.clipboard.writeText(a("pixCode").value),a("copyFeedback").textContent="",clearTimeout(Oe),a("copyToast").hidden=!1,a("copyBackdrop").hidden=!1,a("copyToast").textContent="C\xF3digo PIX copiado",Oe=setTimeout(()=>{a("copyToast").hidden=!0,a("copyBackdrop").hidden=!0,a("copyToast").textContent=""},1600)}catch{a("pixCode").focus(),a("pixCode").select(),a("copyFeedback").textContent="Selecione o c\xF3digo e copie manualmente."}}a("copyPix").addEventListener("click",He);a("copyPixIcon").addEventListener("click",He);a("pixCode").addEventListener("click",He);window.addEventListener("resize",ve);document.fonts?.ready.then(ve);document.addEventListener("visibilitychange",()=>{document.hidden||Je()});Ke();C?Je():(D("Nenhum pedido nesta sess\xE3o","Volte ao checkout para iniciar seu pagamento.","SESSION_MISSING",!1),X({code:"SESSION_MISSING"}));try{let t=JSON.parse(sessionStorage.getItem("cordee.calcas.selection")||"null");if(t){document.getElementById("calcasSelection").textContent=t.colors.join(" + ")+" \xB7 "+t.size;let e={Preta:"preta","Azul escuro":"azul-escuro","Azul m\xE9dio":"azul-medio","Azul claro":"azul-claro"};document.querySelector(".product>img").src="../assets/"+(e[t.colors[0]]||"azul-escuro")+".png"}}catch{}})();
+  <div id="copyToast" class="copy-toast" hidden>Código PIX copiado</div>
+  <div id="copyBackdrop" hidden></div>
 
-</script>
-<!-- generated:payment:end --></body></html>
+  <!-- Lightweight canvas QR code generator -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script>
+  (()=>{
+    const el = id => document.getElementById(id);
+    let order = null;
+    let pollTimer = null;
+    let toastTimer = null;
+
+    try {
+      order = JSON.parse(sessionStorage.getItem('cordee.calcas.ironpayOrder') || localStorage.getItem('cordee.calcas.ironpayOrder') || 'null');
+    } catch {}
+
+    const urlParams = new URLSearchParams(location.search);
+    const orderId = urlParams.get('pedido') || order?.id;
+
+    if (order && order.pixCode) {
+      el('pixCode').value = order.pixCode;
+      renderQr(order.pixCode);
+    }
+
+    if (order && order.amount) {
+      const formatted = (order.amount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      el('paymentAmount').textContent = formatted;
+    }
+
+    async function renderQr(pixStr) {
+      if (!pixStr || typeof QRCode === 'undefined') return;
+      try {
+        const canvas = document.createElement('canvas');
+        await QRCode.toCanvas(canvas, pixStr, {
+          width: 140,
+          margin: 1,
+          color: { dark: '#000000', light: '#ffffff' }
+        });
+        const container = document.querySelector('.qr-code');
+        if (container) {
+          container.replaceChildren(canvas);
+        }
+      } catch (e) {
+        console.error('QR code render error:', e);
+      }
+    }
+
+    // Polling payment status
+    async function checkPaymentStatus() {
+      if (!orderId || !order?.accessToken) return;
+      try {
+        const res = await fetch('/api/orders/' + encodeURIComponent(orderId), {
+          headers: { Authorization: 'Bearer ' + order.accessToken },
+          cache: 'no-store'
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.status === 'paid') {
+            clearInterval(pollTimer);
+            el('paymentStatus').textContent = 'Pagamento confirmado!';
+            el('paymentMessage').textContent = 'Seu pedido foi processado com sucesso. Redirecionando…';
+            setTimeout(() => {
+              location.replace('../obrigado/?pedido=' + encodeURIComponent(orderId));
+            }, 1200);
+            return;
+          }
+          if (data.pixCode && data.pixCode !== el('pixCode').value) {
+            el('pixCode').value = data.pixCode;
+            renderQr(data.pixCode);
+          }
+        }
+      } catch (err) {
+        console.warn('Status check poll failed:', err);
+      }
+    }
+
+    if (orderId && order?.accessToken) {
+      pollTimer = setInterval(checkPaymentStatus, 8000);
+      checkPaymentStatus();
+    }
+
+    // Copy Pix Code
+    async function copyPix() {
+      const code = el('pixCode').value;
+      if (!code) return;
+
+      try {
+        await navigator.clipboard.writeText(code);
+      } catch {
+        el('pixCode').select();
+        document.execCommand('copy');
+      }
+
+      const toast = el('copyToast');
+      toast.hidden = false;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.hidden = true;
+      }, 2000);
+    }
+
+    el('copyPix').addEventListener('click', copyPix);
+    el('copyPixIcon').addEventListener('click', copyPix);
+    el('pixCode').addEventListener('click', copyPix);
+  })();
+  </script>
+</body>
+</html>
