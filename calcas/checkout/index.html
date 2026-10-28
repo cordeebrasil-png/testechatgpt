@@ -687,6 +687,255 @@ a { color: inherit; text-decoration: none; }
   color: #0084c2;
 }
 
+
+/* --- Pagamento Pix 1:1 Mercado Pago Mockup --- */
+.pix-headline {
+  margin-top: 4px;
+  margin-bottom: 14px;
+  text-align: left;
+}
+.pix-headline-title {
+  font-size: 23px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+.pix-headline-sub {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: #64748b;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Valor do pedido Banner */
+.order-value-banner {
+  background: #edf5ff;
+  border-radius: 16px;
+  padding: 16px 20px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.order-value-title {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 4px;
+}
+.order-value-number {
+  display: block;
+  font-size: 29px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.15;
+}
+
+/* QR Code Card */
+.pix-qr-card {
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  padding: 24px 16px 18px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  text-align: center;
+  margin-bottom: 16px;
+}
+.qr-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.qr-code canvas, .qr-code svg, .qr-code img {
+  width: 200px;
+  height: 200px;
+  display: block;
+  border-radius: 6px;
+}
+.qr-center-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  pointer-events: none;
+}
+.qr-center-badge svg {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+/* Código Pix Box */
+.pix-copy-card {
+  background: #f8fafc;
+  border: 1px solid #eef2f6;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.pix-copy-card:hover {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+.pix-copy-info {
+  flex: 1;
+  min-width: 0;
+}
+.pix-copy-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+.pix-copy-code-text {
+  font-size: 11px;
+  line-height: 1.35;
+  color: #475569;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+.pix-copy-action-btn {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: transform 0.1s ease, border-color 0.15s ease;
+}
+.pix-copy-action-btn:active {
+  transform: scale(0.94);
+}
+.pix-copy-action-btn svg {
+  width: 19px;
+  height: 19px;
+  stroke: #009ee3;
+}
+
+/* Aguardando pagamento Notice */
+.waiting-payment-box {
+  background: #edf5ff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+.waiting-icon {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  stroke: #009ee3;
+  flex-shrink: 0;
+}
+.waiting-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.waiting-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #0284c7;
+  line-height: 1.25;
+}
+.waiting-desc {
+  font-size: 12.5px;
+  color: #64748b;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Como pagar com Pix? Card */
+.how-to-pix-card {
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  padding: 18px 16px 14px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  margin-bottom: 24px;
+  text-align: left;
+}
+.how-to-pix-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+.how-to-pix-list {
+  display: flex;
+  flex-direction: column;
+}
+.how-to-pix-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.how-to-pix-item:last-child {
+  border-bottom: none;
+}
+.how-to-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.how-to-step-badge {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  color: #0284c7;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.how-to-step-text {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.3;
+}
+.how-to-chevron {
+  width: 17px;
+  height: 17px;
+  stroke: #64748b;
+  flex-shrink: 0;
+}
+
 /* Step 4 Pagamento Specifics */
 .pix-pay-card {
   background: #ffffff;
