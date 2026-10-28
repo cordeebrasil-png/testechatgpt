@@ -1627,6 +1627,11 @@ a { color: inherit; text-decoration: none; }
       if (el('pixCode')) el('pixCode').value = initialPix;
       if (el('pixCodeDisplay')) el('pixCodeDisplay').textContent = initialPix;
       renderQr(initialPix);
+      try {
+        if (order) {
+          window.dispatchEvent(new CustomEvent('boxes:pix-ready', { detail: order }));
+        }
+      } catch {}
     }
 
     if (order && order.amount) {

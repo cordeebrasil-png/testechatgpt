@@ -2554,7 +2554,9 @@ a { color: inherit; text-decoration: none; }
         // Dispatch TikTok Pix event
         window.dispatchEvent(new CustomEvent('boxes:pix-ready', { detail: finalOrder }));
 
-        location.assign('../pagamento/?pedido=' + encodeURIComponent(finalOrder.id));
+        setTimeout(() => {
+          location.assign('../pagamento/?pedido=' + encodeURIComponent(finalOrder.id));
+        }, 300);
       } catch (err) {
         console.error('Order creation error:', err);
         const fallbackOrder = {
