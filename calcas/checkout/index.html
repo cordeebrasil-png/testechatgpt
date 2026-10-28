@@ -91,70 +91,54 @@ a { color: inherit; text-decoration: none; }
   }
 }
 
-/* Header - Centralizado, Maior e em Evidência */
+/* Header 1:1 Mercado Pago Reference */
 .mp-header {
-  margin-bottom: 22px;
-  text-align: center;
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  width: 100%;
 }
-.mp-brand-center {
+.mp-brand-row {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 12px;
   width: 100%;
 }
 .mp-logo-img {
-  height: 48px;
+  height: 28px;
   width: auto;
-  max-width: 220px;
   display: block;
-  object-fit: contain;
-}
-.mp-trust-banner {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 5px 12px;
-  background: #f0f9ff;
-  border: 1.5px solid #bae6fd;
-  border-radius: 20px;
-  color: #0369a1;
-  font-size: 12.5px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  box-shadow: 0 1px 3px rgba(0, 158, 227, 0.08);
-  max-width: 96%;
 }
 .store-pill-wrap {
-  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 .store-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 5px 16px;
-  background: #f8fafc;
-  border: 1.5px solid #e2e8f0;
+  gap: 7px;
+  padding: 3px 12px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
   border-radius: 20px;
 }
 .store-pill-badge {
   display: grid;
   place-items: center;
-  width: 20px;
-  height: 20px;
-  background: #009ee3;
+  width: 18px;
+  height: 18px;
+  background: #4f46e5;
   color: #fff;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
   border-radius: 50%;
 }
 .store-pill-name {
-  font-size: 13.5px;
-  font-weight: 700;
+  font-size: 12.5px;
+  font-weight: 600;
   color: #334155;
 }
 
@@ -162,11 +146,11 @@ a { color: inherit; text-decoration: none; }
 .product-card {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
+  gap: 10px;
+  padding: 10px 12px;
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
-  border-radius: 14px;
+  border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
   margin-bottom: 20px;
 }
@@ -176,12 +160,12 @@ a { color: inherit; text-decoration: none; }
   }
 }
 .product-thumb {
-  width: 62px;
-  height: 62px;
-  min-width: 62px;
-  max-width: 62px;
-  border-radius: 10px;
-  border: 1.5px solid #cbd5e1;
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  max-width: 54px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
   overflow: hidden;
   background: #ffffff;
   display: flex;
@@ -199,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   min-width: 0;
 }
 .product-title {
-  font-size: 15.5px;
+  font-size: 13.5px;
   font-weight: 700;
   color: #0f172a;
   margin: 0 0 2px;
@@ -208,24 +192,27 @@ a { color: inherit; text-decoration: none; }
   text-overflow: ellipsis;
 }
 .product-subtitle {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #334155;
+  font-size: 12px;
+  font-weight: 500;
+  color: #475569;
   margin: 0 0 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .product-qty {
-  font-size: 13.5px;
+  font-size: 11.5px;
   font-weight: 500;
   color: #64748b;
   margin: 0;
 }
 .product-price {
-  font-size: 15px;
-  font-weight: 700;
-  color: #009ee3;
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 /* Stepper */
@@ -367,15 +354,26 @@ a { color: inherit; text-decoration: none; }
   color: #0f172a;
   outline: none;
   box-sizing: border-box;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 .field input::placeholder {
   color: #94a3b8;
   font-weight: 400;
 }
+/* Fundo azul nos campos de preenchimento quando ativo ou preenchido */
 .field input:focus, .field select:focus {
+  background-color: #f0f9ff;
   border-color: #009ee3;
   box-shadow: 0 0 0 3.5px rgba(0, 158, 227, 0.2);
+}
+.field input:not(:placeholder-shown) {
+  background-color: #f0f9ff;
+  border-color: #7dd3fc;
+}
+.field input:not(:placeholder-shown):focus {
+  background-color: #e0f2fe;
+  border-color: #009ee3;
+  box-shadow: 0 0 0 3.5px rgba(0, 158, 227, 0.25);
 }
 .field [aria-invalid="true"] {
   border-color: #ef4444;
@@ -623,17 +621,16 @@ a { color: inherit; text-decoration: none; }
   }
 }
 .pix-pay-title {
-  font-size: 19px;
+  font-size: 21px;
   font-weight: 700;
   color: #0f172a;
-  margin-bottom: 6px;
-  line-height: 1.25;
+  margin-bottom: 4px;
 }
 .pix-pay-desc {
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 500;
   color: #475569;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 .qr-frame {
   display: inline-flex;
@@ -836,15 +833,8 @@ a { color: inherit; text-decoration: none; }
 
   <main class="checkout-shell">
     <header class="mp-header">
-      <div class="mp-brand-center">
+      <div class="mp-brand-row">
         <img class="mp-logo-img" src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.19.5/mercadopago/logo__large.png" alt="Mercado Pago">
-      </div>
-      <div class="mp-trust-banner">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#009ee3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <path d="m9 12 2 2 4-4"/>
-        </svg>
-        <span>Ambiente Seguro • Checkout Oficial <strong>Mercado Pago</strong></span>
       </div>
       <div class="store-pill-wrap">
         <div class="store-pill">
@@ -861,8 +851,9 @@ a { color: inherit; text-decoration: none; }
       <div class="product-details">
         <h2 class="product-title" id="productTitle">Kit 2 Calças Jeans UltraModel</h2>
         <p class="product-subtitle" id="productSubtitle">Azul escuro + Preta · P (34-36)</p>
-        <p class="product-qty">Qtd: 1 kit (2 calças) &bull; <strong class="product-price" id="visiblePrice">R$ 94,90</strong></p>
+        <p class="product-qty">Quantidade: 1 kit (2 calças)</p>
       </div>
+      <strong class="product-price" id="visiblePrice">R$ 94,90</strong>
       <span hidden class="price">R$ 94,90</span>
     </section>
 
