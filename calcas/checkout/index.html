@@ -1665,36 +1665,161 @@ a { color: inherit; text-decoration: none; }
       e.target.value = v;
     });
 
-    // CEP lookup
+    // Shipping Selection Logic
+    let selectedShippingFee = 0; // PAC grátis selecionado por padrão
+    let selectedShippingMethod = 'pac';
+
+    function updatePriceWithShipping() {
+      const total = orderAmount + selectedShippingFee;
+      const formatted = (total / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      if (el('visiblePrice')) el('visiblePrice').textContent = formatted;
+      document.querySelectorAll('.price').forEach(p => p.textContent = formatted);
+      try {
+        sessionStorage.setItem('cordee.calcas.shippingMethod', selectedShippingMethod);
+        sessionStorage.setItem('cordee.calcas.shippingFee', String(selectedShippingFee));
+      } catch {}
+    }
+
+    const pacCard = el('shipOptionPac');
+    const sedexCard = el('shipOptionSedex');
+
+    function setShipping(method) {
+      selectedShippingMethod = method;
+      if (method === 'pac') {
+        selectedShippingFee = 0;
+        pacCard?.classList.add('selected');
+        sedexCard?.classList.remove('selected');
+      } else {
+        selectedShippingFee = 1783;
+        sedexCard?.classList.add('selected');
+        pacCard?.classList.remove('selected');
+      }
+      updatePriceWithShipping();
+    }
+
+    pacCard?.addEventListener('click', () => setShipping('pac'));
+    sedexCard?.addEventListener('click', () => setShipping('sedex'));
+
+    // CEP lookup com feedback imediato e alta resiliência
     async function lookupCep() {
-      const cep = digits(el('cep').value);
-      if (cep.length !== 8) {
-        el('cepStatus').textContent = 'Digite os 8 números do seu CEP.';
+      clearTimeout(cepDebounceTimer);
+      cepAbortController?.abort();
+
+      const cepRaw = el('cep').value;
+      const cleanCep = digits(cepRaw);
+
+      const statusEl = el('cepStatus');
+      const btn = el('searchCep');
+
+      if (cleanCep.length !== 8) {
+        if (statusEl) {
+          statusEl.style.color = '#e11d48';
+          statusEl.textContent = 'Digite os 8 números do seu CEP para buscar.';
+        }
+        el('cep').focus();
         return;
       }
-      cepAbortController?.abort();
+
       const ctrl = cepAbortController = new AbortController();
-      el('cepStatus').textContent = 'Buscando endereço…';
+      const timeoutId = setTimeout(() => ctrl.abort(), 6000);
+
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Buscando…';
+      }
+      if (statusEl) {
+        statusEl.style.color = '#0284c7';
+        statusEl.textContent = 'Buscando endereço…';
+      }
 
       try {
-        let res = null;
+        let data = null;
+
+        // 1. Tenta ViaCEP oficial diretamente
         try {
-          res = await fetch('/api/cep/' + cep, { signal: ctrl.signal });
-        } catch {
-          res = await fetch('https://viacep.com.br/ws/' + cep + '/json/', { signal: ctrl.signal });
+          const res = await fetch('https://viacep.com.br/ws/' + cleanCep + '/json/', { signal: ctrl.signal });
+          if (res.ok) {
+            const json = await res.json();
+            if (!json.erro) data = json;
+          }
+        } catch (e) {}
+
+        // 2. Tenta BrasilAPI como fallback
+        if (!data) {
+          try {
+            const res = await fetch('https://brasilapi.com.br/api/cep/v1/' + cleanCep, { signal: ctrl.signal });
+            if (res.ok) {
+              const json = await res.json();
+              if (json.city) {
+                data = {
+                  logradouro: json.street || '',
+                  bairro: json.neighborhood || 'Centro',
+                  localidade: json.city || '',
+                  uf: json.state || ''
+                };
+              }
+            }
+          } catch (e) {}
         }
-        if (digits(el('cep').value) !== cep) return;
-        const data = await res.json();
-        if (data.erro) throw new Error('CEP não encontrado');
-        if (data.logradouro) el('street').value = data.logradouro;
-        if (data.bairro) el('district').value = data.bairro;
-        if (data.localidade) el('city').value = data.localidade;
-        if (data.uf) el('state').value = data.uf;
-        el('cepStatus').textContent = 'Endereço encontrado! Preencha o número da residência.';
-        el('number').focus();
+
+        // 3. Tenta endpoint interno do projeto
+        if (!data) {
+          try {
+            const res = await fetch('/api/cep/' + cleanCep, { signal: ctrl.signal });
+            if (res.ok) {
+              const json = await res.json();
+              if (json.localidade || json.city) {
+                data = {
+                  logradouro: json.logradouro || json.street || '',
+                  bairro: json.bairro || json.neighborhood || 'Centro',
+                  localidade: json.localidade || json.city || '',
+                  uf: json.uf || json.state || ''
+                };
+              }
+            }
+          } catch (e) {}
+        }
+
+        clearTimeout(timeoutId);
+
+        if (data) {
+          if (data.logradouro && el('street')) el('street').value = data.logradouro;
+          if (data.bairro && el('district')) el('district').value = data.bairro;
+          if (data.localidade && el('city')) el('city').value = data.localidade;
+          if (data.uf && el('state')) el('state').value = data.uf.toUpperCase();
+
+          ['street', 'district', 'city', 'state'].forEach(id => {
+            const input = el(id);
+            if (input && input.value) {
+              input.classList.add('has-value');
+              input.dispatchEvent(new Event('input', { bubbles: true }));
+              input.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          });
+
+          if (statusEl) {
+            statusEl.style.color = '#16a34a';
+            statusEl.textContent = '✓ Endereço preenchido! Preencha o número da residência.';
+          }
+          if (el('number')) {
+            el('number').focus();
+          }
+        } else {
+          if (statusEl) {
+            statusEl.style.color = '#dc2626';
+            statusEl.textContent = 'CEP não encontrado. Preencha os campos abaixo manualmente.';
+          }
+          if (el('street')) el('street').focus();
+        }
       } catch (err) {
-        if (digits(el('cep').value) === cep) {
-          el('cepStatus').textContent = 'Preencha o endereço manualmente para continuar.';
+        if (statusEl) {
+          statusEl.style.color = '#475569';
+          statusEl.textContent = 'Preencha o endereço manualmente abaixo.';
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Buscar CEP';
         }
       }
     }
@@ -1702,13 +1827,14 @@ a { color: inherit; text-decoration: none; }
     el('cep').addEventListener('input', () => {
       clearTimeout(cepDebounceTimer);
       cepAbortController?.abort();
-      el('cep').value = digits(el('cep').value).slice(0, 8).replace(/(\d{5})(\d)/, '$1-$2');
+      el('cep').value = digits(el('cep').value).slice(0, 8).replace(/(d{5})(d)/, '$1-$2');
       if (digits(el('cep').value).length === 8) {
-        cepDebounceTimer = setTimeout(lookupCep, 350);
+        cepDebounceTimer = setTimeout(lookupCep, 400);
       }
     });
 
-    el('searchCep').addEventListener('click', () => {
+    el('searchCep').addEventListener('click', (e) => {
+      e.preventDefault();
       clearTimeout(cepDebounceTimer);
       lookupCep();
     });
@@ -1768,7 +1894,7 @@ a { color: inherit; text-decoration: none; }
         const finalOrder = {
           id: orderData.id || orderId,
           accessToken: tokenArr,
-          amount: orderData.amount || orderAmount,
+          amount: orderData.amount || (orderAmount + selectedShippingFee),
           status: orderData.status || 'pending',
           pixCode: orderData.pixCode || ''
         };
@@ -1785,7 +1911,7 @@ a { color: inherit; text-decoration: none; }
         const fallbackOrder = {
           id: crypto.randomUUID(),
           accessToken: 'demo',
-          amount: orderAmount,
+          amount: (orderAmount + selectedShippingFee),
           status: 'pending'
         };
         sessionStorage.setItem('cordee.calcas.ironpayOrder', JSON.stringify(fallbackOrder));
