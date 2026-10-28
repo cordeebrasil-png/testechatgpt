@@ -463,7 +463,7 @@
         </div>
         <div class="total-row">
           <span>Envio</span>
-          <strong id="shippingMethodName">Correios (PAC Frete Grátis)</strong>
+          <strong id="shippingMethodName">Correios</strong>
         </div>
         <div class="total-row final">
           <span>Total pago</span>
@@ -531,14 +531,32 @@
   </main>
 
   <script>
-    // Leitura inteligente de dados (SEM NENHUMA TRAVA DE REDIRECT OU SESSÃO)
     (()=>{
+      // Trava de segurança: impede acesso direto sem compra iniciada/confirmada
+      const sessionKey = 'cordee.calcas.ironpayOrder';
+      let orderData = null;
       try {
-        const orderData = JSON.parse(sessionStorage.getItem('cordee.calcas.ironpayOrder') || localStorage.getItem('cordee.calcas.ironpayOrder') || '{}');
+        orderData = JSON.parse(sessionStorage.getItem(sessionKey) || localStorage.getItem(sessionKey) || 'null');
+      } catch {}
+
+      const urlParams = new URLSearchParams(location.search);
+      const isPreview = urlParams.get('preview') === '1' || urlParams.get('demo') === '1';
+
+      // Se não houver pedido válido no navegador e não for preview, redireciona para o checkout
+      if (!orderData?.id && !isPreview) {
+        location.replace('../checkout/');
+        return;
+      }
+
+      // Se o pedido ainda estiver pendente (sem pagar), direciona para o pagamento
+      if (orderData?.status === 'pending' && !isPreview) {
+        location.replace('../pagamento/?pedido=' + encodeURIComponent(orderData.id));
+        return;
+      }
+
+      try {
         const customer = orderData?.customer || orderData?.receipt?.customer || {};
         const selection = orderData?.selection || JSON.parse(sessionStorage.getItem('cordee.calcas.selection') || '{}');
-        const shippingMethod = sessionStorage.getItem('cordee.calcas.shippingMethod') || 'pac';
-        const shippingFee = Number(sessionStorage.getItem('cordee.calcas.shippingFee') || 0);
 
         if (customer.name) {
           const firstName = customer.name.trim().split(/\s+/)[0];
@@ -570,16 +588,16 @@
           document.getElementById('productVariant').textContent = `${selection.colors.join(' + ')} · ${selection.size || 'M (38-40)'}`;
         }
 
-        if (shippingMethod === 'sedex' || shippingFee > 0) {
-          document.getElementById('shippingMethodName').textContent = 'Correios (SEDEX Express)';
-        }
+        // Envio SEMPRE somente Correios
+        const shippingEl = document.getElementById('shippingMethodName');
+        if (shippingEl) shippingEl.textContent = 'Correios';
 
-        if (orderData.amount) {
+        if (orderData?.amount) {
           const val = (orderData.amount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
           document.getElementById('orderTotalValue').textContent = val;
         }
       } catch (e) {
-        console.warn('Preview mode active:', e);
+        console.warn('Order display error:', e);
       }
     })();
   </script>
