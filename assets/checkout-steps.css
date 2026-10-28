@@ -961,109 +961,118 @@ a { color: inherit; text-decoration: none; }
 /* QR Code Card */
 .pix-qr-card {
   background: #ffffff;
-  border: 1px solid #eef2f6;
-  border-radius: 16px;
-  padding: 24px 16px 18px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  border: 1.5px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 24px 18px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   text-align: center;
   margin-bottom: 16px;
 }
 .qr-wrapper {
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  margin: 0 auto 12px;
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 .qr-code canvas, .qr-code svg, .qr-code img {
-  width: 200px;
-  height: 200px;
+  width: 210px;
+  height: 210px;
   display: block;
-  border-radius: 6px;
+  border-radius: 4px;
 }
-.qr-center-badge {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 44px;
-  height: 44px;
-  background: #ffffff;
-  border-radius: 50%;
+
+/* Super Destaque: Botão Copiar Pix Oficial */
+.btn-copy-pix-main {
+  width: 100%;
+  height: 52px;
+  background: #009ee3;
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 16.5px;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-  pointer-events: none;
+  gap: 10px;
+  margin-top: 14px;
+  box-shadow: 0 4px 16px rgba(0, 158, 227, 0.35);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-family: inherit;
 }
-.qr-center-badge svg {
-  width: 32px;
-  height: 32px;
-  display: block;
+.btn-copy-pix-main:hover {
+  background: #0084c2;
+  box-shadow: 0 6px 20px rgba(0, 158, 227, 0.45);
+  transform: translateY(-1px);
+}
+.btn-copy-pix-main:active {
+  transform: scale(0.98);
+}
+.btn-copy-pix-main.copied {
+  background: #00a650 !important;
+  box-shadow: 0 4px 16px rgba(0, 166, 80, 0.4) !important;
+}
+.copy-main-icon {
+  width: 22px;
+  height: 22px;
+  stroke: #ffffff;
+  flex-shrink: 0;
 }
 
-/* Código Pix Box */
+/* Card do Código Pix (Copia e Cola) */
 .pix-copy-card {
   background: #f8fafc;
-  border: 1px solid #eef2f6;
+  border: 1.5px dashed #cbd5e1;
   border-radius: 12px;
   padding: 12px 14px;
-  margin-top: 20px;
+  margin-top: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.pix-copy-card:hover {
+  background: #f0f7ff;
+  border-color: #009ee3;
+}
+.pix-copy-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  text-align: left;
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-.pix-copy-card:hover {
-  background: #f1f5f9;
-  border-color: #e2e8f0;
-}
-.pix-copy-info {
-  flex: 1;
-  min-width: 0;
+  margin-bottom: 6px;
 }
 .pix-copy-label {
-  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #009ee3;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.pix-click-hint {
   font-size: 12px;
   font-weight: 600;
   color: #64748b;
-  margin-bottom: 4px;
 }
 .pix-copy-code-text {
-  font-size: 11px;
-  line-height: 1.35;
-  color: #475569;
+  font-size: 11.5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  line-height: 1.4;
+  color: #334155;
   word-break: break-all;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin: 0;
-}
-.pix-copy-action-btn {
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
   background: #ffffff;
+  padding: 8px 10px;
+  border-radius: 6px;
   border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  cursor: pointer;
-  transition: transform 0.1s ease, border-color 0.15s ease;
-}
-.pix-copy-action-btn:active {
-  transform: scale(0.94);
-}
-.pix-copy-action-btn svg {
-  width: 19px;
-  height: 19px;
-  stroke: #009ee3;
 }
 
 /* Aguardando pagamento Notice */
