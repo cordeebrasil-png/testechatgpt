@@ -760,7 +760,7 @@ a { color: inherit; text-decoration: none; }
 </head>
 <body>
   <!-- Hidden legacy hooks so all tracking scripts and configs work smoothly -->
-  <div hidden class="product"><img id="legacyProductImg" src="/assets/azul-escuro.png" alt=""></div>
+  <div hidden class="product"><img id="legacyProductImg" src="/calcas/assets/azul-escuro.png" alt=""></div>
   <span hidden id="calcasSelection"></span>
 
   <main class="checkout-shell">
@@ -782,7 +782,7 @@ a { color: inherit; text-decoration: none; }
 
     <section class="product-card">
       <div class="product-thumb">
-        <img id="productThumbImg" src="/assets/azul-escuro.png" alt="Kit 2 Calças Jeans Modalle">
+        <img id="productThumbImg" src="/calcas/assets/azul-escuro.png" alt="Kit 2 Calças Jeans Modalle">
       </div>
       <div class="product-details">
         <h2 class="product-title" id="productTitle">Kit 2 Calças Jeans UltraModel</h2>
@@ -1077,7 +1077,7 @@ a { color: inherit; text-decoration: none; }
       'Azul médio': 'azul-medio.png',
       'Azul claro': 'azul-claro.png'
     };
-    const chosenImg = '/assets/' + (imgMap[cor1] || 'azul-escuro.png');
+    const chosenImg = '/calcas/assets/' + (imgMap[cor1] || 'azul-escuro.png');
     el('productThumbImg').src = chosenImg;
     el('legacyProductImg').src = chosenImg;
 
