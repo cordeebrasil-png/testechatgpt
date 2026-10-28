@@ -642,6 +642,156 @@ a { color: inherit; text-decoration: none; }
   white-space: nowrap;
 }
 
+
+/* CEP Modal and Address Finder */
+.btn-link-address-search {
+  background: none;
+  border: none;
+  color: #009ee3;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-align: left;
+  font-family: inherit;
+}
+.btn-link-address-search:hover {
+  color: #0084c2;
+}
+.cep-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.cep-modal-backdrop[hidden] {
+  display: none !important;
+}
+.cep-modal-content {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: modalFadeIn 0.2s ease-out;
+}
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+.cep-modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cep-modal-header h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+}
+.cep-modal-body {
+  padding: 18px 20px;
+  overflow-y: auto;
+}
+.cep-modal-desc {
+  font-size: 13.5px;
+  color: #475569;
+  margin: 0 0 14px;
+  line-height: 1.4;
+}
+.modal-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+.modal-field label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #334155;
+}
+.modal-input {
+  width: 100%;
+  height: 42px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 14px;
+  color: #0f172a;
+  background: #f8fafc;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+.modal-input:focus {
+  border-color: #009ee3;
+  outline: none;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.15);
+}
+.modal-cep-results {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.modal-cep-item {
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+.modal-cep-item:hover {
+  background: #edf5ff;
+  border-color: #009ee3;
+}
+.modal-cep-item strong {
+  display: block;
+  font-size: 14px;
+  color: #009ee3;
+  margin-bottom: 2px;
+}
+.modal-cep-item span {
+  display: block;
+  font-size: 12.5px;
+  color: #475569;
+  line-height: 1.35;
+}
+
 /* Payment Methods */
 .payment-methods {
   display: flex;
@@ -1371,6 +1521,9 @@ a { color: inherit; text-decoration: none; }
             <input id="cep" type="tel" placeholder="00000-000" required maxlength="9">
             <button class="btn-buscar-cep" id="searchCep" type="button">Buscar CEP</button>
           </div>
+          <div style="margin-top: 6px; text-align: left;">
+            <button type="button" id="btnOpenCepModal" class="btn-link-address-search">Não sabe seu CEP? Buscar pelo endereço ›</button>
+          </div>
           <p class="field-error" id="cepError"></p>
           <p id="cepStatus"></p>
         </div>
@@ -1441,24 +1594,6 @@ a { color: inherit; text-decoration: none; }
           <div class="ship-info-col">
             <h3 class="ship-title">PAC — Entrega econômica</h3>
             <p class="ship-deadline">Receba em 5 a 10 dias úteis</p>
-            <div class="ship-tags-row">
-              <span class="ship-tag">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="21 8 21 21 3 21 3 8"/>
-                  <rect x="1" y="3" width="22" height="5"/>
-                  <line x1="10" y1="12" x2="14" y2="12"/>
-                </svg>
-                Opção mais econômica
-              </span>
-              <span class="ship-tag-sep">|</span>
-              <span class="ship-tag">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  <polyline points="9 12 11 14 15 10"/>
-                </svg>
-                Enviado pelos Correios
-              </span>
-            </div>
           </div>
 
           <div class="ship-badge-col">
@@ -1485,22 +1620,6 @@ a { color: inherit; text-decoration: none; }
           <div class="ship-info-col">
             <h3 class="ship-title">SEDEX — Entrega expressa</h3>
             <p class="ship-deadline">Receba em 2 a 5 dias úteis</p>
-            <div class="ship-tags-row">
-              <span class="ship-tag">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                </svg>
-                Entrega mais rápida
-              </span>
-              <span class="ship-tag-sep">|</span>
-              <span class="ship-tag">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  <polyline points="9 12 11 14 15 10"/>
-                </svg>
-                Enviado pelos Correios
-              </span>
-            </div>
           </div>
 
           <div class="ship-badge-col">
@@ -1539,14 +1658,13 @@ a { color: inherit; text-decoration: none; }
           <div class="payment-card active">
             <div class="payment-card-left">
               <div class="pm-icon-wrap pix">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12.0003 3.6L6.3433 9.257C5.5623 10.038 5.5623 11.304 6.3433 12.085L12.0003 17.742L17.6573 12.085C18.4383 11.304 18.4383 10.038 17.6573 9.257L12.0003 3.6Z"/>
-                  <circle cx="12" cy="8" r="1.5" fill="#ffffff"/>
-                  <circle cx="12" cy="13.5" r="1.5" fill="#ffffff"/>
+                <svg width="22" height="22" viewBox="0 0 512 512" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M112.57 391.19c29.17 0 56.6-11.36 77.23-31.99l66.2-66.2 66.2 66.2c20.63 20.63 48.06 31.99 77.23 31.99h14.94l-73.67-73.67c-17.76-17.76-17.76-46.56 0-64.32l73.67-73.67h-14.94c-29.17 0-56.6 11.36-77.23 31.99l-66.2 66.2-66.2-66.2c-20.63-20.63-48.06-31.99-77.23-31.99H97.63l73.67 73.67c17.76 17.76 17.76 46.56 0 64.32l-73.67 73.67h14.94z"/>
+                  <path d="M409.43 105.87h-14.94c-25.04 0-48.59 9.75-66.3 27.46l-72.19 72.19-72.19-72.19c-17.71-17.71-41.26-27.46-66.3-27.46H102.57C45.91 105.87 0 151.78 0 208.44v95.12c0 56.66 45.91 102.57 102.57 102.57h14.94c25.04 0 48.59-9.75 66.3-27.46l72.19-72.19 72.19 72.19c17.71 17.71 41.26 27.46 66.3 27.46h14.94c56.66 0 102.57-45.91 102.57-102.57v-95.12c0-56.66-45.91-102.57-102.57-102.57zm72.57 197.69c0 39.99-32.58 72.57-72.57 72.57h-14.94c-17.47 0-33.89-6.8-46.24-19.16l-78.25-78.25c-7.81-7.81-20.47-7.81-28.28 0l-78.25 78.25c-12.35 12.36-28.77 19.16-46.24 19.16H102.57c-39.99 0-72.57-32.58-72.57-72.57v-95.12c0-39.99 32.58-72.57 72.57-72.57h14.94c17.47 0 33.89 6.8 46.24 19.16l78.25 78.25c7.81 7.81 20.47 7.81 28.28 0l78.25-78.25c12.35-12.36 28.77-19.16 46.24-19.16h14.94c39.99 0 72.57 32.58 72.57 72.57v95.12z"/>
                 </svg>
               </div>
               <div class="pm-texts">
-                <h3>Pix Mercado Pago</h3>
+                <h3>PIX</h3>
                 <p>Aprovação imediata e envio prioritário</p>
               </div>
             </div>
@@ -1556,56 +1674,10 @@ a { color: inherit; text-decoration: none; }
               </svg>
             </div>
           </div>
-
-          <div class="payment-card">
-            <div class="payment-card-left">
-              <div class="pm-icon-wrap card">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <rect x="2" y="5" width="20" height="14" rx="2"/>
-                  <line x1="2" y1="10" x2="22" y2="10"/>
-                </svg>
-              </div>
-              <div class="pm-texts">
-                <h3>Cartão de crédito</h3>
-                <p>Pague em até 6x sem juros</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="payment-card">
-            <div class="payment-card-left">
-              <div class="pm-icon-wrap card">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <rect x="2" y="5" width="20" height="14" rx="2"/>
-                  <line x1="2" y1="10" x2="22" y2="10"/>
-                </svg>
-              </div>
-              <div class="pm-texts">
-                <h3>Cartão de débito</h3>
-                <p>Débito à vista</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="payment-card">
-            <div class="payment-card-left">
-              <div class="pm-icon-wrap wallet">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/>
-                  <path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/>
-                  <circle cx="18" cy="14" r="1"/>
-                </svg>
-              </div>
-              <div class="pm-texts">
-                <h3>Saldo Mercado Pago</h3>
-                <p>Saldo disponível na sua conta</p>
-              </div>
-            </div>
-          </div>
         </div>
 
         <button class="btn-primary" id="finish" type="submit">
-          <span>Continuar com Pix Mercado Pago</span>
+          <span>Continuar com Pix</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
@@ -1863,11 +1935,16 @@ a { color: inherit; text-decoration: none; }
       const btn = el('searchCep');
 
       if (cleanCep.length !== 8) {
-        if (statusEl) {
-          statusEl.style.color = '#e11d48';
-          statusEl.textContent = 'Digite os 8 números do seu CEP para buscar.';
+        // Se não tem 8 números no CEP, verifica se o usuário preencheu rua e cidade para descobrir o CEP!
+        const rua = (el('street')?.value || '').trim();
+        const cid = (el('city')?.value || '').trim();
+        const uf = (el('state')?.value || 'SP').trim();
+        if (rua.length >= 3 && cid.length >= 3) {
+          searchCepByAddress(uf, cid, rua);
+          return;
         }
-        el('cep').focus();
+        // Se ainda não preencheu, abre o modal para buscar pelo endereço
+        openCepModal();
         return;
       }
 
@@ -1880,7 +1957,7 @@ a { color: inherit; text-decoration: none; }
       }
       if (statusEl) {
         statusEl.style.color = '#0284c7';
-        statusEl.textContent = 'Buscando endereço…';
+        statusEl.textContent = 'Buscando endereço pelo CEP…';
       }
 
       try {
@@ -1934,23 +2011,10 @@ a { color: inherit; text-decoration: none; }
         clearTimeout(timeoutId);
 
         if (data) {
-          if (data.logradouro && el('street')) el('street').value = data.logradouro;
-          if (data.bairro && el('district')) el('district').value = data.bairro;
-          if (data.localidade && el('city')) el('city').value = data.localidade;
-          if (data.uf && el('state')) el('state').value = data.uf.toUpperCase();
-
-          ['street', 'district', 'city', 'state'].forEach(id => {
-            const input = el(id);
-            if (input && input.value) {
-              input.classList.add('has-value');
-              input.dispatchEvent(new Event('input', { bubbles: true }));
-              input.dispatchEvent(new Event('change', { bubbles: true }));
-            }
-          });
-
+          applyAddressData(data);
           if (statusEl) {
             statusEl.style.color = '#16a34a';
-            statusEl.textContent = '✓ Endereço preenchido! Preencha o número da residência.';
+            statusEl.textContent = '✓ Endereço preenchido com sucesso! Digite o número.';
           }
           if (el('number')) {
             el('number').focus();
@@ -1958,14 +2022,14 @@ a { color: inherit; text-decoration: none; }
         } else {
           if (statusEl) {
             statusEl.style.color = '#dc2626';
-            statusEl.textContent = 'CEP não encontrado. Preencha os campos abaixo manualmente.';
+            statusEl.textContent = 'CEP não encontrado. Preencha seu endereço abaixo.';
           }
           if (el('street')) el('street').focus();
         }
       } catch (err) {
         if (statusEl) {
           statusEl.style.color = '#475569';
-          statusEl.textContent = 'Preencha o endereço manualmente abaixo.';
+          statusEl.textContent = 'Preencha seu endereço nos campos abaixo.';
         }
       } finally {
         if (btn) {
@@ -1974,6 +2038,149 @@ a { color: inherit; text-decoration: none; }
         }
       }
     }
+
+    function applyAddressData(data) {
+      if (data.logradouro && el('street')) el('street').value = data.logradouro;
+      if (data.bairro && el('district')) el('district').value = data.bairro;
+      if (data.localidade && el('city')) el('city').value = data.localidade;
+      if (data.uf && el('state')) el('state').value = data.uf.toUpperCase();
+      if (data.cep && el('cep')) el('cep').value = data.cep;
+
+      ['street', 'district', 'city', 'state', 'cep'].forEach(id => {
+        const input = el(id);
+        if (input && input.value) {
+          input.classList.add('has-value');
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      });
+    }
+
+    // Busca de CEP por endereço (ViaCEP oficial)
+    async function searchCepByAddress(uf, cidade, logradouro) {
+      const statusEl = el('cepStatus');
+      const btn = el('searchCep');
+      if (btn) { btn.disabled = true; btn.textContent = 'Buscando CEP…'; }
+      if (statusEl) { statusEl.style.color = '#0284c7'; statusEl.textContent = 'Descobrindo o CEP pelo endereço informado…'; }
+
+      try {
+        const cleanUf = (uf || 'SP').trim().toUpperCase();
+        const cleanCid = encodeURIComponent((cidade || '').trim());
+        const cleanLog = encodeURIComponent((logradouro || '').trim());
+        const url = 'https://viacep.com.br/ws/' + cleanUf + '/' + cleanCid + '/' + cleanLog + '/json/';
+
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Falha na busca');
+        const list = await res.json();
+
+        if (Array.isArray(list) && list.length > 0) {
+          const best = list[0];
+          applyAddressData(best);
+          if (statusEl) {
+            statusEl.style.color = '#16a34a';
+            statusEl.textContent = '✓ CEP ' + best.cep + ' encontrado e preenchido com sucesso!';
+          }
+          if (el('number')) el('number').focus();
+        } else {
+          openCepModal(uf, cidade, logradouro, 'Nenhum CEP exato encontrado para esse endereço. Tente refinar a busca abaixo:');
+        }
+      } catch (e) {
+        openCepModal(uf, cidade, logradouro, 'Informe os dados abaixo para encontrar seu CEP:');
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = 'Buscar CEP'; }
+      }
+    }
+
+    // Modal de busca de CEP pelo endereço
+    function openCepModal(uf, city, street, customMsg) {
+      const modal = el('cepSearchModal');
+      if (!modal) return;
+      if (uf && el('modalCepUf')) el('modalCepUf').value = uf;
+      if (city && el('modalCepCity')) el('modalCepCity').value = city;
+      else if (el('city')?.value && el('modalCepCity')) el('modalCepCity').value = el('city').value;
+      if (street && el('modalCepStreet')) el('modalCepStreet').value = street;
+      else if (el('street')?.value && el('modalCepStreet')) el('modalCepStreet').value = el('street').value;
+
+      const status = el('modalCepStatus');
+      if (status) {
+        status.style.color = customMsg ? '#e11d48' : '#0284c7';
+        status.textContent = customMsg || '';
+      }
+      if (el('modalCepResults')) el('modalCepResults').innerHTML = '';
+      modal.hidden = false;
+    }
+
+    function closeCepModal() {
+      const modal = el('cepSearchModal');
+      if (modal) modal.hidden = true;
+    }
+
+    el('btnOpenCepModal')?.addEventListener('click', () => openCepModal());
+    el('btnCloseCepModal')?.addEventListener('click', closeCepModal);
+    el('cepSearchModal')?.addEventListener('click', (e) => {
+      if (e.target === el('cepSearchModal')) closeCepModal();
+    });
+
+    el('btnDoSearchCepByAddress')?.addEventListener('click', async () => {
+      const uf = el('modalCepUf')?.value || 'SP';
+      const city = (el('modalCepCity')?.value || '').trim();
+      const street = (el('modalCepStreet')?.value || '').trim();
+      const status = el('modalCepStatus');
+      const resultsContainer = el('modalCepResults');
+
+      if (city.length < 3 || street.length < 3) {
+        if (status) {
+          status.style.color = '#e11d48';
+          status.textContent = 'Preencha a cidade e o nome da rua (pelo menos 3 caracteres).';
+        }
+        return;
+      }
+
+      if (status) {
+        status.style.color = '#0284c7';
+        status.textContent = 'Buscando CEPs disponíveis…';
+      }
+      if (resultsContainer) resultsContainer.innerHTML = '';
+
+      try {
+        const url = 'https://viacep.com.br/ws/' + uf + '/' + encodeURIComponent(city) + '/' + encodeURIComponent(street) + '/json/';
+        const res = await fetch(url);
+        const list = await res.json();
+
+        if (Array.isArray(list) && list.length > 0) {
+          if (status) {
+            status.style.color = '#16a34a';
+            status.textContent = list.length + ' CEP(s) encontrado(s). Clique no seu endereço:';
+          }
+          list.slice(0, 15).forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'modal-cep-item';
+            card.innerHTML = '<strong>CEP: ' + item.cep + '</strong><span>' + (item.logradouro || street) + ' - ' + (item.bairro || 'Centro') + ', ' + item.localidade + '/' + item.uf + '</span>';
+            card.addEventListener('click', () => {
+              applyAddressData(item);
+              closeCepModal();
+              const mainStatus = el('cepStatus');
+              if (mainStatus) {
+                mainStatus.style.color = '#16a34a';
+                mainStatus.textContent = '✓ CEP ' + item.cep + ' selecionado com sucesso!';
+              }
+              if (el('number')) el('number').focus();
+            });
+            resultsContainer.appendChild(card);
+          });
+        } else {
+          if (status) {
+            status.style.color = '#dc2626';
+            status.textContent = 'Nenhum CEP encontrado. Confira a ortografia da rua ou cidade.';
+          }
+        }
+      } catch (err) {
+        if (status) {
+          status.style.color = '#dc2626';
+          status.textContent = 'Erro ao consultar serviço de CEP. Tente novamente.';
+        }
+      }
+    });
 
     el('cep').addEventListener('input', () => {
       clearTimeout(cepDebounceTimer);
@@ -2081,5 +2288,66 @@ a { color: inherit; text-decoration: none; }
   })();
   </script>
   <!-- generated:checkout:end -->
+
+  <!-- Modal: Descobrir CEP pelo endereço -->
+  <div id="cepSearchModal" class="cep-modal-backdrop" hidden>
+    <div class="cep-modal-content">
+      <div class="cep-modal-header">
+        <h3>Descobrir CEP pelo endereço</h3>
+        <button type="button" id="btnCloseCepModal" class="btn-close-modal">&times;</button>
+      </div>
+      <div class="cep-modal-body">
+        <p class="cep-modal-desc">Informe seu estado, cidade e nome da rua para localizarmos o CEP oficial:</p>
+        <div class="modal-form-grid">
+          <div class="modal-field">
+            <label>Estado (UF)</label>
+            <select id="modalCepUf" class="modal-input">
+              <option value="SP" selected>SP - São Paulo</option>
+              <option value="RJ">RJ - Rio de Janeiro</option>
+              <option value="MG">MG - Minas Gerais</option>
+              <option value="RS">RS - Rio Grande do Sul</option>
+              <option value="PR">PR - Paraná</option>
+              <option value="SC">SC - Santa Catarina</option>
+              <option value="BA">BA - Bahia</option>
+              <option value="GO">GO - Goiás</option>
+              <option value="PE">PE - Pernambuco</option>
+              <option value="CE">CE - Ceará</option>
+              <option value="DF">DF - Distrito Federal</option>
+              <option value="ES">ES - Espírito Santo</option>
+              <option value="MA">MA - Maranhão</option>
+              <option value="MT">MT - Mato Grosso</option>
+              <option value="MS">MS - Mato Grosso do Sul</option>
+              <option value="PA">PA - Pará</option>
+              <option value="PB">PB - Paraíba</option>
+              <option value="RN">RN - Rio Grande do Norte</option>
+              <option value="AL">AL - Alagoas</option>
+              <option value="PI">PI - Piauí</option>
+              <option value="SE">SE - Sergipe</option>
+              <option value="AM">AM - Amazonas</option>
+              <option value="RO">RO - Rondônia</option>
+              <option value="AC">AC - Acre</option>
+              <option value="AP">AP - Amapá</option>
+              <option value="RR">RR - Roraima</option>
+              <option value="TO">TO - Tocantins</option>
+            </select>
+          </div>
+          <div class="modal-field">
+            <label>Cidade</label>
+            <input type="text" id="modalCepCity" class="modal-input" placeholder="Ex: São Paulo">
+          </div>
+          <div class="modal-field">
+            <label>Rua / Avenida</label>
+            <input type="text" id="modalCepStreet" class="modal-input" placeholder="Ex: Paulista ou Rua das Flores">
+          </div>
+        </div>
+        <button type="button" id="btnDoSearchCepByAddress" class="btn-primary" style="margin-top: 14px; height: 46px; font-size: 15px;">
+          Pesquisar CEP
+        </button>
+        <div id="modalCepStatus" style="margin-top: 10px; font-size: 13.5px; font-weight: 600;"></div>
+        <div id="modalCepResults" class="modal-cep-results"></div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
