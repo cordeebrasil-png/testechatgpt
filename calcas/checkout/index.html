@@ -431,48 +431,38 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 0 0 3.5px rgba(0, 158, 227, 0.25);
 }
 
-/* Checks nos campos já preenchidos / válidos */
+/* Validação dos campos: discreta, elegante e padrão Mercado Pago */
 .field label {
-  display: flex !important;
-  align-items: center !important;
-  font-size: 15px;
-  font-weight: 700;
-  color: #0f172a;
-  margin-bottom: 6px;
-}
-.field-check-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 6px;
-  opacity: 0;
-  transform: scale(0.6);
-  transition: opacity 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  pointer-events: none;
-  line-height: 1;
-}
-.field-check-badge.active {
-  opacity: 1;
-  transform: scale(1);
-}
-.field-check-badge svg {
-  width: 17px;
-  height: 17px;
-  display: block;
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  margin-bottom: 6px !important;
 }
 
-/* Borda verde suave e checkmark interno à direita no input preenchido */
-.field input.field-valid:not(#cep), .field select.field-valid {
+/* Checkmark delicado e minimalista de traço fino no canto direito do campo */
+.field input.field-valid:not(#cep):not(#extra), .field input#extra.field-valid {
+  background-color: #ffffff !important;
   border-color: #00a650 !important;
-  background-color: #f6fcf8 !important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300a650'%3E%3Cpath fill-rule='evenodd' d='M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300a650' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") !important;
   background-repeat: no-repeat !important;
   background-position: right 14px center !important;
-  background-size: 20px 20px !important;
+  background-size: 17px 17px !important;
 }
+
+/* CEP com botão de busca à direita: check fino antes do botão */
 .cep-field-wrap input.field-valid {
+  background-color: #ffffff !important;
   border-color: #00a650 !important;
-  background-color: #f6fcf8 !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300a650' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 115px center !important;
+  background-size: 16px 16px !important;
+}
+
+/* Select Estado: apenas borda verde suave para não colidir com a seta */
+.field select.field-valid {
+  background-color: #ffffff !important;
+  border-color: #00a650 !important;
 }
 
 .field [aria-invalid="true"] {
@@ -1561,22 +1551,22 @@ a { color: inherit; text-decoration: none; }
 
       <div class="form-card">
         <div class="field">
-          <label for="name">Nome completo <span class="field-check-badge" id="nameCheck"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#00a650"/><path d="M6 10.2l2.8 2.8 5.4-5.4" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+          <label for="name">Nome completo </label>
           <input id="name" type="text" placeholder="Digite seu nome e sobrenome" required autocomplete="name">
           <p class="field-error" id="nameError"></p>
         </div>
         <div class="field">
-          <label for="cpf">CPF <span class="field-check-badge" id="cpfCheck"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#00a650"/><path d="M6 10.2l2.8 2.8 5.4-5.4" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+          <label for="cpf">CPF </label>
           <input id="cpf" type="tel" placeholder="000.000.000-00" required maxlength="14">
           <p class="field-error" id="cpfError"></p>
         </div>
         <div class="field">
-          <label for="email">E-mail <span class="field-check-badge" id="emailCheck"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#00a650"/><path d="M6 10.2l2.8 2.8 5.4-5.4" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+          <label for="email">E-mail </label>
           <input id="email" type="email" placeholder="seu@email.com" required autocomplete="email">
           <p class="field-error" id="emailError"></p>
         </div>
         <div class="field">
-          <label for="phone">Celular com WhatsApp <span class="field-check-badge" id="phoneCheck"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#00a650"/><path d="M6 10.2l2.8 2.8 5.4-5.4" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+          <label for="phone">Celular com WhatsApp </label>
           <input id="phone" type="tel" placeholder="(00) 00000-0000" required autocomplete="tel" maxlength="15">
           <p class="field-error" id="phoneError"></p>
         </div>
@@ -1609,7 +1599,7 @@ a { color: inherit; text-decoration: none; }
 
       <div class="form-card">
         <div class="field">
-          <label for="cep">CEP <span class="field-check-badge" id="cepCheck"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#00a650"/><path d="M6 10.2l2.8 2.8 5.4-5.4" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+          <label for="cep">CEP </label>
           <div class="cep-field-wrap">
             <input id="cep" type="tel" placeholder="00000-000" required maxlength="9">
             <button class="btn-buscar-cep" id="searchCep" type="button">Buscar CEP</button>
@@ -1621,29 +1611,29 @@ a { color: inherit; text-decoration: none; }
           <p id="cepStatus"></p>
         </div>
         <div class="field">
-          <label for="street">Rua / Avenida <span class="field-check-badge" id="streetCheck"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#00a650"/><path d="M6 10.2l2.8 2.8 5.4-5.4" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+          <label for="street">Rua / Avenida </label>
           <input id="street" type="text" placeholder="Digite o nome da sua rua" required>
           <p class="field-error" id="streetError"></p>
         </div>
         <div class="fields-grid-2 number-comp">
           <div class="field">
-            <label for="number">Número <span class="field-check-badge" id="numberCheck"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#00a650"/><path d="M6 10.2l2.8 2.8 5.4-5.4" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+            <label for="number">Número </label>
             <input id="number" type="text" placeholder="Nº" required>
             <p class="field-error" id="numberError"></p>
           </div>
           <div class="field">
-            <label for="extra">Complemento (opcional) <span class="field-check-badge" id="extraCheck"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#00a650"/><path d="M6 10.2l2.8 2.8 5.4-5.4" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+            <label for="extra">Complemento (opcional) </label>
             <input id="extra" type="text" placeholder="Apto, bloco, etc.">
           </div>
         </div>
         <div class="fields-grid-2 city-state">
           <div class="field">
-            <label for="city">Cidade <span class="field-check-badge" id="cityCheck"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#00a650"/><path d="M6 10.2l2.8 2.8 5.4-5.4" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+            <label for="city">Cidade </label>
             <input id="city" type="text" placeholder="Digite sua cidade" required>
             <p class="field-error" id="cityError"></p>
           </div>
           <div class="field">
-            <label for="state">Estado <span class="field-check-badge" id="stateCheck"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#00a650"/><path d="M6 10.2l2.8 2.8 5.4-5.4" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+            <label for="state">Estado </label>
             <select id="state" required>
               <option value="">UF</option>
               <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option>
@@ -2006,7 +1996,6 @@ a { color: inherit; text-decoration: none; }
     // Lógica dos checks nos campos preenchidos
     function updateFieldCheck(id) {
       const input = el(id);
-      const badge = el(id + 'Check');
       if (!input) return;
       const val = input.value.trim();
       let isValid = false;
@@ -2020,12 +2009,10 @@ a { color: inherit; text-decoration: none; }
       if (isValid) {
         input.classList.add('field-valid');
         input.removeAttribute('aria-invalid');
-        if (badge) badge.classList.add('active');
         const errEl = el(id + 'Error');
         if (errEl) errEl.textContent = '';
       } else {
         input.classList.remove('field-valid');
-        if (badge) badge.classList.remove('active');
       }
     }
 
@@ -2092,14 +2079,7 @@ a { color: inherit; text-decoration: none; }
         const label = btn.querySelector('.step-label');
         if (label) {
           const original = label.getAttribute('data-title') || label.textContent.trim().replace(/s*✓.*$/, '');
-          if (!label.getAttribute('data-title')) {
-            label.setAttribute('data-title', original);
-          }
-          if (isCompleted) {
-            label.innerHTML = original + ' <span class="step-check-mark"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#00a650"/><path d="M4.5 8.2L6.8 10.5L11.5 5.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
-          } else {
-            label.textContent = original;
-          }
+          label.textContent = original;
         }
       });
 
