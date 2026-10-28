@@ -966,57 +966,108 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.15;
 }
 
-/* QR Code Card */
+/* QR Code Card - Compacto e Elegante */
 .pix-qr-card {
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
   border-radius: 18px;
-  padding: 24px 18px 20px;
+  padding: 22px 18px 22px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   text-align: center;
   margin-bottom: 16px;
 }
+
+/* Área do QR Code mais compacta para dar foco ao Copia e Cola */
 .qr-wrapper {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 12px;
-  padding: 12px;
+  margin: 0 auto 16px;
+  padding: 10px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 .qr-code canvas, .qr-code svg, .qr-code img {
-  width: 210px;
-  height: 210px;
+  width: 145px !important;
+  height: 145px !important;
   display: block;
   border-radius: 4px;
 }
+.qr-helper-text {
+  font-size: 12.5px;
+  color: #64748b;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
 
-/* Super Destaque: Botão Copiar Pix Oficial */
-.btn-copy-pix-main {
-  width: 100%;
-  height: 52px;
+/* =========================================
+   BLOCO PIX COPIA E COLA (SUPER DESTACADO)
+   ========================================= */
+.pix-copia-cola-section {
+  background: #f0f7ff;
+  border: 2px solid #009ee3;
+  border-radius: 14px;
+  padding: 16px 14px;
+  margin-top: 6px;
+  box-shadow: 0 3px 12px rgba(0, 158, 227, 0.12);
+  text-align: left;
+}
+.copia-cola-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.copia-cola-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   background: #009ee3;
   color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 4px 9px;
+  border-radius: 6px;
+}
+.copia-cola-badge svg {
+  width: 13px;
+  height: 13px;
+}
+.copia-cola-sub {
+  font-size: 12px;
+  font-weight: 600;
+  color: #0284c7;
+}
+
+/* Botão Principal Gigante de Copiar Pix */
+.btn-copy-pix-main {
+  width: 100%;
+  height: 56px;
+  background: linear-gradient(180deg, #00a8f3 0%, #009ee3 100%);
+  color: #ffffff;
   border-radius: 12px;
-  font-size: 16.5px;
-  font-weight: 700;
+  font-size: 17.5px;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-top: 14px;
-  box-shadow: 0 4px 16px rgba(0, 158, 227, 0.35);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 18px rgba(0, 158, 227, 0.4);
   cursor: pointer;
   transition: all 0.2s ease;
   border: none;
   font-family: inherit;
+  letter-spacing: -0.2px;
 }
 .btn-copy-pix-main:hover {
   background: #0084c2;
-  box-shadow: 0 6px 20px rgba(0, 158, 227, 0.45);
+  box-shadow: 0 6px 22px rgba(0, 158, 227, 0.5);
   transform: translateY(-1px);
 }
 .btn-copy-pix-main:active {
@@ -1024,50 +1075,34 @@ a { color: inherit; text-decoration: none; }
 }
 .btn-copy-pix-main.copied {
   background: #00a650 !important;
-  box-shadow: 0 4px 16px rgba(0, 166, 80, 0.4) !important;
+  box-shadow: 0 5px 18px rgba(0, 166, 80, 0.45) !important;
 }
 .copy-main-icon {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   stroke: #ffffff;
   flex-shrink: 0;
 }
 
-/* Card do Código Pix (Copia e Cola) */
-.pix-copy-card {
-  background: #f8fafc;
-  border: 1.5px dashed #cbd5e1;
-  border-radius: 12px;
-  padding: 12px 14px;
-  margin-top: 12px;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-.pix-copy-card:hover {
-  background: #f0f7ff;
-  border-color: #009ee3;
-}
-.pix-copy-header {
+/* Caixa com o código clicável */
+.pix-code-container {
+  background: #ffffff;
+  border: 1.5px dashed #93c5fd;
+  border-radius: 10px;
+  padding: 10px 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 6px;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
-.pix-copy-label {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: #009ee3;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.pix-click-hint {
-  font-size: 12px;
-  font-weight: 600;
-  color: #64748b;
+.pix-code-container:hover {
+  border-color: #009ee3;
+  background: #f8fafc;
 }
 .pix-copy-code-text {
-  font-size: 11.5px;
+  font-size: 12px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   line-height: 1.4;
   color: #334155;
@@ -1077,10 +1112,13 @@ a { color: inherit; text-decoration: none; }
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin: 0;
-  background: #ffffff;
-  padding: 8px 10px;
-  border-radius: 6px;
-  border: 1px solid #e2e8f0;
+}
+.pix-code-copy-mini-hint {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #009ee3;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Aguardando pagamento Notice */
@@ -1444,30 +1482,39 @@ a { color: inherit; text-decoration: none; }
     </div>
 
     <div class="pix-qr-card">
+      <!-- QR Code Compacto -->
       <div class="qr-wrapper">
         <div class="qr-code">
-          <!-- Canvas do QR Code limpo e nítido gerado dinamicamente -->
-          <canvas width="210" height="210"></canvas>
+          <canvas width="145" height="145"></canvas>
         </div>
       </div>
+      <p class="qr-helper-text">Aponte a câmera do seu celular para escanear o QR Code</p>
 
-      <!-- BOTÃO SUPER DESTACADO COPIAR CÓDIGO PIX -->
-      <button class="btn-copy-pix-main" id="btnCopyPixMain" type="button">
-        <svg class="copy-main-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-        </svg>
-        <span id="btnCopyPixText">Copiar código Pix</span>
-      </button>
-
-      <!-- Caixa do Código Pix com clique facilitado -->
-      <div class="pix-copy-card" id="copyPixCard" title="Toque para copiar">
-        <div class="pix-copy-header">
-          <span class="pix-copy-label">Pix Copia e Cola</span>
-          <span class="pix-click-hint">Toque para copiar</span>
+      <!-- ABA PIX COPIA E COLA GIGANTE E DESTACADA -->
+      <div class="pix-copia-cola-section" id="pixCopiaColaSection">
+        <div class="copia-cola-badge-row">
+          <span class="copia-cola-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Pix Copia e Cola
+          </span>
+          <span class="copia-cola-sub">Mais rápido pelo celular</span>
         </div>
-        <p class="pix-copy-code-text" id="pixCodeDisplay">0002010102122680014br.gov.bcb.pix0136a8f4e7-2c1e-4b7a-a3b5-5f6d7e8f90ab520400005303986540594.915802BR5925ModalleJeans6009SAO PAULO62070503***6304A1B2</p>
-        <input id="pixCode" type="hidden" value="0002010102122680014br.gov.bcb.pix0136a8f4e7-2c1e-4b7a-a3b5-5f6d7e8f90ab520400005303986540594.915802BR5925ModalleJeans6009SAO PAULO62070503***6304A1B2">
+
+        <!-- Botão Principal Chamativo -->
+        <button class="btn-copy-pix-main" id="btnCopyPixMain" type="button">
+          <svg class="copy-main-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          <span id="btnCopyPixText">Copiar código Pix</span>
+        </button>
+
+        <!-- Caixa do Código Pix com toque facilitado -->
+        <div class="pix-code-container" id="copyPixCard" title="Toque para copiar">
+          <p class="pix-copy-code-text" id="pixCodeDisplay">0002010102122680014br.gov.bcb.pix0136a8f4e7-2c1e-4b7a-a3b5-5f6d7e8f90ab520400005303986540594.915802BR5925ModalleJeans6009SAO PAULO62070503***6304A1B2</p>
+          <span class="pix-code-copy-mini-hint">Copiar ›</span>
+          <input id="pixCode" type="hidden" value="0002010102122680014br.gov.bcb.pix0136a8f4e7-2c1e-4b7a-a3b5-5f6d7e8f90ab520400005303986540594.915802BR5925ModalleJeans6009SAO PAULO62070503***6304A1B2">
+        </div>
       </div>
     </div>
 
@@ -1559,8 +1606,7 @@ a { color: inherit; text-decoration: none; }
         try {
           const canvas = document.createElement('canvas');
           await QRCode.toCanvas(canvas, pixStr, {
-            width: 210,
-            margin: 1,
+            width: 145, margin: 1,
             color: { dark: '#0f172a', light: '#ffffff' },
             errorCorrectionLevel: 'M'
           });
@@ -1574,9 +1620,9 @@ a { color: inherit; text-decoration: none; }
       // Fallback de imagem de QR Code de alta qualidade
       const img = document.createElement('img');
       img.alt = 'QR Code Pix';
-      img.width = 210;
-      img.height = 210;
-      img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=4&data=' + encodeURIComponent(pixStr);
+      img.width = 145;
+      img.height = 145;
+      img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=4&data=' + encodeURIComponent(pixStr);
       container.replaceChildren(img);
     }
 

@@ -10,7 +10,13 @@ export function calcasSelection(input = {}) {
   }
   return { colors: [...colors], size };
 }
-export function calcasPricing(amount) {
-  return { version: 1, plan: { id: 'calcas', name: CALCAS_NAME, price: amount }, subtotal: amount,
-    shipping: { id: 'free', name: 'Frete Grátis', amount: 0 }, total: amount };
+export function calcasPricing(amount, shippingFee = 0) {
+  const fee = Number(shippingFee) || 0;
+  return { 
+    version: 1, 
+    plan: { id: 'calcas', name: CALCAS_NAME, price: amount }, 
+    subtotal: amount,
+    shipping: fee > 0 ? { id: 'sedex', name: 'SEDEX', amount: fee } : { id: 'free', name: 'Frete Grátis', amount: 0 }, 
+    total: amount + fee 
+  };
 }
