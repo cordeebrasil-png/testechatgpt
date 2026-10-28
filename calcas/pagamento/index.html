@@ -642,6 +642,156 @@ a { color: inherit; text-decoration: none; }
   white-space: nowrap;
 }
 
+
+/* CEP Modal and Address Finder */
+.btn-link-address-search {
+  background: none;
+  border: none;
+  color: #009ee3;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-align: left;
+  font-family: inherit;
+}
+.btn-link-address-search:hover {
+  color: #0084c2;
+}
+.cep-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.cep-modal-backdrop[hidden] {
+  display: none !important;
+}
+.cep-modal-content {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: modalFadeIn 0.2s ease-out;
+}
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+.cep-modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cep-modal-header h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+}
+.cep-modal-body {
+  padding: 18px 20px;
+  overflow-y: auto;
+}
+.cep-modal-desc {
+  font-size: 13.5px;
+  color: #475569;
+  margin: 0 0 14px;
+  line-height: 1.4;
+}
+.modal-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+.modal-field label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #334155;
+}
+.modal-input {
+  width: 100%;
+  height: 42px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 14px;
+  color: #0f172a;
+  background: #f8fafc;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+.modal-input:focus {
+  border-color: #009ee3;
+  outline: none;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.15);
+}
+.modal-cep-results {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.modal-cep-item {
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+.modal-cep-item:hover {
+  background: #edf5ff;
+  border-color: #009ee3;
+}
+.modal-cep-item strong {
+  display: block;
+  font-size: 14px;
+  color: #009ee3;
+  margin-bottom: 2px;
+}
+.modal-cep-item span {
+  display: block;
+  font-size: 12.5px;
+  color: #475569;
+  line-height: 1.35;
+}
+
 /* Payment Methods */
 .payment-methods {
   display: flex;
