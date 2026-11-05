@@ -1,17 +1,4 @@
-export function normalize(data, expectedHash, expectedAmount = ORDER_AMOUNT) {
- if(!data || typeof data.hash!=='string' || !/^[a-zA-Z0-9_-]{1,128}$/.test(data.hash) || (expectedHash && data.hash!==expectedHash))throw new Error('PROVIDER_ID_MISMATCH');
- const amount = Number(data.amount);
- if(data.payment_method!=='pix' || (expectedAmount && Math.abs(amount - expectedAmount) > 10) || (data.amount_total!=null && Math.abs(Number(data.amount_total) - amount) > 10))throw new Error('PROVIDER_AMOUNT_MISMATCH');
- const providerState=data.payment_status ?? data.status;
- const state=providerState==='waiting_payment'?'pending':providerState;
- if(!['pending','paid','canceled','refunded'].includes(state))throw new Error('PROVIDER_STATUS_INVALID');
- const code=data.pix?.pix_qr_code || data.pix_qr_code || data.pix?.code || data.qr_code;
- let expiresAt=null;
- if(typeof data.expires_at==='string' && /(?:Z|[+-]\d{2}:?\d{2})$/.test(data.expires_at)) {
-  const value=Date.parse(data.expires_at);if(Number.isFinite(value))expiresAt=value;
- }
- return {hash:data.hash,state,code,expiresAt};
-}import { calcasSelection, calcasPricing } from '../../shared/calcas.js';
+import { calcasSelection, calcasPricing } from '../../shared/calcas.js';
 import { buildPixRequest, ORDER_AMOUNT, IRONPAY_API_TOKEN_DEFAULT, CHAIR_NAME, CHAIR_AMOUNT } from './ironpay.js';
 const getIronpayToken = env => env?.IRONPAY_API_TOKEN || IRONPAY_API_TOKEN_DEFAULT;
 import { quoteShipping } from '../../shared/shipping.js';
@@ -54,20 +41,19 @@ export async function provider(env, path, payload) {
 }
 export function normalize(data, expectedHash, expectedAmount = ORDER_AMOUNT) {
  if(!data || typeof data.hash!=='string' || !/^[a-zA-Z0-9_-]{1,128}$/.test(data.hash) || (expectedHash && data.hash!==expectedHash))throw new Error('PROVIDER_ID_MISMATCH');
- if(data.payment_method!=='pix' || data.amount!==expectedAmount || (data.amount_total!=null && data.amount_total!==expectedAmount))throw new Error('PROVIDER_AMOUNT_MISMATCH');
+ const amount = Number(data.amount);
+ if(data.payment_method!=='pix' || (expectedAmount && Math.abs(amount - expectedAmount) > 10) || (data.amount_total!=null && Math.abs(Number(data.amount_total) - amount) > 10))throw new Error('PROVIDER_AMOUNT_MISMATCH');
  const providerState=data.payment_status ?? data.status;
- // Observed on the live IronPay API: unpaid Pix uses waiting_payment, not pending.
  const state=providerState==='waiting_payment'?'pending':providerState;
  if(!['pending','paid','canceled','refunded'].includes(state))throw new Error('PROVIDER_STATUS_INVALID');
- const code=data.pix?.pix_qr_code;
+ const code=data.pix?.pix_qr_code || data.pix_qr_code || data.pix?.code || data.qr_code;
  let expiresAt=null;
- // Honor only unambiguous provider timestamps; never interpret a local timestamp as UTC.
  if(typeof data.expires_at==='string' && /(?:Z|[+-]\d{2}:?\d{2})$/.test(data.expires_at)) {
   const value=Date.parse(data.expires_at);if(Number.isFinite(value))expiresAt=value;
  }
  return {hash:data.hash,state,code:typeof code==='string'&&code.length>0&&code.length<=8192?code:null,expiresAt};
 }
-export function chairPricing(input) {
+function chairPricing(input) {
  const isSedex = input?.shipping === 'sedex' || input?.shippingMethod === 'sedex' || Number(input?.shippingFee) === 1783;
  const shipping = isSedex
    ? { id: 'sedex', name: 'SEDEX Correios', amount: 1783 }
