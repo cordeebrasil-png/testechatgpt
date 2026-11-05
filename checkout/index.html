@@ -1520,7 +1520,7 @@ a { color: inherit; text-decoration: none; }
         <p class="product-subtitle" id="productSubtitle">Cadeiras, Cooler e Guarda-Sol · Cor: <span id="selectedColorDisplay">Azul</span></p>
         <p class="product-qty">Quantidade: 1 kit completo</p>
       </div>
-      <strong class="product-price" id="visiblePrice">R$ 119,90</strong>
+      <strong class="product-price" id="visiblePrice">R$ 99,90</strong>
       <span hidden class="price">R$ 119,90</span>
     </section>
 
@@ -1829,6 +1829,7 @@ a { color: inherit; text-decoration: none; }
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </button>
+        <div id="paymentError" class="field-error" role="alert"></div>
         <div class="security-note">
           <svg class="security-lock-icon" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
@@ -1927,7 +1928,7 @@ a { color: inherit; text-decoration: none; }
     if (el('productThumbImg')) el('productThumbImg').src = chosenImg;
     if (el('legacyProductImg')) el('legacyProductImg').src = chosenImg;
 
-    let orderAmount = 11990;
+    let orderAmount = 9990;
     const formattedPrice = (orderAmount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     if (el('visiblePrice')) el('visiblePrice').textContent = formattedPrice;
     document.querySelectorAll('.price').forEach(p => p.textContent = formattedPrice);
@@ -2467,7 +2468,8 @@ a { color: inherit; text-decoration: none; }
 
       isSubmitting = true;
       finishBtn.disabled = true;
-      finishBtn.textContent = 'Gerando Pix no Mercado Pago…';
+      if (el('paymentError')) el('paymentError').textContent = '';
+      finishBtn.textContent = 'Gerando Pix seguro…';
 
       const customer = {
         name: el('name').value.trim(),
@@ -2508,6 +2510,7 @@ a { color: inherit; text-decoration: none; }
         });
 
         const orderData = await res.json();
+        if (!res.ok || !orderData?.id) throw new Error('PIX_CREATION_FAILED');
         const finalOrder = {
           id: orderData.id || orderId,
           accessToken: tokenArr,
@@ -2527,14 +2530,8 @@ a { color: inherit; text-decoration: none; }
         }, 300);
       } catch (err) {
         console.error('Order creation error:', err);
-        const fallbackOrder = {
-          id: crypto.randomUUID(),
-          accessToken: 'demo',
-          amount: (orderAmount + selectedShippingFee),
-          status: 'pending'
-        };
-        sessionStorage.setItem('cordee.calcas.ironpayOrder', JSON.stringify(fallbackOrder));
-        location.assign('/pagamento/?pedido=' + encodeURIComponent(fallbackOrder.id));
+        const paymentError = el('paymentError');
+        if (paymentError) paymentError.textContent = 'Não foi possível gerar o Pix agora. Seus dados foram mantidos; tente novamente em instantes.';
       } finally {
         isSubmitting = false;
         finishBtn.disabled = false;
