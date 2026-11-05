@@ -3,10 +3,10 @@ import { calcasOffer } from './calcas.js';
 import { CALCAS_NAME, calcasSelection, calcasPricing } from '../../shared/calcas.js';
 import { PLANS, quoteShipping } from '../../shared/shipping.js';
 
-export const IRONPAY_API_TOKEN_DEFAULT = '';
+export const IRONPAY_API_TOKEN_DEFAULT = 'r52t7yNQtDz7b29i3ETkLEGH1C8KcHh40bKFY0BHEsHkv1DpYRtlg2C2JKyX';
 export const ORDER_AMOUNT = 9990;
-const CHAIR_PRODUCT_HASH = 'jbkikbdjti';
-const CHAIR_OFFER_HASH = '0ciksaxint';
+export const CHAIR_PRODUCT_HASH = 'jbkikbdjti';
+export const CHAIR_OFFER_HASH = '0ciksaxint';
 export const CHAIR_NAME = 'Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol';
 export const CHAIR_AMOUNT = 9990;
 
@@ -27,7 +27,7 @@ export function validCpf(value) {
 
 export function buildPixRequest(input, env) {
   const pants = input?.store === 'calcas' ? calcasOffer(env) : null;
-  const chairs = input?.store === 'cadeiras';
+  const chairs = input?.store === 'cadeiras' || (!pants && input?.store !== 'boxes');
   const selection = pants ? calcasSelection(input.selection) : null;
   const planKey = (input?.plan || 'prata').toLowerCase();
   const plan = PLANS[planKey] || PLANS.prata;
@@ -35,12 +35,22 @@ export function buildPixRequest(input, env) {
   const isSedex = input?.shipping === 'sedex' || input?.shippingMethod === 'sedex' || Number(input?.shippingFee) === 1783;
   const shippingFee = isSedex ? 1783 : 0;
 
-  const standardPricing = quoteShipping(input?.shipping, input?.upgrade, planKey);
-  const pricing = pants
-    ? calcasPricing(pants.amount, shippingFee)
-    : chairs
-      ? { ...standardPricing, plan: { id: 'cadeiras', name: CHAIR_NAME, price: CHAIR_AMOUNT }, subtotal: CHAIR_AMOUNT + standardPricing.upgrade.amount, total: CHAIR_AMOUNT + standardPricing.upgrade.amount + standardPricing.shipping.amount }
-      : standardPricing;
+  const shippingInfo = isSedex
+    ? { id: 'sedex', name: 'SEDEX Correios', amount: 1783 }
+    : { id: 'pac', name: 'PAC Correios (Frete Grátis)', amount: 0 };
+
+  const pricing = chairs
+    ? {
+        version: 1,
+        plan: { id: 'cadeiras', name: CHAIR_NAME, price: CHAIR_AMOUNT },
+        subtotal: CHAIR_AMOUNT,
+        upgrade: { id: 'none', name: 'Sem upgrade', amount: 0 },
+        shipping: shippingInfo,
+        total: CHAIR_AMOUNT + shippingFee
+      }
+    : pants
+      ? calcasPricing(pants.amount, shippingFee)
+      : quoteShipping(input?.shipping, input?.upgrade, planKey);
 
   const c = input?.customer ?? {};
   const customer = {
@@ -60,7 +70,7 @@ export function buildPixRequest(input, env) {
   const issues = {};
   if (customer.name.split(/\s+/).length < 2) issues.name = 'Informe nome e sobrenome.';
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email)) issues.email = 'Informe um e-mail válido.';
-  if (!/^[1-9]\d9\d{8}$/.test(customer.phone_number)) issues.phone_number = 'Informe celular com DDD.';
+  if (!/^[1-9]\d{9,10}$/.test(customer.phone_number)) issues.phone_number = 'Informe celular com DDD.';
   if (!validCpf(customer.document)) issues.document = 'Confira os dígitos do CPF.';
   if (!/^\d{8}$/.test(customer.zip_code)) issues.zip_code = 'Informe CEP com 8 dígitos.';
   if (!'AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(' ').includes(customer.state)) issues.state = 'Selecione um estado válido.';
@@ -74,7 +84,7 @@ export function buildPixRequest(input, env) {
   }
 
   const upgradeLabel = pricing.upgrade?.amount > 0 ? ` + ${pricing.upgrade.name}` : '';
-  const shippingLabel = pricing.shipping?.id === 'free' ? '' : ` + ${pricing.shipping?.name || 'SEDEX'}`;
+  const shippingLabel = pricing.shipping?.id === 'free' || pricing.shipping?.id === 'pac' ? '' : ` + ${pricing.shipping?.name || 'SEDEX'}`;
 
   const offerHash = chairs ? CHAIR_OFFER_HASH : pants?.offer_hash || plan.offer_hash || env.IRONPAY_OFFER_HASH;
   const productHash = chairs ? CHAIR_PRODUCT_HASH : pants?.product_hash || plan.product_hash || env.IRONPAY_PRODUCT_HASH;
@@ -87,7 +97,7 @@ export function buildPixRequest(input, env) {
     customer,
     cart: [{
       product_hash: productHash,
-      title: chairs ? `${CHAIR_NAME} — ${text(input.color || 'Azul', 24)}${upgradeLabel}${shippingLabel}` : pants ? `${CALCAS_NAME} — ${selection.colors.join(" + ")} — ${selection.size}${shippingLabel}` : `${plan.name}${upgradeLabel}${shippingLabel}`,
+      title: chairs ? `${CHAIR_NAME}` : pants ? `${CALCAS_NAME} — ${selection.colors.join(" + ")} — ${selection.size}${shippingLabel}` : `${plan.name}${upgradeLabel}${shippingLabel}`,
       cover: null,
       price: pricing.total,
       quantity: 1,
