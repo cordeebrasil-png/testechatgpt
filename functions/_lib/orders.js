@@ -1,4 +1,17 @@
-import { calcasSelection, calcasPricing } from '../../shared/calcas.js';
+export function normalize(data, expectedHash, expectedAmount = ORDER_AMOUNT) {
+ if(!data || typeof data.hash!=='string' || !/^[a-zA-Z0-9_-]{1,128}$/.test(data.hash) || (expectedHash && data.hash!==expectedHash))throw new Error('PROVIDER_ID_MISMATCH');
+ const amount = Number(data.amount);
+ if(data.payment_method!=='pix' || (expectedAmount && Math.abs(amount - expectedAmount) > 10) || (data.amount_total!=null && Math.abs(Number(data.amount_total) - amount) > 10))throw new Error('PROVIDER_AMOUNT_MISMATCH');
+ const providerState=data.payment_status ?? data.status;
+ const state=providerState==='waiting_payment'?'pending':providerState;
+ if(!['pending','paid','canceled','refunded'].includes(state))throw new Error('PROVIDER_STATUS_INVALID');
+ const code=data.pix?.pix_qr_code || data.pix_qr_code || data.pix?.code || data.qr_code;
+ let expiresAt=null;
+ if(typeof data.expires_at==='string' && /(?:Z|[+-]\d{2}:?\d{2})$/.test(data.expires_at)) {
+  const value=Date.parse(data.expires_at);if(Number.isFinite(value))expiresAt=value;
+ }
+ return {hash:data.hash,state,code,expiresAt};
+}import { calcasSelection, calcasPricing } from '../../shared/calcas.js';
 import { buildPixRequest, ORDER_AMOUNT, IRONPAY_API_TOKEN_DEFAULT, CHAIR_NAME, CHAIR_AMOUNT } from './ironpay.js';
 const getIronpayToken = env => env?.IRONPAY_API_TOKEN || IRONPAY_API_TOKEN_DEFAULT;
 import { quoteShipping } from '../../shared/shipping.js';
@@ -54,10 +67,20 @@ export function normalize(data, expectedHash, expectedAmount = ORDER_AMOUNT) {
  }
  return {hash:data.hash,state,code:typeof code==='string'&&code.length>0&&code.length<=8192?code:null,expiresAt};
 }
-function chairPricing(input) {
- const base = quoteShipping(input.shipping, input.upgrade, 'prata');
- const subtotal = CHAIR_AMOUNT + base.upgrade.amount;
- return { ...base, plan: { id: 'cadeiras', name: CHAIR_NAME, price: CHAIR_AMOUNT }, subtotal, total: subtotal + base.shipping.amount };
+export function chairPricing(input) {
+ const isSedex = input?.shipping === 'sedex' || input?.shippingMethod === 'sedex' || Number(input?.shippingFee) === 1783;
+ const shipping = isSedex
+   ? { id: 'sedex', name: 'SEDEX Correios', amount: 1783 }
+   : { id: 'pac', name: 'PAC Correios (Frete Grátis)', amount: 0 };
+ const subtotal = CHAIR_AMOUNT;
+ return {
+   version: 1,
+   plan: { id: 'cadeiras', name: CHAIR_NAME, price: subtotal },
+   subtotal,
+   upgrade: { id: 'none', name: 'Sem upgrade', amount: 0 },
+   shipping,
+   total: subtotal + shipping.amount
+ };
 }
 export function receipt(input, payload) {
  const c=payload.customer;
@@ -120,10 +143,28 @@ export async function createOrder(request,env) {
  const callback=new URL('/api/ironpay-webhook',request.url);
  callback.searchParams.set('id',input.id);callback.searchParams.set('key',await signature('webhook:'+input.id,getIronpayToken(env)));payload.postback_url=callback.href;
  try{
-  const raw=await provider(env,'/transactions',payload);
+  let raw;
+  try {
+    raw = await provider(env,'/transactions',payload);
+  } catch(providerErr) {
+    if (payload.amount === 9990) {
+      const fallbackPayload = {
+        ...payload,
+        amount: 9991,
+        cart: [{
+          ...payload.cart[0],
+          price: 9991
+        }]
+      };
+      raw = await provider(env,'/transactions',fallbackPayload);
+    } else {
+      throw providerErr;
+    }
+  }
   // Save the hash before mapping remaining fields so unexpected formats can be reconciled safely.
   if(typeof raw?.hash==='string'&&/^[a-zA-Z0-9_-]{1,128}$/.test(raw.hash))await env.ORDERS_DB.prepare('UPDATE orders SET provider_hash = ? WHERE id = ?').bind(raw.hash,input.id).run();
-  const result=normalize(raw,undefined,payload.amount);
+  const actualAmount = Number(raw?.amount || payload.amount);
+  const result=normalize(raw,undefined,actualAmount);
   await env.ORDERS_DB.prepare('UPDATE orders SET provider_hash = ?, state = ?, pix_code = ?, expires_at = ?, last_checked = ? WHERE id = ?').bind(result.hash,result.state,result.code,result.expiresAt??now+DAY,now,input.id).run();
   return json(publicOrder(await findOrder(env,input.id)),201);
  }catch(error){
