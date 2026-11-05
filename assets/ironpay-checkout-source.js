@@ -63,13 +63,14 @@ async function start(event) {
     const fingerprint = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify({customer, color, shipping}))))]
       .map(byte => byte.toString(16).padStart(2, '0')).join('');
     let intent = readSession(INTENT_KEY);
+    if (intent && intent.store !== 'cadeiras') { sessionStorage.removeItem(INTENT_KEY); intent = null; }
     if (intent && intent.fingerprint !== fingerprint) {
       await openPaymentWhenReady({ status: 'uncertain' }, intent);
       return;
     }
     if (!intent) {
       const accessToken = [...crypto.getRandomValues(new Uint8Array(32))].map(byte => byte.toString(16).padStart(2, '0')).join('');
-      intent = { id: crypto.randomUUID(), accessToken, fingerprint };
+      intent = { id: crypto.randomUUID(), accessToken, fingerprint, store: 'cadeiras' };
       // Save before POST: retrying a dropped connection must reuse the same order ID.
       sessionStorage.setItem(INTENT_KEY, JSON.stringify(intent));
     }
