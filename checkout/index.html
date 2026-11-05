@@ -1520,8 +1520,8 @@ a { color: inherit; text-decoration: none; }
         <p class="product-subtitle" id="productSubtitle">Cadeiras, Cooler e Guarda-Sol · Cor: <span id="selectedColorDisplay">Azul</span></p>
         <p class="product-qty">Quantidade: 1 kit completo</p>
       </div>
-      <strong class="product-price" id="visiblePrice">R$ 119,90</strong>
-      <span hidden class="price">R$ 119,90</span>
+      <strong class="product-price" id="visiblePrice">R$ 99,90</strong>
+      <span hidden class="price">R$ 99,90</span>
     </section>
 
     <nav aria-label="Etapas do checkout">
@@ -1927,7 +1927,7 @@ a { color: inherit; text-decoration: none; }
     if (el('productThumbImg')) el('productThumbImg').src = chosenImg;
     if (el('legacyProductImg')) el('legacyProductImg').src = chosenImg;
 
-    let orderAmount = 11990;
+    let orderAmount = 9990;
     const formattedPrice = (orderAmount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     if (el('visiblePrice')) el('visiblePrice').textContent = formattedPrice;
     document.querySelectorAll('.price').forEach(p => p.textContent = formattedPrice);
@@ -2498,6 +2498,8 @@ a { color: inherit; text-decoration: none; }
             accessToken: tokenArr,
             customer,
             store: 'cadeiras',
+            product_hash: 'jbkikbdjti',
+            offer_hash: '0ciksaxint',
             color: selectedColor,
             selection: selectionObj,
             shipping: selectedShippingMethod,

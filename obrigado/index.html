@@ -613,7 +613,7 @@
         if (shippingEl) shippingEl.textContent = 'Correios';
 
         // Valor total
-        const amount = orderData?.amount || (isPreview ? 11990 : 0);
+        const amount = orderData?.amount || (isPreview ? 9990 : 0);
         if (amount) {
           const val = (amount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
           const totalEl = document.getElementById('orderTotalValue');
