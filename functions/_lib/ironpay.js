@@ -4,7 +4,7 @@ import { CALCAS_NAME, calcasSelection, calcasPricing } from '../../shared/calcas
 import { PLANS, quoteShipping } from '../../shared/shipping.js';
 
 export const IRONPAY_API_TOKEN_DEFAULT = '';
-export const ORDER_AMOUNT = 11990;
+export const ORDER_AMOUNT = 9990;
 const CHAIR_PRODUCT_HASH = 'jbkikbdjti';
 const CHAIR_OFFER_HASH = '0ciksaxint';
 export const CHAIR_NAME = 'Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol';

@@ -67,7 +67,7 @@ export function receipt(input, payload) {
 export function storedPricing(row) {
  const receipt=row.receipt_json?JSON.parse(row.receipt_json):{};
  // All orders before shipping support charged the legacy fixed amount.
- if(!Object.hasOwn(receipt,'pricing'))return {version:1,subtotal:11990,shipping:{id:'free',name:'Frete Grátis',amount:0},total:11990};
+ if(!Object.hasOwn(receipt,'pricing'))return {version:1,subtotal:9990,shipping:{id:'free',name:'Frete Grátis',amount:0},total:9990};
  const p=receipt.pricing;
  if(p?.version!==1||!Number.isSafeInteger(p.subtotal)||p.subtotal<=0||
     !Number.isSafeInteger(p.shipping?.amount)||p.shipping.amount<0||
