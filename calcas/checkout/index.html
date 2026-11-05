@@ -1480,7 +1480,7 @@ a { color: inherit; text-decoration: none; }
 </style>
 </head>
 <body>
-  <div hidden class="product"><img id="legacyProductImg" src="/calcas/assets/azul-escuro.png" alt=""></div>
+  <div hidden class="product"><img id="legacyProductImg" src="/assets/home-1.webp" alt=""></div>
   <span hidden id="calcasSelection"></span>
 
   <main class="checkout-shell">
@@ -1915,55 +1915,22 @@ a { color: inherit; text-decoration: none; }
     let cepAbortController = null;
     let cepDebounceTimer = null;
 
-    // Load customer selection (colors and size)
+    // Load customer selection (color variant for beach kit)
     const urlParams = new URLSearchParams(location.search);
-    let cor1 = urlParams.get('cor1');
-    let cor2 = urlParams.get('cor2');
-    let tamanho = urlParams.get('tamanho');
+    const selectedColor = urlParams.get('cor') || 'Azul';
 
-    if (!cor1 || !cor2) {
-      try {
-        const stored = JSON.parse(sessionStorage.getItem('cordee.calcas.selection') || '{}');
-        cor1 = cor1 || stored.colors?.[0] || 'Azul escuro';
-        cor2 = cor2 || stored.colors?.[1] || 'Preta';
-        tamanho = tamanho || stored.size || 'P (34-36)';
-      } catch {
-        cor1 = cor1 || 'Azul escuro';
-        cor2 = cor2 || 'Preta';
-        tamanho = tamanho || 'P (34-36)';
-      }
-    }
-    tamanho = tamanho || 'P (34-36)';
+    el('productTitle').textContent = 'Kit Dobrável Duo 3 em 1';
+    el('productSubtitle').textContent = 'Cadeiras, Cooler e Guarda-Sol · Cor: ' + selectedColor;
+    if (el('selectedColorDisplay')) el('selectedColorDisplay').textContent = selectedColor;
 
-    const selectionObj = { colors: [cor1, cor2], size: tamanho };
-    try { sessionStorage.setItem('cordee.calcas.selection', JSON.stringify(selectionObj)); } catch {}
+    const chosenImg = '/assets/home-1.webp';
+    if (el('productThumbImg')) el('productThumbImg').src = chosenImg;
+    if (el('legacyProductImg')) el('legacyProductImg').src = chosenImg;
 
-    el('productSubtitle').textContent = cor1 + ' + ' + cor2 + ' · ' + tamanho;
-    el('calcasSelection').textContent = cor1 + ' + ' + cor2 + ' · ' + tamanho;
-
-    const imgMap = {
-      'Preta': 'preta.png',
-      'Azul escuro': 'azul-escuro.png',
-      'Azul médio': 'azul-medio.png',
-      'Azul claro': 'azul-claro.png'
-    };
-    const chosenImg = '/calcas/assets/' + (imgMap[cor1] || 'azul-escuro.png');
-    el('productThumbImg').src = chosenImg;
-    el('legacyProductImg').src = chosenImg;
-
-    // Fetch config for dynamic price
     let orderAmount = 11990;
-    fetch('/api/calcas-config', { cache: 'no-store' }).then(async res => {
-      if (res.ok) {
-        const data = await res.json();
-        if (data.amount && Number.isSafeInteger(data.amount)) {
-          orderAmount = data.amount;
-          const formatted = (data.amount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-          el('visiblePrice').textContent = formatted;
-          document.querySelectorAll('.price').forEach(p => p.textContent = formatted);
-        }
-      }
-    }).catch(()=>{});
+    const formattedPrice = (orderAmount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    if (el('visiblePrice')) el('visiblePrice').textContent = formattedPrice;
+    document.querySelectorAll('.price').forEach(p => p.textContent = formattedPrice);
 
     const fieldsByStep = [
       ['name', 'cpf', 'email', 'phone'],
@@ -2567,7 +2534,7 @@ a { color: inherit; text-decoration: none; }
           status: 'pending'
         };
         sessionStorage.setItem('cordee.calcas.ironpayOrder', JSON.stringify(fallbackOrder));
-        location.assign('../pagamento/?pedido=' + encodeURIComponent(fallbackOrder.id));
+        location.assign('/pagamento/?pedido=' + encodeURIComponent(fallbackOrder.id));
       } finally {
         isSubmitting = false;
         finishBtn.disabled = false;
