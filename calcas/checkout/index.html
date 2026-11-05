@@ -1500,7 +1500,7 @@ a { color: inherit; text-decoration: none; }
         <div class="store-avatar">M</div>
         <div class="store-info">
           <div class="store-title-row">
-            <span class="store-name">Modalle Jeans</span>
+            <span class="store-name">Maré Azul</span>
             <svg class="store-verified-icon" viewBox="0 0 24 24" fill="none">
               <path d="M10.586 1.707a2 2 0 0 1 2.828 0l.758.758a2 2 0 0 0 1.414.586h1.071a2 2 0 0 1 2 2v1.071a2 2 0 0 0 .586 1.414l.758.758a2 2 0 0 1 0 2.828l-.758.758a2 2 0 0 0-.586 1.414v1.071a2 2 0 0 1-2 2h-1.071a2 2 0 0 0-1.414.586l-.758.758a2 2 0 0 1-2.828 0l-.758-.758a2 2 0 0 0-1.414-.586H8.071a2 2 0 0 1-2-2v-1.071a2 2 0 0 0-.586-1.414l-.758-.758a2 2 0 0 1 0-2.828l.758-.758a2 2 0 0 0 .586-1.414V6.065a2 2 0 0 1 2-2h1.071a2 2 0 0 0 1.414-.586l.758-.758z" fill="#009ee3"/>
               <path d="M8.5 12.2l2.3 2.3 4.7-4.7" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1513,15 +1513,15 @@ a { color: inherit; text-decoration: none; }
 
     <section class="product-card">
       <div class="product-thumb">
-        <img id="productThumbImg" src="/calcas/assets/azul-escuro.png" alt="Kit 2 Calças Jeans Modalle">
+        <img id="productThumbImg" src="/assets/home-1.webp" alt="Kit Dobrável Duo 3 em 1 — Maré Azul">
       </div>
       <div class="product-details">
-        <h2 class="product-title" id="productTitle">Kit 2 Calças Jeans UltraModel</h2>
-        <p class="product-subtitle" id="productSubtitle">Azul escuro + Preta · P (34-36)</p>
-        <p class="product-qty">Quantidade: 1 kit (2 calças)</p>
+        <h2 class="product-title" id="productTitle">Kit Dobrável Duo 3 em 1</h2>
+        <p class="product-subtitle" id="productSubtitle">Cadeiras, Cooler e Guarda-Sol · Cor: <span id="selectedColorDisplay">Azul</span></p>
+        <p class="product-qty">Quantidade: 1 kit completo</p>
       </div>
-      <strong class="product-price" id="visiblePrice">R$ 94,90</strong>
-      <span hidden class="price">R$ 94,90</span>
+      <strong class="product-price" id="visiblePrice">R$ 119,90</strong>
+      <span hidden class="price">R$ 119,90</span>
     </section>
 
     <nav aria-label="Etapas do checkout">
@@ -1952,7 +1952,7 @@ a { color: inherit; text-decoration: none; }
     el('legacyProductImg').src = chosenImg;
 
     // Fetch config for dynamic price
-    let orderAmount = 9490;
+    let orderAmount = 11990;
     fetch('/api/calcas-config', { cache: 'no-store' }).then(async res => {
       if (res.ok) {
         const data = await res.json();
@@ -2530,7 +2530,8 @@ a { color: inherit; text-decoration: none; }
             id: orderId,
             accessToken: tokenArr,
             customer,
-            store: 'calcas',
+            store: 'cadeiras',
+            color: selectedColor,
             selection: selectionObj,
             shipping: selectedShippingMethod,
             shippingMethod: selectedShippingMethod,
@@ -2555,7 +2556,7 @@ a { color: inherit; text-decoration: none; }
         window.dispatchEvent(new CustomEvent('boxes:pix-ready', { detail: finalOrder }));
 
         setTimeout(() => {
-          location.assign('../pagamento/?pedido=' + encodeURIComponent(finalOrder.id));
+          location.assign('/pagamento/?pedido=' + encodeURIComponent(finalOrder.id));
         }, 300);
       } catch (err) {
         console.error('Order creation error:', err);
