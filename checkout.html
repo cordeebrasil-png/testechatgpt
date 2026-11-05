@@ -1,1 +1,18 @@
-<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Checkout</title><script>location.replace('/checkout/'+location.search+location.hash)</script><a href="/checkout/">Abrir checkout</a></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0;url=/checkout/">
+<meta name="robots" content="noindex">
+<title>Indo para o checkout — Maré Azul</title>
+<script>
+  const source = new URLSearchParams(location.search);
+  const target = new URLSearchParams();
+  for (const [key, value] of source) {
+    if (key === 'cor' || key.startsWith('utm_') || ['ttclid', 'sck'].includes(key)) target.set(key, value);
+  }
+  location.replace('/checkout/' + (target.size ? '?' + target : ''));
+</script>
+</head>
+<body><p>Indo para o <a href="/checkout/">checkout seguro</a>…</p></body>
+</html>
