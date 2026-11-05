@@ -2501,7 +2501,7 @@ a { color: inherit; text-decoration: none; }
             product_hash: 'jbkikbdjti',
             offer_hash: '0ciksaxint',
             color: selectedColor,
-            selection: selectionObj,
+            selection: { color: selectedColor },
             shipping: selectedShippingMethod,
             shippingMethod: selectedShippingMethod,
             shippingFee: selectedShippingFee,
@@ -2529,14 +2529,10 @@ a { color: inherit; text-decoration: none; }
         }, 300);
       } catch (err) {
         console.error('Order creation error:', err);
-        const fallbackOrder = {
-          id: crypto.randomUUID(),
-          accessToken: 'demo',
-          amount: (orderAmount + selectedShippingFee),
-          status: 'pending'
-        };
-        sessionStorage.setItem('cordee.calcas.ironpayOrder', JSON.stringify(fallbackOrder));
-        location.assign('/pagamento/?pedido=' + encodeURIComponent(fallbackOrder.id));
+        isSubmitting = false;
+        finishBtn.disabled = false;
+        finishBtn.textContent = 'Continuar com Pix';
+        alert(err.message || 'Ocorreu um erro ao gerar seu Pix. Por favor, confira seus dados e tente novamente.');
       } finally {
         isSubmitting = false;
         finishBtn.disabled = false;
