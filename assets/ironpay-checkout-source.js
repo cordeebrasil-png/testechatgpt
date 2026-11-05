@@ -78,7 +78,7 @@ async function start(event) {
     let response;
     try { response = await fetch('/api/orders', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: controller.signal,
-      body: JSON.stringify({ id: intent.id, accessToken: intent.accessToken, customer, color, shipping })
+      body: JSON.stringify({ id: intent.id, accessToken: intent.accessToken, customer, color, shipping, store: 'cadeiras' })
     }); } finally { clearTimeout(timeout); }
     httpStatus = response.status;
     const data = await readJson(response);

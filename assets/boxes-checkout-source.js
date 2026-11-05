@@ -3,17 +3,14 @@ import { initIronPayCheckout } from './ironpay-checkout-source.js';
 // Address/payment contents were absent from SingleFile: reconstructed with original design tokens.
 // Existing IronPay product: server-owned base price plus selected shipping.
 const plans = {
-  bronze: {name:'Bronze', amount:7990, image:'f27b4f275c81d505.png'},
-  prata: {name:'Prata', amount:7990, image:'4533661a7b85490c.png'},
-  ouro: {name:'Ouro', amount:9990, image:'e7067139f8507f7c.png'},
+  mare: {name:'Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol', amount:11990, image:'home-1.webp'},
 };
-const key = new URLSearchParams(location.search).get('plano');
-const plan = Object.hasOwn(plans, key) ? plans[key] : plans.prata;
+const plan = plans.mare;
 const $ = id => document.getElementById(id);
 const money = cents => (cents / 100).toLocaleString('pt-BR', {style:'currency',currency:'BRL'});
-$('sum-name').textContent = `Caixa Surpresa ${plan.name}`;
+$('sum-name').textContent = plan.name;
 $('sum-img').src = `/assets/${plan.image}`;
-$('sum-img').alt = `Caixa ${plan.name}`;
+$('sum-img').alt = plan.name;
 $('sum-price').textContent = $('sum-subtotal').textContent = money(plan.amount);
 $('sum-total').textContent = money(plan.amount);
 function field(id, label, placeholder, autocomplete, max = '') {

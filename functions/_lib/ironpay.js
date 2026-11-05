@@ -3,8 +3,12 @@ import { calcasOffer } from './calcas.js';
 import { CALCAS_NAME, calcasSelection, calcasPricing } from '../../shared/calcas.js';
 import { PLANS, quoteShipping } from '../../shared/shipping.js';
 
-export const IRONPAY_API_TOKEN_DEFAULT = 'r52t7yNQtDz7b29i3ETkLEGH1C8KcHh40bKFY0BHEsHkv1DpYRtlg2C2JKyX';
-export const ORDER_AMOUNT = 7990;
+export const IRONPAY_API_TOKEN_DEFAULT = '';
+export const ORDER_AMOUNT = 11990;
+const CHAIR_PRODUCT_HASH = 'jbkikbdjti';
+const CHAIR_OFFER_HASH = '0ciksaxint';
+const CHAIR_NAME = 'Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol';
+const CHAIR_AMOUNT = 11990;
 
 const digits = value => String(value ?? '').replace(/\D/g, '');
 const text = (value, max = 160) => String(value ?? '').trim().slice(0, max);
@@ -23,6 +27,7 @@ export function validCpf(value) {
 
 export function buildPixRequest(input, env) {
   const pants = input?.store === 'calcas' ? calcasOffer(env) : null;
+  const chairs = input?.store === 'cadeiras';
   const selection = pants ? calcasSelection(input.selection) : null;
   const planKey = (input?.plan || 'prata').toLowerCase();
   const plan = PLANS[planKey] || PLANS.prata;
@@ -30,9 +35,12 @@ export function buildPixRequest(input, env) {
   const isSedex = input?.shipping === 'sedex' || input?.shippingMethod === 'sedex' || Number(input?.shippingFee) === 1783;
   const shippingFee = isSedex ? 1783 : 0;
 
-  const pricing = pants 
-    ? calcasPricing(pants.amount, shippingFee) 
-    : quoteShipping(input?.shipping, input?.upgrade, planKey);
+  const standardPricing = quoteShipping(input?.shipping, input?.upgrade, planKey);
+  const pricing = pants
+    ? calcasPricing(pants.amount, shippingFee)
+    : chairs
+      ? { ...standardPricing, plan: { id: 'cadeiras', name: CHAIR_NAME, price: CHAIR_AMOUNT }, subtotal: CHAIR_AMOUNT + standardPricing.upgrade.amount, total: CHAIR_AMOUNT + standardPricing.upgrade.amount + standardPricing.shipping.amount }
+      : standardPricing;
 
   const c = input?.customer ?? {};
   const customer = {
@@ -68,8 +76,8 @@ export function buildPixRequest(input, env) {
   const upgradeLabel = pricing.upgrade?.amount > 0 ? ` + ${pricing.upgrade.name}` : '';
   const shippingLabel = pricing.shipping?.id === 'free' ? '' : ` + ${pricing.shipping?.name || 'SEDEX'}`;
 
-  const offerHash = pants?.offer_hash || plan.offer_hash || env.IRONPAY_OFFER_HASH;
-  const productHash = pants?.product_hash || plan.product_hash || env.IRONPAY_PRODUCT_HASH;
+  const offerHash = chairs ? CHAIR_OFFER_HASH : pants?.offer_hash || plan.offer_hash || env.IRONPAY_OFFER_HASH;
+  const productHash = chairs ? CHAIR_PRODUCT_HASH : pants?.product_hash || plan.product_hash || env.IRONPAY_PRODUCT_HASH;
 
   const payload = {
     amount: pricing.total,
@@ -79,7 +87,7 @@ export function buildPixRequest(input, env) {
     customer,
     cart: [{
       product_hash: productHash,
-      title: pants ? `${CALCAS_NAME} — ${selection.colors.join(" + ")} — ${selection.size}${shippingLabel}` : `${plan.name}${upgradeLabel}${shippingLabel}`,
+      title: chairs ? `${CHAIR_NAME} — ${text(input.color || 'Azul', 24)}${upgradeLabel}${shippingLabel}` : pants ? `${CALCAS_NAME} — ${selection.colors.join(" + ")} — ${selection.size}${shippingLabel}` : `${plan.name}${upgradeLabel}${shippingLabel}`,
       cover: null,
       price: pricing.total,
       quantity: 1,
