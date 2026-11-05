@@ -7,8 +7,8 @@ export const IRONPAY_API_TOKEN_DEFAULT = '';
 export const ORDER_AMOUNT = 11990;
 const CHAIR_PRODUCT_HASH = 'jbkikbdjti';
 const CHAIR_OFFER_HASH = '0ciksaxint';
-const CHAIR_NAME = 'Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol';
-const CHAIR_AMOUNT = 11990;
+export const CHAIR_NAME = 'Kit Dobrável Duo 3 em 1 — Cadeiras, Cooler e Guarda-Sol';
+export const CHAIR_AMOUNT = 11990;
 
 const digits = value => String(value ?? '').replace(/\D/g, '');
 const text = (value, max = 160) => String(value ?? '').trim().slice(0, max);
