@@ -1550,9 +1550,9 @@ a { color: inherit; text-decoration: none; }
 
         <!-- Caixa do Código Pix com toque facilitado -->
         <div class="pix-code-container" id="copyPixCard" title="Toque para copiar">
-          <p class="pix-copy-code-text" id="pixCodeDisplay">0002010102122680014br.gov.bcb.pix0136a8f4e7-2c1e-4b7a-a3b5-5f6d7e8f90ab520400005303986540594.915802BR5925ModalleJeans6009SAO PAULO62070503***6304A1B2</p>
+          <p class="pix-copy-code-text" id="pixCodeDisplay"> PAULO62070503***6304A1B2</p>
           <span class="pix-code-copy-mini-hint">Copiar ›</span>
-          <input id="pixCode" type="hidden" value="0002010102122680014br.gov.bcb.pix0136a8f4e7-2c1e-4b7a-a3b5-5f6d7e8f90ab520400005303986540594.915802BR5925ModalleJeans6009SAO PAULO62070503***6304A1B2">
+          <input id="pixCode" type="hidden" value=" PAULO62070503***6304A1B2">
         </div>
       </div>
     </div>
@@ -1622,30 +1622,11 @@ a { color: inherit; text-decoration: none; }
     const urlParams = new URLSearchParams(location.search);
     const orderId = urlParams.get('pedido') || order?.id;
 
-    const initialPix = order?.pixCode || el('pixCode')?.value;
-    if (initialPix) {
-      if (el('pixCode')) el('pixCode').value = initialPix;
-      if (el('pixCodeDisplay')) el('pixCodeDisplay').textContent = initialPix;
-      renderQr(initialPix);
-      try {
-        if (order) {
-          window.dispatchEvent(new CustomEvent('boxes:pix-ready', { detail: order }));
-        }
-      } catch {}
-    }
-
-    if (order && order.amount) {
-      const formatted = (order.amount / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-      if (el('paymentAmount')) el('paymentAmount').textContent = formatted;
-      if (el('visiblePrice')) el('visiblePrice').textContent = formatted;
-    }
-
     async function renderQr(pixStr) {
       if (!pixStr) return;
       const container = document.querySelector('.qr-code');
       if (!container) return;
 
-      // Se a lib QRCode já estiver carregada
       if (typeof QRCode !== 'undefined' && QRCode.toCanvas) {
         try {
           const canvas = document.createElement('canvas');
@@ -1661,38 +1642,78 @@ a { color: inherit; text-decoration: none; }
         }
       }
 
-      // Fallback de imagem de QR Code de alta qualidade
       const img = document.createElement('img');
-      img.alt = 'QR Code Pix';
+      img.alt = 'QR Code Pix Oficial';
       img.width = 145;
       img.height = 145;
       img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=4&data=' + encodeURIComponent(pixStr);
       container.replaceChildren(img);
     }
 
-    // Polling payment status
-    async function checkPaymentStatus() {
-      if (!orderId || !order?.accessToken) return;
+    function applyPixData(pixCode, amountCents) {
+      if (!pixCode) return;
+      if (el('pixCode')) el('pixCode').value = pixCode;
+      if (el('pixCodeDisplay')) {
+        el('pixCodeDisplay').textContent = pixCode;
+        el('pixCodeDisplay').style.color = '#1e293b';
+        el('pixCodeDisplay').style.fontWeight = '500';
+      }
+      renderQr(pixCode);
+
+      if (amountCents) {
+        const formatted = (amountCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        if (el('paymentAmount')) el('paymentAmount').textContent = formatted;
+        if (el('visiblePrice')) el('visiblePrice').textContent = formatted;
+      }
+    }
+
+    // Se já veio com o Pix da IronPay no sessionStorage/localStorage
+    if (order && order.pixCode) {
+      applyPixData(order.pixCode, order.amount);
       try {
+        window.dispatchEvent(new CustomEvent('boxes:pix-ready', { detail: order }));
+      } catch {}
+    } else if (orderId) {
+      // Se não está no storage local, busca diretamente no backend
+      fetch('/api/orders/' + encodeURIComponent(orderId))
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.pixCode) {
+            order = data;
+            applyPixData(data.pixCode, data.amount);
+          } else {
+            if (el('pixCodeDisplay')) {
+              el('pixCodeDisplay').innerHTML = '<span style="color:#ef4444;font-weight:600">Pix pendente. <a href="/checkout/" style="color:#009ee3;text-decoration:underline">Voltar ao checkout</a></span>';
+            }
+          }
+        })
+        .catch(err => {
+          console.error('Erro ao buscar pedido:', err);
+        });
+    }
+
+    // Polling payment status na IronPay
+    async function checkPaymentStatus() {
+      if (!orderId) return;
+      try {
+        const headers = order?.accessToken ? { Authorization: 'Bearer ' + order.accessToken } : {};
         const res = await fetch('/api/orders/' + encodeURIComponent(orderId), {
-          headers: { Authorization: 'Bearer ' + order.accessToken },
+          headers,
           cache: 'no-store'
         });
         if (res.ok) {
           const data = await res.json();
           if (data.status === 'paid') {
             clearInterval(pollTimer);
-            el('paymentStatus').textContent = 'Pagamento confirmado!';
-            el('paymentMessage').textContent = 'Seu pedido foi processado com sucesso pelo Mercado Pago. Redirecionando…';
+            if (el('paymentStatus')) el('paymentStatus').textContent = 'Pagamento confirmado!';
+            if (el('paymentMessage')) el('paymentMessage').textContent = 'Seu pagamento foi confirmado com sucesso. Redirecionando…';
             setTimeout(() => {
               location.replace('../obrigado/?pedido=' + encodeURIComponent(orderId));
             }, 1200);
             return;
           }
           if (data.pixCode && data.pixCode !== el('pixCode')?.value) {
-            if (el('pixCode')) el('pixCode').value = data.pixCode;
-            if (el('pixCodeDisplay')) el('pixCodeDisplay').textContent = data.pixCode;
-            renderQr(data.pixCode);
+            applyPixData(data.pixCode, data.amount);
           }
         }
       } catch (err) {
@@ -1700,15 +1721,14 @@ a { color: inherit; text-decoration: none; }
       }
     }
 
-    if (orderId && order?.accessToken) {
-      pollTimer = setInterval(checkPaymentStatus, 8000);
-      checkPaymentStatus();
+    if (orderId) {
+      pollTimer = setInterval(checkPaymentStatus, 6000);
     }
 
-    // Copy Pix Code com feedback visual forte e háptico
+    // Copiar código Pix
     async function copyPix() {
       const code = el('pixCode')?.value || el('pixCodeDisplay')?.textContent;
-      if (!code) return;
+      if (!code || code.includes('Carregando') || code.includes('pendente')) return;
 
       try {
         await navigator.clipboard.writeText(code);
@@ -1747,7 +1767,7 @@ a { color: inherit; text-decoration: none; }
     el('btnCopyPixMain')?.addEventListener('click', copyPix);
     el('copyPixCard')?.addEventListener('click', copyPix);
   })();
-  </script>
+</script>
   <!-- generated:payment:end -->
 </body>
 </html>
