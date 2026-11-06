@@ -53,15 +53,19 @@ export function buildPixRequest(input, env) {
       : quoteShipping(input?.shipping, input?.upgrade, planKey);
 
   const c = input?.customer ?? {};
+  let rawPhone = digits(c.phone_number);
+  if ((rawPhone.length === 12 || rawPhone.length === 13) && rawPhone.startsWith('55')) {
+    rawPhone = rawPhone.slice(2);
+  }
   const customer = {
     name: text(c.name),
     email: text(c.email, 254),
-    phone_number: digits(c.phone_number),
+    phone_number: rawPhone,
     document: digits(c.document),
     street_name: text(c.street_name),
-    number: text(c.number, 30),
+    number: text(c.number, 30) || 'S/N',
     complement: text(c.complement),
-    neighborhood: text(c.neighborhood),
+    neighborhood: text(c.neighborhood) || 'Centro',
     city: text(c.city),
     state: text(c.state, 2).toUpperCase(),
     zip_code: digits(c.zip_code)

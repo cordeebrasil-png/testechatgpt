@@ -2467,7 +2467,7 @@ a { color: inherit; text-decoration: none; }
 
       isSubmitting = true;
       finishBtn.disabled = true;
-      finishBtn.textContent = 'Gerando Pix no Mercado Pago…';
+      finishBtn.innerHTML = '<span>Gerando Pix oficial na IronPay…</span>';
 
       const customer = {
         name: el('name').value.trim(),
@@ -2475,7 +2475,7 @@ a { color: inherit; text-decoration: none; }
         phone_number: digits(el('phone').value),
         document: digits(el('cpf').value),
         street_name: el('street').value.trim(),
-        number: el('number').value.trim(),
+        number: el('number').value.trim() || 'S/N',
         complement: el('extra')?.value.trim() || '',
         neighborhood: el('district')?.value.trim() || 'Centro',
         city: el('city').value.trim(),
@@ -2490,32 +2490,42 @@ a { color: inherit; text-decoration: none; }
         sessionStorage.setItem('cordee.calcas.ironpayIntent', JSON.stringify(intent));
 
         const totalOrderAmount = orderAmount + selectedShippingFee;
-        const res = await fetch('/api/orders', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            id: orderId,
-            accessToken: tokenArr,
-            customer,
-            store: 'cadeiras',
-            product_hash: 'jbkikbdjti',
-            offer_hash: '0ciksaxint',
-            color: selectedColor,
-            selection: { color: selectedColor },
-            shipping: selectedShippingMethod,
-            shippingMethod: selectedShippingMethod,
-            shippingFee: selectedShippingFee,
-            amount: totalOrderAmount
-          })
-        });
+        let res, orderData;
+        try {
+          res = await fetch('/api/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: orderId,
+              accessToken: tokenArr,
+              customer,
+              store: 'cadeiras',
+              product_hash: 'jbkikbdjti',
+              offer_hash: '0ciksaxint',
+              color: selectedColor,
+              selection: { color: selectedColor },
+              shipping: selectedShippingMethod,
+              shippingMethod: selectedShippingMethod,
+              shippingFee: selectedShippingFee,
+              amount: totalOrderAmount
+            })
+          });
+          orderData = await res.json();
+        } catch (netErr) {
+          throw new Error('Falha de conexão com a IronPay. Verifique sua internet e tente novamente.');
+        }
 
-        const orderData = await res.json();
+        if (!res.ok || !orderData?.pixCode) {
+          const msg = orderData?.error || 'A IronPay não autorizou a criação do Pix. Confira os dados informados.';
+          throw new Error(msg);
+        }
+
         const finalOrder = {
           id: orderData.id || orderId,
           accessToken: tokenArr,
-          amount: orderData.amount || (orderAmount + selectedShippingFee),
+          amount: orderData.amount || totalOrderAmount,
           status: orderData.status || 'pending',
-          pixCode: orderData.pixCode || ''
+          pixCode: orderData.pixCode
         };
 
         sessionStorage.setItem('cordee.calcas.ironpayOrder', JSON.stringify(finalOrder));
@@ -2531,12 +2541,8 @@ a { color: inherit; text-decoration: none; }
         console.error('Order creation error:', err);
         isSubmitting = false;
         finishBtn.disabled = false;
-        finishBtn.textContent = 'Continuar com Pix';
-        alert(err.message || 'Ocorreu um erro ao gerar seu Pix. Por favor, confira seus dados e tente novamente.');
-      } finally {
-        isSubmitting = false;
-        finishBtn.disabled = false;
-        finishBtn.textContent = 'Continuar com Pix';
+        finishBtn.innerHTML = '<span>Continuar com Pix</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        alert('⚠️ ' + (err.message || 'Erro ao gerar o Pix. Verifique os dados digitados.'));
       }
     }
 
