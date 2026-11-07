@@ -2467,7 +2467,7 @@ a { color: inherit; text-decoration: none; }
 
       isSubmitting = true;
       finishBtn.disabled = true;
-      finishBtn.innerHTML = '<span>Gerando Pix oficial na IronPay…</span>';
+      finishBtn.innerHTML = '<span>Gerando o código PIX…</span>';
 
       const customer = {
         name: el('name').value.trim(),
@@ -2512,11 +2512,11 @@ a { color: inherit; text-decoration: none; }
           });
           orderData = await res.json();
         } catch (netErr) {
-          throw new Error('Falha de conexão com a IronPay. Verifique sua internet e tente novamente.');
+          throw new Error('Falha de conexão ao gerar o Pix. Verifique sua internet e tente novamente.');
         }
 
         if (!res.ok || !orderData?.pixCode) {
-          const msg = orderData?.error || 'A IronPay não autorizou a criação do Pix. Confira os dados informados.';
+          const msg = orderData?.error || 'Não foi possível gerar o código Pix. Confira os dados informados.';
           throw new Error(msg);
         }
 
